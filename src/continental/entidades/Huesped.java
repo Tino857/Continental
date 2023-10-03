@@ -1,27 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package continental.entidades;
 
 /**
  *
- * @author valen
+ * @author Grupo 61
  */
 public class Huesped {
+    
     private String nombre,apellido,domicilio,correo,celular;
     private int dni,idHuesped;
-    
+    private boolean estado;
 
-    public Huesped(String nombre, String apellido, String domicilio, String correo, int dni, int idHuesped, String celular) {
+    public Huesped() {
+    }
+
+    public Huesped(String nombre, String apellido, String domicilio, String correo, String celular, int dni, boolean estado) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.domicilio = domicilio;
         this.correo = correo;
+        this.celular = celular;
+        this.dni = dni;
+        this.estado = estado;
+    }
+    
+    public Huesped(String nombre, String apellido, String domicilio, String correo, String celular, int dni, int idHuesped, boolean estado) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.domicilio = domicilio;
+        this.correo = correo;
+        this.celular = celular;
         this.dni = dni;
         this.idHuesped = idHuesped;
-        this.celular = celular;
+        this.estado = estado;
     }
 
     public String getNombre() {
@@ -56,6 +66,14 @@ public class Huesped {
         this.correo = correo;
     }
 
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
     public int getDni() {
         return dni;
     }
@@ -72,18 +90,19 @@ public class Huesped {
         this.idHuesped = idHuesped;
     }
 
-    public String getCelular() {
-        return celular;
+    public boolean isEstado() {
+        return estado;
     }
 
-    public void setCelular(String celular) {
-        this.celular = celular;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
+        
     @Override
     public String toString() {
         return "Apellido: " + apellido + "\n"
                 + "Nombre: " + nombre + "\n"
-                + "Correo: " + correo
+                + "Correo: " + correo + "\n"
                 +"Celular: "+celular+"\n"
                 + "Domicilio: "+domicilio;
     }

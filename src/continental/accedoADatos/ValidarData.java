@@ -44,5 +44,4 @@ public class ValidarData {
         return (fecha.isBefore(LocalDate.of(1950, 01, 01)) || fecha.isAfter(LocalDate.now(ZoneId.systemDefault())));
     }
     
-   
 }

@@ -6,7 +6,6 @@
 package continental.entidades;
 
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
 import java.time.temporal.ChronoUnit;
 
 /**
@@ -30,7 +29,7 @@ public class Reservas {
         this.cantDePersonas = cantDePersonas;
         this.monto = monto;
         this.estado = estado;
-        this.dias=(int)ChronoUnit.DAYS.between(fi, ff);
+        this.dias = (int)ChronoUnit.DAYS.between(fi, ff);
     }
 
     public Reservas(Huesped huesped, Habitacion habitacion, LocalDate fi, int dias, int cantDePersonas, double monto, boolean estado) {
@@ -41,10 +40,9 @@ public class Reservas {
         this.cantDePersonas = cantDePersonas;
         this.monto = monto;
         this.estado = estado;
-        this.ff=fi.plusDays(dias);
+        this.ff = fi.plusDays(dias);
     }
     
-
     public int getCantDePersonas() {
         return cantDePersonas;
     }
