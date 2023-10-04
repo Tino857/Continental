@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package continental.entidades;
 
 import java.time.LocalDate;
@@ -10,18 +5,21 @@ import java.time.temporal.ChronoUnit;
 
 /**
  *
- * @author valen
+ * @author Gurpo 61
  */
-public class Reservas {
+public class Reserva {
 
     private Huesped huesped;
     private Habitacion habitacion;
     private LocalDate fi, ff;
-    private int dias, cantDePersonas;
+    private int dias, cantDePersonas, idReserva;
     private double monto;
     private boolean estado;
 
-    public Reservas(Huesped huesped, Habitacion habitacion, LocalDate fi, LocalDate ff, int cantDePersonas, double monto, boolean estado) {
+    public Reserva() {
+    }
+
+    public Reserva(Huesped huesped, Habitacion habitacion, LocalDate fi, LocalDate ff, int cantDePersonas, double monto, boolean estado) {
         this.huesped = huesped;
         this.habitacion = habitacion;
         this.fi = fi;
@@ -32,7 +30,19 @@ public class Reservas {
         this.dias = (int)ChronoUnit.DAYS.between(fi, ff);
     }
 
-    public Reservas(Huesped huesped, Habitacion habitacion, LocalDate fi, int dias, int cantDePersonas, double monto, boolean estado) {
+    public Reserva(Huesped huesped, Habitacion habitacion, LocalDate fi, LocalDate ff, int cantDePersonas, int idReserva, double monto, boolean estado) {
+        this.huesped = huesped;
+        this.habitacion = habitacion;
+        this.fi = fi;
+        this.ff = ff;
+        this.cantDePersonas = cantDePersonas;
+        this.idReserva = idReserva;
+        this.monto = monto;
+        this.estado = estado;
+        this.dias = (int)ChronoUnit.DAYS.between(fi, ff);
+    }
+
+    public Reserva(Huesped huesped, Habitacion habitacion, LocalDate fi, int dias, int cantDePersonas, double monto, boolean estado) {
         this.huesped = huesped;
         this.habitacion = habitacion;
         this.fi = fi;
@@ -41,6 +51,26 @@ public class Reservas {
         this.monto = monto;
         this.estado = estado;
         this.ff = fi.plusDays(dias);
+    }
+
+    public Reserva(Huesped huesped, Habitacion habitacion, LocalDate fi, int dias, int cantDePersonas, int idReserva, double monto, boolean estado) {
+        this.huesped = huesped;
+        this.habitacion = habitacion;
+        this.fi = fi;
+        this.dias = dias;
+        this.cantDePersonas = cantDePersonas;
+        this.idReserva = idReserva;
+        this.monto = monto;
+        this.estado = estado;
+        this.ff = fi.plusDays(dias);
+    }
+
+    public int getIdReserva() {
+        return idReserva;
+    }
+
+    public void setIdReserva(int idReserva) {
+        this.idReserva = idReserva;
     }
     
     public int getCantDePersonas() {

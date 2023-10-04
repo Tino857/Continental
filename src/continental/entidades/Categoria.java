@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package continental.entidades;
 
 /**
@@ -12,14 +7,26 @@ package continental.entidades;
 public class Categoria {
     private int idCategoria,cantDePersonas,cantDeCamas,tipoDeCamas;
     private Double precio;
- 
+    private String tipoCategoria;
 
-    public Categoria(int codigoTipo, int cantDePersonas, int cantDeCamas, Double precio, int tipoDeCamas) {
-        this.idCategoria = codigoTipo;
+    public Categoria() {
+    }
+
+    public Categoria(int cantDePersonas, int cantDeCamas, int tipoDeCamas, Double precio, String tipoCategoria) {
+        this.cantDePersonas = cantDePersonas;
+        this.cantDeCamas = cantDeCamas;
+        this.tipoDeCamas = tipoDeCamas;
+        this.precio = precio;
+        this.tipoCategoria = tipoCategoria;
+    }
+
+    public Categoria(int idCategoria, int cantDePersonas, int cantDeCamas, Double precio, int tipoDeCamas, String tipoCategoria) {
+        this.idCategoria = idCategoria;
         this.cantDePersonas = cantDePersonas;
         this.cantDeCamas = cantDeCamas;
         this.precio = precio;
         this.tipoDeCamas = tipoDeCamas;
+        this.tipoCategoria = tipoCategoria;
     }
 
     public int getIdCategoria() {
@@ -63,5 +70,17 @@ public class Categoria {
         this.tipoDeCamas = tipoDeCamas;
     }
 
+    public String getTipoCategoria() {
+        return tipoCategoria;
+    }
+
+    public void setTipoCategoria(String tipoCategoria) {
+        this.tipoCategoria = tipoCategoria;
+    }
+
+    @Override
+    public String toString() {
+        return idCategoria + " - " + tipoCategoria;
+    }
 
 }

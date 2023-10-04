@@ -1,7 +1,15 @@
 package continental;
 
+import continental.accedoADatos.CategoriaData;
+import continental.accedoADatos.HabitacionData;
 import continental.accedoADatos.HuespedData;
+import continental.accedoADatos.ReservaData;
+import continental.entidades.Categoria;
+import continental.entidades.Habitacion;
 import continental.entidades.Huesped;
+import continental.entidades.Reserva;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 
 /**
@@ -16,6 +24,9 @@ public class Continental {
     public static void main(String[] args) {
         //Prueba de ejecucion
         HuespedData hd = new HuespedData();
+        CategoriaData cd = new CategoriaData();
+        HabitacionData habd = new HabitacionData();
+        ReservaData rd = new ReservaData();
         Huesped huesped1 = new Huesped("Juan Pablo", "Lopez", "Colon 1015", "juanpablo@ahsdgfka.com", "324516656", 12345678, 1, true);
 
 //        //Prueba de alta
@@ -76,5 +87,25 @@ public class Continental {
 //        for (Huesped huesped : resultado) {
 //            System.out.println(huesped.toString());
 //        }
+
+//---------------------------------------------------------------------------------
+
+//            Categoria simple = new Categoria(2, 2, 1, 530.0, "Suite simple");
+//            simple.setIdCategoria(1);
+//            System.out.println(cd.listarCategorias());
+
+//---------------------------------------------------------------------------------
+
+//            Habitacion hab01 = new Habitacion(1, 1, cd.buscarCategoriaPorId(1), true);
+//            int id = habd.guardarHabitacion(hab01);
+//            hab01.setIdHabitacion(id);
+//            System.out.println(habd.listarHabitaciones());
+
+//---------------------------------------------------------------------------------
+
+              Reserva reserva1 = new Reserva(hd.buscarHuespedPorId(1), habd.buscarHabitacionPorId(1), LocalDate.of(2023, 5, 12), LocalDate.of(2023, 5, 13), 2, 1000.0, true);
+              int id = rd.guardarReserva(reserva1);
+              reserva1.setIdReserva(id);
+              System.out.println(rd.listarReservas());
     }
 }

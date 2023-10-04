@@ -50,7 +50,7 @@ public class HuespedData {
             //Consulta si el conjunto de resultados tiene un valor posterior
             if (rs.next()) {
                 
-                //Si se obtuvieron claves generadas, se asigna el ID generado al objeto alumno y el valor del id se guarda en registro
+                //Si se obtuvieron claves generadas, se asigna el ID generado al objeto huesped y el valor del id se guarda en registro
                 huesped.setIdHuesped(rs.getInt(1));
                 registro = rs.getInt(1);
                 System.out.println("Se creo el huesped");
