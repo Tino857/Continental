@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-10-2023 a las 23:56:50
+-- Tiempo de generación: 06-10-2023 a las 00:52:09
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 7.4.22
 
@@ -34,7 +34,8 @@ CREATE TABLE `categoria` (
   `cantidadPersonas` int(11) NOT NULL,
   `precio` double NOT NULL,
   `cantidadCamas` int(11) NOT NULL,
-  `tipoCama` int(11) NOT NULL
+  `tipoCama` int(11) NOT NULL,
+  `tipoCategoria` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -79,7 +80,7 @@ CREATE TABLE `reserva` (
   `idHabitacion` int(11) NOT NULL,
   `idHuesped` int(11) NOT NULL,
   `fechaInicio` date NOT NULL,
-  `fechaFina` date NOT NULL,
+  `fechaFin` date NOT NULL,
   `dias` int(11) NOT NULL,
   `monto` double NOT NULL,
   `estado` tinyint(1) NOT NULL,
@@ -94,7 +95,8 @@ CREATE TABLE `reserva` (
 -- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  ADD PRIMARY KEY (`idCategoria`);
+  ADD PRIMARY KEY (`idCategoria`),
+  ADD UNIQUE KEY `tipoCategoria` (`tipoCategoria`);
 
 --
 -- Indices de la tabla `habitacion`
@@ -121,6 +123,12 @@ ALTER TABLE `reserva`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `habitacion`
