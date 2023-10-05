@@ -1,4 +1,4 @@
-package continental.accedoADatos;
+package continental.accesoADatos;
 
 import java.time.LocalDate;
 import java.time.ZoneId;

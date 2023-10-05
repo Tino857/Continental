@@ -1,9 +1,9 @@
 package continental;
 
-import continental.accedoADatos.CategoriaData;
-import continental.accedoADatos.HabitacionData;
-import continental.accedoADatos.HuespedData;
-import continental.accedoADatos.ReservaData;
+import continental.accesoADatos.CategoriaData;
+import continental.accesoADatos.HabitacionData;
+import continental.accesoADatos.HuespedData;
+import continental.accesoADatos.ReservaData;
 import continental.entidades.Categoria;
 import continental.entidades.Habitacion;
 import continental.entidades.Huesped;

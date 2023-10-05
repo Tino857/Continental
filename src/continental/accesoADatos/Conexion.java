@@ -1,4 +1,4 @@
-package continental.accedoADatos;
+package continental.accesoADatos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,4 +1,4 @@
-package continental.accedoADatos;
+package continental.accesoADatos;
 
 import continental.entidades.Huesped;
 import java.sql.Connection;
@@ -29,9 +29,19 @@ public class HuespedData {
         String query = "INSERT INTO huesped (dni, apellido, nombre, domicilio, correo, celular, estado) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         
-        //Esta variable se utilizará para almacenar el ID generado del nuevo registro en la base de datos.
+        
+//Esta variable se utilizará para almacenar el ID generado del nuevo registro en la base de datos.
         int registro = 0;
         try {
+        Huesped h = buscarHuespedPorDni(huesped.getDni());// Esto se hace para verificar si el huesped ya existe en la base de datos
+            if (h != null) {//Se verifica si se encontró un alumno en la base de datos
+                
+                if (h.getIdHuesped() != huesped.getIdHuesped()) {//compara el ID por parametro con el de la base para no duplicar un DNI
+                    
+                    return registro;
+                }
+            }
+
 
             //Se crea un prepared statement, se prepara la declaracion con la consulta sql definida previamente y se setean los valores
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -201,10 +211,38 @@ public class HuespedData {
     }
 
     //Este metodo devuelve una lista de huespedes
-    public ArrayList<Huesped> listarHuesped() {
+    public ArrayList<Huesped> listarHuespedAct() {
         
         ArrayList<Huesped> listaHuespedes = new ArrayList();//se  creo una lista paraa almacenar Huespedes
         String query = "SELECT * FROM huesped WHERE estado = 1";//se define consulta
+        try {
+            
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = ps.executeQuery();//se ejecuta la consulta, para un conjunto de resultados(resulset)
+            Huesped huesped = null;// se inicializa un huesped en null
+            while (rs.next()) {//se inicializa un bucle para modificar al huesped
+                huesped = new Huesped();
+                huesped.setIdHuesped(rs.getInt("idHuesped"));
+                huesped.setDni(rs.getInt("dni"));
+                huesped.setApellido(rs.getString("apellido"));
+                huesped.setNombre(rs.getString("nombre"));
+                huesped.setDomicilio(rs.getString("domicilio"));
+                huesped.setCorreo(rs.getString("correo"));
+                huesped.setCelular(rs.getString("celular"));
+                huesped.setEstado(rs.getBoolean("estado"));
+                listaHuespedes.add(huesped);//se agrega el huesped a la lista
+            }
+            ps.close();//cierra  el PS
+        } catch (SQLException e) {
+            
+            System.out.println("Error al encontrar al huesped" + e.getMessage());
+        }
+        return listaHuespedes;//retorna una lista de huespedes
+    }
+     public ArrayList<Huesped> listarHuespedIn() {
+        
+        ArrayList<Huesped> listaHuespedes = new ArrayList();//se  creo una lista paraa almacenar Huespedes
+        String query = "SELECT * FROM huesped WHERE estado = 0";//se define consulta
         try {
             
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);

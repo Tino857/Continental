@@ -1,4 +1,4 @@
-package continental.accedoADatos;
+package continental.accesoADatos;
 
 import continental.entidades.Categoria;
 import java.sql.Connection;

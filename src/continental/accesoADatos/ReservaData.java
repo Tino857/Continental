@@ -1,6 +1,7 @@
-package continental.accedoADatos;
+package continental.accesoADatos;
 
 import continental.entidades.Reserva;
+import continental.vistas.Vista;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -165,8 +166,7 @@ public class ReservaData {
     
     //Este metodo devuelve una lista de reservas
     public ArrayList<Reserva> listarReservas() {
-        HuespedData huespedD = new HuespedData();
-        HabitacionData habitacionD = new HabitacionData();
+      
         ArrayList<Reserva> listaReservas = new ArrayList();//se  creo una lista paraa almacenar Reservas
         String query = "SELECT * FROM reserva WHERE estado = 1";//se define consulta
         try {
@@ -176,8 +176,8 @@ public class ReservaData {
             Reserva reserva = null;// se inicializa una reserva en null
             while (rs.next()) {//se inicializa un bucle para modificar la reserva
                 reserva = new Reserva();
-                reserva.setHuesped(huespedD.buscarHuespedPorId(rs.getInt("idHuesped")));
-                reserva.setHabitacion(habitacionD.buscarHabitacionPorId(rs.getInt("idHabitacion")));
+                reserva.setHuesped(Vista.getHD().buscarHuespedPorId(rs.getInt("idHuesped")));
+                reserva.setHabitacion(Vista.getHabD().buscarHabitacionPorId(rs.getInt("idHabitacion")));
                 reserva.setFi(rs.getDate("fechaInicio").toLocalDate());
                 reserva.setFf(rs.getDate("fechaFin").toLocalDate());
                 reserva.setMonto(rs.getDouble("monto"));

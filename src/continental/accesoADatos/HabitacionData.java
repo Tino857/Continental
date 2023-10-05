@@ -1,6 +1,7 @@
-package continental.accedoADatos;
+package continental.accesoADatos;
 
 import continental.entidades.Habitacion;
+import continental.vistas.Vista;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -121,7 +122,7 @@ public class HabitacionData {
     
     //Este metodo permite buscar una habitacion por su ID
     public Habitacion buscarHabitacionPorId(int idHab) {
-        CategoriaData cd = new CategoriaData();//****Si trabajamos con estaticos en la vista principal, borrar esta linea y editar 139***
+       
         Habitacion habitacion = null;//Declara una variable al de tipo Habitacion e inicializa su valor como null. Esta variable se utilizará para almacenar el resultado de la búsqueda.
         String query = "SELECT * FROM habitacion WHERE idHabitacion = ?";
         try {
@@ -137,7 +138,7 @@ public class HabitacionData {
                 habitacion.setNro(rs.getInt("numero"));
                 habitacion.setPiso(rs.getInt("piso"));
                 habitacion.setEstado(rs.getBoolean("estado"));
-                habitacion.setCategoria(cd.buscarCategoriaPorId(rs.getInt("idCategoria")));//***leer 123***
+                habitacion.setCategoria(Vista.getCD().buscarCategoriaPorId(rs.getInt("idCategoria")));//***leer 123***
                 
             } else {
                 
@@ -165,14 +166,14 @@ public class HabitacionData {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();//se ejecuta la consulta, para un conjunto de resultados(resulset)
             Habitacion habitacion = null;// se inicializa una Habitacion en null
-            CategoriaData cd = new CategoriaData();//****Si trabajamos con estaticos en la vista principal, borrar esta linea y editar 139***
+           
             while (rs.next()) {//se inicializa un bucle para modificar la Habitacion
                 habitacion = new Habitacion();
                 habitacion.setIdHabitacion(rs.getInt("idHabitacion"));
                 habitacion.setNro(rs.getInt("numero"));
                 habitacion.setPiso(rs.getInt("piso"));
                 habitacion.setEstado(rs.getBoolean("estado"));
-                habitacion.setCategoria(cd.buscarCategoriaPorId(rs.getInt("idCategoria")));
+                habitacion.setCategoria(Vista.getCD().buscarCategoriaPorId(rs.getInt("idCategoria")));
                 listaHabitaciones.add(habitacion);//se agrega ela habitacion a la lista
             }
             ps.close();//cierra  el PS
