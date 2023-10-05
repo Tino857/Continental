@@ -74,7 +74,7 @@ public class Eliminar extends javax.swing.JInternalFrame {
 
         jbAceptar.setBackground(new java.awt.Color(51, 51, 51));
         jbAceptar.setForeground(new java.awt.Color(235, 235, 235));
-        jbAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/aceptar-c.png"))); // NOI18N
+        jbAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/aceptar-c.png"))); // NOI18N
         jbAceptar.setText("Aceptar");
         jbAceptar.setIconTextGap(10);
         jbAceptar.setPreferredSize(new java.awt.Dimension(110, 32));
@@ -86,7 +86,7 @@ public class Eliminar extends javax.swing.JInternalFrame {
 
         jbCancelar.setBackground(new java.awt.Color(51, 51, 51));
         jbCancelar.setForeground(new java.awt.Color(235, 235, 235));
-        jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/cancelar-c.png"))); // NOI18N
+        jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/cancelar-c.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
         jbCancelar.setIconTextGap(10);
         jbCancelar.setPreferredSize(new java.awt.Dimension(110, 32));
