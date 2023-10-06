@@ -6,8 +6,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import continental.accesoADatos.ValidarData;
 import continental.entidades.Huesped;
-import continental.vistas.Eliminar;
-
 
 /**
  *
@@ -33,7 +31,6 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDPEscritorio = new javax.swing.JDesktopPane();
         ImageIcon icon = new ImageIcon(getClass().getResource("/continental/imagenes/WindowBackground.png"));
         Image image = icon.getImage();
         jPBackground = new javax.swing.JPanel(){
@@ -43,9 +40,6 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
             }
         };
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jBBuscar = new javax.swing.JButton();
         JTFDni = new javax.swing.JTextField();
@@ -61,38 +55,26 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
         jLLogo = new javax.swing.JLabel();
         jTFDomicilio = new javax.swing.JTextField();
         jTFCorreo = new javax.swing.JTextField();
-        jLCelular = new javax.swing.JLabel();
         jTFCelular = new javax.swing.JTextField();
         jRBEstado = new javax.swing.JRadioButton();
         jLCelular1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setClosable(true);
         setMaximizable(true);
         setResizable(true);
-        setPreferredSize(new java.awt.Dimension(500, 400));
-
-        jDPEscritorio.addContainerListener(new java.awt.event.ContainerAdapter() {
-            public void componentRemoved(java.awt.event.ContainerEvent evt) {
-                jDPEscritorioComponentRemoved(evt);
-            }
-        });
+        setPreferredSize(new java.awt.Dimension(500, 450));
 
         jPBackground.setBackground(new java.awt.Color(51, 51, 51));
 
         jLabel2.setForeground(new java.awt.Color(235, 235, 235));
         jLabel2.setText("Documento:");
 
-        jLabel3.setForeground(new java.awt.Color(235, 235, 235));
-        jLabel3.setText("Apellido:");
-
-        jLabel4.setForeground(new java.awt.Color(235, 235, 235));
-        jLabel4.setText("Nombre:");
-
-        jLabel5.setForeground(new java.awt.Color(235, 235, 235));
-        jLabel5.setText("Correo:");
-
         jLabel6.setForeground(new java.awt.Color(235, 235, 235));
-        jLabel6.setText("Domicilio");
+        jLabel6.setText("Nombre:");
 
         jBBuscar.setBackground(new java.awt.Color(51, 51, 51));
         jBBuscar.setForeground(new java.awt.Color(235, 235, 235));
@@ -199,9 +181,11 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
         jTFDomicilio.setBackground(new java.awt.Color(102, 102, 102));
 
         jTFCorreo.setBackground(new java.awt.Color(102, 102, 102));
-
-        jLCelular.setForeground(new java.awt.Color(235, 235, 235));
-        jLCelular.setText("Celular:");
+        jTFCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFCorreoActionPerformed(evt);
+            }
+        });
 
         jTFCelular.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -214,6 +198,18 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
         jLCelular1.setForeground(new java.awt.Color(235, 235, 235));
         jLCelular1.setText("Estado:");
 
+        jLabel7.setForeground(new java.awt.Color(235, 235, 235));
+        jLabel7.setText("Apellido:");
+
+        jLabel8.setForeground(new java.awt.Color(235, 235, 235));
+        jLabel8.setText("Domicilio:");
+
+        jLabel9.setForeground(new java.awt.Color(235, 235, 235));
+        jLabel9.setText("Correo:");
+
+        jLabel10.setForeground(new java.awt.Color(235, 235, 235));
+        jLabel10.setText("Celular:");
+
         javax.swing.GroupLayout jPBackgroundLayout = new javax.swing.GroupLayout(jPBackground);
         jPBackground.setLayout(jPBackgroundLayout);
         jPBackgroundLayout.setHorizontalGroup(
@@ -223,25 +219,30 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPBackgroundLayout.createSequentialGroup()
                         .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel3)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel5)
-                            .addComponent(jLCelular)
-                            .addComponent(jLCelular1))
+                            .addComponent(jLCelular1)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTFNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFApellido, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JTFDni)
-                            .addComponent(jTFCorreo)
-                            .addComponent(jTFCelular, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFDomicilio, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPBackgroundLayout.createSequentialGroup()
+                                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTFNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTFApellido, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(JTFDni)
+                                    .addComponent(jTFCorreo)
+                                    .addComponent(jTFCelular, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTFDomicilio, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPBackgroundLayout.createSequentialGroup()
+                                .addComponent(jRBEstado)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPBackgroundLayout.createSequentialGroup()
                         .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -250,10 +251,6 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
                         .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLPCabecera))
                 .addGap(20, 20, 20))
-            .addGroup(jPBackgroundLayout.createSequentialGroup()
-                .addGap(202, 202, 202)
-                .addComponent(jRBEstado)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPBackgroundLayout.setVerticalGroup(
             jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,33 +263,34 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
                     .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPBackgroundLayout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPBackgroundLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTFApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)
                         .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPBackgroundLayout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                            .addComponent(jTFDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jTFCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jRBEstado)
-                    .addComponent(jLCelular1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                    .addComponent(jTFCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jRBEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLCelular1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -300,48 +298,19 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20))
         );
 
-        jDPEscritorio.setLayer(jPBackground, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jDPEscritorioLayout = new javax.swing.GroupLayout(jDPEscritorio);
-        jDPEscritorio.setLayout(jDPEscritorioLayout);
-        jDPEscritorioLayout.setHorizontalGroup(
-            jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 498, Short.MAX_VALUE)
-            .addGroup(jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jDPEscritorioLayout.setVerticalGroup(
-            jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 455, Short.MAX_VALUE)
-            .addGroup(jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDPEscritorio)
+            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDPEscritorio, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jDPEscritorioComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jDPEscritorioComponentRemoved
-        
-        /**
-         * Se captura el evento de cierre de ventana de confirmacion al eliminar un alumno.
-         * Luego se busca al alumno que se intento eliminar y se recupera su estado.
-         * Por ultimo se setea el componente radioButton estado con el valor de estado del alumno.
-         */
-        int dni = Integer.parseInt(JTFDni.getText());
-        Huesped h= Vista.getHD().buscarHuespedPorDni(dni);
-          jRBEstado.setSelected(h.isEstado());
-    }//GEN-LAST:event_jDPEscritorioComponentRemoved
 
     //BOTON SALIR
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
@@ -466,7 +435,6 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
                 
                     JOptionPane.showMessageDialog(this, "No se pudo borrar al huesped");
                 }
-                dispose();
             }
 
         } catch (NumberFormatException e) {
@@ -528,6 +496,10 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
+    private void jTFCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFCorreoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JTFDni;
@@ -536,18 +508,17 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jBSalir;
-    private javax.swing.JDesktopPane jDPEscritorio;
-    private javax.swing.JLabel jLCelular;
     private javax.swing.JLabel jLCelular1;
     private javax.swing.JLabel jLLogo;
     private javax.swing.JLabel jLMargen;
     private javax.swing.JLayeredPane jLPCabecera;
     private javax.swing.JLabel jLTitulo;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPBackground;
     private javax.swing.JRadioButton jRBEstado;
     private javax.swing.JTextField jTFApellido;

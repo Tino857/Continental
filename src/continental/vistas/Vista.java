@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -98,7 +99,7 @@ public class Vista extends javax.swing.JFrame {
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
-                .addContainerGap(571, Short.MAX_VALUE)
+                .addContainerGap(621, Short.MAX_VALUE)
                 .addComponent(logo)
                 .addContainerGap())
         );
@@ -172,8 +173,7 @@ public class Vista extends javax.swing.JFrame {
 
     private void jMIFormularioDeMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFormularioDeMateriaActionPerformed
         
-//        GestionDeHabitacion GDH = new GestionDeHabitacion();
-//        abrirVentana(GDH);
+        JOptionPane.showMessageDialog(this, "Todavia no disponible...", "Aviso!", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_jMIFormularioDeMateriaActionPerformed
 
     private void jMIEdicionDeAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIEdicionDeAlumnoActionPerformed
@@ -184,8 +184,7 @@ public class Vista extends javax.swing.JFrame {
 
     private void jMIEdicionDeMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIEdicionDeMateriaActionPerformed
 
-//        RemodelacionDeHabitacion EDH = new RemodelacionDeHabitacion();
-//        abrirVentana(EDH);
+        JOptionPane.showMessageDialog(this, "Todavia no disponible...", "Aviso!", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_jMIEdicionDeMateriaActionPerformed
 
     private void jMIFormularioDeAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFormularioDeAlumnoActionPerformed
@@ -196,8 +195,10 @@ public class Vista extends javax.swing.JFrame {
 
     private void jMSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMSalirMouseClicked
 
-        SalirView exit = new SalirView();
-        abrirVentana(exit);
+        int salir = JOptionPane.showConfirmDialog(this, "¿Esta seguro?", "SALIR", JOptionPane.YES_OPTION);
+        if (salir == 0) {
+            System.exit(0);
+        }
     }//GEN-LAST:event_jMSalirMouseClicked
 
     private void escritorioComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_escritorioComponentResized
