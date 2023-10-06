@@ -82,6 +82,8 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLCelular = new javax.swing.JLabel();
+        jRBEstado = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
         setMaximizable(true);
@@ -259,6 +261,8 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         jLCelular.setForeground(new java.awt.Color(235, 235, 235));
         jLCelular.setText("Celular:");
 
+        jLabel1.setText("Estado:");
+
         jLayeredPane1.setLayer(jTFDni, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jTFApellido, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jTFNombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -271,6 +275,8 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         jLayeredPane1.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLCelular, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jRBEstado, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -284,16 +290,22 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
                     .addComponent(jLNombre)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jLCelular))
+                    .addComponent(jLCelular)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTFDomicilio)
-                    .addComponent(jTFCorreo)
-                    .addComponent(jTFCelular)
-                    .addComponent(jTFApellido)
-                    .addComponent(jTFNombre)
-                    .addComponent(jTFDni))
-                .addGap(23, 23, 23))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addComponent(jRBEstado)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTFDomicilio)
+                            .addComponent(jTFCorreo)
+                            .addComponent(jTFCelular)
+                            .addComponent(jTFApellido)
+                            .addComponent(jTFNombre)
+                            .addComponent(jTFDni))
+                        .addGap(23, 23, 23))))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,6 +334,10 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLCelular))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jRBEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -361,10 +377,10 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -456,17 +472,18 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
 
             int celular = Integer.parseInt(jTFCelular.getText());//Con esto validamos que en la casilla celular solo haya numeros
 
-            //Llegado el punto en que todos los valores son correctos, se crea un alumno
-            //En este alumno guardamos el resultado de la busqueda por medio del dni que figura en la tabla
+            //Llegado el punto en que todos los valores son correctos, se crea un huesped
+            //En este huesped guardamos el resultado de la busqueda por medio del dni que figura en la tabla
             Huesped h = Vista.getHD().buscarHuespedPorDni(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
 
-            //Seteamos al alumno con la informacion nueva
+            //Seteamos al huesped con la informacion nueva
             h.setDni(dni);
             h.setApellido(apellido);
             h.setNombre(nombre);
             h.setCorreo(correo);
             h.setCelular(jTFCelular.getText());
             h.setDomicilio(domicilio);
+            h.setEstado(jRBEstado.isSelected());
 
             //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo editarAlumno
             int registro = Vista.getHD().editarHuesped(h);
@@ -565,12 +582,14 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLNombre;
     private javax.swing.JLayeredPane jLPCabecera;
     private javax.swing.JLabel jLTitulo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPBackground;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRBA;
+    private javax.swing.JRadioButton jRBEstado;
     private javax.swing.JRadioButton jRBIn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFApellido;
@@ -593,6 +612,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         modelo.addColumn("Domicilio");
         modelo.addColumn("Correo");
         modelo.addColumn("Celular");
+        modelo.addColumn("Estado");
 
         //Se setea el modelo de tabla a la tabla de alumnos
         jTable1.setModel(modelo);
@@ -603,7 +623,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         //Se llama al metodo que se encarga de setear el ancho de las columnas
         anchoColumna(columnas, 0, 40);
         anchoColumna(columnas, 1, 80);
-        anchoColumna(columnas, 4, 90);
+        anchoColumna(columnas, 7, 60);
     }
 
     //Este metodo se usa para setear el ancho de una columna
@@ -647,7 +667,8 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
             h.getNombre(),
             h.getDomicilio(),
             h.getCorreo(),
-            h.getCelular()
+            h.getCelular(),
+            h.isEstado()
         });
     }
 
@@ -660,6 +681,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         jTFDomicilio.setText("");
         jTFCorreo.setText("");
         jTFCelular.setText("");
+        jRBEstado.setSelected(false);
     }
 
     //Este metodo elimina todas las filas de la tabla
@@ -679,6 +701,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         String domicilio = (String) modelo.getValueAt(filaSelec, 4);
         String correo = (String) modelo.getValueAt(filaSelec, 5);
         String celular = (String) modelo.getValueAt(filaSelec, 6);
+        boolean estado = (boolean) modelo.getValueAt(filaSelec, 7);
 
         //Se setean los valores recuperados anteriormente en los campos correspondientes
         jTFDni.setText(dni);
@@ -687,5 +710,6 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         jTFDomicilio.setText(domicilio);
         jTFCorreo.setText(correo);
         jTFCelular.setText(celular);
+        jRBEstado.setSelected(estado);
     }
 }
