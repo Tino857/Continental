@@ -181,8 +181,9 @@ public class Vista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMIFormularioDeMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFormularioDeMateriaActionPerformed
-        
-        JOptionPane.showMessageDialog(this, "Todavia no disponible...", "Aviso!", JOptionPane.WARNING_MESSAGE);
+        GestionDeHabitacion GDHab = new GestionDeHabitacion();
+        abrirVentana(GDHab); 
+        //JOptionPane.showMessageDialog(this, "Todavia no disponible...", "Aviso!", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_jMIFormularioDeMateriaActionPerformed
 
     private void jMIEdicionDeAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIEdicionDeAlumnoActionPerformed

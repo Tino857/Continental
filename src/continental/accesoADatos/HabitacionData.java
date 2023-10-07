@@ -155,7 +155,41 @@ public class HabitacionData {
         }
         return habitacion;//retorna una habitacion
     }
-    
+    //Este metodo permite buscar una habitacion por su numero
+     public Habitacion buscarHabitacionPorNumero(int nDH) {
+       
+        Habitacion habitacion = null;//Declara una variable al de tipo Habitacion e inicializa su valor como null. Esta variable se utilizará para almacenar el resultado de la búsqueda.
+        String query = "SELECT * FROM habitacion WHERE numero = ?";
+        try {
+            
+            //se prepara la consulta PS y se solicita las claves generadas automaticamente
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, nDH);// se modifica el ID
+            ResultSet rs = ps.executeQuery();//se ejecuta la consulta y se almacena en un resulset "rs"
+            if (rs.next()) {// si rs contiene valores, se recuperan abajo
+                
+                habitacion = new Habitacion();
+                habitacion.setIdHabitacion(rs.getInt("idHabitacion"));
+                habitacion.setNro(rs.getInt("numero"));
+                habitacion.setPiso(rs.getInt("piso"));
+                habitacion.setEstado(rs.getBoolean("estado"));
+                habitacion.setCategoria(Vista.getCD().buscarCategoriaPorId(rs.getInt("idCategoria")));//***leer 123***
+                
+            } else {
+                
+                //si no se encuentra una habitacion con los parametros buscados deja el msj
+                JOptionPane.showMessageDialog(null, "No existe la habitacion");
+            }
+            
+            //Cierra consulta
+            ps.close();
+        } catch (SQLException e) {
+            
+            //Se captura una posible excepcion SQL
+            System.out.println("Error al buscar la habitacion" + e.getMessage());
+        }
+        return habitacion;//retorna una habitacion
+    }
     //Este metodo devuelve una lista de habitaciones
     public ArrayList<Habitacion> listarHabitaciones() {
         

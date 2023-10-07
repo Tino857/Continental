@@ -407,22 +407,22 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
             //Se crea un alumno y se busca en la base de datos para confirmar que el alumno existe
             //En caso que el alumno no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
             Huesped h = Vista.getHD().buscarHuespedPorDni(dni);
-            System.out.println("1");
+           
             if (h == null) {
                 
                 JOptionPane.showMessageDialog(this, "No existe el huesped");
                 return;
             }
-            System.out.println("2");
+            
             //Si el alumno se encontraba en la base de datos, se recupera su estado para confirmar que no haya sido eliminado anteriormente
             if (!h.isEstado()) {
 
                 JOptionPane.showMessageDialog(this, "El huesped ya ha sido borrado");
                 return;
             }
-            System.out.println("3");
+       
             //Habiendo confirmado que el dni del alumno es correcto, que el alumno existe en la DB y que su estado es activo
-            //Se crea una ventana de confirmacion para eliminar al alumno, esta ventana recibe como parametro el dni del alumno
+           
             int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea eliminar este huesped?", "", JOptionPane.YES_OPTION);
             int registro;
             if (resp == 0) {

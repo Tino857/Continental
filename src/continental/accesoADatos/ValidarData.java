@@ -43,5 +43,12 @@ public class ValidarData {
         
         return (fecha.isBefore(LocalDate.of(1950, 01, 01)) || fecha.isAfter(LocalDate.now(ZoneId.systemDefault())));
     }
-    
+     public static boolean validarPiso(int piso){
+        
+        return (piso<0 || piso>20);
+    }
+     public static boolean validarNumero(int num){
+        
+        return (num<0 || num>200);
+    }
 }
