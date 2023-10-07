@@ -3,9 +3,6 @@ package continental.vistas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -609,10 +606,6 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         modelo.addColumn("DNI");
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
-        modelo.addColumn("Domicilio");
-        modelo.addColumn("Correo");
-        modelo.addColumn("Celular");
-        modelo.addColumn("Estado");
 
         //Se setea el modelo de tabla a la tabla de alumnos
         jTable1.setModel(modelo);
@@ -623,7 +616,6 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         //Se llama al metodo que se encarga de setear el ancho de las columnas
         anchoColumna(columnas, 0, 40);
         anchoColumna(columnas, 1, 80);
-        anchoColumna(columnas, 7, 60);
     }
 
     //Este metodo se usa para setear el ancho de una columna
@@ -689,27 +681,21 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
 
         int filas = modelo.getRowCount() - 1;
         for (int i = filas; i >= 0; i--) {
+            
             modelo.removeRow(i);
         }
     }
     
     private void mostrarInfo(int filaSelec){
         //Se obtienen los datos del alumno almacenado en la fila seleccionada
-        String dni = (String) modelo.getValueAt(filaSelec, 1);
-        String apellido = (String) modelo.getValueAt(filaSelec, 2);
-        String nombre = (String) modelo.getValueAt(filaSelec, 3);
-        String domicilio = (String) modelo.getValueAt(filaSelec, 4);
-        String correo = (String) modelo.getValueAt(filaSelec, 5);
-        String celular = (String) modelo.getValueAt(filaSelec, 6);
-        boolean estado = (boolean) modelo.getValueAt(filaSelec, 7);
-
-        //Se setean los valores recuperados anteriormente en los campos correspondientes
-        jTFDni.setText(dni);
-        jTFApellido.setText(apellido);
-        jTFNombre.setText(nombre);
-        jTFDomicilio.setText(domicilio);
-        jTFCorreo.setText(correo);
-        jTFCelular.setText(celular);
-        jRBEstado.setSelected(estado);
+        int dni = Integer.parseInt(modelo.getValueAt(filaSelec, 1).toString());
+        Huesped huesped = Vista.getHD().buscarHuespedPorDni(dni);
+        jTFDni.setText(dni+"");
+        jTFApellido.setText(huesped.getApellido());
+        jTFNombre.setText(huesped.getNombre());
+        jTFDomicilio.setText(huesped.getDomicilio());
+        jTFCorreo.setText(huesped.getCorreo());
+        jTFCelular.setText(huesped.getCelular());
+        jRBEstado.setSelected(huesped.isEstado());
     }
 }

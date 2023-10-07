@@ -75,6 +75,7 @@ public class Vista extends javax.swing.JFrame {
         jMMaterias = new javax.swing.JMenu();
         jMIFormularioDeMateria = new javax.swing.JMenuItem();
         jMIEdicionDeMateria = new javax.swing.JMenuItem();
+        jMICategorias = new javax.swing.JMenuItem();
         jMSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -145,6 +146,14 @@ public class Vista extends javax.swing.JFrame {
         });
         jMMaterias.add(jMIEdicionDeMateria);
 
+        jMICategorias.setText("Categoria de Habitaciones");
+        jMICategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMICategoriasActionPerformed(evt);
+            }
+        });
+        jMMaterias.add(jMICategorias);
+
         jMenuBar1.add(jMMaterias);
 
         jMSalir.setText("Salir");
@@ -209,6 +218,11 @@ public class Vista extends javax.swing.JFrame {
         colocarLogo();
     }//GEN-LAST:event_escritorioComponentResized
 
+    private void jMICategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICategoriasActionPerformed
+        CategoriasVista cav = new CategoriasVista();
+        abrirVentana(cav);
+    }//GEN-LAST:event_jMICategoriasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -247,6 +261,7 @@ public class Vista extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMAlumnos;
+    private javax.swing.JMenuItem jMICategorias;
     private javax.swing.JMenuItem jMIEdicionDeAlumno;
     private javax.swing.JMenuItem jMIEdicionDeMateria;
     private javax.swing.JMenuItem jMIFormularioDeAlumno;
