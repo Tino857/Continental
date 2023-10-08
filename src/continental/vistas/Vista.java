@@ -129,6 +129,11 @@ public class Vista extends javax.swing.JFrame {
         jMenuBar1.add(jMAlumnos);
 
         jMMaterias.setText("Habitacion");
+        jMMaterias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMMateriasActionPerformed(evt);
+            }
+        });
 
         jMIFormularioDeMateria.setText("Gestion de Habitacion");
         jMIFormularioDeMateria.addActionListener(new java.awt.event.ActionListener() {
@@ -194,7 +199,9 @@ public class Vista extends javax.swing.JFrame {
 
     private void jMIEdicionDeMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIEdicionDeMateriaActionPerformed
 
-        JOptionPane.showMessageDialog(this, "Todavia no disponible...", "Aviso!", JOptionPane.WARNING_MESSAGE);
+ RemodelacionDeHabitacion RDH = new RemodelacionDeHabitacion();
+        abrirVentana(RDH);        
+//JOptionPane.showMessageDialog(this, "Todavia no disponible...", "Aviso!", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_jMIEdicionDeMateriaActionPerformed
 
     private void jMIFormularioDeAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFormularioDeAlumnoActionPerformed
@@ -223,6 +230,10 @@ public class Vista extends javax.swing.JFrame {
         CategoriasVista cav = new CategoriasVista();
         abrirVentana(cav);
     }//GEN-LAST:event_jMICategoriasActionPerformed
+
+    private void jMMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMMateriasActionPerformed
+      
+    }//GEN-LAST:event_jMMateriasActionPerformed
 
     /**
      * @param args the command line arguments

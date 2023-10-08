@@ -143,7 +143,7 @@ public class HabitacionData {
             } else {
                 
                 //si no se encuentra una habitacion con los parametros buscados deja el msj
-                JOptionPane.showMessageDialog(null, "No existe la habitacion");
+//                JOptionPane.showMessageDialog(null, "No existe la habitacion");
             }
             
             //Cierra consulta
@@ -178,7 +178,7 @@ public class HabitacionData {
             } else {
                 
                 //si no se encuentra una habitacion con los parametros buscados deja el msj
-                JOptionPane.showMessageDialog(null, "No existe la habitacion");
+//                JOptionPane.showMessageDialog(null, "No existe la habitacion");
             }
             
             //Cierra consulta

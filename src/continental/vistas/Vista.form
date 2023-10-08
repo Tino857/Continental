@@ -39,6 +39,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Habitacion"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMMateriasActionPerformed"/>
+          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMIFormularioDeMateria">
               <Properties>

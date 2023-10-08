@@ -12,6 +12,8 @@ import continental.entidades.Reserva;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -21,9 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class GestionDeHabitacion extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form GestionDeHabitacion
-     */
+    private  Map<Integer,Categoria> listaDeHab=new HashMap();
     public GestionDeHabitacion() {
         initComponents();
         cargarCB();
@@ -65,6 +65,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         jLLogo = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jCBCategorias = new javax.swing.JComboBox<>();
+        jLLogo1 = new javax.swing.JLabel();
 
         jDPEscritorio.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentRemoved(java.awt.event.ContainerEvent evt) {
@@ -182,6 +183,8 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         jLabel6.setForeground(new java.awt.Color(235, 235, 235));
         jLabel6.setText("Categoria");
 
+        jLLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoULP3-w.png"))); // NOI18N
+
         javax.swing.GroupLayout jPBackgroundLayout = new javax.swing.GroupLayout(jPBackground);
         jPBackground.setLayout(jPBackgroundLayout);
         jPBackgroundLayout.setHorizontalGroup(
@@ -218,12 +221,16 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                         .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(51, 51, 51))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLLogo1)
+                .addGap(7, 7, 7))
         );
         jPBackgroundLayout.setVerticalGroup(
             jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPBackgroundLayout.createSequentialGroup()
-                .addComponent(jLPCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLPCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLLogo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -309,25 +316,22 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
             jTFCodigo.setText(hab.getIdHabitacion()+"");
             jTFNumero.setText(hab.getNro()+"");
             jTFPiso.setText(hab.getPiso() + "");
-                    int i=0;
-                ArrayList<Categoria> Lista = Vista.getCD().listarCategorias();
-        
-       
-        for (Categoria cat : Lista) {
+                   for (Map.Entry<Integer, Categoria> entry : listaDeHab.entrySet()) {
+                Integer key = entry.getKey();
+                Categoria value = entry.getValue();
+                       if (hab.getCategoria().getIdCategoria()==value.getIdCategoria()) {
+                           jCBCategorias.setSelectedIndex(key);
+                       }
+            } 
             
-            if (cat==hab.getCategoria()) {
-                jCBCategorias.setSelectedIndex(i+1);
-            }
-            i++;
-        }    
-        
-            
+               
+   
         } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(this, "El numero de la habitacion es incorrecto.");
         } catch (NullPointerException e) {
 
-            JOptionPane.showMessageDialog(this, "No existe la materia");
+            JOptionPane.showMessageDialog(this, "No existe la habitacion");
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
@@ -469,6 +473,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<Categoria> jCBCategorias;
     private javax.swing.JDesktopPane jDPEscritorio;
     private javax.swing.JLabel jLLogo;
+    private javax.swing.JLabel jLLogo1;
     private javax.swing.JLabel jLMargen;
     private javax.swing.JLayeredPane jLPCabecera;
     private javax.swing.JLabel jLTitulo;
@@ -503,7 +508,11 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
 
         //Se recupera una lista de alumnos
         ArrayList<Categoria> Lista = Vista.getCD().listarCategorias();
-        
+       int i=0;
+        for (Categoria categoria : Lista) {
+            listaDeHab.put(i+1, categoria);
+            i++;
+        }
         //Se recorre la lista y cada alumno se agrega al CB
         for (Categoria cat : Lista) {
             jCBCategorias.addItem(cat);
