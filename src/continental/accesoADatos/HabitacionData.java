@@ -27,8 +27,8 @@ public class HabitacionData {
     public int guardarHabitacion(Habitacion habitacion) {
         
         //Se define consulta SQL, colocando comodines para los valores que luego seran seteados.
-        String query = "INSERT INTO habitacion (numero, piso, estado, idCategoria) "
-                + "VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO habitacion (numero, piso, estado,habilitada, idCategoria) "
+                + "VALUES (?, ?, ?,?, ?)";
         
         //Esta variable se utilizará para almacenar el ID generado del nuevo registro en la base de datos.
         int registro = 0;
@@ -39,7 +39,8 @@ public class HabitacionData {
             ps.setInt(1, habitacion.getNro());
             ps.setInt(2, habitacion.getPiso());
             ps.setBoolean(3, habitacion.isEstado());
-            ps.setInt(4, habitacion.getCategoria().getIdCategoria());
+            ps.setBoolean(4,true);
+            ps.setInt(5, habitacion.getCategoria().getIdCategoria());
             //Se ejecuta la consulta
             ps.executeUpdate();
             //Se recupera un conjunto de resultados
@@ -70,16 +71,16 @@ public class HabitacionData {
     }
     
     //Este metodo permite dar de baja una habitacion de la BD del hotel
-    public int eliminarHabitacion(int idHab) {
+    public int eliminarHabitacion(int nro) {
         
-        String query = "UPDATE habitacion SET estado=0 WHERE idHabitacion=?";
+        String query = "UPDATE habitacion SET habilitada=0 WHERE numero=?";
         //Esta variable almacenara si hubo cambios en el registro de la DB
         int registro = 0;
         try {
             
             //Se crea un prepared statement, se prepara la declaracion con la consulta sql definida previamente y se setean los valores
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, idHab);
+            ps.setInt(1, nro);
             //Se ejecuta la consulta preparada utilizando el metodo executeUpdate() y se recupera llave generada automaticamente
             registro = ps.executeUpdate();
 
@@ -98,7 +99,7 @@ public class HabitacionData {
     //Este metodo permite actualizar los datos de la habitacion
     public int editarHabitacion(Habitacion habitacion) {
         
-        String query = "UPDATE habitacion SET numero = ?, piso = ?, estado = ?, idCategoria = ? WHERE idHabitacion = ?";
+        String query = "UPDATE habitacion SET numero = ?, piso = ?, estado = ?,habilitada=?, idCategoria = ? WHERE idHabitacion = ?";
         
         int registro = 0;
         try {
@@ -108,8 +109,9 @@ public class HabitacionData {
             ps.setInt(1, habitacion.getNro());
             ps.setInt(2, habitacion.getPiso());
             ps.setBoolean(3, habitacion.isEstado());
-            ps.setInt(4, habitacion.getCategoria().getIdCategoria());
-            ps.setInt(5, habitacion.getIdHabitacion());
+            ps.setBoolean(4, habitacion.isHabilitada());
+            ps.setInt(5, habitacion.getCategoria().getIdCategoria());
+            ps.setInt(6, habitacion.getIdHabitacion());
             registro = ps.executeUpdate(); //ejecuta Update
             ps.close();//Cierra consulta
         } catch (SQLException e) {
@@ -123,7 +125,7 @@ public class HabitacionData {
     //Este metodo permite buscar una habitacion por su ID
     public Habitacion buscarHabitacionPorId(int idHab) {
        
-        Habitacion habitacion = null;//Declara una variable al de tipo Habitacion e inicializa su valor como null. Esta variable se utilizará para almacenar el resultado de la búsqueda.
+        Habitacion hab = null;//Declara una variable al de tipo Habitacion e inicializa su valor como null. Esta variable se utilizará para almacenar el resultado de la búsqueda.
         String query = "SELECT * FROM habitacion WHERE idHabitacion = ?";
         try {
             
@@ -133,12 +135,13 @@ public class HabitacionData {
             ResultSet rs = ps.executeQuery();//se ejecuta la consulta y se almacena en un resulset "rs"
             if (rs.next()) {// si rs contiene valores, se recuperan abajo
                 
-                habitacion = new Habitacion();
-                habitacion.setIdHabitacion(rs.getInt("idHabitacion"));
-                habitacion.setNro(rs.getInt("numero"));
-                habitacion.setPiso(rs.getInt("piso"));
-                habitacion.setEstado(rs.getBoolean("estado"));
-                habitacion.setCategoria(Vista.getCD().buscarCategoriaPorId(rs.getInt("idCategoria")));//***leer 123***
+                hab = new Habitacion();
+                hab.setIdHabitacion(rs.getInt("idHabitacion"));
+                hab.setNro(rs.getInt("numero"));
+                hab.setPiso(rs.getInt("piso"));
+                hab.setEstado(rs.getBoolean("estado"));
+                hab.setCategoria(Vista.getCD().buscarCategoriaPorId(rs.getInt("idCategoria")));
+                hab.setHabilitada(rs.getBoolean("habilitada"));
                 
             } else {
                 
@@ -153,12 +156,12 @@ public class HabitacionData {
             //Se captura una posible excepcion SQL
             System.out.println("Error al buscar la habitacion" + e.getMessage());
         }
-        return habitacion;//retorna una habitacion
+        return hab;//retorna una habitacion
     }
     //Este metodo permite buscar una habitacion por su numero
      public Habitacion buscarHabitacionPorNumero(int nDH) {
        
-        Habitacion habitacion = null;//Declara una variable al de tipo Habitacion e inicializa su valor como null. Esta variable se utilizará para almacenar el resultado de la búsqueda.
+        Habitacion hab = null;//Declara una variable al de tipo Habitacion e inicializa su valor como null. Esta variable se utilizará para almacenar el resultado de la búsqueda.
         String query = "SELECT * FROM habitacion WHERE numero = ?";
         try {
             
@@ -168,13 +171,13 @@ public class HabitacionData {
             ResultSet rs = ps.executeQuery();//se ejecuta la consulta y se almacena en un resulset "rs"
             if (rs.next()) {// si rs contiene valores, se recuperan abajo
                 
-                habitacion = new Habitacion();
-                habitacion.setIdHabitacion(rs.getInt("idHabitacion"));
-                habitacion.setNro(rs.getInt("numero"));
-                habitacion.setPiso(rs.getInt("piso"));
-                habitacion.setEstado(rs.getBoolean("estado"));
-                habitacion.setCategoria(Vista.getCD().buscarCategoriaPorId(rs.getInt("idCategoria")));//***leer 123***
-                
+                hab = new Habitacion();
+                hab.setIdHabitacion(rs.getInt("idHabitacion"));
+                hab.setNro(rs.getInt("numero"));
+                hab.setPiso(rs.getInt("piso"));
+                hab.setEstado(rs.getBoolean("estado"));
+                hab.setCategoria(Vista.getCD().buscarCategoriaPorId(rs.getInt("idCategoria")));
+                hab.setHabilitada(rs.getBoolean("habilitada"));
             } else {
                 
                 //si no se encuentra una habitacion con los parametros buscados deja el msj
@@ -188,7 +191,7 @@ public class HabitacionData {
             //Se captura una posible excepcion SQL
             System.out.println("Error al buscar la habitacion" + e.getMessage());
         }
-        return habitacion;//retorna una habitacion
+        return hab;//retorna una habitacion
     }
     //Este metodo devuelve una lista de habitaciones
     public ArrayList<Habitacion> listarHabitaciones() {
@@ -199,16 +202,17 @@ public class HabitacionData {
             
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();//se ejecuta la consulta, para un conjunto de resultados(resulset)
-            Habitacion habitacion = null;// se inicializa una Habitacion en null
+            Habitacion hab = null;// se inicializa una Habitacion en null
            
             while (rs.next()) {//se inicializa un bucle para modificar la Habitacion
-                habitacion = new Habitacion();
-                habitacion.setIdHabitacion(rs.getInt("idHabitacion"));
-                habitacion.setNro(rs.getInt("numero"));
-                habitacion.setPiso(rs.getInt("piso"));
-                habitacion.setEstado(rs.getBoolean("estado"));
-                habitacion.setCategoria(Vista.getCD().buscarCategoriaPorId(rs.getInt("idCategoria")));
-                listaHabitaciones.add(habitacion);//se agrega ela habitacion a la lista
+                hab = new Habitacion();
+                hab.setIdHabitacion(rs.getInt("idHabitacion"));
+                hab.setNro(rs.getInt("numero"));
+                hab.setPiso(rs.getInt("piso"));
+                hab.setEstado(rs.getBoolean("estado"));
+                hab.setCategoria(Vista.getCD().buscarCategoriaPorId(rs.getInt("idCategoria")));
+                hab.setHabilitada(rs.getBoolean("habilitada"));
+                listaHabitaciones.add(hab);//se agrega ela habitacion a la lista
             }
             ps.close();//cierra  el PS
         } catch (SQLException e) {
@@ -217,5 +221,28 @@ public class HabitacionData {
         }
         return listaHabitaciones;//retorna una lista de habitaciones
     }
-    
+     public int habilitarHabitacion(int nro) {
+        
+        String query = "UPDATE habitacion SET habilitada=1 WHERE numero=?";
+        //Esta variable almacenara si hubo cambios en el registro de la DB
+        int registro = 0;
+        try {
+            
+            //Se crea un prepared statement, se prepara la declaracion con la consulta sql definida previamente y se setean los valores
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, nro);
+            //Se ejecuta la consulta preparada utilizando el metodo executeUpdate() y se recupera llave generada automaticamente
+            registro = ps.executeUpdate();
+
+            //Cierra consulta
+            ps.close();
+        } catch (SQLException e) {
+            
+            //Se captura una posible excepcion SQL
+            System.out.println("Error al habilitar la habitacion" + e.getMessage());
+        }
+        
+        //Retorna variable registro al metodo que lo invoca
+        return registro; 
+    }
 }

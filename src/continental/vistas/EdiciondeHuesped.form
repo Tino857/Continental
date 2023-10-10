@@ -328,26 +328,17 @@
                           <Component id="jLabel6" min="-2" pref="58" max="-2" attributes="0"/>
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <Component id="jLCelular" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jRBEstado" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTFDomicilio" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTFCorreo" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTFCelular" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTFApellido" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTFNombre" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTFDni" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jTFDomicilio" alignment="0" pref="379" max="32767" attributes="0"/>
+                          <Component id="jTFCorreo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTFCelular" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTFApellido" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTFNombre" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTFDni" alignment="0" max="32767" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -384,12 +375,7 @@
                           <Component id="jTFCelular" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLCelular" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jRBEstado" max="32767" attributes="0"/>
-                          <Component id="jLabel1" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="40" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -501,13 +487,6 @@
                   <Color blue="eb" green="eb" red="eb" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Celular:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="jRBEstado">
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Estado:"/>
               </Properties>
             </Component>
           </SubComponents>

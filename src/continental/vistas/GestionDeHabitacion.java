@@ -28,6 +28,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         initComponents();
         cargarCB();
          jCBCategorias.setSelectedIndex(0);
+         jRBHabilitada.setSelected(false);
     }
 
     /**
@@ -56,7 +57,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         jTFPiso = new javax.swing.JTextField();
         jTFNumero = new javax.swing.JTextField();
         jBLimpiar = new javax.swing.JButton();
-        jBEliminar = new javax.swing.JButton();
+        jBHabilitar = new javax.swing.JButton();
         jBGuardar = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
         jLPCabecera = new javax.swing.JLayeredPane();
@@ -66,6 +67,9 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jCBCategorias = new javax.swing.JComboBox<>();
         jLLogo1 = new javax.swing.JLabel();
+        jRBHabilitada = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        jBDeshabilitar1 = new javax.swing.JButton();
 
         jDPEscritorio.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentRemoved(java.awt.event.ContainerEvent evt) {
@@ -116,14 +120,14 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
-        jBEliminar.setBackground(new java.awt.Color(51, 51, 51));
-        jBEliminar.setForeground(new java.awt.Color(235, 235, 235));
-        jBEliminar.setText("Demoler");
-        jBEliminar.setIconTextGap(10);
-        jBEliminar.setPreferredSize(new java.awt.Dimension(105, 32));
-        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+        jBHabilitar.setBackground(new java.awt.Color(51, 51, 51));
+        jBHabilitar.setForeground(new java.awt.Color(235, 235, 235));
+        jBHabilitar.setText("Habilitar");
+        jBHabilitar.setIconTextGap(10);
+        jBHabilitar.setPreferredSize(new java.awt.Dimension(105, 32));
+        jBHabilitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEliminarActionPerformed(evt);
+                jBHabilitarActionPerformed(evt);
             }
         });
 
@@ -165,7 +169,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
             .addGroup(jLPCabeceraLayout.createSequentialGroup()
                 .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLLogo))
         );
@@ -185,6 +189,27 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
 
         jLLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoULP3-w.png"))); // NOI18N
 
+        jRBHabilitada.setEnabled(false);
+        jRBHabilitada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBHabilitadaActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setForeground(new java.awt.Color(235, 235, 235));
+        jLabel1.setText("Habilitada");
+
+        jBDeshabilitar1.setBackground(new java.awt.Color(51, 51, 51));
+        jBDeshabilitar1.setForeground(new java.awt.Color(235, 235, 235));
+        jBDeshabilitar1.setText("Deshabilitar");
+        jBDeshabilitar1.setIconTextGap(10);
+        jBDeshabilitar1.setPreferredSize(new java.awt.Dimension(105, 32));
+        jBDeshabilitar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBDeshabilitar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPBackgroundLayout = new javax.swing.GroupLayout(jPBackground);
         jPBackground.setLayout(jPBackgroundLayout);
         jPBackgroundLayout.setHorizontalGroup(
@@ -192,45 +217,60 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
             .addGroup(jPBackgroundLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLPCabecera)
+                    .addGroup(jPBackgroundLayout.createSequentialGroup()
+                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLPCabecera)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
+                                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel2)
+                                            .addGroup(jPBackgroundLayout.createSequentialGroup()
+                                                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel1)
+                                                    .addComponent(jLabel6))
+                                                .addGap(1, 1, 1)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(4, 4, 4)))
+                                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPBackgroundLayout.createSequentialGroup()
+                                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTFNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(jCBCategorias, javax.swing.GroupLayout.Alignment.LEADING, 0, 125, Short.MAX_VALUE)
+                                                .addComponent(jTFPiso, javax.swing.GroupLayout.Alignment.LEADING)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPBackgroundLayout.createSequentialGroup()
+                                        .addGap(26, 26, 26)
+                                        .addComponent(jRBHabilitada)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLLogo1)
+                        .addGap(7, 7, 7))
                     .addGroup(jPBackgroundLayout.createSequentialGroup()
                         .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBHabilitar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBDeshabilitar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
-                        .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
-                                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(4, 4, 4)))
-                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jCBCategorias, javax.swing.GroupLayout.Alignment.LEADING, 0, 125, Short.MAX_VALUE)
-                                .addComponent(jTFPiso, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLLogo1)
-                .addGap(7, 7, 7))
+                        .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))))
         );
         jPBackgroundLayout.setVerticalGroup(
             jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPBackgroundLayout.createSequentialGroup()
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLPCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLLogo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLLogo1, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -253,11 +293,16 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                         .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(jCBCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jRBHabilitada)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBHabilitar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBDeshabilitar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
@@ -271,9 +316,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         );
         jDPEscritorioLayout.setVerticalGroup(
             jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDPEscritorioLayout.createSequentialGroup()
-                .addComponent(jPBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -323,7 +366,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                            jCBCategorias.setSelectedIndex(key);
                        }
             } 
-            
+            jRBHabilitada.setSelected(hab.isHabilitada());
                
    
         } catch (NumberFormatException e) {
@@ -341,11 +384,11 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         limpiar();
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
-    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+    private void jBHabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHabilitarActionPerformed
 //Se controla que el campo de numero no se encuentre vacio
               if (jTFNumero.getText().isEmpty()){
 
-            JOptionPane.showMessageDialog(this, "La casilla Nombre no debe estar vacia.");
+            JOptionPane.showMessageDialog(this, "La casilla numero no debe estar vacia.");
             return;
         }
         try {
@@ -362,39 +405,32 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No existe la habitacion");
             return;
         }
-//El problema que encuentro es que si las habitaciones son eliminadas tendran reservas asociadas y ademas. Mi idea es que si el usuario desea eliminar una habitacion debera eliminar pirmero
-//las reservas que tenga asociada. Podemos poner un cartel que diga que si la habitacion que encontramos no es nula y ademas tiene asociada reservas no podra eliminarla.
-        //Si la habitacion se encontraba en la base de datos, se recupera su estado para confirmar que no haya sido eliminado anteriormente
-        
-        ArrayList <Reserva> reservas=new ArrayList();
-            for (Reserva reserva : reservas) {
-                if (hab==reserva.getHabitacion()) {
-                 JOptionPane.showMessageDialog(this, "La habitacion que desea eliminar tiene reservas asociadas."
-                         + "\n Primero elimine todas las reservas asociadas a esta habiatacion");   
-                }
+            if (hab.isHabilitada()) {
+                JOptionPane.showMessageDialog(this, "La habitacion ya se encunetra habilitada");
+                return;
             }
         
-            //Habiendo confirmado que el numero de la habitacion es correcto, que la habitacion existe en la DB y que su no tiene reservas asociadas
+            //Habiendo confirmado que el numero de la habitacion es correcto, que la habitacion existe en la DB y que no este habilitada
             
-           int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea eliminar esta habitacion?", "", JOptionPane.YES_OPTION);
+           int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea habilitar esta habitacion?", "", JOptionPane.YES_OPTION);
             int registro;
             if (resp == 0) {
-                registro = Vista.getHabD().eliminarHabitacion(hab.getIdHabitacion());
+                registro = Vista.getHabD().habilitarHabitacion(hab.getNro());
                 
                 if (registro == 1) {
                 
-                    JOptionPane.showMessageDialog(this, "La habitacion ha sido borrada");
+                    JOptionPane.showMessageDialog(this, "La habitacion ha sido habilitada");
+                    jRBHabilitada.setSelected(true);
                 } else {
                 
-                    JOptionPane.showMessageDialog(this, "No se pudo borrar la habitacion");
+                    JOptionPane.showMessageDialog(this, "No se pudo habilitar la habitacion");
                 }
             }
         } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(this, "El numero de la habitacion es incorrecto.");
-        }
-    }//GEN-LAST:event_jBEliminarActionPerformed
-
+    }//GEN-LAST:event_jBHabilitarActionPerformed
+    }
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
         //Controla que no hayan campos vacios
@@ -463,11 +499,72 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
        
     }//GEN-LAST:event_jDPEscritorioComponentRemoved
 
+    private void jRBHabilitadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBHabilitadaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRBHabilitadaActionPerformed
+
+    private void jBDeshabilitar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeshabilitar1ActionPerformed
+    //Se controla que el campo de numero no se encuentre vacio
+              if (jTFNumero.getText().isEmpty()){
+
+            JOptionPane.showMessageDialog(this, "La casilla numero no debe estar vacia.");
+            return;
+        }
+        try {
+
+        int numero = Integer.parseInt(jTFNumero.getText());
+        
+
+      
+        //Se crea una habitacion y se busca en la base de datos para confirmar que la habitacion existe
+        //En caso que la habitacion no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
+        Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(numero);
+        if (hab == null) {
+
+            JOptionPane.showMessageDialog(this, "No existe la habitacion");
+            return;
+        }
+//El problema que encuentro es que si las habitaciones son eliminadas tendran reservas asociadas. Mi idea es que si el usuario desea eliminar una habitacion debera eliminar pirmero
+//las reservas que tenga asociada. Podemos poner un cartel que diga que si la habitacion que encontramos no es nula y ademas tiene asociada reservas no podra eliminarla.
+        //Si la habitacion se encontraba en la base de datos, se recupera su estado para confirmar que no haya sido eliminado anteriormente
+        
+        ArrayList <Reserva> reservas=new ArrayList();
+            for (Reserva reserva : reservas) {
+                if (hab==reserva.getHabitacion()&&reserva.isEstado()) {
+                 JOptionPane.showMessageDialog(this, "La habitacion que desea eliminar tiene reservas asociadas."
+                         + "\n Primero elimine todas las reservas asociadas a esta habiatacion");   
+                 return;
+                }
+            }
+        
+            //Habiendo confirmado que el numero de la habitacion es correcto, que la habitacion existe en la DB y que su no tiene reservas asociadas
+            
+           int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea deshabilitar esta habitacion?", "", JOptionPane.YES_OPTION);
+            int registro;
+            if (resp == 0) {
+                registro = Vista.getHabD().eliminarHabitacion(hab.getNro());
+                
+                if (registro == 1) {
+                
+                    JOptionPane.showMessageDialog(this, "La habitacion ha sido deshabilitada");
+                    jRBHabilitada.setSelected(false);
+                } else {
+                
+                    JOptionPane.showMessageDialog(this, "No se pudo deshabilitar la habitacion");
+                }
+            }
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "El numero de la habitacion es incorrecto.");
+        }    
+    }//GEN-LAST:event_jBDeshabilitar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;
-    private javax.swing.JButton jBEliminar;
+    private javax.swing.JButton jBDeshabilitar1;
     private javax.swing.JButton jBGuardar;
+    private javax.swing.JButton jBHabilitar;
     private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jBSalir;
     private javax.swing.JComboBox<Categoria> jCBCategorias;
@@ -477,11 +574,13 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLMargen;
     private javax.swing.JLayeredPane jLPCabecera;
     private javax.swing.JLabel jLTitulo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPBackground;
+    private javax.swing.JRadioButton jRBHabilitada;
     private javax.swing.JTextField jTFCodigo;
     private javax.swing.JTextField jTFNumero;
     private javax.swing.JTextField jTFPiso;
@@ -492,7 +591,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         jTFNumero.setText("");
         jTFPiso.setText("");
         jCBCategorias.setSelectedIndex(0);
-      
+       jRBHabilitada.setSelected(false);
 
     }
     private void cargarCB() {

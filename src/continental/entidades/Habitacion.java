@@ -12,7 +12,7 @@ package continental.entidades;
 public class Habitacion {
     private int piso, nro, idHabitacion;
     private Categoria categoria;
-    private boolean estado;
+    private boolean estado,habilitada;
 
     public Habitacion() {
     }
@@ -22,6 +22,7 @@ public class Habitacion {
         this.nro = nro;
         this.categoria = categoria;
         this.estado = estado;
+        this.habilitada=true;
     }
 
     public Habitacion(int piso, int nro, int idHabitacion, Categoria categoria, boolean estado) {
@@ -30,6 +31,15 @@ public class Habitacion {
         this.idHabitacion = idHabitacion;
         this.categoria = categoria;
         this.estado = estado;
+          this.habilitada=true;
+    }
+
+    public boolean isHabilitada() {
+        return habilitada;
+    }
+
+    public void setHabilitada(boolean habilitada) {
+        this.habilitada = habilitada;
     }
 
     public int getPiso() {

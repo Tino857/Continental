@@ -79,8 +79,6 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLCelular = new javax.swing.JLabel();
-        jRBEstado = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
         setMaximizable(true);
@@ -258,8 +256,6 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         jLCelular.setForeground(new java.awt.Color(235, 235, 235));
         jLCelular.setText("Celular:");
 
-        jLabel1.setText("Estado:");
-
         jLayeredPane1.setLayer(jTFDni, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jTFApellido, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jTFNombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -272,8 +268,6 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         jLayeredPane1.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLCelular, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jRBEstado, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -287,22 +281,16 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
                     .addComponent(jLNombre)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jLCelular)
-                    .addComponent(jLabel1))
+                    .addComponent(jLCelular))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jRBEstado)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFDomicilio)
-                            .addComponent(jTFCorreo)
-                            .addComponent(jTFCelular)
-                            .addComponent(jTFApellido)
-                            .addComponent(jTFNombre)
-                            .addComponent(jTFDni))
-                        .addGap(23, 23, 23))))
+                    .addComponent(jTFDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
+                    .addComponent(jTFCorreo)
+                    .addComponent(jTFCelular)
+                    .addComponent(jTFApellido)
+                    .addComponent(jTFNombre)
+                    .addComponent(jTFDni))
+                .addGap(23, 23, 23))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,11 +319,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLCelular))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jRBEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPBackgroundLayout = new javax.swing.GroupLayout(jPBackground);
@@ -480,7 +464,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
             h.setCorreo(correo);
             h.setCelular(jTFCelular.getText());
             h.setDomicilio(domicilio);
-            h.setEstado(jRBEstado.isSelected());
+            
 
             //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo editarAlumno
             int registro = Vista.getHD().editarHuesped(h);
@@ -579,14 +563,12 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLNombre;
     private javax.swing.JLayeredPane jLPCabecera;
     private javax.swing.JLabel jLTitulo;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPBackground;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRBA;
-    private javax.swing.JRadioButton jRBEstado;
     private javax.swing.JRadioButton jRBIn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFApellido;
@@ -673,7 +655,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         jTFDomicilio.setText("");
         jTFCorreo.setText("");
         jTFCelular.setText("");
-        jRBEstado.setSelected(false);
+       
     }
 
     //Este metodo elimina todas las filas de la tabla
@@ -696,6 +678,6 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         jTFDomicilio.setText(huesped.getDomicilio());
         jTFCorreo.setText(huesped.getCorreo());
         jTFCelular.setText(huesped.getCelular());
-        jRBEstado.setSelected(huesped.isEstado());
+       
     }
 }

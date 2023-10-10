@@ -62,6 +62,7 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jBHabilitar = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -163,7 +164,7 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
             .addGroup(jLPCabeceraLayout.createSequentialGroup()
                 .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLLogo))
         );
@@ -194,6 +195,7 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
         jRBEstado.setForeground(new java.awt.Color(255, 255, 255));
         jRBEstado.setAlignmentY(0.0F);
         jRBEstado.setBorderPainted(true);
+        jRBEstado.setEnabled(false);
 
         jLCelular1.setForeground(new java.awt.Color(235, 235, 235));
         jLCelular1.setText("Estado:");
@@ -209,6 +211,13 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
 
         jLabel10.setForeground(new java.awt.Color(235, 235, 235));
         jLabel10.setText("Celular:");
+
+        jBHabilitar.setText("Habilitar");
+        jBHabilitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBHabilitarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPBackgroundLayout = new javax.swing.GroupLayout(jPBackground);
         jPBackground.setLayout(jPBackgroundLayout);
@@ -245,9 +254,11 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPBackgroundLayout.createSequentialGroup()
                         .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBHabilitar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                        .addGap(29, 29, 29)
                         .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLPCabecera))
                 .addGap(20, 20, 20))
@@ -294,7 +305,8 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBHabilitar))
                 .addGap(20, 20, 20))
         );
 
@@ -431,6 +443,7 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
                 if (registro == 1) {
                 
                     JOptionPane.showMessageDialog(this, "El huesped ha sido borrado");
+                    jRBEstado.setSelected(false);
                 } else {
                 
                     JOptionPane.showMessageDialog(this, "No se pudo borrar al huesped");
@@ -500,12 +513,70 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFCorreoActionPerformed
 
+    private void jBHabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHabilitarActionPerformed
+       //Se controla que el campo que contiene el dni no esté vacío
+        if (JTFDni.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea eliminar al alumno.");
+            return;
+        }
+
+        try {
+            
+            //Se intenta parsear el valor del campo dni
+            int dni = Integer.parseInt(JTFDni.getText());
+            
+            //Se crea un alumno y se busca en la base de datos para confirmar que el alumno existe
+            //En caso que el alumno no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
+            Huesped h = Vista.getHD().buscarHuespedPorDni(dni);
+           
+            if (h == null) {
+                
+                JOptionPane.showMessageDialog(this, "No existe el huesped");
+                return;
+            }
+            
+            //Si el alumno se encontraba en la base de datos, se recupera su estado para confirmar que no haya sido eliminado anteriormente
+            if (h.isEstado()) {
+
+                JOptionPane.showMessageDialog(this, "El huesped ya se encunetra habilitado");
+                return;
+            }
+       
+            //Habiendo confirmado que el dni del alumno es correcto, que el huesped existe en la DB y que su estado es inactivo
+           
+            int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea habilitar este huesped?", "", JOptionPane.YES_OPTION);
+            int registro;
+            if (resp == 0) {
+                registro = Vista.getHD().habilitarHuesped(h.getDni());
+                
+                if (registro == 1) {
+                
+                    JOptionPane.showMessageDialog(this, "El huesped ha sido habilitado");
+                    jRBEstado.setSelected(true);
+                    
+                } else {
+                
+                    JOptionPane.showMessageDialog(this, "No se pudo habilitar al huesped");
+                }
+            }
+
+        } catch (NumberFormatException e) {
+            
+            JOptionPane.showMessageDialog(this, "El DNI es incorrecto.");
+        } catch (NullPointerException e) {
+            
+            JOptionPane.showMessageDialog(this, "No existe el huesped ");
+        }
+    }//GEN-LAST:event_jBHabilitarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JTFDni;
     private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBGuardar;
+    private javax.swing.JButton jBHabilitar;
     private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jBSalir;
     private javax.swing.JLabel jLCelular1;
@@ -537,5 +608,6 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
        jTFDomicilio.setText("");
        jTFCorreo.setText("");
        jTFCelular.setText("");
+       jRBEstado.setSelected(false);
     }
 }

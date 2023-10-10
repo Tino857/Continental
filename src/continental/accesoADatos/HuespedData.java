@@ -263,4 +263,28 @@ public class HuespedData {
         }
         return listaHuespedes;//retorna una lista de huespedes
     }
+     public int habilitarHuesped(int dni) {
+
+        String query = "UPDATE huesped SET estado=1 WHERE dni=?";
+        //Esta variable almacenara si hubo cambios en el registro de la DB
+        int registro = 0;
+        try {
+
+            //Se crea un prepared statement, se prepara la declaracion con la consulta sql definida previamente y se setean los valores
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, dni);
+            //Se ejecuta la consulta preparada utilizando el metodo executeUpdate() y se recupera llave generada automaticamente
+            registro = ps.executeUpdate();
+
+            //Cierra consulta
+            ps.close();
+        } catch (SQLException e) {
+
+            //Se captura una posible excepcion SQL
+            System.out.println("Error al habilitar al huesped" + e.getMessage());
+        }
+
+        //Retorna variable registro al metodo que lo invoca
+        return registro;
+    }
 }
