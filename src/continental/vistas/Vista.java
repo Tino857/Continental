@@ -76,6 +76,8 @@ public class Vista extends javax.swing.JFrame {
         jMIFormularioDeMateria = new javax.swing.JMenuItem();
         jMIEdicionDeMateria = new javax.swing.JMenuItem();
         jMICategorias = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMGestionDeReserva = new javax.swing.JMenuItem();
         jMSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -161,6 +163,18 @@ public class Vista extends javax.swing.JFrame {
 
         jMenuBar1.add(jMMaterias);
 
+        jMenu1.setText("Reserva");
+
+        jMGestionDeReserva.setText("Gestion de reserva");
+        jMGestionDeReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMGestionDeReservaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMGestionDeReserva);
+
+        jMenuBar1.add(jMenu1);
+
         jMSalir.setText("Salir");
         jMSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -235,6 +249,12 @@ public class Vista extends javax.swing.JFrame {
       
     }//GEN-LAST:event_jMMateriasActionPerformed
 
+    private void jMGestionDeReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMGestionDeReservaActionPerformed
+       GestionDeReservas gr= new GestionDeReservas();
+        abrirVentana(gr);
+        
+    }//GEN-LAST:event_jMGestionDeReservaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -273,6 +293,7 @@ public class Vista extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMAlumnos;
+    private javax.swing.JMenuItem jMGestionDeReserva;
     private javax.swing.JMenuItem jMICategorias;
     private javax.swing.JMenuItem jMIEdicionDeAlumno;
     private javax.swing.JMenuItem jMIEdicionDeMateria;
@@ -280,6 +301,7 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMIFormularioDeMateria;
     private javax.swing.JMenu jMMaterias;
     private javax.swing.JMenu jMSalir;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables

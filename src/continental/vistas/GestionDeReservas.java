@@ -33,6 +33,8 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
     };
     public GestionDeReservas() {
         initComponents();
+        armarTabla();
+        
     }
 
     /**
@@ -46,7 +48,7 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
 
         jDCInicio = new com.toedter.calendar.JDateChooser();
         jDCFinal = new com.toedter.calendar.JDateChooser();
-        jButton1 = new javax.swing.JButton();
+        jBFiltrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -56,16 +58,20 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
         jLMargen = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTFCantidad = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        jBSiguiente = new javax.swing.JButton();
         jCBCategorias = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTFPrecio = new javax.swing.JTextField();
 
-        jButton1.setText("Filtrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
+
+        jBFiltrar.setText("Filtrar");
+        jBFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBFiltrarActionPerformed(evt);
             }
         });
 
@@ -101,7 +107,18 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Siguiente");
+        jBSiguiente.setText("Siguiente");
+        jBSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSiguienteActionPerformed(evt);
+            }
+        });
+
+        jCBCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBCategoriasActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Categoria");
 
@@ -144,7 +161,7 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(187, 187, 187)
-                        .addComponent(jButton2))
+                        .addComponent(jBSiguiente))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
@@ -158,7 +175,7 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3)
                             .addGap(26, 26, 26)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton1)
+                                .addComponent(jBFiltrar)
                                 .addComponent(jTFCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -189,18 +206,19 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5)
                     .addComponent(jTFPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
-                .addComponent(jButton1)
+                .addComponent(jBFiltrar)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(jBSiguiente)
                 .addGap(17, 17, 17))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFiltrarActionPerformed
+        limpiarTabla();
         
         try{
              LocalDate fi=jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -219,35 +237,41 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
         ArrayList<Reserva> ListaDeReserva=Vista.getRD().listarReservas();
         ArrayList<Habitacion> listaDeHabitacion=Vista.getHabD().listarHabitaciones();
         Map<Integer,Habitacion> listaDeHab=new HashMap();
-        for (Habitacion hab : listaDeHabitacion) {
-            if (hab.getCategoria()==(Categoria)jCBCategorias.getSelectedItem()) {
-               listaDeHab.put(hab.getNro(), hab); 
-            }
-   
+        Categoria cat= (Categoria)jCBCategorias.getSelectedItem();
             
+            for (Habitacion hab : listaDeHabitacion) {
+                if (hab.getCategoria().getTipoCategoria().equals(cat.getTipoCategoria())) {
+                    listaDeHab.put(hab.getNro(), hab);
+                }
+
             }
             for (Reserva reserva : ListaDeReserva) {
-                if (!((fi.isBefore(reserva.getFi())&&ff.isBefore(reserva.getFi()))||(fi.isAfter(reserva.getFf())&&ff.isAfter(reserva.getFf())))) {
+                if (!((fi.isBefore(reserva.getFi()) && ff.isBefore(reserva.getFi())) || (fi.isAfter(reserva.getFf()) && ff.isAfter(reserva.getFf())))) {
                     listaDeHab.remove(reserva.getHabitacion());
+
                 }
             }
-         
+
             for (Map.Entry<Integer, Habitacion> entry : listaDeHab.entrySet()) {
                 Integer key = entry.getKey();
                 Habitacion value = entry.getValue();
+
                 cargarTabla(value);
             }
-            
-        }catch(NumberFormatException e){
-          JOptionPane.showMessageDialog(this, "En cantidad debe ser un numero entero");   
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "En cantidad debe ser un numero entero");
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Error en la Fecha");
+
         }
-      
+
         
         
         
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBFiltrarActionPerformed
 
     private void jTFCantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCantidadKeyReleased
      jCBCategorias.removeAllItems();
@@ -255,7 +279,7 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
         
         for (Categoria cat : ListaDeCategorias) {
 
-            if ((cat.getCantDePersonas()+ "").startsWith(jTFCantidad.getText())) {
+            if ((cat.getCantDePersonas()>= Integer.parseInt(jTFCantidad.getText()))) {
 
                 jCBCategorias.addItem(cat);
             }
@@ -265,10 +289,23 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
                      
     }//GEN-LAST:event_jTFCantidadKeyReleased
 
+    private void jCBCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCategoriasActionPerformed
+       Categoria cat=(Categoria)jCBCategorias.getSelectedItem();
+        jTFPrecio.setText(cat.getPrecio()+"");
+        
+        
+        
+    }//GEN-LAST:event_jCBCategoriasActionPerformed
+
+    private void jBSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSiguienteActionPerformed
+       int respuesta= JOptionPane.showConfirmDialog(this,"¿Es un husped nuevo?","",JOptionPane.YES_NO_OPTION);
+        
+    }//GEN-LAST:event_jBSiguienteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jBFiltrar;
+    private javax.swing.JButton jBSiguiente;
     private javax.swing.JComboBox<Categoria> jCBCategorias;
     private com.toedter.calendar.JDateChooser jDCFinal;
     private com.toedter.calendar.JDateChooser jDCInicio;
