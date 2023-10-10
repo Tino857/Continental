@@ -5,7 +5,9 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import continental.accesoADatos.ValidarData;
+import continental.entidades.Habitacion;
 import continental.entidades.Huesped;
+import java.time.LocalDate;
 
 /**
  *
@@ -13,13 +15,22 @@ import continental.entidades.Huesped;
  */
 public class GestionDeHuesped extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form GestionDeAlumnos
-     */
+    private LocalDate fI,fF;
+    private Habitacion hab;
     public GestionDeHuesped() {
 
         initComponents();
          jRBEstado.setEnabled(false);
+    }
+    public GestionDeHuesped(LocalDate fI, LocalDate fF, Habitacion hab) {
+        initComponents();
+        this.fI = fI;
+        this.fF = fF;
+        this.hab = hab;
+        jBBuscar.setVisible(false);
+        jBHabilitar.setVisible(false);
+        jBEliminar.setVisible(false);
+        jBSalir.setText("Atras");
     }
 
     /**
