@@ -1,9 +1,11 @@
 package continental.vistas;
 
+import continental.entidades.Habitacion;
 import continental.entidades.Huesped;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -23,11 +25,20 @@ public class MostrarHuespedes extends javax.swing.JInternalFrame {
             return false;
         }
     };
+      private LocalDate fI, fF;
+      private Habitacion hab;
+      
 
-    public MostrarHuespedes() {
+    public MostrarHuespedes(LocalDate fI, LocalDate fF, Habitacion hab) {
         initComponents();
         armarTabla();
         cargarDatos();
+    this.fI=fI;
+    this.fF=fF;
+    this.hab=hab;
+
+    
+        
     }
 
     /**
@@ -225,10 +236,12 @@ public class MostrarHuespedes extends javax.swing.JInternalFrame {
             return;
         }
         
-       int dni = Integer.parseInt((String) modelo.getValueAt(1, fila));
+       int dni = Integer.parseInt((String) modelo.getValueAt(fila,0));
         
         Huesped huesped = Vista.getHD().buscarHuespedPorDni(dni);
         System.out.println("dni " + huesped.getDni() + " nombre " + huesped.getNombre());
+        JOptionPane.showConfirmDialog(this,"¿Desea confirmar la reserva?");
+        
     }//GEN-LAST:event_JBContinuarActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
