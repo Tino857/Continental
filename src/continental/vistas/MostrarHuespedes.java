@@ -2,10 +2,12 @@ package continental.vistas;
 
 import continental.entidades.Habitacion;
 import continental.entidades.Huesped;
+import continental.entidades.Reserva;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -18,6 +20,11 @@ import javax.swing.table.TableColumnModel;
  */
 public class MostrarHuespedes extends javax.swing.JInternalFrame {
 
+    private LocalDate fI, fF;
+    private Habitacion hab;
+    private int cantidadPersonas, dias;
+    private double monto;
+    
     private final DefaultTableModel modelo = new DefaultTableModel() {
 
         @Override
@@ -25,20 +32,18 @@ public class MostrarHuespedes extends javax.swing.JInternalFrame {
             return false;
         }
     };
-      private LocalDate fI, fF;
-      private Habitacion hab;
       
 
-    public MostrarHuespedes(LocalDate fI, LocalDate fF, Habitacion hab) {
+    public MostrarHuespedes(LocalDate fI, LocalDate fF, Habitacion hab, int cantidadPersonas) {
         initComponents();
         armarTabla();
         cargarDatos();
-    this.fI=fI;
-    this.fF=fF;
-    this.hab=hab;
-
-    
-        
+        this.fI = fI;
+        this.fF = fF;
+        this.hab = hab;
+        this.cantidadPersonas = cantidadPersonas;
+        this.dias = (int)ChronoUnit.DAYS.between(fI, fF);
+        this.monto = hab.getCategoria().getPrecio() * dias;
     }
 
     /**
@@ -236,12 +241,32 @@ public class MostrarHuespedes extends javax.swing.JInternalFrame {
             return;
         }
         
-       int dni = Integer.parseInt((String) modelo.getValueAt(fila,0));
+        int dni = Integer.parseInt((String) modelo.getValueAt(fila,0));
         
         Huesped huesped = Vista.getHD().buscarHuespedPorDni(dni);
         System.out.println("dni " + huesped.getDni() + " nombre " + huesped.getNombre());
-        JOptionPane.showConfirmDialog(this,"¿Desea confirmar la reserva?");
-        
+        int respuesta = JOptionPane.showConfirmDialog(this,"¿Desea confirmar la reserva?"
+                + " \nTitular: " + huesped.getApellido() + ", " + huesped.getNombre()
+                + " \nDNI: " + huesped.getDni()
+                + " \nFecha de ingreso: " + fI
+                + " \nFecha de salida: " + fF
+                + " \nCantidad de personas: " + cantidadPersonas
+                + " \nNumero de Habitacion: " + hab.getNro() + " - Piso: " + hab.getPiso()
+                + " \nTipo de habitacion: " + hab.getCategoria().getTipoCategoria()
+                + " \nPrecio por noche: " + hab.getCategoria().getPrecio()
+                + " \nCantidad de dias: " + dias
+                + " \nTOTAL A PAGAR: " + monto,
+                "CONFIRMAR!", JOptionPane.YES_NO_OPTION
+        );
+        if (respuesta == 0) {
+            Reserva reserva = new Reserva(huesped, hab, fI, fF, dias, cantidadPersonas, monto, true);
+            int registro = Vista.getRD().guardarReserva(reserva);
+            if (registro >0) {
+                JOptionPane.showMessageDialog(this, "La reserva se realizo correctamente");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo realizar la reserva");
+            }
+        }
     }//GEN-LAST:event_JBContinuarActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed

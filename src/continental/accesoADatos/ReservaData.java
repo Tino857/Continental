@@ -27,8 +27,8 @@ public class ReservaData {
     public int guardarReserva(Reserva reserva) {
         
         //Se define consulta SQL, colocando comodines para los valores que luego seran seteados.
-        String query = "INSERT INTO reserva (idHabitacion, idHuesped, fechaInicio, fechaFin, monto, estado, cantidadPersonas) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO reserva (idHabitacion, idHuesped, fechaInicio, fechaFin, dias, monto, estado, cantidadPersonas) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         //Esta variable se utilizará para almacenar el ID generado del nuevo registro en la base de datos.
         int registro = 0;
@@ -40,9 +40,10 @@ public class ReservaData {
             ps.setInt(2, reserva.getHuesped().getIdHuesped());
             ps.setString(3, reserva.getFi().toString());
             ps.setString(4, reserva.getFf().toString());
-            ps.setDouble(5, reserva.getMonto());
-            ps.setBoolean(6, reserva.isEstado());
-            ps.setInt(7, reserva.getCantDePersonas());
+            ps.setInt(5, reserva.getDias());
+            ps.setDouble(6, reserva.getMonto());
+            ps.setBoolean(7, reserva.isEstado());
+            ps.setInt(8, reserva.getCantDePersonas());
             //Se ejecuta la consulta
             ps.executeUpdate();
             //Se recupera un conjunto de resultados

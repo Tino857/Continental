@@ -372,6 +372,7 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
             int filaSelec = jTable1.getSelectedRow();
             LocalDate fi = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate ff = jDCFinal.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            int cantidadPersonas = Integer.parseInt(jTFCantidad.getText());
             if (jTable1.getRowCount() == -1) {
                 JOptionPane.showMessageDialog(this, "Seleccione una habitacion para continuar");
             }
@@ -380,11 +381,11 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Es un husped nuevo?", "", JOptionPane.YES_NO_OPTION);
             if (respuesta == 0) {
                 //Dijo que si
-                GestionDeHuesped GDH = new GestionDeHuesped(fi, ff, hab);
+                GestionDeHuesped GDH = new GestionDeHuesped(fi, ff, hab, cantidadPersonas);
                 abrirVentana(GDH);
             } else {
                 //Dijo que no
-                MostrarHuespedes mh = new MostrarHuespedes();
+                MostrarHuespedes mh = new MostrarHuespedes(fi, ff, hab, cantidadPersonas);
                 abrirVentana(mh);        
             }
         } catch (NullPointerException e) {

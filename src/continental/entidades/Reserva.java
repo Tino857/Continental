@@ -19,50 +19,27 @@ public class Reserva {
     public Reserva() {
     }
 
-    public Reserva(Huesped huesped, Habitacion habitacion, LocalDate fi, LocalDate ff, int cantDePersonas, double monto, boolean estado) {
+    public Reserva(Huesped huesped, Habitacion habitacion, LocalDate fi, LocalDate ff, int dias, int cantDePersonas, double monto, boolean estado) {
         this.huesped = huesped;
         this.habitacion = habitacion;
         this.fi = fi;
         this.ff = ff;
-        this.cantDePersonas = cantDePersonas;
-        this.monto = monto;
-        this.estado = estado;
-        this.dias = (int)ChronoUnit.DAYS.between(fi, ff);
-    }
-
-    public Reserva(Huesped huesped, Habitacion habitacion, LocalDate fi, LocalDate ff, int cantDePersonas, int idReserva, double monto, boolean estado) {
-        this.huesped = huesped;
-        this.habitacion = habitacion;
-        this.fi = fi;
-        this.ff = ff;
-        this.cantDePersonas = cantDePersonas;
-        this.idReserva = idReserva;
-        this.monto = monto;
-        this.estado = estado;
-        this.dias = (int)ChronoUnit.DAYS.between(fi, ff);
-    }
-
-    public Reserva(Huesped huesped, Habitacion habitacion, LocalDate fi, int dias, int cantDePersonas, double monto, boolean estado) {
-        this.huesped = huesped;
-        this.habitacion = habitacion;
-        this.fi = fi;
         this.dias = dias;
         this.cantDePersonas = cantDePersonas;
         this.monto = monto;
         this.estado = estado;
-        this.ff = fi.plusDays(dias);
     }
 
-    public Reserva(Huesped huesped, Habitacion habitacion, LocalDate fi, int dias, int cantDePersonas, int idReserva, double monto, boolean estado) {
+    public Reserva(Huesped huesped, Habitacion habitacion, LocalDate fi, LocalDate ff, int dias, int cantDePersonas, int idReserva, double monto, boolean estado) {
         this.huesped = huesped;
         this.habitacion = habitacion;
         this.fi = fi;
+        this.ff = ff;
         this.dias = dias;
         this.cantDePersonas = cantDePersonas;
         this.idReserva = idReserva;
         this.monto = monto;
         this.estado = estado;
-        this.ff = fi.plusDays(dias);
     }
 
     public int getIdReserva() {

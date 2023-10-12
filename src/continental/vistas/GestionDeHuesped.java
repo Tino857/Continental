@@ -7,7 +7,9 @@ import javax.swing.JOptionPane;
 import continental.accesoADatos.ValidarData;
 import continental.entidades.Habitacion;
 import continental.entidades.Huesped;
+import continental.entidades.Reserva;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 /**
  *
@@ -15,18 +17,25 @@ import java.time.LocalDate;
  */
 public class GestionDeHuesped extends javax.swing.JInternalFrame {
 
-    private LocalDate fI,fF;
+    private LocalDate fI, fF;
     private Habitacion hab;
+    private int cantidadPersonas, dias;
+    private double monto;
+
     public GestionDeHuesped() {
 
         initComponents();
-         jRBEstado.setEnabled(false);
+        jRBEstado.setEnabled(false);
     }
-    public GestionDeHuesped(LocalDate fI, LocalDate fF, Habitacion hab) {
+
+    public GestionDeHuesped(LocalDate fI, LocalDate fF, Habitacion hab, int cantidadPersonas) {
         initComponents();
         this.fI = fI;
         this.fF = fF;
         this.hab = hab;
+        this.cantidadPersonas = cantidadPersonas;
+        this.dias = (int) ChronoUnit.DAYS.between(fI, fF);
+        this.monto = hab.getCategoria().getPrecio() * dias;
         jBBuscar.setVisible(false);
         jBHabilitar.setVisible(false);
         jBEliminar.setVisible(false);
@@ -337,61 +346,59 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
 
     //BOTON SALIR
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-        
+
         //Cierra la ventana
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     //BOTON GUARDAR
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-        
+
         //Controla que no hayan campos vacios
-        if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || JTFDni.getText().isEmpty() || jTFCelular.getText().isEmpty()||jTFDomicilio.getText().isEmpty()||jTFCorreo.getText().isEmpty()) {
+        if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || JTFDni.getText().isEmpty() || jTFCelular.getText().isEmpty() || jTFDomicilio.getText().isEmpty() || jTFCorreo.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio.");
             return;
         }
-        
+
         try {
-            
+
             //Se intenta parsear el dni y se realiza su validacion
             int dni = Integer.parseInt(JTFDni.getText());
             if (ValidarData.validarDNI(dni)) {
-                
+
                 JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");
                 return;
             }
-            
+
             //Se valida si los campos de nombre, apellido  y domicilio no contienen caracteres especiales
             String nombre = jTFNombre.getText();
             String apellido = jTFApellido.getText();
-            String correo=jTFCorreo.getText();
-            String domicilio=jTFDomicilio.getText();
-           
-            if (ValidarData.caracteresEspeciales(nombre) || ValidarData.caracteresEspeciales(apellido)|| ValidarData.largoCadena(domicilio)) {
-                
+            String correo = jTFCorreo.getText();
+            String domicilio = jTFDomicilio.getText();
+
+            if (ValidarData.caracteresEspeciales(nombre) || ValidarData.caracteresEspeciales(apellido) || ValidarData.largoCadena(domicilio)) {
+
                 JOptionPane.showMessageDialog(this, "No se permiten caracteres especiales o numeros");
                 return;
             }
 
             //Deberiamos poner una validacion para el correo (por ejemplo que termine con ".com" y que tenga un arroba no mas.
-           
-          int celular = Integer.parseInt(jTFCelular.getText());//Con esto validamos que en la casilla celular solo haya numeros
-            
+            int celular = Integer.parseInt(jTFCelular.getText());//Con esto validamos que en la casilla celular solo haya numeros
+
             //Se valida si los campos de nombre, apellido, correo y domicilio  cumplen con un largo determinado
-            if (ValidarData.largoCadena(nombre) || ValidarData.largoCadena(apellido)||ValidarData.largoCadena(correo)|| ValidarData.largoCadena(domicilio)) {
-                
+            if (ValidarData.largoCadena(nombre) || ValidarData.largoCadena(apellido) || ValidarData.largoCadena(correo) || ValidarData.largoCadena(domicilio)) {
+
                 JOptionPane.showMessageDialog(this, "El nombre, apellido, correo o domicilio son incorrectos");
                 return;
             }
-            
-            
+
             //Llegado el punto en que todos los valores son correctos, se crea un alumno
             Huesped h = new Huesped(nombre, apellido, domicilio, correo, jTFCelular.getText(), dni, true);
-            
+
             //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo guardarAlumno
             int registro = Vista.getHD().guardarHuesped(h);
-            
+
             //Dependiendo del valor que tome la variable registro se muestra un mensaje al usuario
             if (registro > 0) {
 
@@ -400,7 +407,11 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
 
                 JOptionPane.showMessageDialog(this, "No se pudo agregar al Huesped, el DNI ya existe.");
             }
-            
+
+            if (hab != null) {
+                continuarReserva(h);
+            }
+
             //Se limpian los campos
             limpiar();
         } catch (NumberFormatException e) {
@@ -423,49 +434,48 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
         }
 
         try {
-            
+
             //Se intenta parsear el valor del campo dni
             int dni = Integer.parseInt(JTFDni.getText());
-            
+
             //Se crea un alumno y se busca en la base de datos para confirmar que el alumno existe
             //En caso que el alumno no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
             Huesped h = Vista.getHD().buscarHuespedPorDni(dni);
-           
+
             if (h == null) {
-                
+
                 JOptionPane.showMessageDialog(this, "No existe el huesped");
                 return;
             }
-            
+
             //Si el alumno se encontraba en la base de datos, se recupera su estado para confirmar que no haya sido eliminado anteriormente
             if (!h.isEstado()) {
 
                 JOptionPane.showMessageDialog(this, "El huesped ya ha sido borrado");
                 return;
             }
-       
+
             //Habiendo confirmado que el dni del alumno es correcto, que el alumno existe en la DB y que su estado es activo
-           
             int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea eliminar este huesped?", "", JOptionPane.YES_OPTION);
             int registro;
             if (resp == 0) {
                 registro = Vista.getHD().eliminarHuesped(h.getDni());
-                
+
                 if (registro == 1) {
-                
+
                     JOptionPane.showMessageDialog(this, "El huesped ha sido borrado");
                     jRBEstado.setSelected(false);
                 } else {
-                
+
                     JOptionPane.showMessageDialog(this, "No se pudo borrar al huesped");
                 }
             }
 
         } catch (NumberFormatException e) {
-            
+
             JOptionPane.showMessageDialog(this, "El DNI es incorrecto.");
         } catch (NullPointerException e) {
-            
+
             JOptionPane.showMessageDialog(this, "No existe el alumno ");
         }
     }//GEN-LAST:event_jBEliminarActionPerformed
@@ -479,7 +489,7 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
 
     //BOTON BUSCAR
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        
+
         //Se controla que el campo dni no este vacio
         if (JTFDni.getText().isEmpty()) {
 
@@ -488,21 +498,21 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
         }
 
         try {
-            
+
             //Se intenta parsear el dni
             int dni = Integer.parseInt(JTFDni.getText());
-            
+
             //Se recupera el alumno que posee el dni en la DB
             Huesped h = Vista.getHD().buscarHuespedPorDni(dni);
-            
+
             //Si el alumno recibido tiene valor nulo significa que no se encuentra en la DB
             //Se muestra el mensaje al usuario y se finaliza la ejecucion
             if (h == null) {
-                
+
                 JOptionPane.showMessageDialog(this, "No existe el huesped");
                 return;
             }
-            
+
             //Si el alumno se encontraba en la DB, se setean los campos correspondientes con los valores obtenidos del alumno
             jTFNombre.setText(h.getNombre());
             jTFApellido.setText(h.getApellido());
@@ -525,7 +535,7 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTFCorreoActionPerformed
 
     private void jBHabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHabilitarActionPerformed
-       //Se controla que el campo que contiene el dni no esté vacío
+        //Se controla que el campo que contiene el dni no esté vacío
         if (JTFDni.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea eliminar al alumno.");
@@ -533,50 +543,49 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
         }
 
         try {
-            
+
             //Se intenta parsear el valor del campo dni
             int dni = Integer.parseInt(JTFDni.getText());
-            
+
             //Se crea un alumno y se busca en la base de datos para confirmar que el alumno existe
             //En caso que el alumno no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
             Huesped h = Vista.getHD().buscarHuespedPorDni(dni);
-           
+
             if (h == null) {
-                
+
                 JOptionPane.showMessageDialog(this, "No existe el huesped");
                 return;
             }
-            
+
             //Si el alumno se encontraba en la base de datos, se recupera su estado para confirmar que no haya sido eliminado anteriormente
             if (h.isEstado()) {
 
                 JOptionPane.showMessageDialog(this, "El huesped ya se encunetra habilitado");
                 return;
             }
-       
+
             //Habiendo confirmado que el dni del alumno es correcto, que el huesped existe en la DB y que su estado es inactivo
-           
             int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea habilitar este huesped?", "", JOptionPane.YES_OPTION);
             int registro;
             if (resp == 0) {
                 registro = Vista.getHD().habilitarHuesped(h.getDni());
-                
+
                 if (registro == 1) {
-                
+
                     JOptionPane.showMessageDialog(this, "El huesped ha sido habilitado");
                     jRBEstado.setSelected(true);
-                    
+
                 } else {
-                
+
                     JOptionPane.showMessageDialog(this, "No se pudo habilitar al huesped");
                 }
             }
 
         } catch (NumberFormatException e) {
-            
+
             JOptionPane.showMessageDialog(this, "El DNI es incorrecto.");
         } catch (NullPointerException e) {
-            
+
             JOptionPane.showMessageDialog(this, "No existe el huesped ");
         }
     }//GEN-LAST:event_jBHabilitarActionPerformed
@@ -610,15 +619,41 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTFNombre;
     // End of variables declaration//GEN-END:variables
 
+    private void continuarReserva(Huesped huesped) {
+
+        int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea confirmar la reserva?"
+                + " \nTitular: " + huesped.getApellido() + ", " + huesped.getNombre()
+                + " \nDNI: " + huesped.getDni()
+                + " \nFecha de ingreso: " + fI
+                + " \nFecha de salida: " + fF
+                + " \nCantidad de personas: " + cantidadPersonas
+                + " \nNumero de Habitacion: " + hab.getNro() + " - Piso: " + hab.getPiso()
+                + " \nTipo de habitacion: " + hab.getCategoria().getTipoCategoria()
+                + " \nPrecio por noche: " + hab.getCategoria().getPrecio()
+                + " \nCantidad de dias: " + dias
+                + " \nTOTAL A PAGAR: " + monto,
+                "CONFIRMAR!", JOptionPane.YES_NO_OPTION
+        );
+        if (respuesta == 0) {
+            Reserva reserva = new Reserva(huesped, hab, fI, fF, dias, cantidadPersonas, monto, true);
+            int registro = Vista.getRD().guardarReserva(reserva);
+            if (registro > 0) {
+                JOptionPane.showMessageDialog(this, "La reserva se realizo correctamente");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo realizar la reserva");
+            }
+        }
+    }
+
     //Este metodo limpia los textfields y resetea los campos de estado y fecha
     private void limpiar() {
-        
+
         JTFDni.setText("");
         jTFApellido.setText("");
         jTFNombre.setText("");
-       jTFDomicilio.setText("");
-       jTFCorreo.setText("");
-       jTFCelular.setText("");
-       jRBEstado.setSelected(false);
+        jTFDomicilio.setText("");
+        jTFCorreo.setText("");
+        jTFCelular.setText("");
+        jRBEstado.setSelected(false);
     }
 }

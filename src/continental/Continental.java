@@ -10,6 +10,7 @@ import continental.entidades.Huesped;
 import continental.entidades.Reserva;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 /**
@@ -103,7 +104,7 @@ public class Continental {
 
 //---------------------------------------------------------------------------------
 
-              Reserva reserva1 = new Reserva(hd.buscarHuespedPorId(1), habd.buscarHabitacionPorId(1), LocalDate.of(2023, 5, 12), LocalDate.of(2023, 5, 13), 2, 1000.0, true);
+              Reserva reserva1 = new Reserva(hd.buscarHuespedPorId(1), habd.buscarHabitacionPorId(1), LocalDate.of(2023, 5, 12), LocalDate.of(2023, 5, 13), (int) ChronoUnit.DAYS.between(LocalDate.of(2023, 5, 12),LocalDate.of(2023, 5, 13)), 2, 1000.0, true);
               int id = rd.guardarReserva(reserva1);
               reserva1.setIdReserva(id);
               System.out.println(rd.listarReservas());
