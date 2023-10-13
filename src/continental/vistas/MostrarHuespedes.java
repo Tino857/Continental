@@ -234,8 +234,8 @@ public class MostrarHuespedes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBContinuarActionPerformed
-
-        int fila = jTable1.getSelectedRow();
+try{
+  int fila = jTable1.getSelectedRow();
         if (fila <0) {
             JOptionPane.showMessageDialog(this, "Seleccione un huesped");
             return;
@@ -263,10 +263,15 @@ public class MostrarHuespedes extends javax.swing.JInternalFrame {
             int registro = Vista.getRD().guardarReserva(reserva);
             if (registro >0) {
                 JOptionPane.showMessageDialog(this, "La reserva se realizo correctamente");
+                dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "No se pudo realizar la reserva");
             }
-        }
+        }  
+}catch(NumberFormatException e){
+  JOptionPane.showMessageDialog(this, "Ingrese datos correctos");  
+}
+        
     }//GEN-LAST:event_JBContinuarActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed

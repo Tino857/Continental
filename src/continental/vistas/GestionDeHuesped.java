@@ -25,11 +25,13 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
     public GestionDeHuesped() {
 
         initComponents();
+      
         jRBEstado.setEnabled(false);
     }
 
     public GestionDeHuesped(LocalDate fI, LocalDate fF, Habitacion hab, int cantidadPersonas) {
         initComponents();
+     
         this.fI = fI;
         this.fF = fF;
         this.hab = hab;
@@ -396,7 +398,10 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
             //Llegado el punto en que todos los valores son correctos, se crea un alumno
             Huesped h = new Huesped(nombre, apellido, domicilio, correo, jTFCelular.getText(), dni, true);
 
-            //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo guardarAlumno
+            if (hab != null) {
+                continuarReserva(h);
+            }   else{
+                //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo guardarAlumno
             int registro = Vista.getHD().guardarHuesped(h);
 
             //Dependiendo del valor que tome la variable registro se muestra un mensaje al usuario
@@ -407,10 +412,10 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
 
                 JOptionPane.showMessageDialog(this, "No se pudo agregar al Huesped, el DNI ya existe.");
             }
+            }         
 
-            if (hab != null) {
-                continuarReserva(h);
-            }
+
+            
 
             //Se limpian los campos
             limpiar();
@@ -635,10 +640,22 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
                 "CONFIRMAR!", JOptionPane.YES_NO_OPTION
         );
         if (respuesta == 0) {
+           int regis = Vista.getHD().guardarHuesped(huesped);
+
+            //Dependiendo del valor que tome la variable registro se muestra un mensaje al usuario
+            if (regis > 0) {
+
+                JOptionPane.showMessageDialog(this, "El Huesped ha sido agregado.");
+            } else {
+
+                JOptionPane.showMessageDialog(this, "No se pudo agregar al Huesped, el DNI ya existe.");
+            } 
             Reserva reserva = new Reserva(huesped, hab, fI, fF, dias, cantidadPersonas, monto, true);
+          
             int registro = Vista.getRD().guardarReserva(reserva);
             if (registro > 0) {
                 JOptionPane.showMessageDialog(this, "La reserva se realizo correctamente");
+                dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "No se pudo realizar la reserva");
             }

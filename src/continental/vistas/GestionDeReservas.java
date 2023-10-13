@@ -51,6 +51,7 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         ImageIcon icon = new ImageIcon(getClass().getResource("/continental/imagenes/WindowBackground.png"));
         Image image = icon.getImage();
@@ -78,6 +79,8 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jTFPrecio = new javax.swing.JTextField();
         jBSiguiente = new javax.swing.JButton();
+        jBLimpiar = new javax.swing.JButton();
+        jBSalir = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -100,7 +103,7 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
         jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLTitulo.setForeground(new java.awt.Color(235, 235, 235));
         jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLTitulo.setText("REMODELACION DE HABIACIONES");
+        jLTitulo.setText("GESTION DE RESERVAS");
 
         jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoULP3-w.png"))); // NOI18N
 
@@ -185,6 +188,20 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
             }
         });
 
+        jBLimpiar.setText("Limpiar");
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
+
+        jBSalir.setText("Salir");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -229,9 +246,13 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
                         .addGap(0, 14, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(210, 210, 210)
+                .addContainerGap()
+                .addComponent(jBLimpiar)
+                .addGap(131, 131, 131)
                 .addComponent(jBSiguiente)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBSalir)
+                .addGap(22, 22, 22))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,7 +280,10 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jBSiguiente)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBSiguiente)
+                    .addComponent(jBLimpiar)
+                    .addComponent(jBSalir))
                 .addGap(20, 20, 20))
         );
 
@@ -314,6 +338,7 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
             Map<Integer, Habitacion> listaDeHab = new HashMap();
             Categoria cat = (Categoria) jCBCategorias.getSelectedItem();
 
+           //Paso la lista de habitaciones a un hash map
             for (Habitacion hab : listaDeHabitacion) {
                 if (hab.getCategoria().getTipoCategoria().equals(cat.getTipoCategoria())) {
                     listaDeHab.put(hab.getNro(), hab);
@@ -322,7 +347,8 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
             }
             for (Reserva reserva : ListaDeReserva) {
                 if (!((fi.isBefore(reserva.getFi()) && ff.isBefore(reserva.getFi())) || (fi.isAfter(reserva.getFf()) && ff.isAfter(reserva.getFf())))) {
-                    listaDeHab.remove(reserva.getHabitacion());
+                    
+                 listaDeHab.remove(reserva.getHabitacion().getNro());
 
                 }
             }
@@ -369,13 +395,15 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
     private void jBSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSiguienteActionPerformed
 
         try {
+            if (jTable1.getSelectedRow() == -1) {
+                JOptionPane.showMessageDialog(this, "Seleccione una habitacion para continuar");
+            return;
+            }
             int filaSelec = jTable1.getSelectedRow();
             LocalDate fi = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate ff = jDCFinal.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             int cantidadPersonas = Integer.parseInt(jTFCantidad.getText());
-            if (jTable1.getRowCount() == -1) {
-                JOptionPane.showMessageDialog(this, "Seleccione una habitacion para continuar");
-            }
+            
             Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
 
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Es un husped nuevo?", "", JOptionPane.YES_NO_OPTION);
@@ -394,9 +422,26 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jBSiguienteActionPerformed
 
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        limpiarTabla();
+         
+          jTFCantidad.setText("");
+          jTFPrecio.setText("");
+          jDCInicio.setDate(null);
+           jDCFinal.setDate(null);
+           //falta que se limpie el comobo box jCBCategorias.removeAllItems();
+    }//GEN-LAST:event_jBLimpiarActionPerformed
+
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jBSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBFiltrar;
+    private javax.swing.JButton jBLimpiar;
+    private javax.swing.JButton jBSalir;
     private javax.swing.JButton jBSiguiente;
     private javax.swing.JComboBox<Categoria> jCBCategorias;
     private com.toedter.calendar.JDateChooser jDCFinal;

@@ -4,9 +4,12 @@ import continental.accesoADatos.CategoriaData;
 import continental.accesoADatos.HabitacionData;
 import continental.accesoADatos.HuespedData;
 import continental.accesoADatos.ReservaData;
+import continental.entidades.Reserva;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -32,6 +35,7 @@ public class Vista extends javax.swing.JFrame {
         HabD = new HabitacionData();
         RD = new ReservaData();
         CD=new CategoriaData();
+        actualizaconDeHabitacionYReserva();
     }
 
     public static HuespedData getHD() {
@@ -60,6 +64,7 @@ public class Vista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem2 = new javax.swing.JMenuItem();
         ImageIcon icon = new ImageIcon(getClass().getResource("/continental/imagenes/Background.png"));
         Image image = icon.getImage();
         escritorio = new javax.swing.JDesktopPane(){
@@ -78,7 +83,11 @@ public class Vista extends javax.swing.JFrame {
         jMICategorias = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMGestionDeReserva = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMSalir = new javax.swing.JMenu();
+
+        jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -164,6 +173,11 @@ public class Vista extends javax.swing.JFrame {
         jMenuBar1.add(jMMaterias);
 
         jMenu1.setText("Reserva");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
 
         jMGestionDeReserva.setText("Gestion de reserva");
         jMGestionDeReserva.addActionListener(new java.awt.event.ActionListener() {
@@ -172,6 +186,22 @@ public class Vista extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMGestionDeReserva);
+
+        jMenuItem1.setText("Reserva por Huesped");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem3.setText("Reserva por Habitacion");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
 
@@ -255,6 +285,21 @@ public class Vista extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMGestionDeReservaActionPerformed
 
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+ ReservaPorHuesped RPH= new ReservaPorHuesped();
+        abrirVentana(RPH);      
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+ ReservaPorHuesped RPH= new ReservaPorHuesped();
+        abrirVentana(RPH);        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+      ReservaPorHabitacion RPHab= new ReservaPorHabitacion();
+        abrirVentana(RPHab); 
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -303,6 +348,9 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JMenu jMSalir;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
 
@@ -328,4 +376,17 @@ public class Vista extends javax.swing.JFrame {
         escritorio.add(logo);
         escritorio.moveToFront(logo);
     }
+    private void actualizaconDeHabitacionYReserva(){
+        ArrayList<Reserva> ListaDeReserva = Vista.getRD().listarReservas();
+         for (Reserva reserva : ListaDeReserva) {
+                if (LocalDate.now().isAfter(reserva.getFi())&&LocalDate.now().isBefore(reserva.getFf())) {
+                 reserva.getHabitacion().setEstado(false);
+             }
+                if (LocalDate.now().isAfter(reserva.getFf())) {
+                 reserva.setEstado(false);
+                 reserva.getHabitacion().setEstado(true);
+             }
+            }
+    }
+   
 }
