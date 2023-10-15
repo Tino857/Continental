@@ -107,6 +107,6 @@ public class Continental {
               Reserva reserva1 = new Reserva(hd.buscarHuespedPorId(1), habd.buscarHabitacionPorId(1), LocalDate.of(2023, 5, 12), LocalDate.of(2023, 5, 13), (int) ChronoUnit.DAYS.between(LocalDate.of(2023, 5, 12),LocalDate.of(2023, 5, 13)), 2, 1000.0, true);
               int id = rd.guardarReserva(reserva1);
               reserva1.setIdReserva(id);
-              System.out.println(rd.listarReservas());
+              System.out.println(reserva1.getIdReserva());
     }
 }

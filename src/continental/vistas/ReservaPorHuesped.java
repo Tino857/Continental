@@ -174,9 +174,11 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
             }
              ArrayList<Reserva> reservas=Vista.getRD().listarReservas();
              for (Reserva reserva : reservas) {
+                  
                  if (reserva.getHuesped().getDni()==h.getDni()) {
-                     cargarTabla(reserva);
-                 }
+                    cargarTabla(reserva);
+             
+                }
             }
         } catch (NumberFormatException e) {
 
@@ -251,7 +253,7 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
             Integer.toString(res.getHabitacion().getNro()),
             res.getHuesped().getApellido(),
             res.getFi().toString(),
-                res.getFf().toString(),
+            res.getFf().toString(),
             Integer.toString(res.getDias()),
             Double.toString(res.getMonto())
         });

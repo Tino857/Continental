@@ -177,11 +177,13 @@ public class ReservaData {
             Reserva reserva = null;// se inicializa una reserva en null
             while (rs.next()) {//se inicializa un bucle para modificar la reserva
                 reserva = new Reserva();
+                reserva.setIdReserva(rs.getInt("idReserva"));
                 reserva.setHuesped(Vista.getHD().buscarHuespedPorId(rs.getInt("idHuesped")));
                 reserva.setHabitacion(Vista.getHabD().buscarHabitacionPorId(rs.getInt("idHabitacion")));
                 reserva.setFi(rs.getDate("fechaInicio").toLocalDate());
                 reserva.setFf(rs.getDate("fechaFin").toLocalDate());
                 reserva.setMonto(rs.getDouble("monto"));
+                reserva.setDias(rs.getInt("dias"));
                 reserva.setEstado(rs.getBoolean("estado"));
                 reserva.setCantDePersonas(rs.getInt("cantidadPersonas"));
                 listaReservas.add(reserva);//se agrega la reserva a la lista
