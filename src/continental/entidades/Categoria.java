@@ -5,14 +5,15 @@ package continental.entidades;
  * @author valen
  */
 public class Categoria {
-    private int idCategoria,cantDePersonas,cantDeCamas,tipoDeCamas;
+    private int idCategoria,cantDePersonas,cantDeCamas;
     private Double precio;
     private String tipoCategoria;
+    private TipoCama tipoDeCamas;
 
     public Categoria() {
     }
 
-    public Categoria(int cantDePersonas, int cantDeCamas, int tipoDeCamas, Double precio, String tipoCategoria) {
+    public Categoria(int cantDePersonas, int cantDeCamas, TipoCama tipoDeCamas, Double precio, String tipoCategoria) {
         this.cantDePersonas = cantDePersonas;
         this.cantDeCamas = cantDeCamas;
         this.tipoDeCamas = tipoDeCamas;
@@ -20,7 +21,7 @@ public class Categoria {
         this.tipoCategoria = tipoCategoria;
     }
 
-    public Categoria(int idCategoria, int cantDePersonas, int cantDeCamas, Double precio, int tipoDeCamas, String tipoCategoria) {
+    public Categoria(int idCategoria, int cantDePersonas, int cantDeCamas, Double precio, TipoCama tipoDeCamas, String tipoCategoria) {
         this.idCategoria = idCategoria;
         this.cantDePersonas = cantDePersonas;
         this.cantDeCamas = cantDeCamas;
@@ -62,14 +63,6 @@ public class Categoria {
         this.precio = precio;
     }
 
-    public int getTipoDeCamas() {
-        return tipoDeCamas;
-    }
-
-    public void setTipoDeCamas(int tipoDeCamas) {
-        this.tipoDeCamas = tipoDeCamas;
-    }
-
     public String getTipoCategoria() {
         return tipoCategoria;
     }
@@ -78,9 +71,16 @@ public class Categoria {
         this.tipoCategoria = tipoCategoria;
     }
 
+    public TipoCama getTipoDeCamas() {
+        return tipoDeCamas;
+    }
+
+    public void setTipoDeCamas(TipoCama tipoDeCamas) {
+        this.tipoDeCamas = tipoDeCamas;
+    }
+
     @Override
     public String toString() {
         return idCategoria + " - " + tipoCategoria;
     }
-
 }

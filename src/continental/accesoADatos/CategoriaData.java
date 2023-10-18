@@ -38,7 +38,7 @@ public class CategoriaData {
             ps.setInt(1, categoria.getCantDePersonas());
             ps.setDouble(2, categoria.getPrecio());
             ps.setInt(3, categoria.getCantDeCamas());
-            ps.setInt(4, categoria.getTipoDeCamas());
+            ps.setInt(4, ValidarData.numeroCama(categoria.getTipoDeCamas()));
             ps.setString(5, categoria.getTipoCategoria());
             //Se ejecuta la consulta
             ps.executeUpdate();
@@ -108,7 +108,7 @@ public class CategoriaData {
             ps.setInt(1, categoria.getCantDePersonas());
             ps.setDouble(2, categoria.getPrecio());
             ps.setInt(3, categoria.getCantDeCamas());
-            ps.setInt(4, categoria.getTipoDeCamas());
+            ps.setInt(4, ValidarData.numeroCama(categoria.getTipoDeCamas()));
             ps.setString(5, categoria.getTipoCategoria());
             ps.setInt(6, categoria.getIdCategoria());
             registro = ps.executeUpdate(); //ejecuta Update
@@ -132,14 +132,14 @@ public class CategoriaData {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, idCat);// se modifica el ID
             ResultSet rs = ps.executeQuery();//se ejecuta la consulta y se almacena en un resulset "rs"
+            categoria = new Categoria();
             if (rs.next()) {// si rs contiene valores, se recuperan abajo
-                
-                categoria = new Categoria();
+                    
                 categoria.setIdCategoria(rs.getInt("idCategoria"));
                 categoria.setCantDePersonas(rs.getInt("cantidadPersonas"));
                 categoria.setPrecio(rs.getDouble("precio"));
                 categoria.setCantDeCamas(rs.getInt("cantidadCamas"));
-                categoria.setTipoDeCamas(rs.getInt("tipoCama"));
+                categoria.setTipoDeCamas(ValidarData.nombreCama(rs.getInt("tipoCama")));
                 categoria.setTipoCategoria(rs.getString("tipoCategoria"));
                 
             } else {
@@ -174,7 +174,7 @@ public class CategoriaData {
                 categoria.setCantDePersonas(rs.getInt("cantidadPersonas"));
                 categoria.setPrecio(rs.getDouble("precio"));
                 categoria.setCantDeCamas(rs.getInt("cantidadCamas"));
-                categoria.setTipoDeCamas(rs.getInt("tipoCama"));
+                categoria.setTipoDeCamas(ValidarData.nombreCama(rs.getInt("tipoCama")));
                 categoria.setTipoCategoria(rs.getString("tipoCategoria"));
                 listaCategorias.add(categoria);//se agrega la categoria a la lista
             }

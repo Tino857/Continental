@@ -2,10 +2,12 @@ package continental.vistas;
 
 import continental.accesoADatos.ValidarData;
 import continental.entidades.Categoria;
+import continental.entidades.TipoCama;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -32,6 +34,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         initComponents();
         armarTabla();
         cargarDatos();
+        cargarCB();
         jTFID.setEditable(false);
     }
 
@@ -66,7 +69,6 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         jTFNombre = new javax.swing.JTextField();
         jTFPersonas = new javax.swing.JTextField();
         jTFCantCamas = new javax.swing.JTextField();
-        jTFTipoCama = new javax.swing.JTextField();
         jTFPrecio = new javax.swing.JTextField();
         jLNombre = new javax.swing.JLabel();
         jLPersonas = new javax.swing.JLabel();
@@ -76,12 +78,13 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         jBLimpiar = new javax.swing.JButton();
         jTFID = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jCBCamas = new javax.swing.JComboBox<>();
         JBEditar = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
         setResizable(true);
-        setPreferredSize(new java.awt.Dimension(500, 550));
+        setPreferredSize(new java.awt.Dimension(550, 550));
 
         jPBackground.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -90,7 +93,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         JBAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/guardar-w.png"))); // NOI18N
         JBAgregar.setText("Agregar");
         JBAgregar.setIconTextGap(10);
-        JBAgregar.setPreferredSize(new java.awt.Dimension(100, 32));
+        JBAgregar.setPreferredSize(new java.awt.Dimension(105, 32));
         JBAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBAgregarActionPerformed(evt);
@@ -102,7 +105,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/salir-w.png"))); // NOI18N
         jBSalir.setText("Salir");
         jBSalir.setIconTextGap(10);
-        jBSalir.setPreferredSize(new java.awt.Dimension(100, 32));
+        jBSalir.setPreferredSize(new java.awt.Dimension(105, 32));
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSalirActionPerformed(evt);
@@ -209,9 +212,6 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         jTFCantCamas.setBackground(new java.awt.Color(102, 102, 102));
         jTFCantCamas.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTFTipoCama.setBackground(new java.awt.Color(102, 102, 102));
-        jTFTipoCama.setForeground(new java.awt.Color(255, 255, 255));
-
         jTFPrecio.setBackground(new java.awt.Color(102, 102, 102));
         jTFPrecio.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -256,7 +256,6 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         jLayeredPane1.setLayer(jTFNombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jTFPersonas, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jTFCantCamas, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jTFTipoCama, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jTFPrecio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLNombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLPersonas, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -266,6 +265,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         jLayeredPane1.setLayer(jBLimpiar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jTFID, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jCBCamas, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -281,23 +281,17 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
                         .addComponent(jLPrecio)
                         .addComponent(jLTipoCama))
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTFPrecio, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTFTipoCama, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTFPersonas, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTFCantCamas, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(18, 18, 18)
-                                .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(25, 25, 25))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jTFID, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jTFID)
+                    .addComponent(jTFNombre)
+                    .addComponent(jTFPrecio)
+                    .addComponent(jTFPersonas)
+                    .addComponent(jTFCantCamas)
+                    .addComponent(jCBCamas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,29 +299,29 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLNombre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLNombre)
+                    .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLPersonas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFCantCamas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLCantCamas)
-                    .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLCantCamas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFTipoCama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLTipoCama))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLTipoCama)
+                    .addComponent(jCBCamas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLPrecio))
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
 
         JBEditar.setBackground(new java.awt.Color(51, 51, 51));
@@ -335,7 +329,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         JBEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/editar-w.png"))); // NOI18N
         JBEditar.setText("Editar");
         JBEditar.setIconTextGap(10);
-        JBEditar.setPreferredSize(new java.awt.Dimension(100, 32));
+        JBEditar.setPreferredSize(new java.awt.Dimension(105, 32));
         JBEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBEditarActionPerformed(evt);
@@ -347,21 +341,19 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         jPBackgroundLayout.setHorizontalGroup(
             jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPBackgroundLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLPCabecera)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
                     .addComponent(jLayeredPane1)
                     .addGroup(jPBackgroundLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(JBAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JBAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(JBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)))
-                .addContainerGap())
+                        .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20))
         );
         jPBackgroundLayout.setVerticalGroup(
             jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,26 +362,26 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                    .addComponent(JBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
         );
 
         pack();
@@ -398,7 +390,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
     private void JBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAgregarActionPerformed
 
          //Controla que no hayan campos vacios
-        if (jTFNombre.getText().isEmpty() || jTFCantCamas.getText().isEmpty() || jTFPersonas.getText().isEmpty() || jTFPrecio.getText().isEmpty()||jTFTipoCama.getText().isEmpty()) {
+        if (jTFNombre.getText().isEmpty() || jTFCantCamas.getText().isEmpty() || jTFPersonas.getText().isEmpty() || jTFPrecio.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio.");
             return;
@@ -409,9 +401,9 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
             //Se intentan parsear los valores numericos y se realiza su validacion
             int cantidadPersonas = Integer.parseInt(jTFPersonas.getText());
             int cantidadCamas = Integer.parseInt(jTFCantCamas.getText());
-            int tipoCamas = Integer.parseInt(jTFTipoCama.getText());
             double precio = Double.parseDouble(jTFPrecio.getText());
             
+            TipoCama tipoCamas = (TipoCama)jCBCamas.getSelectedItem();
             //VALIDAR NUMEROS**************************
             
             //Se valida si el de nombre no contiene caracteres especiales
@@ -517,7 +509,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
 
     private void JBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditarActionPerformed
         //Se controla que no hayan campos vacios
-        if (jTFCantCamas.getText().isEmpty() || jTFPersonas.getText().isEmpty() || jTFNombre.getText().isEmpty() || jTFTipoCama.getText().isEmpty() || jTFPrecio.getText().isEmpty()) {
+        if (jTFCantCamas.getText().isEmpty() || jTFPersonas.getText().isEmpty() || jTFNombre.getText().isEmpty()|| jTFPrecio.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio.");
             return;
@@ -564,10 +556,9 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
             //VALIDAR NUMEROS********************
             int cantidadPersonas = Integer.parseInt(jTFPersonas.getText());
             int cantidadCamas = Integer.parseInt(jTFCantCamas.getText());
-            int tipoCamas = Integer.parseInt(jTFTipoCama.getText());
             double precio = Double.parseDouble(jTFPrecio.getText());
             
-            
+            TipoCama tipoCamas = (TipoCama)jCBCamas.getSelectedItem();
             //Llegado el punto en que todos los valores son correctos, se crea una categoria
             //En este categoria guardamos el resultado de la busqueda por medio del id que figura en la tabla
             Categoria cat = Vista.getCD().buscarCategoriaPorId(Integer.parseInt((String) modelo.getValueAt(filaSelec, 0)));
@@ -617,6 +608,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
     private javax.swing.JTextField JTFBuscador;
     private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jBSalir;
+    private javax.swing.JComboBox<TipoCama> jCBCamas;
     private javax.swing.JLabel jLCantCamas;
     private javax.swing.JLabel jLLogo;
     private javax.swing.JLabel jLMargen;
@@ -636,7 +628,6 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTFNombre;
     private javax.swing.JTextField jTFPersonas;
     private javax.swing.JTextField jTFPrecio;
-    private javax.swing.JTextField jTFTipoCama;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
@@ -645,9 +636,9 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
 
         //Se agregan las columnas con su nombre correspondiente al modelo de tabla creado anteriormente
         modelo.addColumn("ID");
-        modelo.addColumn("Tipo");
-        modelo.addColumn("Cantidad de Personas");
-        modelo.addColumn("Cantidad de Camas");
+        modelo.addColumn("Tipo de Hab");
+        modelo.addColumn("Cant Personas");
+        modelo.addColumn("Cant Camas");
         modelo.addColumn("Tipo de Camas");
         modelo.addColumn("Precio");
 
@@ -659,7 +650,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
 
         //Se llama al metodo que se encarga de setear el ancho de las columnas
         anchoColumna(columnas, 0, 40);
-        anchoColumna(columnas, 1, 80);
+        anchoColumna(columnas, 5, 80);
     }
 
     //Este metodo se usa para setear el ancho de una columna
@@ -674,9 +665,9 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
 
     //Se cargan las filas en la tabla
     private void cargarDatos() {
-        //Se recupera una lista de alumnos
+        //Se recupera una lista de categorias
         ArrayList<Categoria> ListaDeCategorias = Vista.getCD().listarCategorias();
-        //Se recorre la lista y por cada alumno, se llama al metodo correspondiente para agregar la fila, enviando por parametro dicho alumno
+        //Se recorre la lista y por cada categoria, se llama al metodo correspondiente para agregar la fila, enviando por parametro dicha categoria
         for (Categoria next : ListaDeCategorias) {
             cargarTabla(next);
         }
@@ -701,7 +692,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         jTFID.setText("");
         jTFNombre.setText("");
         jTFPersonas.setText("");
-        jTFTipoCama.setText("");
+        jCBCamas.setSelectedIndex(0);
         jTFCantCamas.setText("");
         jTFPrecio.setText("");
     }
@@ -717,15 +708,22 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
     }
 
     private void mostrarInfo(int filaSelec) {
-        //Se obtienen los datos del alumno almacenado en la fila seleccionada
+        //Se obtienen los datos de la categoria almacenada en la fila seleccionada
         int idC = Integer.parseInt(modelo.getValueAt(filaSelec, 0).toString());
         Categoria cat = Vista.getCD().buscarCategoriaPorId(idC);
         jTFID.setText(idC+"");
         jTFNombre.setText(cat.getTipoCategoria());
         jTFPersonas.setText(cat.getCantDePersonas()+"");
-        jTFTipoCama.setText(cat.getTipoDeCamas()+"");
+        jCBCamas.setSelectedItem(cat.getTipoDeCamas());
         jTFCantCamas.setText(cat.getCantDeCamas()+"");
         jTFPrecio.setText(cat.getPrecio()+"");
     }
-
+    
+    private void cargarCB(){
+        //Este metodo carga el CB con los tipos de camas
+        int largo = TipoCama.values().length;
+        for (int i = 1; i <= largo; i++) {
+            jCBCamas.addItem(ValidarData.nombreCama(i));
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package continental.accesoADatos;
 
+import continental.entidades.TipoCama;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
@@ -50,5 +51,43 @@ public class ValidarData {
      public static boolean validarNumero(int num){
         
         return (num<0 || num>200);
+    }
+     
+     
+    public boolean minimoPersonas(int n){
+     
+       return n<1;
+    }
+     
+    public static int numeroCama(TipoCama tc){
+        switch (tc) {
+            case SIMPLE:
+                return 1;
+            case DOBLE:
+                return 2;
+            case MATRIMONIAL:
+                return 3;
+            case QUEEN_SIZE:
+                return 4;
+            case KING_SIZE:
+                return 5;
+            default:
+                return 0;
+        }
+    }
+    
+    public static TipoCama nombreCama(int num){
+        switch (num) {
+            case 1:
+                return TipoCama.SIMPLE;
+            case 2:
+                return TipoCama.DOBLE;
+            case 3:
+                return TipoCama.MATRIMONIAL;
+            case 4:
+                return TipoCama.QUEEN_SIZE;
+            default:
+                return TipoCama.KING_SIZE;
+        }
     }
 }
