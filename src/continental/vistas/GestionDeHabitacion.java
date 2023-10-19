@@ -516,16 +516,14 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No existe la habitacion");
             return;
         }
-//El problema que encuentro es que si las habitaciones son eliminadas tendran reservas asociadas. Mi idea es que si el usuario desea eliminar una habitacion debera eliminar pirmero
-//las reservas que tenga asociada. Podemos poner un cartel que diga que si la habitacion que encontramos no es nula y ademas tiene asociada reservas no podra eliminarla.
-        //Si la habitacion se encontraba en la base de datos, se recupera su estado para confirmar que no haya sido eliminado anteriormente
-        
-        ArrayList <Reserva> reservas=new ArrayList();
+
+    
+            ArrayList<Reserva> reservas =Vista.getRD().listarReservas();
             for (Reserva reserva : reservas) {
-                if (hab==reserva.getHabitacion()&&reserva.isEstado()) {
-                 JOptionPane.showMessageDialog(this, "La habitacion que desea eliminar tiene reservas asociadas."
-                         + "\n Primero elimine todas las reservas asociadas a esta habiatacion");   
-                 return;
+                if (hab.getIdHabitacion() == reserva.getHabitacion().getIdHabitacion()) {
+                    JOptionPane.showMessageDialog(this, "La habitacion que desea eliminar tiene reservas asociadas."
+                            + "\n Primero elimine todas las reservas asociadas a esta habiatacion");
+                    return;
                 }
             }
         

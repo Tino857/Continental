@@ -9,6 +9,8 @@ import continental.entidades.Habitacion;
 import continental.entidades.Reserva;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -19,7 +21,7 @@ import javax.swing.table.TableColumnModel;
  *
  * @author valen
  */
-public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
+public class ReservaPorFecha extends javax.swing.JInternalFrame {
 private final DefaultTableModel modelo = new DefaultTableModel() {
 
         @Override
@@ -28,7 +30,7 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
             return false;
         }
     };
-    public ReservaPorHabitacion() {
+    public ReservaPorFecha() {
         initComponents();
         armarTabla();
     }
@@ -42,7 +44,7 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jBEliminar = new javax.swing.JButton();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         ImageIcon icon = new ImageIcon(getClass().getResource("/continental/imagenes/WindowBackground.png"));
         Image image = icon.getImage();
         jPBackground = new javax.swing.JPanel(){
@@ -56,20 +58,26 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jTFNro = new javax.swing.JTextField();
         jBBuscar = new javax.swing.JButton();
         jLPCabecera = new javax.swing.JLayeredPane();
         jLMargen = new javax.swing.JLabel();
         jLTitulo = new javax.swing.JLabel();
         jLLogo = new javax.swing.JLabel();
-        jBEliminar2 = new javax.swing.JButton();
+        jDCInicio = new com.toedter.calendar.JDateChooser();
+        jDCFin = new com.toedter.calendar.JDateChooser();
+        jLabel2 = new javax.swing.JLabel();
+        jBEliminar = new javax.swing.JButton();
 
-        jBEliminar.setText("Eliminar");
-
-        setClosable(true);
-        setMaximizable(true);
-        setResizable(true);
-        setPreferredSize(new java.awt.Dimension(550, 500));
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         jBSalir.setBackground(new java.awt.Color(51, 51, 51));
         jBSalir.setForeground(new java.awt.Color(255, 255, 255));
@@ -103,9 +111,7 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Ingrese el numero de habitacion");
-
-        jTFNro.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel1.setText("Ingrese la fecha de inicio");
 
         jBBuscar.setBackground(new java.awt.Color(51, 51, 51));
         jBBuscar.setForeground(new java.awt.Color(255, 255, 255));
@@ -119,7 +125,7 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLTitulo.setForeground(new java.awt.Color(235, 235, 235));
         jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLTitulo.setText("RESERVA POR HABITACION");
+        jLTitulo.setText("RESERVA POR FECHA");
 
         jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoULP3-w.png"))); // NOI18N
 
@@ -132,10 +138,11 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         jLPCabeceraLayout.setHorizontalGroup(
             jLPCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLPCabeceraLayout.createSequentialGroup()
-                .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLMargen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLLogo))
         );
         jLPCabeceraLayout.setVerticalGroup(
@@ -144,15 +151,18 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
                 .addContainerGap()
                 .addGroup(jLPCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLMargen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jBEliminar2.setText("Eliminar");
-        jBEliminar2.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Ingrese la fecha de fin");
+
+        jBEliminar.setText("Eliminar");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEliminar2ActionPerformed(evt);
+                jBEliminarActionPerformed(evt);
             }
         });
 
@@ -161,43 +171,64 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         jPBackgroundLayout.setHorizontalGroup(
             jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPBackgroundLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-                    .addComponent(jLPCabecera)
+                    .addGroup(jPBackgroundLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLPCabecera)
+                            .addGroup(jPBackgroundLayout.createSequentialGroup()
+                                .addComponent(jBLimpiar)
+                                .addGap(185, 185, 185)
+                                .addComponent(jBEliminar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBSalir))))
+                    .addGroup(jPBackgroundLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE))
                     .addGroup(jPBackgroundLayout.createSequentialGroup()
                         .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPBackgroundLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTFNro, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBBuscar))
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPBackgroundLayout.createSequentialGroup()
-                                .addComponent(jBLimpiar)
-                                .addGap(131, 131, 131)
-                                .addComponent(jBEliminar2)
-                                .addGap(158, 158, 158)
-                                .addComponent(jBSalir)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(20, 20, 20))
+                                .addGap(30, 30, 30)
+                                .addComponent(jDCInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPBackgroundLayout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(jDCFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(55, 55, 55)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jBBuscar)
+                .addGap(297, 297, 297))
         );
         jPBackgroundLayout.setVerticalGroup(
             jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPBackgroundLayout.createSequentialGroup()
                 .addComponent(jLPCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPBackgroundLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jDCInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPBackgroundLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jDCFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21)
+                .addComponent(jBBuscar)
                 .addGap(18, 18, 18)
-                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTFNro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBBuscar))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBLimpiar)
                     .addComponent(jBSalir)
-                    .addComponent(jBEliminar2))
+                    .addComponent(jBEliminar))
                 .addGap(20, 20, 20))
         );
 
@@ -205,11 +236,26 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 329, Short.MAX_VALUE)
+                    .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 329, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 251, Short.MAX_VALUE)
+                    .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 252, Short.MAX_VALUE)))
         );
 
         pack();
@@ -219,49 +265,46 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
-    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        if (jTFNro.getText().isEmpty()) {
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+limpiarTabla();
+jDCInicio.setDate(null);
+jDCFin.setDate(null);
+    }//GEN-LAST:event_jBLimpiarActionPerformed
 
-            JOptionPane.showMessageDialog(this, "La casilla numero no debe estar vacia si desea buscar las reservas.");
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+        if (jDCInicio.equals(null)||jDCFin.equals(null)) {
+
+            JOptionPane.showMessageDialog(this, "La casilla de las fechas debe recibir un dato valido.");
             return;
         }
 
         try {
+            LocalDate fi = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate ff = jDCFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+          
 
-            //Se intenta parsear el dni
-            int nro = Integer.parseInt(jTFNro.getText());
-
-            //Se recupera el alumno que posee el dni en la DB
-            Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(nro);
-
-            //Si el alumno recibido tiene valor nulo significa que no se encuentra en la DB
-            //Se muestra el mensaje al usuario y se finaliza la ejecucion
-            if (hab == null) {
-
-                JOptionPane.showMessageDialog(this, "No existe el huesped");
+            if (fi.isAfter(ff)) {
+                JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser anterior a la fecha de final");
                 return;
             }
+
+           
             ArrayList<Reserva> reservas=Vista.getRD().listarReservas();
             for (Reserva reserva : reservas) {
-                if (reserva.getHabitacion().getNro()==hab.getNro()) {
+                if ((reserva.getFi().equals(fi)||reserva.getFi().isAfter(fi))&&(reserva.getFf().equals(ff)||reserva.getFf().isBefore(ff))) {
                     cargarTabla(reserva);
                 }
             }
         } catch (NumberFormatException e) {
 
-            JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
+            JOptionPane.showMessageDialog(this, "");
         } catch (NullPointerException e) {
 
-            JOptionPane.showMessageDialog(this, "No existe el alumno");
+            JOptionPane.showMessageDialog(this, "Debe ingresar datos validos");
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
-    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
-      limpiarTabla();
-      jTFNro.setText("");
-    }//GEN-LAST:event_jBLimpiarActionPerformed
-
-    private void jBEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminar2ActionPerformed
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         try{
             int filaSelec = jTable1.getSelectedRow();
             if (filaSelec==-1) {
@@ -272,21 +315,21 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
 
                 filaSelec = 0;
             }
-            //Se intenta parsear el dni
-            int nro= Integer.parseInt(jTFNro.getText());
+           
+             LocalDate fi = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate ff = jDCFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-            //Se recupera el alumno que posee el dni en la DB
-            Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(nro);
+            
+            
             Reserva res = Vista.getRD().buscarReservaPorId(Integer.parseInt((String) modelo.getValueAt(filaSelec, 0)));
             Vista.getRD().eliminarReserva(res.getIdReserva());
             limpiarTabla();
-            ArrayList<Reserva> reservas=Vista.getRD().listarReservas();
+           ArrayList<Reserva> reservas=Vista.getRD().listarReservas();
             for (Reserva reserva : reservas) {
-
-                if (reserva.getHabitacion().getNro()==hab.getNro()) {
+                if ((reserva.getFi().equals(fi)||reserva.getFi().isAfter(fi))&&(reserva.getFf().equals(ff)||reserva.getFf().isBefore(ff))) {
                     cargarTabla(reserva);
-
                 }
+            
             }
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Ingrese datos validos");
@@ -295,36 +338,38 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
             JOptionPane.showMessageDialog(this, "Ingrese datos validos");
         }
 
-    }//GEN-LAST:event_jBEliminar2ActionPerformed
+    }//GEN-LAST:event_jBEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jBEliminar;
-    private javax.swing.JButton jBEliminar2;
     private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jBSalir;
+    private com.toedter.calendar.JDateChooser jDCFin;
+    private com.toedter.calendar.JDateChooser jDCInicio;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLLogo;
     private javax.swing.JLabel jLMargen;
     private javax.swing.JLayeredPane jLPCabecera;
     private javax.swing.JLabel jLTitulo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPBackground;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTFNro;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 private void armarTabla() {
 
-        //Se agregan las columnas con su nombre correspondiente al modelo de tabla creado anteriormente
-        modelo.addColumn("ID");
-        modelo.addColumn("Numero de Hab");
-        modelo.addColumn("Apellido");
-        modelo.addColumn("Fecha de Inicio");
-        modelo.addColumn("Fecha de Fin");
-        modelo.addColumn("Dias");
-        modelo.addColumn("Precio Final");
-         modelo.addColumn("Estado");
+    //Se agregan las columnas con su nombre correspondiente al modelo de tabla creado anteriormente
+    modelo.addColumn("ID");
+    modelo.addColumn("Numero de Hab");
+    modelo.addColumn("Apellido");
+    modelo.addColumn("Fecha de Inicio");
+    modelo.addColumn("Fecha de Fin");
+    modelo.addColumn("Dias");
+    modelo.addColumn("Precio Final");
+       modelo.addColumn("Estado");
 
         //Se setea el modelo de tabla a la tabla de alumnos
         jTable1.setModel(modelo);
@@ -344,10 +389,22 @@ private void armarTabla() {
         modeloTabla.getColumn(indice).setMinWidth(ancho - 10);
         modeloTabla.getColumn(indice).setPreferredWidth(ancho);
     }
-
-    
-
-    private void limpiarTabla() {
+ private void cargarTabla(Reserva res) {
+String estado="Inactiva";
+        if (res.isEstado()) {
+            estado="Activa";
+        }
+        modelo.addRow(new Object[]{
+           Integer.toString(res.getIdReserva()),
+            Integer.toString(res.getHabitacion().getNro()),
+            res.getHuesped().getApellido(),
+            res.getFi().toString(),
+            res.getFf().toString(),
+            Integer.toString(res.getDias()),
+            Double.toString(res.getMonto())
+        });
+    } 
+ private void limpiarTabla() {
 
         int filas = modelo.getRowCount() - 1;
         for (int i = filas; i >= 0; i--) {
@@ -355,21 +412,5 @@ private void armarTabla() {
             modelo.removeRow(i);
         }
     }
-
-    private void cargarTabla(Reserva res) {
- String estado="Inactiva";
-        if (res.isEstado()) {
-            estado="Activa";
-        }
-        modelo.addRow(new Object[]{
-            Integer.toString(res.getIdReserva()),
-            Integer.toString(res.getHabitacion().getNro()),
-            res.getHuesped().getApellido(),
-            res.getFi().toString(),
-            res.getFf().toString(),
-            Integer.toString(res.getDias()),
-            Double.toString(res.getMonto()),
-                estado
-        });
-    }} 
+}
 

@@ -99,8 +99,8 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jBLimpiar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jBSiguiente" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
+                              <Component id="jBSiguiente" min="-2" pref="118" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
                               <Component id="jBSalir" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>

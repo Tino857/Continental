@@ -197,7 +197,7 @@ public class HabitacionData {
     public ArrayList<Habitacion> listarHabitaciones() {
         
         ArrayList<Habitacion> listaHabitaciones = new ArrayList();//se  creo una lista paraa almacenar Habitaciones
-        String query = "SELECT * FROM habitacion WHERE estado = 1";//se define consulta
+        String query = "SELECT * FROM habitacion where  habilitada=1 ";//se define consulta
         try {
             
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);

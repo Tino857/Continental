@@ -117,6 +117,7 @@ public class ReservaData {
             ps.setDouble(5, reserva.getMonto());
             ps.setBoolean(6, reserva.isEstado());
             ps.setInt(7, reserva.getCantDePersonas());
+            ps.setInt(8, reserva.getIdReserva());
             registro = ps.executeUpdate(); //ejecuta Update
             ps.close();//Cierra consulta
         } catch (SQLException e) {
@@ -142,11 +143,13 @@ public class ReservaData {
             if (rs.next()) {// si rs contiene valores, se recuperan abajo
                 
                 reserva = new Reserva();
-                reserva.setHuesped(huespedD.buscarHuespedPorId(rs.getInt("idHuesped")));
-                reserva.setHabitacion(habitacionD.buscarHabitacionPorId(rs.getInt("idHabitacion")));
+                 reserva.setIdReserva(rs.getInt("idReserva"));
+                reserva.setHuesped(Vista.getHD().buscarHuespedPorId(rs.getInt("idHuesped")));
+                reserva.setHabitacion(Vista.getHabD().buscarHabitacionPorId(rs.getInt("idHabitacion")));
                 reserva.setFi(rs.getDate("fechaInicio").toLocalDate());
                 reserva.setFf(rs.getDate("fechaFin").toLocalDate());
                 reserva.setMonto(rs.getDouble("monto"));
+                reserva.setDias(rs.getInt("dias"));
                 reserva.setEstado(rs.getBoolean("estado"));
                 reserva.setCantDePersonas(rs.getInt("cantidadPersonas"));
             } else {

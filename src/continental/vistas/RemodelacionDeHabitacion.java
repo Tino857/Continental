@@ -327,7 +327,7 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditarActionPerformed
-
+       
         //Se controla que no hayan campos vacios
         if (jTFPiso.getText().isEmpty() || jTFNumero.getText().isEmpty() || jTFCodigo.getText().isEmpty()||jCBCategorias.getSelectedIndex()==0 ) {
 
@@ -365,13 +365,11 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
                 return;
             }
 
-           
-          
-
-          
-           
                Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
-
+                if (!hab.isEstado()) {
+                JOptionPane.showMessageDialog(this, "No puede editar una habitacion que esta siendo ocupada");
+                return;
+            }
                 //Seteamos a la habitacioncon la informacion nueva
                 hab.setNro(numero);
                 hab.setPiso(piso);
@@ -492,6 +490,7 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
         modelo.addColumn("Numero");
         modelo.addColumn("Piso");
         modelo.addColumn("Categoria");
+        modelo.addColumn("Estado");
 
         //Se setea el modelo de tabla a la tabla de alumnos
         jTable1.setModel(modelo);
@@ -522,12 +521,16 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
 }
  
  private void cargarTabla(Habitacion hab) {
-
+String estado="Ocupado";
+     if (hab.isEstado()) {
+         estado="Libre";
+     }
         modelo.addRow(new Object[]{
              Integer.toString(hab.getIdHabitacion()),
             Integer.toString(hab.getNro()),
             Integer.toString(hab.getPiso()),
-           hab.getCategoria().getTipoCategoria()
+           hab.getCategoria().getTipoCategoria(),
+           estado
            
         });
     }

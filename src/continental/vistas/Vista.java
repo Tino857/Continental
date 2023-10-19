@@ -4,6 +4,7 @@ import continental.accesoADatos.CategoriaData;
 import continental.accesoADatos.HabitacionData;
 import continental.accesoADatos.HuespedData;
 import continental.accesoADatos.ReservaData;
+import continental.entidades.Habitacion;
 import continental.entidades.Reserva;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -85,12 +86,18 @@ public class Vista extends javax.swing.JFrame {
         jMGestionDeReserva = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMSalir = new javax.swing.JMenu();
 
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        escritorio.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentRemoved(java.awt.event.ContainerEvent evt) {
+                escritorioComponentRemoved(evt);
+            }
+        });
         escritorio.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 escritorioComponentResized(evt);
@@ -203,6 +210,14 @@ public class Vista extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
+        jMenuItem4.setText("Reserva por Fechas");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
+
         jMenuBar1.add(jMenu1);
 
         jMSalir.setText("Salir");
@@ -300,6 +315,15 @@ public class Vista extends javax.swing.JFrame {
         abrirVentana(RPHab); 
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+       ReservaPorFecha RPF= new ReservaPorFecha();
+        abrirVentana(RPF); 
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void escritorioComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_escritorioComponentRemoved
+       actualizaconDeHabitacionYReserva();
+    }//GEN-LAST:event_escritorioComponentRemoved
+
     /**
      * @param args the command line arguments
      */
@@ -351,6 +375,7 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
 
@@ -379,12 +404,19 @@ public class Vista extends javax.swing.JFrame {
     private void actualizaconDeHabitacionYReserva(){
         ArrayList<Reserva> ListaDeReserva = Vista.getRD().listarReservas();
          for (Reserva reserva : ListaDeReserva) {
-                if (LocalDate.now().isAfter(reserva.getFi())&&LocalDate.now().isBefore(reserva.getFf())) {
-                 reserva.getHabitacion().setEstado(false);
+                if ((LocalDate.now().isAfter(reserva.getFi())||LocalDate.now().equals(reserva.getFi()))&&(LocalDate.now().isBefore(reserva.getFf())||LocalDate.now().equals(reserva.getFf()))) {
+                Habitacion hab=HabD.buscarHabitacionPorId(reserva.getHabitacion().getIdHabitacion());
+                hab.setEstado(false);
+                HabD.editarHabitacion(hab);
+               
              }
                 if (LocalDate.now().isAfter(reserva.getFf())) {
-                 reserva.setEstado(false);
-                 reserva.getHabitacion().setEstado(true);
+                Habitacion hab=HabD.buscarHabitacionPorId(reserva.getHabitacion().getIdHabitacion());
+                hab.setEstado(true);
+                HabD.editarHabitacion(hab);
+                 Reserva res=RD.buscarReservaPorId(reserva.getIdReserva());
+                RD.eliminarReserva(res.getIdReserva());
+                        
              }
             }
     }

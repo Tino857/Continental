@@ -62,6 +62,7 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         jTable1 = new javax.swing.JTable();
         jBLimpiar = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
+        jBEliminar = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -150,6 +151,13 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
             }
         });
 
+        jBEliminar.setText("Eliminar");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPBackgroundLayout = new javax.swing.GroupLayout(jPBackground);
         jPBackground.setLayout(jPBackgroundLayout);
         jPBackgroundLayout.setHorizontalGroup(
@@ -159,6 +167,8 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPBackgroundLayout.createSequentialGroup()
                         .addComponent(jBLimpiar)
+                        .addGap(130, 130, 130)
+                        .addComponent(jBEliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBSalir))
                     .addComponent(jLPCabecera)
@@ -169,7 +179,7 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
                         .addGap(18, 18, 18)
                         .addComponent(jBBuscar)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
         jPBackgroundLayout.setVerticalGroup(
@@ -187,7 +197,8 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
                 .addGap(18, 18, 18)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBLimpiar)
-                    .addComponent(jBSalir))
+                    .addComponent(jBSalir)
+                    .addComponent(jBEliminar))
                 .addGap(20, 20, 20))
         );
 
@@ -195,7 +206,7 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
+            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,10 +252,10 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
             }
         } catch (NumberFormatException e) {
 
-            JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
+            JOptionPane.showMessageDialog(this, "Ingrese datos validos");
         } catch (NullPointerException e) {
 
-            JOptionPane.showMessageDialog(this, "No existe el alumno");
+            JOptionPane.showMessageDialog(this, "Ingrese datos validos");
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
@@ -257,9 +268,46 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
       jTFDni.setText("");
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        try{
+             int filaSelec = jTable1.getSelectedRow();
+            if (filaSelec==-1) {
+                JOptionPane.showMessageDialog(this, "Seleccione una reserva");
+                return;
+            }
+             if (jTable1.getRowCount() == 1) {
+
+                filaSelec = 0;
+            }
+            //Se intenta parsear el dni
+            int dni = Integer.parseInt(jTFDni.getText());
+
+            //Se recupera el alumno que posee el dni en la DB
+            Huesped h = Vista.getHD().buscarHuespedPorDni(dni);
+            Reserva res = Vista.getRD().buscarReservaPorId(Integer.parseInt((String) modelo.getValueAt(filaSelec, 0)));
+            Vista.getRD().eliminarReserva(res.getIdReserva());
+            limpiarTabla();
+           ArrayList<Reserva> reservas=Vista.getRD().listarReservas();
+             for (Reserva reserva : reservas) {
+                  
+                 if (reserva.getHuesped().getDni()==h.getDni()) {
+                    cargarTabla(reserva);
+             
+                }
+            }
+        }catch(NumberFormatException e){
+             JOptionPane.showMessageDialog(this, "Ingrese datos validos");
+        }catch (NullPointerException e) {
+
+            JOptionPane.showMessageDialog(this, "Ingrese datos validos");
+        }
+       
+    }//GEN-LAST:event_jBEliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;
+    private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jBSalir;
     private javax.swing.JLabel jLLogo;
@@ -282,6 +330,7 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         modelo.addColumn("Fecha de Fin");
         modelo.addColumn("Dias");
         modelo.addColumn("Precio Final");
+        modelo.addColumn("Estado");
 
         //Se setea el modelo de tabla a la tabla de alumnos
         jTable1.setModel(modelo);
@@ -314,15 +363,19 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
     }
 
     private void cargarTabla(Reserva res) {
-
+       String estado="Inactiva";
+        if (res.isEstado()) {
+            estado="Activa";
+        }
         modelo.addRow(new Object[]{
-            Integer.toString(res.getIdReserva()),//lo carga como 0 no se porque?
+            Integer.toString(res.getIdReserva()),
             Integer.toString(res.getHabitacion().getNro()),
             res.getHuesped().getApellido(),
             res.getFi().toString(),
             res.getFf().toString(),
             Integer.toString(res.getDias()),
-            Double.toString(res.getMonto())
+            Double.toString(res.getMonto()),
+                estado
         });
     }
 }
