@@ -131,6 +131,11 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         jBLimpiar.setBackground(new java.awt.Color(51, 51, 51));
         jBLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         jBLimpiar.setText("Limpiar");
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
 
         jBSalir.setBackground(new java.awt.Color(51, 51, 51));
         jBSalir.setForeground(new java.awt.Color(255, 255, 255));
@@ -249,6 +254,11 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
       dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
+
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+      limpiarTabla();
+      jTFDni.setText("");
+    }//GEN-LAST:event_jBLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

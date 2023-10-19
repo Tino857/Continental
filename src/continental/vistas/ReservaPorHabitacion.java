@@ -74,6 +74,11 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         jBLimpiar.setBackground(new java.awt.Color(51, 51, 51));
         jBLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         jBLimpiar.setText("Limpiar");
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -229,6 +234,11 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
             JOptionPane.showMessageDialog(this, "No existe el alumno");
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
+
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+      limpiarTabla();
+      jTFNro.setText("");
+    }//GEN-LAST:event_jBLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
