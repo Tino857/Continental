@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,7 +26,7 @@ public class HabitacionData {
     public int guardarHabitacion(Habitacion habitacion) {
         
         //Se define consulta SQL, colocando comodines para los valores que luego seran seteados.
-        String query = "INSERT INTO habitacion (numero, piso, estado,habilitada, idCategoria) "
+        String query = "INSERT INTO habitacion (numero, piso, estado, habilitada, idCategoria) "
                 + "VALUES (?, ?, ?,?, ?)";
         
         //Esta variable se utilizará para almacenar el ID generado del nuevo registro en la base de datos.
@@ -142,11 +141,6 @@ public class HabitacionData {
                 hab.setEstado(rs.getBoolean("estado"));
                 hab.setCategoria(Vista.getCD().buscarCategoriaPorId(rs.getInt("idCategoria")));
                 hab.setHabilitada(rs.getBoolean("habilitada"));
-                
-            } else {
-                
-                //si no se encuentra una habitacion con los parametros buscados deja el msj
-//                JOptionPane.showMessageDialog(null, "No existe la habitacion");
             }
             
             //Cierra consulta
@@ -158,8 +152,9 @@ public class HabitacionData {
         }
         return hab;//retorna una habitacion
     }
+    
     //Este metodo permite buscar una habitacion por su numero
-     public Habitacion buscarHabitacionPorNumero(int nDH) {
+    public Habitacion buscarHabitacionPorNumero(int nDH) {
        
         Habitacion hab = null;//Declara una variable al de tipo Habitacion e inicializa su valor como null. Esta variable se utilizará para almacenar el resultado de la búsqueda.
         String query = "SELECT * FROM habitacion WHERE numero = ?";
@@ -178,10 +173,6 @@ public class HabitacionData {
                 hab.setEstado(rs.getBoolean("estado"));
                 hab.setCategoria(Vista.getCD().buscarCategoriaPorId(rs.getInt("idCategoria")));
                 hab.setHabilitada(rs.getBoolean("habilitada"));
-            } else {
-                
-                //si no se encuentra una habitacion con los parametros buscados deja el msj
-//                JOptionPane.showMessageDialog(null, "No existe la habitacion");
             }
             
             //Cierra consulta
@@ -193,6 +184,7 @@ public class HabitacionData {
         }
         return hab;//retorna una habitacion
     }
+    
     //Este metodo devuelve una lista de habitaciones
     public ArrayList<Habitacion> listarHabitaciones() {
         
@@ -214,6 +206,7 @@ public class HabitacionData {
                 hab.setHabilitada(rs.getBoolean("habilitada"));
                 listaHabitaciones.add(hab);//se agrega ela habitacion a la lista
             }
+            
             ps.close();//cierra  el PS
         } catch (SQLException e) {
             
@@ -221,7 +214,8 @@ public class HabitacionData {
         }
         return listaHabitaciones;//retorna una lista de habitaciones
     }
-     public int habilitarHabitacion(int nro) {
+    
+    public int habilitarHabitacion(int nro) {
         
         String query = "UPDATE habitacion SET habilitada=1 WHERE numero=?";
         //Esta variable almacenara si hubo cambios en el registro de la DB

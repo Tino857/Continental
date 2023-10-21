@@ -23,12 +23,14 @@ import javax.swing.JOptionPane;
  */
 public class GestionDeHabitacion extends javax.swing.JInternalFrame {
 
-    private  Map<Integer,Categoria> listaDeHab=new HashMap();
+    private Map<Integer, Categoria> listaDeHab = new HashMap();
+
     public GestionDeHabitacion() {
+
         initComponents();
         cargarCB();
-         jCBCategorias.setSelectedIndex(0);
-         jRBHabilitada.setSelected(false);
+        jCBCategorias.setSelectedIndex(0);
+        jRBHabilitada.setSelected(false);
     }
 
     /**
@@ -87,10 +89,10 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         jLabel2.setText("Codigo:");
 
         jLabel3.setForeground(new java.awt.Color(235, 235, 235));
-        jLabel3.setText("Piso");
+        jLabel3.setText("Piso:");
 
         jLabel4.setForeground(new java.awt.Color(235, 235, 235));
-        jLabel4.setText("Numero de Habitacion");
+        jLabel4.setText("Num de Habitacion:");
 
         jBBuscar.setBackground(new java.awt.Color(51, 51, 51));
         jBBuscar.setForeground(new java.awt.Color(235, 235, 235));
@@ -163,7 +165,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         });
 
         jLabel6.setForeground(new java.awt.Color(235, 235, 235));
-        jLabel6.setText("Categoria");
+        jLabel6.setText("Categoria:");
 
         jRBHabilitada.setEnabled(false);
         jRBHabilitada.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +175,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setForeground(new java.awt.Color(235, 235, 235));
-        jLabel1.setText("Habilitada");
+        jLabel1.setText("Habilitada:");
 
         jBDeshabilitar1.setBackground(new java.awt.Color(51, 51, 51));
         jBDeshabilitar1.setForeground(new java.awt.Color(235, 235, 235));
@@ -224,9 +226,9 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         jPBackground.setLayout(jPBackgroundLayout);
         jPBackgroundLayout.setHorizontalGroup(
             jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
-                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPBackgroundLayout.createSequentialGroup()
+            .addGroup(jPBackgroundLayout.createSequentialGroup()
+                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
@@ -236,31 +238,31 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRBHabilitada)
                             .addGroup(jPBackgroundLayout.createSequentialGroup()
+                                .addComponent(jRBHabilitada)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
                                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTFPiso)
+                                    .addComponent(jCBCategorias, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTFPiso, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTFNumero)
-                                    .addComponent(jCBCategorias, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(62, 62, 62)
-                                .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPBackgroundLayout.createSequentialGroup()
-                                .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                                .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPBackgroundLayout.createSequentialGroup()
+                                    .addComponent(jTFCodigo))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jBLimpiar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jBBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jBHabilitar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBHabilitar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jBDeshabilitar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                        .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(20, 20, 20))
-            .addGroup(jPBackgroundLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLPCabecera)
+                        .addComponent(jBDeshabilitar1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPBackgroundLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLPCabecera)))
                 .addGap(20, 20, 20))
         );
         jPBackgroundLayout.setVerticalGroup(
@@ -270,17 +272,17 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFPiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCBCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
@@ -289,7 +291,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jRBHabilitada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBHabilitar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -333,9 +335,8 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
             return;
         }
         try {
-        
-            int nDH=Integer.parseInt(jTFNumero.getText());
-        
+
+            int nDH = Integer.parseInt(jTFNumero.getText());
 
             //Se busca la materia en la base de datos y se guarda
             Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(nDH);
@@ -348,19 +349,18 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
             }
 
             //Si la materia se encontraba en la DB, se setean los campos correspondientes con los valores obtenidos de la materia
-            jTFCodigo.setText(hab.getIdHabitacion()+"");
-            jTFNumero.setText(hab.getNro()+"");
+            jTFCodigo.setText(hab.getIdHabitacion() + "");
+            jTFNumero.setText(hab.getNro() + "");
             jTFPiso.setText(hab.getPiso() + "");
-                   for (Map.Entry<Integer, Categoria> entry : listaDeHab.entrySet()) {
+            for (Map.Entry<Integer, Categoria> entry : listaDeHab.entrySet()) {
                 Integer key = entry.getKey();
                 Categoria value = entry.getValue();
-                       if (hab.getCategoria().getIdCategoria()==value.getIdCategoria()) {
-                           jCBCategorias.setSelectedIndex(key);
-                       }
-            } 
+                if (hab.getCategoria().getIdCategoria() == value.getIdCategoria()) {
+                    jCBCategorias.setSelectedIndex(key);
+                }
+            }
             jRBHabilitada.setSelected(hab.isHabilitada());
-               
-   
+
         } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(this, "El numero de la habitacion es incorrecto.");
@@ -378,43 +378,40 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
 
     private void jBHabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHabilitarActionPerformed
 //Se controla que el campo de numero no se encuentre vacio
-              if (jTFNumero.getText().isEmpty()){
+        if (jTFNumero.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "La casilla numero no debe estar vacia.");
             return;
         }
         try {
 
-        int numero = Integer.parseInt(jTFNumero.getText());
-        
+            int numero = Integer.parseInt(jTFNumero.getText());
 
-      
-        //Se crea una habitacion y se busca en la base de datos para confirmar que la habitacion existe
-        //En caso que la habitacion no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
-        Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(numero);
-        if (hab == null) {
+            //Se crea una habitacion y se busca en la base de datos para confirmar que la habitacion existe
+            //En caso que la habitacion no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
+            Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(numero);
+            if (hab == null) {
 
-            JOptionPane.showMessageDialog(this, "No existe la habitacion");
-            return;
-        }
+                JOptionPane.showMessageDialog(this, "No existe la habitacion");
+                return;
+            }
             if (hab.isHabilitada()) {
                 JOptionPane.showMessageDialog(this, "La habitacion ya se encunetra habilitada");
                 return;
             }
-        
+
             //Habiendo confirmado que el numero de la habitacion es correcto, que la habitacion existe en la DB y que no este habilitada
-            
-           int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea habilitar esta habitacion?", "", JOptionPane.YES_OPTION);
+            int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea habilitar esta habitacion?", "", JOptionPane.YES_OPTION);
             int registro;
             if (resp == 0) {
                 registro = Vista.getHabD().habilitarHabitacion(hab.getNro());
-                
+
                 if (registro == 1) {
-                
+
                     JOptionPane.showMessageDialog(this, "La habitacion ha sido habilitada");
                     jRBHabilitada.setSelected(true);
                 } else {
-                
+
                     JOptionPane.showMessageDialog(this, "No se pudo habilitar la habitacion");
                 }
             }
@@ -426,8 +423,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
         //Controla que no hayan campos vacios
-       
-        if (jTFNumero.getText().isEmpty() || jTFPiso.getText().isEmpty()||jCBCategorias.getSelectedIndex()==0) {
+        if (jTFNumero.getText().isEmpty() || jTFPiso.getText().isEmpty() || jCBCategorias.getSelectedIndex() == 0) {
 
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
             return;
@@ -436,7 +432,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         try {
 
             //Se intenta parsear el numero y el piso de la habitacion
-            int numero=Integer.parseInt(jTFNumero.getText());
+            int numero = Integer.parseInt(jTFNumero.getText());
             int piso = Integer.parseInt(jTFPiso.getText());
             if (ValidarData.validarNumero(numero)) {
 
@@ -450,7 +446,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
             }
 
             //Llegado el punto en que todos los valores son correctos, se crea una materia
-            Habitacion hab = new Habitacion(piso, numero, (Categoria)jCBCategorias.getSelectedItem(), true);
+            Habitacion hab = new Habitacion(piso, numero, (Categoria) jCBCategorias.getSelectedItem(), true);
 
             //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo guardarMateria
             int registro = Vista.getHabD().guardarHabitacion(hab);
@@ -484,11 +480,12 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
     private void jDPEscritorioComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jDPEscritorioComponentRemoved
 
         /**
-        * Se captura el evento de cierre de ventana de confirmacion al eliminar una materia.
-        * Luego se busca la materia que se intento eliminar y se recupera su estado.
-        * Por ultimo se setea el componente radioButton estado con el valor de estado de la materia.
-        */
-       
+         * Se captura el evento de cierre de ventana de confirmacion al eliminar
+         * una materia. Luego se busca la materia que se intento eliminar y se
+         * recupera su estado. Por ultimo se setea el componente radioButton
+         * estado con el valor de estado de la materia.
+         */
+
     }//GEN-LAST:event_jDPEscritorioComponentRemoved
 
     private void jRBHabilitadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBHabilitadaActionPerformed
@@ -496,29 +493,26 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRBHabilitadaActionPerformed
 
     private void jBDeshabilitar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeshabilitar1ActionPerformed
-    //Se controla que el campo de numero no se encuentre vacio
-              if (jTFNumero.getText().isEmpty()){
+        //Se controla que el campo de numero no se encuentre vacio
+        if (jTFNumero.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "La casilla numero no debe estar vacia.");
             return;
         }
         try {
 
-        int numero = Integer.parseInt(jTFNumero.getText());
-        
+            int numero = Integer.parseInt(jTFNumero.getText());
 
-      
-        //Se crea una habitacion y se busca en la base de datos para confirmar que la habitacion existe
-        //En caso que la habitacion no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
-        Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(numero);
-        if (hab == null) {
+            //Se crea una habitacion y se busca en la base de datos para confirmar que la habitacion existe
+            //En caso que la habitacion no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
+            Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(numero);
+            if (hab == null) {
 
-            JOptionPane.showMessageDialog(this, "No existe la habitacion");
-            return;
-        }
+                JOptionPane.showMessageDialog(this, "No existe la habitacion");
+                return;
+            }
 
-    
-            ArrayList<Reserva> reservas =Vista.getRD().listarReservas();
+            ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
             for (Reserva reserva : reservas) {
                 if (hab.getIdHabitacion() == reserva.getHabitacion().getIdHabitacion()) {
                     JOptionPane.showMessageDialog(this, "La habitacion que desea eliminar tiene reservas asociadas."
@@ -526,27 +520,26 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                     return;
                 }
             }
-        
+
             //Habiendo confirmado que el numero de la habitacion es correcto, que la habitacion existe en la DB y que su no tiene reservas asociadas
-            
-           int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea deshabilitar esta habitacion?", "", JOptionPane.YES_OPTION);
+            int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea deshabilitar esta habitacion?", "", JOptionPane.YES_OPTION);
             int registro;
             if (resp == 0) {
                 registro = Vista.getHabD().eliminarHabitacion(hab.getNro());
-                
+
                 if (registro == 1) {
-                
+
                     JOptionPane.showMessageDialog(this, "La habitacion ha sido deshabilitada");
                     jRBHabilitada.setSelected(false);
                 } else {
-                
+
                     JOptionPane.showMessageDialog(this, "No se pudo deshabilitar la habitacion");
                 }
             }
         } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(this, "El numero de la habitacion es incorrecto.");
-        }    
+        }
     }//GEN-LAST:event_jBDeshabilitar1ActionPerformed
 
 
@@ -580,9 +573,10 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         jTFNumero.setText("");
         jTFPiso.setText("");
         jCBCategorias.setSelectedIndex(0);
-       jRBHabilitada.setSelected(false);
+        jRBHabilitada.setSelected(false);
 
     }
+
     private void cargarCB() {
 
         //Agregamos en el primer lugar un alumno vacio
@@ -596,9 +590,9 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
 
         //Se recupera una lista de alumnos
         ArrayList<Categoria> Lista = Vista.getCD().listarCategorias();
-       int i=0;
+        int i = 0;
         for (Categoria categoria : Lista) {
-            listaDeHab.put(i+1, categoria);
+            listaDeHab.put(i + 1, categoria);
             i++;
         }
         //Se recorre la lista y cada alumno se agrega al CB

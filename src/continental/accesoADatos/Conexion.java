@@ -12,10 +12,10 @@ import javax.swing.JOptionPane;
 public class Conexion {
 
     private static final String URL = "jdbc:mariadb://localhost/";//direccion de la base de datos
-    private static final String USUARIO = "root";//nombre de usuario para  autenticar la base de datos
+    private static final String USUARIO = "root";//nombre de usuario para autenticar la base de datos
     private static final String PASSWORD = "";//contraseña para autenticar
     private static final String DB = "hotelcontinental";//nombre de la base de datos
-    private static Connection conection = null;//variable ded tipo Connection que almacena la coneccion.
+    private static Connection conection = null;//variable de tipo Connection que almacena la coneccion.
 
     private Conexion() {
     }

@@ -16,8 +16,10 @@ public class ValidarData {
         
         String sup = "ºª!|@·#$~%€&¬/()=?¿¡'`^[*+]´¨{çÇ},;:.-_<>1234567890";
         for (int i = 0; i < cadena.length(); i++) {
+            
             String letra = cadena.substring(i, i + 1);
             if (sup.contains(letra)) {
+                
                 return true;
             }
         }
@@ -44,23 +46,30 @@ public class ValidarData {
         
         return (fecha.isBefore(LocalDate.of(1950, 01, 01)) || fecha.isAfter(LocalDate.now(ZoneId.systemDefault())));
     }
-     public static boolean validarPiso(int piso){
+    
+    //Valida si el valor ingresado de piso es correcto
+    public static boolean validarPiso(int piso){
         
         return (piso<0 || piso>20);
     }
-     public static boolean validarNumero(int num){
+    
+    //Valida si el valor ingresado de habitacion es correcto
+    public static boolean validarNumero(int num){
         
         return (num<0 || num>200);
     }
      
-     
+    //Valida si el minimo de personas es correcto 
     public boolean minimoPersonas(int n){
      
        return n<1;
     }
-     
+    
+    //Recibe un entero y devuelve un tipo de cama
     public static int numeroCama(TipoCama tc){
+        
         switch (tc) {
+            
             case SIMPLE:
                 return 1;
             case DOBLE:
@@ -76,8 +85,11 @@ public class ValidarData {
         }
     }
     
+    //Recibe un tipo de cama y devuelve un entero
     public static TipoCama nombreCama(int num){
+        
         switch (num) {
+            
             case 1:
                 return TipoCama.SIMPLE;
             case 2:
@@ -89,5 +101,53 @@ public class ValidarData {
             default:
                 return TipoCama.KING_SIZE;
         }
+    }
+    
+    //Controla que no hayan caracteres especiales en un numero
+    public static boolean caracteresEspecialesNum (String str){
+        
+        String sup = "ºª!|@·#$~%€&¬/()=?¿¡'`^[*+]´¨{çÇ},;:.-_<> ";
+        for (int i = 0; i < str.length(); i++) {
+            
+            String letra = str.substring(i, i + 1);
+            if (sup.contains(letra)) {
+                
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    //Controla que el email contenga un solo @ y al menos un punto "."
+    public static boolean caracteresEspecialesMail (String str){
+        
+        String sup = "ºª!|·#$~€¬/=?¿¡'`^*+´¨{çÇ}()<>,;:\"[]%&éýúíóáèùìòàëÿüïöä ";
+        int arroba = 0;
+        int punto = 0;
+        for (int i = 0; i < str.length(); i++) {
+            
+            String letra = str.substring(i, i + 1);
+            if (sup.contains(letra)) {
+                
+                return true;
+            }
+            if (letra.equals("@")) {
+                
+                arroba++;
+                if (arroba>1) {
+                    
+                    return true;    
+                }
+            }
+            if (letra.equals(".")) {
+                
+                punto++;
+            }
+        }
+        if (punto == 0 || arroba == 0) {
+            
+            return true;
+        }
+        return false;
     }
 }

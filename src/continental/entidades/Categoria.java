@@ -2,18 +2,18 @@ package continental.entidades;
 
 /**
  *
- * @author valen
+ * @author Grupo 61
  */
 public class Categoria {
     private int idCategoria,cantDePersonas,cantDeCamas;
-    private Double precio;
+    private double precio;
     private String tipoCategoria;
     private TipoCama tipoDeCamas;
 
     public Categoria() {
     }
 
-    public Categoria(int cantDePersonas, int cantDeCamas, TipoCama tipoDeCamas, Double precio, String tipoCategoria) {
+    public Categoria(int cantDePersonas, int cantDeCamas, TipoCama tipoDeCamas, double precio, String tipoCategoria) {
         this.cantDePersonas = cantDePersonas;
         this.cantDeCamas = cantDeCamas;
         this.tipoDeCamas = tipoDeCamas;
@@ -21,7 +21,7 @@ public class Categoria {
         this.tipoCategoria = tipoCategoria;
     }
 
-    public Categoria(int idCategoria, int cantDePersonas, int cantDeCamas, Double precio, TipoCama tipoDeCamas, String tipoCategoria) {
+    public Categoria(int idCategoria, int cantDePersonas, int cantDeCamas, double precio, TipoCama tipoDeCamas, String tipoCategoria) {
         this.idCategoria = idCategoria;
         this.cantDePersonas = cantDePersonas;
         this.cantDeCamas = cantDeCamas;
@@ -55,11 +55,11 @@ public class Categoria {
         this.cantDeCamas = cantDeCamas;
     }
 
-    public Double getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Double precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
