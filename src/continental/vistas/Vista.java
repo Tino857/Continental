@@ -394,10 +394,10 @@ public class Vista extends javax.swing.JFrame {
     //Crea un label y coloca el logo de la ULP, y lo posiciona en la esquina inferior izquierda
     private void colocarLogo(){
         
-        Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/continental/imagenes/LogoULP-w.png")).getImage());
+        Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/continental/imagenes/LogoFull-w.png")).getImage());
         logo.setText("");
-        logo.setSize(200,81);
-        logo.setLocation(escritorio.getWidth()-220,escritorio.getHeight()-100);
+        logo.setSize(240,145);
+        logo.setLocation(escritorio.getWidth()-260,escritorio.getHeight()-160);
         logo.setIcon(icono);
         escritorio.add(logo);
         escritorio.moveToFront(logo);
