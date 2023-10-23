@@ -339,12 +339,12 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
 
         //Se agregan las columnas con su nombre correspondiente al modelo de tabla creado anteriormente
         modelo.addColumn("ID");
-        modelo.addColumn("Numero de Hab");
+        modelo.addColumn("Nº de Hab");
         modelo.addColumn("Apellido");
-        modelo.addColumn("Fecha de Inicio");
-        modelo.addColumn("Fecha de Fin");
+        modelo.addColumn("Inicio");
+        modelo.addColumn("Fin");
         modelo.addColumn("Dias");
-        modelo.addColumn("Precio Final");
+        modelo.addColumn("Precio");
         modelo.addColumn("Estado");
 
         //Se setea el modelo de tabla a la tabla de alumnos
@@ -355,7 +355,9 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
 
         //Se llama al metodo que se encarga de setear el ancho de las columnas
         anchoColumna(columnas, 0, 40);
-        anchoColumna(columnas, 1, 90);
+        anchoColumna(columnas, 1, 70);
+        anchoColumna(columnas, 5, 50);
+        anchoColumna(columnas, 7, 70);
     }
 
     private void anchoColumna(TableColumnModel modeloTabla, int indice, int ancho) {
