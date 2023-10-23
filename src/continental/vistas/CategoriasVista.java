@@ -7,7 +7,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
-import java.util.Iterator;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,6 +22,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
 
         @Override
         public boolean isCellEditable(int f, int c) {
+            
             return false;
         }
     };
@@ -88,30 +88,33 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
 
         jPBackground.setBackground(new java.awt.Color(51, 51, 51));
 
-        JBAgregar.setBackground(new java.awt.Color(51, 51, 51));
+        JBAgregar.setBackground(new java.awt.Color(45, 54, 60));
+        JBAgregar.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         JBAgregar.setForeground(new java.awt.Color(235, 235, 235));
         JBAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/guardar-w.png"))); // NOI18N
         JBAgregar.setText("Agregar");
         JBAgregar.setIconTextGap(10);
-        JBAgregar.setPreferredSize(new java.awt.Dimension(105, 32));
+        JBAgregar.setPreferredSize(new java.awt.Dimension(110, 32));
         JBAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBAgregarActionPerformed(evt);
             }
         });
 
-        jBSalir.setBackground(new java.awt.Color(51, 51, 51));
+        jBSalir.setBackground(new java.awt.Color(45, 54, 60));
+        jBSalir.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBSalir.setForeground(new java.awt.Color(235, 235, 235));
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/salir-w.png"))); // NOI18N
         jBSalir.setText("Salir");
         jBSalir.setIconTextGap(10);
-        jBSalir.setPreferredSize(new java.awt.Dimension(105, 32));
+        jBSalir.setPreferredSize(new java.awt.Dimension(110, 32));
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSalirActionPerformed(evt);
             }
         });
 
+        jTable1.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -131,12 +134,12 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(85, 94, 100));
         jPanel1.setPreferredSize(new java.awt.Dimension(100, 24));
 
-        JTFBuscador.setBackground(new java.awt.Color(102, 102, 102));
-        JTFBuscador.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
-        JTFBuscador.setForeground(new java.awt.Color(153, 153, 153));
+        JTFBuscador.setBackground(new java.awt.Color(85, 94, 100));
+        JTFBuscador.setFont(new java.awt.Font("Dialog", 2, 13)); // NOI18N
+        JTFBuscador.setForeground(new java.awt.Color(190, 190, 190));
         JTFBuscador.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         JTFBuscador.setText("Ingrese el nombre de la categoria para filtrar la tabla...");
         JTFBuscador.setBorder(null);
@@ -190,7 +193,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
             .addGroup(jLPCabeceraLayout.createSequentialGroup()
                 .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLLogo))
         );
@@ -205,39 +208,52 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jTFNombre.setBackground(new java.awt.Color(102, 102, 102));
+        jTFNombre.setBackground(new java.awt.Color(85, 94, 100));
+        jTFNombre.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTFNombre.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTFPersonas.setBackground(new java.awt.Color(102, 102, 102));
+        jTFPersonas.setBackground(new java.awt.Color(85, 94, 100));
+        jTFPersonas.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTFPersonas.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTFCantCamas.setBackground(new java.awt.Color(102, 102, 102));
+        jTFCantCamas.setBackground(new java.awt.Color(85, 94, 100));
+        jTFCantCamas.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTFCantCamas.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTFPrecio.setBackground(new java.awt.Color(102, 102, 102));
+        jTFPrecio.setBackground(new java.awt.Color(85, 94, 100));
+        jTFPrecio.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTFPrecio.setForeground(new java.awt.Color(255, 255, 255));
 
+        jLNombre.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLNombre.setForeground(new java.awt.Color(235, 235, 235));
         jLNombre.setText("Nombre:");
 
+        jLPersonas.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLPersonas.setForeground(new java.awt.Color(235, 235, 235));
         jLPersonas.setText("Cant. Personas");
 
+        jLCantCamas.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLCantCamas.setForeground(new java.awt.Color(235, 235, 235));
         jLCantCamas.setText("Cant. Camas:");
 
+        jLTipoCama.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLTipoCama.setForeground(new java.awt.Color(235, 235, 235));
         jLTipoCama.setText("Tipo de Camas:");
 
+        jLPrecio.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLPrecio.setForeground(new java.awt.Color(235, 235, 235));
         jLPrecio.setText("Precio:");
 
-        jTFID.setBackground(new java.awt.Color(102, 102, 102));
-        jTFID.setForeground(new java.awt.Color(154, 154, 154));
+        jTFID.setBackground(new java.awt.Color(85, 94, 100));
+        jTFID.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
+        jTFID.setForeground(new java.awt.Color(190, 190, 190));
         jTFID.setDisabledTextColor(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ID:");
+
+        jCBCamas.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
 
         jLayeredPane1.setLayer(jTFNombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jTFPersonas, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -283,47 +299,49 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLNombre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLPersonas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFCantCamas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLCantCamas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLTipoCama)
                     .addComponent(jCBCamas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLPrecio))
                 .addGap(0, 0, 0))
         );
 
-        JBEditar.setBackground(new java.awt.Color(51, 51, 51));
+        JBEditar.setBackground(new java.awt.Color(45, 54, 60));
+        JBEditar.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         JBEditar.setForeground(new java.awt.Color(235, 235, 235));
         JBEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/editar-w.png"))); // NOI18N
         JBEditar.setText("Editar");
         JBEditar.setIconTextGap(10);
-        JBEditar.setPreferredSize(new java.awt.Dimension(105, 32));
+        JBEditar.setPreferredSize(new java.awt.Dimension(110, 32));
         JBEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBEditarActionPerformed(evt);
             }
         });
 
-        jBLimpiar.setBackground(new java.awt.Color(51, 51, 51));
+        jBLimpiar.setBackground(new java.awt.Color(45, 54, 60));
+        jBLimpiar.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         jBLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/limpiar-w.png"))); // NOI18N
         jBLimpiar.setText("Limpiar");
         jBLimpiar.setIconTextGap(10);
-        jBLimpiar.setPreferredSize(new java.awt.Dimension(100, 32));
+        jBLimpiar.setPreferredSize(new java.awt.Dimension(110, 32));
         jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBLimpiarActionPerformed(evt);
@@ -339,17 +357,20 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLPCabecera)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
-                    .addGroup(jPBackgroundLayout.createSequentialGroup()
-                        .addComponent(JBAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(JBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPBackgroundLayout.createSequentialGroup()
-                        .addComponent(jLayeredPane1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
+                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPBackgroundLayout.createSequentialGroup()
+                                .addComponent(JBAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(JBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPBackgroundLayout.createSequentialGroup()
+                                .addComponent(jLayeredPane1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(20, 20, 20))
         );
         jPBackgroundLayout.setVerticalGroup(
@@ -359,7 +380,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package continental.vistas;
 
-import continental.entidades.Habitacion;
 import continental.entidades.Huesped;
 import continental.entidades.Reserva;
 import java.awt.Graphics;
@@ -18,10 +12,11 @@ import javax.swing.table.TableColumnModel;
 
 /**
  *
- * @author valen
+ * @author Grupo 61
  */
 public class ReservaPorHuesped extends javax.swing.JInternalFrame {
-private final DefaultTableModel modelo = new DefaultTableModel() {
+
+    private final DefaultTableModel modelo = new DefaultTableModel() {
 
         @Override
         public boolean isCellEditable(int f, int c) {
@@ -29,7 +24,9 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
             return false;
         }
     };
+
     public ReservaPorHuesped() {
+
         initComponents();
         armarTabla();
     }
@@ -68,12 +65,14 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         setMaximizable(true);
         setResizable(true);
 
+        jLMargen.setPreferredSize(new java.awt.Dimension(63, 64));
+
         jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLTitulo.setForeground(new java.awt.Color(235, 235, 235));
         jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLTitulo.setText("RESERVA POR HUESPED");
 
-        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoULP3-w.png"))); // NOI18N
+        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoSmall-w.png"))); // NOI18N
 
         jLPCabecera.setLayer(jLMargen, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLPCabecera.setLayer(jLTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -84,9 +83,9 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         jLPCabeceraLayout.setHorizontalGroup(
             jLPCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLPCabeceraLayout.createSequentialGroup()
-                .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLLogo))
         );
@@ -96,8 +95,8 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
                 .addContainerGap()
                 .addGroup(jLPCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLMargen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -105,11 +104,6 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
 
         jTFDni.setBackground(new java.awt.Color(102, 102, 102));
         jTFDni.setForeground(new java.awt.Color(255, 255, 255));
-        jTFDni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFDniActionPerformed(evt);
-            }
-        });
 
         jBBuscar.setBackground(new java.awt.Color(51, 51, 51));
         jBBuscar.setForeground(new java.awt.Color(255, 255, 255));
@@ -206,7 +200,7 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
                     .addComponent(jTFDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,11 +223,8 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTFDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDniActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFDniActionPerformed
-
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+
         if (jTFDni.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea buscar las reservas.");
@@ -245,24 +236,79 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
             //Se intenta parsear el dni
             int dni = Integer.parseInt(jTFDni.getText());
 
-            //Se recupera el alumno que posee el dni en la DB
+            //Se recupera el huesped que posee el dni en la DB
             Huesped h = Vista.getHD().buscarHuespedPorDni(dni);
 
-            //Si el alumno recibido tiene valor nulo significa que no se encuentra en la DB
+            //Si el huesped recibido tiene valor nulo significa que no se encuentra en la DB
             //Se muestra el mensaje al usuario y se finaliza la ejecucion
             if (h == null) {
 
                 JOptionPane.showMessageDialog(this, "No existe el huesped");
                 return;
             }
-             ArrayList<Reserva> reservas=Vista.getRD().listarReservas();
-             for (Reserva reserva : reservas) {
-                  
-                 if (reserva.getHuesped().getDni()==h.getDni()) {
-                    cargarTabla(reserva);
-             
+            //Si se encontro un huesped, se limpia la tabla y se cargan las reservas activas de ese huesped
+            mostrarReservas(h);
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "Solo se permiten números.", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
+        } catch (NullPointerException e) {
+
+            JOptionPane.showMessageDialog(this, "Ingrese datos validos", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jBBuscarActionPerformed
+
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+
+        dispose();
+    }//GEN-LAST:event_jBSalirActionPerformed
+
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+
+        limpiarTabla();
+        jTFDni.setText("");
+    }//GEN-LAST:event_jBLimpiarActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+
+        try {
+            //Se obtiene la fila seleccionada de la tabla de reservas
+            int filaSelec = jTable1.getSelectedRow();
+            
+            //Si hay solo una reserva, se toma la primer fila como seleccionada
+            if (jTable1.getRowCount() == 1) {
+
+                filaSelec = 0;
+            }
+            
+            if (filaSelec == -1) {
+                //Si hay mas de una reserva y no se selecciono ninguna fila de la tabla se finaliza la ejecucion
+                JOptionPane.showMessageDialog(this, "Seleccione una reserva.", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            //Se obtiene la reserva por medio del id que figura en la tabla
+            Reserva res = Vista.getRD().buscarReservaPorId(Integer.parseInt((String) modelo.getValueAt(filaSelec, 0)));
+            //Se obtiene el huesped correspondiente a dicha reserva
+            Huesped h = res.getHuesped();
+            //Se pregunta si se desea eliminar la reserva
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar esta reserva?", "ELIMINAR", JOptionPane.YES_NO_OPTION);
+            //Si la respuesta es si, el resultado obtenido es 0
+            if (respuesta == 0) {
+
+                //Se crea una variable que almacenara el numero de indices afectados en la DB al eliminar la reserva
+                respuesta = Vista.getRD().eliminarReserva(res.getIdReserva());
+                //Dependiendo del resultado se mostrara un mensaje al usuario
+                //Si se elimino exitosamente el numero de indice sera mayor a 0. Caso contrario sera 0
+                if (respuesta > 0) {
+
+                    JOptionPane.showMessageDialog(this, "Se elimino la reserva.");
+                } else {
+
+                    JOptionPane.showMessageDialog(this, "No se pudo eliminar la reserva.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             }
+            //Se limpia la tabla y se cargan las reservas nuevamente
+            mostrarReservas(h);
         } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(this, "Ingrese datos validos");
@@ -270,51 +316,6 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
 
             JOptionPane.showMessageDialog(this, "Ingrese datos validos");
         }
-    }//GEN-LAST:event_jBBuscarActionPerformed
-
-    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-      dispose();
-    }//GEN-LAST:event_jBSalirActionPerformed
-
-    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
-      limpiarTabla();
-      jTFDni.setText("");
-    }//GEN-LAST:event_jBLimpiarActionPerformed
-
-    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        try{
-             int filaSelec = jTable1.getSelectedRow();
-            if (filaSelec==-1) {
-                JOptionPane.showMessageDialog(this, "Seleccione una reserva");
-                return;
-            }
-             if (jTable1.getRowCount() == 1) {
-
-                filaSelec = 0;
-            }
-            //Se intenta parsear el dni
-            int dni = Integer.parseInt(jTFDni.getText());
-
-            //Se recupera el alumno que posee el dni en la DB
-            Huesped h = Vista.getHD().buscarHuespedPorDni(dni);
-            Reserva res = Vista.getRD().buscarReservaPorId(Integer.parseInt((String) modelo.getValueAt(filaSelec, 0)));
-            Vista.getRD().eliminarReserva(res.getIdReserva());
-            limpiarTabla();
-           ArrayList<Reserva> reservas=Vista.getRD().listarReservas();
-             for (Reserva reserva : reservas) {
-                  
-                 if (reserva.getHuesped().getDni()==h.getDni()) {
-                    cargarTabla(reserva);
-             
-                }
-            }
-        }catch(NumberFormatException e){
-             JOptionPane.showMessageDialog(this, "Ingrese datos validos");
-        }catch (NullPointerException e) {
-
-            JOptionPane.showMessageDialog(this, "Ingrese datos validos");
-        }
-       
     }//GEN-LAST:event_jBEliminarActionPerformed
 
 
@@ -333,7 +334,8 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
     private javax.swing.JTextField jTFDni;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
-   private void armarTabla() {
+
+    private void armarTabla() {
 
         //Se agregan las columnas con su nombre correspondiente al modelo de tabla creado anteriormente
         modelo.addColumn("ID");
@@ -353,7 +355,7 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
 
         //Se llama al metodo que se encarga de setear el ancho de las columnas
         anchoColumna(columnas, 0, 40);
-        anchoColumna(columnas, 1, 80);
+        anchoColumna(columnas, 1, 90);
     }
 
     private void anchoColumna(TableColumnModel modeloTabla, int indice, int ancho) {
@@ -363,8 +365,6 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         modeloTabla.getColumn(indice).setMinWidth(ancho - 10);
         modeloTabla.getColumn(indice).setPreferredWidth(ancho);
     }
-
-    
 
     private void limpiarTabla() {
 
@@ -376,9 +376,9 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
     }
 
     private void cargarTabla(Reserva res) {
-       String estado="Inactiva";
+        String estado = "Inactiva";
         if (res.isEstado()) {
-            estado="Activa";
+            estado = "Activa";
         }
         modelo.addRow(new Object[]{
             Integer.toString(res.getIdReserva()),
@@ -388,7 +388,19 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
             res.getFf().toString(),
             Integer.toString(res.getDias()),
             Double.toString(res.getMonto()),
-                estado
+            estado
         });
+    }
+
+    private void mostrarReservas(Huesped h) {
+        limpiarTabla();
+        ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
+        for (Reserva reserva : reservas) {
+
+            if (reserva.getHuesped().getDni() == h.getDni()) {
+
+                cargarTabla(reserva);
+            }
+        }
     }
 }

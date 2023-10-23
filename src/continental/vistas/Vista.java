@@ -383,7 +383,6 @@ public class Vista extends javax.swing.JFrame {
         logo.setLocation(escritorio.getWidth() - 260, escritorio.getHeight() - 160);
         logo.setIcon(icono);
         escritorio.add(logo);
-        escritorio.moveToFront(logo);
     }
 
     //Actualiza la lista de reservas activas

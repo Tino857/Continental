@@ -87,30 +87,33 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
 
         jPBackground.setBackground(new java.awt.Color(51, 51, 51));
 
-        JBEditar.setBackground(new java.awt.Color(51, 51, 51));
+        JBEditar.setBackground(new java.awt.Color(45, 54, 60));
+        JBEditar.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         JBEditar.setForeground(new java.awt.Color(235, 235, 235));
         JBEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/editar-w.png"))); // NOI18N
         JBEditar.setText("Editar");
         JBEditar.setIconTextGap(10);
-        JBEditar.setPreferredSize(new java.awt.Dimension(105, 32));
+        JBEditar.setPreferredSize(new java.awt.Dimension(110, 32));
         JBEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBEditarActionPerformed(evt);
             }
         });
 
-        jBSalir.setBackground(new java.awt.Color(51, 51, 51));
+        jBSalir.setBackground(new java.awt.Color(45, 54, 60));
+        jBSalir.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBSalir.setForeground(new java.awt.Color(235, 235, 235));
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/salir-w.png"))); // NOI18N
         jBSalir.setText("Salir");
         jBSalir.setIconTextGap(10);
-        jBSalir.setPreferredSize(new java.awt.Dimension(105, 32));
+        jBSalir.setPreferredSize(new java.awt.Dimension(110, 32));
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSalirActionPerformed(evt);
             }
         });
 
+        jTable1.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -130,12 +133,12 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(85, 94, 100));
         jPanel1.setPreferredSize(new java.awt.Dimension(100, 24));
 
-        JTFBuscador.setBackground(new java.awt.Color(102, 102, 102));
-        JTFBuscador.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
-        JTFBuscador.setForeground(new java.awt.Color(153, 153, 153));
+        JTFBuscador.setBackground(new java.awt.Color(85, 94, 100));
+        JTFBuscador.setFont(new java.awt.Font("Dialog", 2, 13)); // NOI18N
+        JTFBuscador.setForeground(new java.awt.Color(190, 190, 190));
         JTFBuscador.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         JTFBuscador.setText("Ingrese un DNI para filtrar la tabla...");
         JTFBuscador.setBorder(null);
@@ -170,6 +173,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         );
 
         buttonGroup1.add(jRBIn);
+        jRBIn.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jRBIn.setForeground(new java.awt.Color(255, 255, 255));
         jRBIn.setText("Inactivos");
         jRBIn.addActionListener(new java.awt.event.ActionListener() {
@@ -179,6 +183,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         });
 
         buttonGroup1.add(jRBA);
+        jRBA.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jRBA.setForeground(new java.awt.Color(255, 255, 255));
         jRBA.setText("Activos");
         jRBA.addActionListener(new java.awt.event.ActionListener() {
@@ -187,12 +192,14 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
             }
         });
 
+        jLMargen.setPreferredSize(new java.awt.Dimension(63, 64));
+
         jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLTitulo.setForeground(new java.awt.Color(235, 235, 235));
         jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLTitulo.setText("EDICIÓN DE HUESPED");
 
-        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoULP3-w.png"))); // NOI18N
+        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoSmall-w.png"))); // NOI18N
 
         jLPCabecera.setLayer(jLMargen, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLPCabecera.setLayer(jLTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -203,9 +210,9 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         jLPCabeceraLayout.setHorizontalGroup(
             jLPCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLPCabeceraLayout.createSequentialGroup()
-                .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLLogo))
         );
@@ -215,45 +222,57 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jLPCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLMargen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jTFDni.setBackground(new java.awt.Color(102, 102, 102));
+        jTFDni.setBackground(new java.awt.Color(85, 94, 100));
+        jTFDni.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTFDni.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTFApellido.setBackground(new java.awt.Color(102, 102, 102));
+        jTFApellido.setBackground(new java.awt.Color(85, 94, 100));
+        jTFApellido.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTFApellido.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTFNombre.setBackground(new java.awt.Color(102, 102, 102));
+        jTFNombre.setBackground(new java.awt.Color(85, 94, 100));
+        jTFNombre.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTFNombre.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTFDomicilio.setBackground(new java.awt.Color(102, 102, 102));
+        jTFDomicilio.setBackground(new java.awt.Color(85, 94, 100));
+        jTFDomicilio.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTFDomicilio.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTFCorreo.setBackground(new java.awt.Color(102, 102, 102));
+        jTFCorreo.setBackground(new java.awt.Color(85, 94, 100));
+        jTFCorreo.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTFCorreo.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTFCelular.setBackground(new java.awt.Color(102, 102, 102));
+        jTFCelular.setBackground(new java.awt.Color(85, 94, 100));
+        jTFCelular.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTFCelular.setForeground(new java.awt.Color(255, 255, 255));
 
+        jLDocumento.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLDocumento.setForeground(new java.awt.Color(235, 235, 235));
         jLDocumento.setText("DNI:");
 
+        jLApellido.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLApellido.setForeground(new java.awt.Color(235, 235, 235));
         jLApellido.setText("Apellido:");
 
+        jLNombre.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLNombre.setForeground(new java.awt.Color(235, 235, 235));
         jLNombre.setText("Nombre:");
 
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(235, 235, 235));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Domicilio:");
 
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(235, 235, 235));
         jLabel5.setText("Correo:");
 
+        jLCelular.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLCelular.setForeground(new java.awt.Color(235, 235, 235));
         jLCelular.setText("Celular:");
 
@@ -275,17 +294,17 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(14, 14, 14)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLDocumento)
                     .addComponent(jLApellido)
                     .addComponent(jLNombre)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jLCelular))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLCelular)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTFDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                    .addComponent(jTFDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
                     .addComponent(jTFCorreo)
                     .addComponent(jTFCelular)
                     .addComponent(jTFApellido)
@@ -336,7 +355,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
             .addGroup(jPBackgroundLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
                     .addComponent(jLayeredPane1)
                     .addGroup(jPBackgroundLayout.createSequentialGroup()
@@ -357,7 +376,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)

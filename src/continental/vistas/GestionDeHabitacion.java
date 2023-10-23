@@ -85,21 +85,25 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
 
         jPBackground.setBackground(new java.awt.Color(51, 51, 51));
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(235, 235, 235));
         jLabel2.setText("Codigo:");
 
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(235, 235, 235));
         jLabel3.setText("Piso:");
 
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(235, 235, 235));
         jLabel4.setText("Num de Habitacion:");
 
-        jBBuscar.setBackground(new java.awt.Color(51, 51, 51));
+        jBBuscar.setBackground(new java.awt.Color(45, 54, 60));
+        jBBuscar.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBBuscar.setForeground(new java.awt.Color(235, 235, 235));
         jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/buscar-w.png"))); // NOI18N
         jBBuscar.setText("Buscar");
         jBBuscar.setIconTextGap(10);
-        jBBuscar.setPreferredSize(new java.awt.Dimension(100, 32));
+        jBBuscar.setPreferredSize(new java.awt.Dimension(110, 32));
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBBuscarActionPerformed(evt);
@@ -107,65 +111,75 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         });
 
         jTFCodigo.setEditable(false);
-        jTFCodigo.setBackground(new java.awt.Color(102, 102, 102));
-        jTFCodigo.setForeground(new java.awt.Color(255, 255, 255));
+        jTFCodigo.setBackground(new java.awt.Color(85, 94, 100));
+        jTFCodigo.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
+        jTFCodigo.setForeground(new java.awt.Color(190, 190, 190));
 
-        jTFPiso.setBackground(new java.awt.Color(102, 102, 102));
+        jTFPiso.setBackground(new java.awt.Color(85, 94, 100));
+        jTFPiso.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTFPiso.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTFNumero.setBackground(new java.awt.Color(102, 102, 102));
+        jTFNumero.setBackground(new java.awt.Color(85, 94, 100));
+        jTFNumero.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTFNumero.setForeground(new java.awt.Color(255, 255, 255));
 
-        jBLimpiar.setBackground(new java.awt.Color(51, 51, 51));
+        jBLimpiar.setBackground(new java.awt.Color(45, 54, 60));
+        jBLimpiar.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBLimpiar.setForeground(new java.awt.Color(235, 235, 235));
         jBLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/limpiar-w.png"))); // NOI18N
         jBLimpiar.setText("Limpiar");
         jBLimpiar.setIconTextGap(10);
-        jBLimpiar.setPreferredSize(new java.awt.Dimension(100, 32));
+        jBLimpiar.setPreferredSize(new java.awt.Dimension(110, 32));
         jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBLimpiarActionPerformed(evt);
             }
         });
 
-        jBHabilitar.setBackground(new java.awt.Color(51, 51, 51));
+        jBHabilitar.setBackground(new java.awt.Color(45, 54, 60));
+        jBHabilitar.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBHabilitar.setForeground(new java.awt.Color(235, 235, 235));
         jBHabilitar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/aceptar-c.png"))); // NOI18N
         jBHabilitar.setText("Habilitar");
         jBHabilitar.setIconTextGap(10);
-        jBHabilitar.setPreferredSize(new java.awt.Dimension(105, 32));
+        jBHabilitar.setPreferredSize(new java.awt.Dimension(110, 32));
         jBHabilitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBHabilitarActionPerformed(evt);
             }
         });
 
-        jBGuardar.setBackground(new java.awt.Color(51, 51, 51));
+        jBGuardar.setBackground(new java.awt.Color(45, 54, 60));
+        jBGuardar.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBGuardar.setForeground(new java.awt.Color(235, 235, 235));
         jBGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/guardar-w.png"))); // NOI18N
         jBGuardar.setText("Guardar");
         jBGuardar.setIconTextGap(10);
-        jBGuardar.setPreferredSize(new java.awt.Dimension(105, 32));
+        jBGuardar.setPreferredSize(new java.awt.Dimension(110, 32));
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBGuardarActionPerformed(evt);
             }
         });
 
-        jBSalir.setBackground(new java.awt.Color(51, 51, 51));
+        jBSalir.setBackground(new java.awt.Color(45, 54, 60));
+        jBSalir.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBSalir.setForeground(new java.awt.Color(235, 235, 235));
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/salir-w.png"))); // NOI18N
         jBSalir.setText("Salir");
         jBSalir.setIconTextGap(10);
-        jBSalir.setPreferredSize(new java.awt.Dimension(100, 32));
+        jBSalir.setPreferredSize(new java.awt.Dimension(110, 32));
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSalirActionPerformed(evt);
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(235, 235, 235));
         jLabel6.setText("Categoria:");
+
+        jCBCategorias.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
 
         jRBHabilitada.setEnabled(false);
         jRBHabilitada.addActionListener(new java.awt.event.ActionListener() {
@@ -174,27 +188,31 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(235, 235, 235));
         jLabel1.setText("Habilitada:");
 
-        jBDeshabilitar1.setBackground(new java.awt.Color(51, 51, 51));
+        jBDeshabilitar1.setBackground(new java.awt.Color(45, 54, 60));
+        jBDeshabilitar1.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBDeshabilitar1.setForeground(new java.awt.Color(235, 235, 235));
         jBDeshabilitar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/cancelar-c.png"))); // NOI18N
         jBDeshabilitar1.setText("Deshabilitar");
         jBDeshabilitar1.setIconTextGap(10);
-        jBDeshabilitar1.setPreferredSize(new java.awt.Dimension(105, 32));
+        jBDeshabilitar1.setPreferredSize(new java.awt.Dimension(110, 32));
         jBDeshabilitar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBDeshabilitar1ActionPerformed(evt);
             }
         });
 
+        jLMargen.setPreferredSize(new java.awt.Dimension(63, 64));
+
         jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLTitulo.setForeground(new java.awt.Color(235, 235, 235));
+        jLTitulo.setForeground(new java.awt.Color(255, 255, 255));
         jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLTitulo.setText("GESTION DE HABITACION");
 
-        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoULP3-w.png"))); // NOI18N
+        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoSmall-w.png"))); // NOI18N
 
         jLPCabecera.setLayer(jLMargen, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLPCabecera.setLayer(jLTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -205,9 +223,9 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         jLPCabeceraLayout.setHorizontalGroup(
             jLPCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLPCabeceraLayout.createSequentialGroup()
-                .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLLogo))
         );
@@ -217,8 +235,8 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jLPCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLMargen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -229,7 +247,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
             .addGroup(jPBackgroundLayout.createSequentialGroup()
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
-                        .addGap(38, 38, 38)
+                        .addGap(20, 20, 20)
                         .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel2)
@@ -242,23 +260,23 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                                 .addComponent(jRBHabilitada)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
-                                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jCBCategorias, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTFPiso, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTFNumero)
-                                    .addComponent(jTFCodigo))
-                                .addGap(18, 18, 18)
                                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jBLimpiar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jBBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jCBCategorias, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTFCodigo)
+                                    .addComponent(jTFPiso)
+                                    .addComponent(jTFNumero, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jBBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jBLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jBHabilitar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBHabilitar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jBDeshabilitar1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addComponent(jBDeshabilitar1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPBackgroundLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -291,7 +309,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jRBHabilitada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBHabilitar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
