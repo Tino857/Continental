@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-10-2023 a las 23:15:29
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 24-10-2023 a las 01:09:56
+-- Versión del servidor: 10.4.20-MariaDB
+-- Versión de PHP: 7.4.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,7 +36,7 @@ CREATE TABLE `categoria` (
   `cantidadCamas` int(11) NOT NULL,
   `tipoCama` int(11) NOT NULL,
   `tipoCategoria` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -51,7 +51,7 @@ CREATE TABLE `habitacion` (
   `estado` tinyint(1) NOT NULL,
   `habilitada` tinyint(1) NOT NULL,
   `idCategoria` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -68,7 +68,7 @@ CREATE TABLE `huesped` (
   `correo` varchar(100) NOT NULL,
   `celular` varchar(30) NOT NULL,
   `estado` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -86,7 +86,7 @@ CREATE TABLE `reserva` (
   `monto` double NOT NULL,
   `estado` tinyint(1) NOT NULL,
   `cantidadPersonas` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Índices para tablas volcadas
@@ -104,6 +104,7 @@ ALTER TABLE `categoria`
 --
 ALTER TABLE `habitacion`
   ADD PRIMARY KEY (`idHabitacion`),
+  ADD UNIQUE KEY `numero` (`numero`),
   ADD KEY `idCategoria` (`idCategoria`);
 
 --
