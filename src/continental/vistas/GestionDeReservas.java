@@ -378,7 +378,10 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
         ArrayList<Categoria> ListaDeCategorias = Vista.getCD().listarCategorias();
 
         for (Categoria cat : ListaDeCategorias) {
-
+            if (jTFCantidad.getText().equals("")) {
+                 jCBCategorias.removeAllItems();
+                 return;
+            }
             if ((cat.getCantDePersonas() >= Integer.parseInt(jTFCantidad.getText()))) {
 
                 jCBCategorias.addItem(cat);
@@ -390,7 +393,13 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
 
     private void jCBCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCategoriasActionPerformed
         Categoria cat = (Categoria) jCBCategorias.getSelectedItem();
-        jTFPrecio.setText(cat.getPrecio() + "");
+        if (cat==null) {
+         jTFPrecio.setText("");   
+         return;
+        }else{
+             jTFPrecio.setText(cat.getPrecio() + "");
+        }
+       
 
 
     }//GEN-LAST:event_jCBCategoriasActionPerformed

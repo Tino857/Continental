@@ -10,6 +10,7 @@ import continental.entidades.Huesped;
 import continental.entidades.Reserva;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
 /**
  *
@@ -404,7 +405,11 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
 
             //Llegado el punto en que todos los valores son correctos, se crea un alumno
             Huesped h = new Huesped(nombre, apellido, domicilio, correo, jTFCelular.getText(), dni, true);
-
+            Huesped huesped=Vista.getHD().buscarHuespedPorCel(jTFCelular.getText());
+            if (huesped!=null) {
+               JOptionPane.showMessageDialog(this, "No se puede agregar este huesped debido a que tiene el mismo celular que otro"); 
+            return;
+            }
             if (hab != null) {
                 continuarReserva(h);
             }   else{
@@ -453,12 +458,14 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
             //Se crea un alumno y se busca en la base de datos para confirmar que el alumno existe
             //En caso que el alumno no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
             Huesped h = Vista.getHD().buscarHuespedPorDni(dni);
+            
 
             if (h == null) {
 
                 JOptionPane.showMessageDialog(this, "No existe el huesped");
                 return;
             }
+            
 
             //Si el alumno se encontraba en la base de datos, se recupera su estado para confirmar que no haya sido eliminado anteriormente
             if (!h.isEstado()) {
@@ -466,7 +473,14 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "El huesped ya ha sido borrado");
                 return;
             }
-
+ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
+            for (Reserva reserva : reservas) {
+                if (h.getIdHuesped() == reserva.getHuesped().getIdHuesped()) {
+                    JOptionPane.showMessageDialog(this, "El Huesped que desea eliminar tiene reservas asociadas."
+                            + "\n Primero elimine todas las reservas asociadas a este huesped");
+                    return;
+                }
+            }
             //Habiendo confirmado que el dni del alumno es correcto, que el alumno existe en la DB y que su estado es activo
             int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea eliminar este huesped?", "", JOptionPane.YES_OPTION);
             int registro;

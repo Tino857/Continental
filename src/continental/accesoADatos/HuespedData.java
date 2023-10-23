@@ -287,4 +287,38 @@ public class HuespedData {
         //Retorna variable registro al metodo que lo invoca
         return registro;
     }
+     public Huesped buscarHuespedPorCel(String cel){
+         Huesped huesped = null;// se crea instancia de huesped para utilizarlo dentro del try
+        String query = "SELECT * FROM huesped WHERE celular = ?";
+        try {
+
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, cel);//se modifica el comodin por el pasado por teclado
+            ResultSet rs = ps.executeQuery();//se ejecuta la consulta
+
+            if (rs.next()) {
+
+                huesped = new Huesped();
+                huesped.setIdHuesped(rs.getInt("idHuesped"));
+                huesped.setDni(rs.getInt("dni"));
+                huesped.setApellido(rs.getString("apellido"));
+                huesped.setNombre(rs.getString("nombre"));
+                huesped.setDomicilio(rs.getString("domicilio"));
+                huesped.setCorreo(rs.getString("correo"));
+                huesped.setCelular(rs.getString("celular"));
+                huesped.setEstado(rs.getBoolean("estado"));
+            } else {
+
+                System.out.println("No existe el huesped");
+            }
+            //Se cierra la consulta
+            ps.close();
+        } catch (SQLException e) {
+
+            //Se captura una posible excepcion SQL
+            System.out.println("Error al buscar el huesped" + e.getMessage());
+        }
+              return huesped;
+  
+     }
 }

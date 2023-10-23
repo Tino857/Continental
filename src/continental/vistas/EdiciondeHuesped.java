@@ -467,14 +467,22 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No se permiten caracteres especiales o numeros");
                 return;
             }
-            //Deberiamos poner una validacion para el correo (por ejemplo que termine con ".com" y que tenga un arroba no mas.
+            
+if (ValidarData.caracteresEspecialesMail(correo)) {
 
+                JOptionPane.showMessageDialog(this, "El correo electronico es incorrecto");
+                return;
+            }
             int celular = Integer.parseInt(jTFCelular.getText());//Con esto validamos que en la casilla celular solo haya numeros
 
             //Llegado el punto en que todos los valores son correctos, se crea un huesped
             //En este huesped guardamos el resultado de la busqueda por medio del dni que figura en la tabla
             Huesped h = Vista.getHD().buscarHuespedPorDni(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
-
+            Huesped huesped=Vista.getHD().buscarHuespedPorCel(jTFCelular.getText());
+            if (huesped.getDni()!=h.getDni()) {
+               JOptionPane.showMessageDialog(this, "No se puede editar este huesped debido a que tiene el mismo celular que otro"); 
+            return;
+            }
             //Seteamos al huesped con la informacion nueva
             h.setDni(dni);
             h.setApellido(apellido);

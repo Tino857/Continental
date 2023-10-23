@@ -117,7 +117,7 @@ public class ValidarData {
 
         String sup = "ºª!|·#$~€¬/=?¿¡'`^*+´¨{çÇ}()<>,;:\"[]%&éýúíóáèùìòàëÿüïöä ";
         int arroba = 0;
-        int punto = 0;
+        int extension = 0;
         for (int i = 0; i < str.length(); i++) {
 
             String letra = str.substring(i, i + 1);
@@ -133,15 +133,17 @@ public class ValidarData {
                     return true;
                 }
             }
-            if (letra.equals(".")) {
-
-                punto++;
-            }
+           
         }
-        if (punto == 0 || arroba == 0) {
+         if (str.endsWith(".com")||str.endsWith(".ar")||str.endsWith(".edu")||str.endsWith(".gov")||str.endsWith(".org")||str.endsWith(".net")) {
+
+                extension++;
+            }
+        if (extension == 0 || arroba == 0) {
 
             return true;
         }
         return false;
     }
+   
 }
