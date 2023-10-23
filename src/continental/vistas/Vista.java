@@ -15,7 +15,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author Grupo 61
@@ -27,15 +26,13 @@ public class Vista extends javax.swing.JFrame {
     private static ReservaData RD;
     private static CategoriaData CD;
 
-  
-    
     public Vista() {
-        
+
         initComponents();
         HD = new HuespedData();
         HabD = new HabitacionData();
         RD = new ReservaData();
-        CD=new CategoriaData();
+        CD = new CategoriaData();
         actualizaconDeHabitacionYReserva();
     }
 
@@ -51,10 +48,9 @@ public class Vista extends javax.swing.JFrame {
         return RD;
     }
 
-  public static CategoriaData getCD() {
+    public static CategoriaData getCD() {
         return CD;
     }
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,19 +70,19 @@ public class Vista extends javax.swing.JFrame {
             }
         };
         logo = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMAlumnos = new javax.swing.JMenu();
-        jMIFormularioDeAlumno = new javax.swing.JMenuItem();
-        jMIEdicionDeAlumno = new javax.swing.JMenuItem();
-        jMMaterias = new javax.swing.JMenu();
-        jMIFormularioDeMateria = new javax.swing.JMenuItem();
-        jMIEdicionDeMateria = new javax.swing.JMenuItem();
+        jMenuBar = new javax.swing.JMenuBar();
+        jMHuesped = new javax.swing.JMenu();
+        jMIGestionDeHuesped = new javax.swing.JMenuItem();
+        jMIEdicionDeHuesped = new javax.swing.JMenuItem();
+        jMHabitacion = new javax.swing.JMenu();
+        jMIGestionDeHabitacion = new javax.swing.JMenuItem();
+        jMIEdicionDeHabitaciones = new javax.swing.JMenuItem();
         jMICategorias = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        jMReserva = new javax.swing.JMenu();
         jMGestionDeReserva = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMIReservaPorHuesped = new javax.swing.JMenuItem();
+        jMIReservaPorHabitacion = new javax.swing.JMenuItem();
+        jMIReservaPorFecha = new javax.swing.JMenuItem();
         jMSalir = new javax.swing.JMenu();
 
         jMenuItem2.setText("jMenuItem2");
@@ -123,51 +119,46 @@ public class Vista extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jMenuBar1.setBackground(new java.awt.Color(51, 51, 51));
-        jMenuBar1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jMenuBar.setBackground(new java.awt.Color(51, 51, 51));
+        jMenuBar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
-        jMAlumnos.setText("Huesped");
+        jMHuesped.setText("Huesped");
 
-        jMIFormularioDeAlumno.setText("Gestion de Huesped");
-        jMIFormularioDeAlumno.addActionListener(new java.awt.event.ActionListener() {
+        jMIGestionDeHuesped.setText("Gestion de Huesped");
+        jMIGestionDeHuesped.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIFormularioDeAlumnoActionPerformed(evt);
+                jMIGestionDeHuespedActionPerformed(evt);
             }
         });
-        jMAlumnos.add(jMIFormularioDeAlumno);
+        jMHuesped.add(jMIGestionDeHuesped);
 
-        jMIEdicionDeAlumno.setText("Edicion de Huesped");
-        jMIEdicionDeAlumno.addActionListener(new java.awt.event.ActionListener() {
+        jMIEdicionDeHuesped.setText("Edicion de Huesped");
+        jMIEdicionDeHuesped.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIEdicionDeAlumnoActionPerformed(evt);
+                jMIEdicionDeHuespedActionPerformed(evt);
             }
         });
-        jMAlumnos.add(jMIEdicionDeAlumno);
+        jMHuesped.add(jMIEdicionDeHuesped);
 
-        jMenuBar1.add(jMAlumnos);
+        jMenuBar.add(jMHuesped);
 
-        jMMaterias.setText("Habitacion");
-        jMMaterias.addActionListener(new java.awt.event.ActionListener() {
+        jMHabitacion.setText("Habitacion");
+
+        jMIGestionDeHabitacion.setText("Gestion de Habitacion");
+        jMIGestionDeHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMMateriasActionPerformed(evt);
+                jMIGestionDeHabitacionActionPerformed(evt);
             }
         });
+        jMHabitacion.add(jMIGestionDeHabitacion);
 
-        jMIFormularioDeMateria.setText("Gestion de Habitacion");
-        jMIFormularioDeMateria.addActionListener(new java.awt.event.ActionListener() {
+        jMIEdicionDeHabitaciones.setText("Remodelacion de Habitaciones");
+        jMIEdicionDeHabitaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIFormularioDeMateriaActionPerformed(evt);
+                jMIEdicionDeHabitacionesActionPerformed(evt);
             }
         });
-        jMMaterias.add(jMIFormularioDeMateria);
-
-        jMIEdicionDeMateria.setText("Remodelacion de Habitaciones");
-        jMIEdicionDeMateria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMIEdicionDeMateriaActionPerformed(evt);
-            }
-        });
-        jMMaterias.add(jMIEdicionDeMateria);
+        jMHabitacion.add(jMIEdicionDeHabitaciones);
 
         jMICategorias.setText("Categoria de Habitaciones");
         jMICategorias.addActionListener(new java.awt.event.ActionListener() {
@@ -175,16 +166,11 @@ public class Vista extends javax.swing.JFrame {
                 jMICategoriasActionPerformed(evt);
             }
         });
-        jMMaterias.add(jMICategorias);
+        jMHabitacion.add(jMICategorias);
 
-        jMenuBar1.add(jMMaterias);
+        jMenuBar.add(jMHabitacion);
 
-        jMenu1.setText("Reserva");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
-            }
-        });
+        jMReserva.setText("Reserva");
 
         jMGestionDeReserva.setText("Gestion de reserva");
         jMGestionDeReserva.addActionListener(new java.awt.event.ActionListener() {
@@ -192,33 +178,33 @@ public class Vista extends javax.swing.JFrame {
                 jMGestionDeReservaActionPerformed(evt);
             }
         });
-        jMenu1.add(jMGestionDeReserva);
+        jMReserva.add(jMGestionDeReserva);
 
-        jMenuItem1.setText("Reserva por Huesped");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMIReservaPorHuesped.setText("Reserva por Huesped");
+        jMIReservaPorHuesped.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMIReservaPorHuespedActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMReserva.add(jMIReservaPorHuesped);
 
-        jMenuItem3.setText("Reserva por Habitacion");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jMIReservaPorHabitacion.setText("Reserva por Habitacion");
+        jMIReservaPorHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jMIReservaPorHabitacionActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        jMReserva.add(jMIReservaPorHabitacion);
 
-        jMenuItem4.setText("Reserva por Fechas");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMIReservaPorFecha.setText("Reserva por Fecha");
+        jMIReservaPorFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jMIReservaPorFechaActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
+        jMReserva.add(jMIReservaPorFecha);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar.add(jMReserva);
 
         jMSalir.setText("Salir");
         jMSalir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -226,9 +212,9 @@ public class Vista extends javax.swing.JFrame {
                 jMSalirMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMSalir);
+        jMenuBar.add(jMSalir);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -245,85 +231,82 @@ public class Vista extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMIFormularioDeMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFormularioDeMateriaActionPerformed
-        GestionDeHabitacion GDHab = new GestionDeHabitacion();
-        abrirVentana(GDHab); 
-        //JOptionPane.showMessageDialog(this, "Todavia no disponible...", "Aviso!", JOptionPane.WARNING_MESSAGE);
-    }//GEN-LAST:event_jMIFormularioDeMateriaActionPerformed
-
-    private void jMIEdicionDeAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIEdicionDeAlumnoActionPerformed
-
-        EdiciondeHuesped EDA = new EdiciondeHuesped();
-        abrirVentana(EDA);
-    }//GEN-LAST:event_jMIEdicionDeAlumnoActionPerformed
-
-    private void jMIEdicionDeMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIEdicionDeMateriaActionPerformed
-
- RemodelacionDeHabitacion RDH = new RemodelacionDeHabitacion();
-        abrirVentana(RDH);        
-//JOptionPane.showMessageDialog(this, "Todavia no disponible...", "Aviso!", JOptionPane.WARNING_MESSAGE);
-    }//GEN-LAST:event_jMIEdicionDeMateriaActionPerformed
-
-    private void jMIFormularioDeAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFormularioDeAlumnoActionPerformed
+    private void jMIGestionDeHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIGestionDeHuespedActionPerformed
 
         GestionDeHuesped GDH = new GestionDeHuesped();
         abrirVentana(GDH);
-    }//GEN-LAST:event_jMIFormularioDeAlumnoActionPerformed
+    }//GEN-LAST:event_jMIGestionDeHuespedActionPerformed
+
+    private void jMIEdicionDeHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIEdicionDeHuespedActionPerformed
+
+        EdiciondeHuesped EDA = new EdiciondeHuesped();
+        abrirVentana(EDA);
+    }//GEN-LAST:event_jMIEdicionDeHuespedActionPerformed
+
+    private void jMIGestionDeHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIGestionDeHabitacionActionPerformed
+        
+        GestionDeHabitacion GDHab = new GestionDeHabitacion();
+        abrirVentana(GDHab);
+    }//GEN-LAST:event_jMIGestionDeHabitacionActionPerformed
+
+    private void jMIEdicionDeHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIEdicionDeHabitacionesActionPerformed
+
+        RemodelacionDeHabitacion RDH = new RemodelacionDeHabitacion();
+        abrirVentana(RDH);
+    }//GEN-LAST:event_jMIEdicionDeHabitacionesActionPerformed
+
+    private void jMICategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICategoriasActionPerformed
+
+        CategoriasVista cav = new CategoriasVista();
+        abrirVentana(cav);
+    }//GEN-LAST:event_jMICategoriasActionPerformed
+
+    private void jMGestionDeReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMGestionDeReservaActionPerformed
+
+        GestionDeReservas gr = new GestionDeReservas();
+        abrirVentana(gr);
+    }//GEN-LAST:event_jMGestionDeReservaActionPerformed
+
+    private void jMIReservaPorHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIReservaPorHuespedActionPerformed
+
+        ReservaPorHuesped RPH = new ReservaPorHuesped();
+        abrirVentana(RPH);
+    }//GEN-LAST:event_jMIReservaPorHuespedActionPerformed
+
+    private void jMIReservaPorHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIReservaPorHabitacionActionPerformed
+
+        ReservaPorHabitacion RPHab = new ReservaPorHabitacion();
+        abrirVentana(RPHab);
+    }//GEN-LAST:event_jMIReservaPorHabitacionActionPerformed
+
+    private void jMIReservaPorFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIReservaPorFechaActionPerformed
+
+        ReservaPorFecha RPF = new ReservaPorFecha();
+        abrirVentana(RPF);
+    }//GEN-LAST:event_jMIReservaPorFechaActionPerformed
 
     private void jMSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMSalirMouseClicked
 
         int salir = JOptionPane.showConfirmDialog(this, "¿Esta seguro?", "SALIR", JOptionPane.YES_OPTION);
         if (salir == 0) {
+            
             System.exit(0);
         }
     }//GEN-LAST:event_jMSalirMouseClicked
 
+    private void escritorioComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_escritorioComponentRemoved
+
+        //Captura el evento de cierre de ventana y vuelve a actualizar las reservas
+        actualizaconDeHabitacionYReserva();
+    }//GEN-LAST:event_escritorioComponentRemoved
+
     private void escritorioComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_escritorioComponentResized
-        
+
         //Captura el evento de redimension de la ventana, quita el logo y lo vuelve a colocar en la esquina inferior izquierda
         escritorio.remove(logo);
         escritorio.repaint();
         colocarLogo();
     }//GEN-LAST:event_escritorioComponentResized
-
-    private void jMICategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICategoriasActionPerformed
-        CategoriasVista cav = new CategoriasVista();
-        abrirVentana(cav);
-    }//GEN-LAST:event_jMICategoriasActionPerformed
-
-    private void jMMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMMateriasActionPerformed
-      
-    }//GEN-LAST:event_jMMateriasActionPerformed
-
-    private void jMGestionDeReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMGestionDeReservaActionPerformed
-       GestionDeReservas gr= new GestionDeReservas();
-        abrirVentana(gr);
-        
-    }//GEN-LAST:event_jMGestionDeReservaActionPerformed
-
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
- ReservaPorHuesped RPH= new ReservaPorHuesped();
-        abrirVentana(RPH);      
-    }//GEN-LAST:event_jMenu1ActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
- ReservaPorHuesped RPH= new ReservaPorHuesped();
-        abrirVentana(RPH);        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-      ReservaPorHabitacion RPHab= new ReservaPorHabitacion();
-        abrirVentana(RPHab); 
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-       ReservaPorFecha RPF= new ReservaPorFecha();
-        abrirVentana(RPF); 
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void escritorioComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_escritorioComponentRemoved
-       actualizaconDeHabitacionYReserva();
-    }//GEN-LAST:event_escritorioComponentRemoved
 
     /**
      * @param args the command line arguments
@@ -362,27 +345,27 @@ public class Vista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
-    private javax.swing.JMenu jMAlumnos;
     private javax.swing.JMenuItem jMGestionDeReserva;
+    private javax.swing.JMenu jMHabitacion;
+    private javax.swing.JMenu jMHuesped;
     private javax.swing.JMenuItem jMICategorias;
-    private javax.swing.JMenuItem jMIEdicionDeAlumno;
-    private javax.swing.JMenuItem jMIEdicionDeMateria;
-    private javax.swing.JMenuItem jMIFormularioDeAlumno;
-    private javax.swing.JMenuItem jMIFormularioDeMateria;
-    private javax.swing.JMenu jMMaterias;
+    private javax.swing.JMenuItem jMIEdicionDeHabitaciones;
+    private javax.swing.JMenuItem jMIEdicionDeHuesped;
+    private javax.swing.JMenuItem jMIGestionDeHabitacion;
+    private javax.swing.JMenuItem jMIGestionDeHuesped;
+    private javax.swing.JMenuItem jMIReservaPorFecha;
+    private javax.swing.JMenuItem jMIReservaPorHabitacion;
+    private javax.swing.JMenuItem jMIReservaPorHuesped;
+    private javax.swing.JMenu jMReserva;
     private javax.swing.JMenu jMSalir;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
 
     //Recibe un componente por parametro y realiza las tareas de remover las ventanas activas, repintar el fondo y colocar la ventana nueva
-    private void abrirVentana(Component cpm){
-        
+    private void abrirVentana(Component cpm) {
+
         escritorio.removeAll();
         escritorio.repaint();
         cpm.setVisible(true);
@@ -392,34 +375,38 @@ public class Vista extends javax.swing.JFrame {
     }
 
     //Crea un label y coloca el logo de la ULP, y lo posiciona en la esquina inferior izquierda
-    private void colocarLogo(){
-        
+    private void colocarLogo() {
+
         Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/continental/imagenes/LogoFull-w.png")).getImage());
         logo.setText("");
-        logo.setSize(240,145);
-        logo.setLocation(escritorio.getWidth()-260,escritorio.getHeight()-160);
+        logo.setSize(240, 145);
+        logo.setLocation(escritorio.getWidth() - 260, escritorio.getHeight() - 160);
         logo.setIcon(icono);
         escritorio.add(logo);
         escritorio.moveToFront(logo);
     }
-    private void actualizaconDeHabitacionYReserva(){
+
+    //Actualiza la lista de reservas activas
+    private void actualizaconDeHabitacionYReserva() {
+        
         ArrayList<Reserva> ListaDeReserva = Vista.getRD().listarReservas();
-         for (Reserva reserva : ListaDeReserva) {
-                if ((LocalDate.now().isAfter(reserva.getFi())||LocalDate.now().equals(reserva.getFi()))&&(LocalDate.now().isBefore(reserva.getFf())||LocalDate.now().equals(reserva.getFf()))) {
-                Habitacion hab=HabD.buscarHabitacionPorId(reserva.getHabitacion().getIdHabitacion());
+        for (Reserva reserva : ListaDeReserva) {
+            
+            if ((LocalDate.now().isAfter(reserva.getFi()) || LocalDate.now().equals(reserva.getFi())) && (LocalDate.now().isBefore(reserva.getFf()) || LocalDate.now().equals(reserva.getFf()))) {
+                
+                Habitacion hab = HabD.buscarHabitacionPorId(reserva.getHabitacion().getIdHabitacion());
                 hab.setEstado(false);
                 HabD.editarHabitacion(hab);
-               
-             }
-                if (LocalDate.now().isAfter(reserva.getFf())) {
-                Habitacion hab=HabD.buscarHabitacionPorId(reserva.getHabitacion().getIdHabitacion());
+            }
+            
+            if (LocalDate.now().isAfter(reserva.getFf())) {
+                
+                Habitacion hab = HabD.buscarHabitacionPorId(reserva.getHabitacion().getIdHabitacion());
                 hab.setEstado(true);
                 HabD.editarHabitacion(hab);
-                 Reserva res=RD.buscarReservaPorId(reserva.getIdReserva());
+                Reserva res = RD.buscarReservaPorId(reserva.getIdReserva());
                 RD.eliminarReserva(res.getIdReserva());
-                        
-             }
             }
+        }
     }
-   
 }

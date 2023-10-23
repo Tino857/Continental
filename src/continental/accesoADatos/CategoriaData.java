@@ -26,13 +26,20 @@ public class CategoriaData {
     public int guardarCategoria(Categoria categoria) {
         
         //Se define consulta SQL, colocando comodines para los valores que luego seran seteados.
-        String query = "INSERT INTO categoria (cantidadPersonas, precio, cantidadCamas, tipoCama, tipoCategoria)"
-                + "VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO categoria (cantidadPersonas, precio, cantidadCamas, tipoCama, tipoCategoria) VALUES (?, ?, ?, ?, ?)";
         
         //Esta variable se utilizará para almacenar el ID generado del nuevo registro en la base de datos.
         int registro = 0;
         try {
-
+            
+            Categoria cat = buscarCategoriaPorNombre(categoria.getTipoCategoria());
+            if (cat!=null) {
+                
+                if (cat.getTipoCategoria().equalsIgnoreCase(categoria.getTipoCategoria())) {
+                    
+                    return registro;
+                }
+            }
             //Se crea un prepared statement, se prepara la declaracion con la consulta sql definida previamente y se setean los valores
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, categoria.getCantDePersonas());
@@ -102,7 +109,15 @@ public class CategoriaData {
         
         int registro = 0;
         try {
-            
+
+            Categoria cat = buscarCategoriaPorNombre(categoria.getTipoCategoria());
+            if (cat!=null) {
+                
+                if (cat.getTipoCategoria().equalsIgnoreCase(categoria.getTipoCategoria())&&cat.getIdCategoria()!=categoria.getIdCategoria()) {
+                    
+                    return registro;
+                }
+            }
             //Preparación y ejecución de la consulta SQL
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, categoria.getCantDePersonas());
@@ -148,6 +163,43 @@ public class CategoriaData {
                 JOptionPane.showMessageDialog(null, "No existe la categoria");
             }
             
+            //Cierra consulta
+            ps.close();
+        } catch (SQLException e) {
+            
+            //Se captura una posible excepcion SQL
+            System.out.println("Error al buscar la categoria" + e.getMessage());
+        }
+        return categoria;//retorna una categoria
+    }
+    
+    //Este metodo permite buscar una categoria por su nombre
+    public Categoria buscarCategoriaPorNombre(String nombre) {
+        
+        //Declara una variable al de tipo Categoria e inicializa su valor como null. Esta variable se utilizará para almacenar el resultado de la búsqueda.
+        Categoria categoria = null;
+        
+        //Se crea una query que luego recibira el valor que se obtiene por parametro
+        String query = "SELECT * FROM categoria WHERE tipoCategoria = ?";
+        try {
+            
+            //se prepara la consulta PS y se solicita las claves generadas automaticamente
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            // se modifica el nombre
+            ps.setString(1, nombre);
+            //se ejecuta la consulta y se almacena en un resulset "rs"
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {// si rs contiene valores, se recuperan abajo
+                
+                categoria = new Categoria();
+                categoria.setIdCategoria(rs.getInt("idCategoria"));
+                categoria.setCantDePersonas(rs.getInt("cantidadPersonas"));
+                categoria.setPrecio(rs.getDouble("precio"));
+                categoria.setCantDeCamas(rs.getInt("cantidadCamas"));
+                categoria.setTipoDeCamas(ValidarData.nombreCama(rs.getInt("tipoCama")));
+                categoria.setTipoCategoria(rs.getString("tipoCategoria"));
+            }
             //Cierra consulta
             ps.close();
         } catch (SQLException e) {
