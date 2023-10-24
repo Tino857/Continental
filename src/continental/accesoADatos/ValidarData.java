@@ -25,12 +25,26 @@ public class ValidarData {
         }
         return false;
     }
+    
+    public static boolean caracteresEspecialesDomicilio(String cadena) {
+
+        String sup = "ºª!|@·#$~%€&¬/()=?¿¡'`^[*+]´¨{çÇ},;:.-_<>";
+        for (int i = 0; i < cadena.length(); i++) {
+
+            String letra = cadena.substring(i, i + 1);
+            if (sup.contains(letra)) {
+
+                return true;
+            }
+        }
+        return false;
+    }
 
     //Valida si una cadena cumple con un largo determinado
     //En caso de encontrarse fuera del rango retorna verdadero, caso contrario, falso
     public static boolean largoCadena(String cadena) {
 
-        return (cadena.length() <= 2 || cadena.length() >= 100);
+        return (cadena.length() <= 3 || cadena.length() >= 100);
     }
 
     //Valida si una entero se encuentra dentro de un rango
@@ -112,7 +126,7 @@ public class ValidarData {
         return false;
     }
 
-    //Controla que el email contenga un solo @ y al menos un punto "."
+    //Controla que el email contenga un solo @ y una extencion valida
     public static boolean caracteresEspecialesMail(String str) {
 
         String sup = "ºª!|·#$~€¬/=?¿¡'`^*+´¨{çÇ}()<>,;:\"[]%&éýúíóáèùìòàëÿüïöä ";
@@ -133,17 +147,36 @@ public class ValidarData {
                     return true;
                 }
             }
-           
         }
-         if (str.endsWith(".com")||str.endsWith(".ar")||str.endsWith(".edu")||str.endsWith(".gov")||str.endsWith(".org")||str.endsWith(".net")) {
+        if (str.endsWith(".com") || str.endsWith(".ar") || str.endsWith(".edu") || str.endsWith(".gov") || str.endsWith(".org") || str.endsWith(".net")) {
 
-                extension++;
-            }
+            extension++;
+        }
         if (extension == 0 || arroba == 0) {
 
             return true;
         }
         return false;
     }
-   
+
+    public static boolean validarLargoCelular (String celular){
+                   
+        return (celular.length()<8 || celular.length()>12);
+    }
+    
+    public static boolean validarCelular (String celular){
+        
+        String especial = "1234567890";
+        for (int i = 0; i < celular.length(); i++) {
+            
+            String letra = celular.substring(i,i+1);
+            System.out.println("1");
+            if (!especial.contains(letra)) {
+                System.out.println("2");
+                return true;
+            } 
+        }
+        return false;
+    }
+    
 }

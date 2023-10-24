@@ -398,7 +398,7 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
             int dni = Integer.parseInt(JTFDni.getText());
             if (ValidarData.validarDNI(dni)) {
 
-                JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");
+                JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
@@ -407,57 +407,84 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
             String apellido = jTFApellido.getText();
             String correo = jTFCorreo.getText();
             String domicilio = jTFDomicilio.getText();
-
-            if (ValidarData.caracteresEspeciales(nombre) || ValidarData.caracteresEspeciales(apellido) || ValidarData.largoCadena(domicilio)) {
-
-                JOptionPane.showMessageDialog(this, "No se permiten caracteres especiales o numeros");
-                return;
-            }
-
-            //Deberiamos poner una validacion para el correo (por ejemplo que termine con ".com" y que tenga un arroba no mas.
-            int celular = Integer.parseInt(jTFCelular.getText());//Con esto validamos que en la casilla celular solo haya numeros
-
-            //Se valida si los campos de nombre, apellido, correo y domicilio  cumplen con un largo determinado
-            if (ValidarData.largoCadena(nombre) || ValidarData.largoCadena(apellido) || ValidarData.largoCadena(correo) || ValidarData.largoCadena(domicilio)) {
-
-                JOptionPane.showMessageDialog(this, "El nombre, apellido, correo o domicilio son incorrectos");
-                return;
-            }
-
-            //Llegado el punto en que todos los valores son correctos, se crea un alumno
-            Huesped h = new Huesped(nombre, apellido, domicilio, correo, jTFCelular.getText(), dni, true);
-            Huesped huesped=Vista.getHD().buscarHuespedPorCel(jTFCelular.getText());
-            if (huesped!=null) {
-               JOptionPane.showMessageDialog(this, "No se puede agregar este huesped debido a que tiene el mismo celular que otro"); 
-            return;
-            }
-            if (hab != null) {
-                continuarReserva(h);
-            }   else{
-                //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo guardarAlumno
-            int registro = Vista.getHD().guardarHuesped(h);
-
-            //Dependiendo del valor que tome la variable registro se muestra un mensaje al usuario
-            if (registro > 0) {
-
-                JOptionPane.showMessageDialog(this, "El Huesped ha sido agregado.");
-            } else {
-
-                JOptionPane.showMessageDialog(this, "No se pudo agregar al Huesped, el DNI ya existe.");
-            }
-            }         
-
-
             
+            //Se valida si los campos de nombre, apellido y domicilio no contengan caracteres especiales
+            if (ValidarData.caracteresEspeciales(nombre) || ValidarData.caracteresEspeciales(apellido)) {
+
+                JOptionPane.showMessageDialog(this, "No se permiten caracteres especiales o números.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            //Se valida que el domicilio sea correcto
+            if (ValidarData.caracteresEspecialesDomicilio(domicilio)) {
+                
+                JOptionPane.showMessageDialog(this, "El domicilio contiene caracteres especiales.","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            //Se valida que el mail no contenga caracteres especiales
+            if (ValidarData.caracteresEspecialesMail(correo)) {
+
+                JOptionPane.showMessageDialog(this, "El correo electronico es incorrecto","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            //Se valida que el nobre, apellido, domicilio y correo contengan un largo adecuado
+            if (ValidarData.largoCadena(nombre)||ValidarData.largoCadena(apellido)||ValidarData.largoCadena(domicilio)|| ValidarData.largoCadena(correo)) {
+                
+                JOptionPane.showMessageDialog(this, "El dato ingresado es incorrecto.","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            //Se valida que en la casilla celular solo haya numeros
+            String celular = jTFCelular.getText();
+            if (ValidarData.validarCelular(celular)) {
+
+                JOptionPane.showMessageDialog(this, "El teléfono contiene caracteres incorrectos.","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            //Se valida que el numero de telefono tenga un largo adecuado
+            if (ValidarData.validarLargoCelular(celular)) {
+                JOptionPane.showMessageDialog(this, "El teléfono es incorrecto.","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            //Llegado el punto en que todos los valores son correctos, se crea un Huesped
+            Huesped h = new Huesped(nombre, apellido, domicilio, correo, jTFCelular.getText(), dni, true);
+            Huesped huesped=Vista.getHD().buscarHuespedPorCel(celular);
+            if (huesped!=null) {
+                
+                JOptionPane.showMessageDialog(this, "No se puede agregar este huesped debido a que tiene el mismo celular que otro.","ERROR", JOptionPane.ERROR_MESSAGE); 
+                return;
+            }
+            
+            if (hab != null) {
+                
+                continuarReserva(h);
+            }else{
+                
+                //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo guardarHuesped
+                int registro = Vista.getHD().guardarHuesped(h);
+
+                //Dependiendo del valor que tome la variable registro se muestra un mensaje al usuario
+                if (registro > 0) {
+
+                    JOptionPane.showMessageDialog(this, "El Huesped ha sido agregado.");
+                } else {
+
+                    JOptionPane.showMessageDialog(this, "No se pudo agregar al Huesped, el DNI ya existe.","ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            }         
 
             //Se limpian los campos
             limpiar();
         } catch (NumberFormatException e) {
 
-            JOptionPane.showMessageDialog(this, "En la casilla DNI o en la de Celular debe ir solo numeros.");
+            JOptionPane.showMessageDialog(this, "En la casilla DNI o en la de Celular debe ir solo numeros.","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
         } catch (NullPointerException e) {
 
-            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio.");
+            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio.","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
 
@@ -476,33 +503,31 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
             //Se intenta parsear el valor del campo dni
             int dni = Integer.parseInt(JTFDni.getText());
 
-            //Se crea un alumno y se busca en la base de datos para confirmar que el alumno existe
-            //En caso que el alumno no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
+            //Se crea un huesped y se busca en la base de datos para confirmar que el huesped existe
+            //En caso que el huesped no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
             Huesped h = Vista.getHD().buscarHuespedPorDni(dni);
-            
 
             if (h == null) {
 
-                JOptionPane.showMessageDialog(this, "No existe el huesped");
+                JOptionPane.showMessageDialog(this, "No existe el huesped.","ERROR",JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
-
-            //Si el alumno se encontraba en la base de datos, se recupera su estado para confirmar que no haya sido eliminado anteriormente
+            //Si el huesped se encontraba en la base de datos, se recupera su estado para confirmar que no haya sido eliminado anteriormente
             if (!h.isEstado()) {
 
-                JOptionPane.showMessageDialog(this, "El huesped ya ha sido borrado");
+                JOptionPane.showMessageDialog(this, "El huesped ya ha sido borrado.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
+            ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
             for (Reserva reserva : reservas) {
                 if (h.getIdHuesped() == reserva.getHuesped().getIdHuesped()) {
                     JOptionPane.showMessageDialog(this, "El Huesped que desea eliminar tiene reservas asociadas."
-                            + "\n Primero elimine todas las reservas asociadas a este huesped");
+                            + "\n Primero elimine todas las reservas asociadas a este huesped","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
             }
-            //Habiendo confirmado que el dni del alumno es correcto, que el alumno existe en la DB y que su estado es activo
+            //Habiendo confirmado que el dni del huesped es correcto, que el huesped existe en la DB y que su estado es activo
             int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea eliminar este huesped?", "", JOptionPane.YES_OPTION);
             int registro;
             if (resp == 0) {
@@ -510,20 +535,20 @@ ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
 
                 if (registro == 1) {
 
-                    JOptionPane.showMessageDialog(this, "El huesped ha sido borrado");
+                    JOptionPane.showMessageDialog(this, "El huesped ha sido borrado.");
                     jRBEstado.setSelected(false);
                 } else {
 
-                    JOptionPane.showMessageDialog(this, "No se pudo borrar al huesped");
+                    JOptionPane.showMessageDialog(this, "No se pudo borrar al huesped.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
         } catch (NumberFormatException e) {
 
-            JOptionPane.showMessageDialog(this, "El DNI es incorrecto.");
+            JOptionPane.showMessageDialog(this, "El DNI es incorrecto.", "ADVERTENCIA",JOptionPane.WARNING_MESSAGE);
         } catch (NullPointerException e) {
 
-            JOptionPane.showMessageDialog(this, "No existe el alumno ");
+            JOptionPane.showMessageDialog(this, "No existe el alumno.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBEliminarActionPerformed
 

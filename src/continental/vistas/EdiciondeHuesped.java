@@ -422,7 +422,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         //Se controla que no hayan campos vacios
         if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || jTFDni.getText().isEmpty() || jTFCelular.getText().isEmpty() || jTFDomicilio.getText().isEmpty() || jTFCorreo.getText().isEmpty()) {
 
-            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio.");
+            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio.", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -446,7 +446,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
             int dni = Integer.parseInt(jTFDni.getText());
             if (ValidarData.validarDNI(dni)) {
 
-                JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.", "", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
@@ -455,33 +455,58 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
             String apellido = jTFApellido.getText();
             String correo = jTFCorreo.getText();
             String domicilio = jTFDomicilio.getText();
-            if (ValidarData.caracteresEspeciales(nombre) || ValidarData.caracteresEspeciales(apellido) || ValidarData.largoCadena(domicilio)) {
 
-                JOptionPane.showMessageDialog(this, "No se permiten caracteres especiales o numeros");
-                return;
-            }
+            //Se valida si los campos de nombre, apellido y domicilio no contengan caracteres especiales
+            if (ValidarData.caracteresEspeciales(nombre) || ValidarData.caracteresEspeciales(apellido)) {
 
-            //Se valida si los campos de nombre y apellido cumplen con un largo determinado
-            if (ValidarData.caracteresEspeciales(nombre) || ValidarData.caracteresEspeciales(apellido) || ValidarData.largoCadena(domicilio)) {
-
-                JOptionPane.showMessageDialog(this, "No se permiten caracteres especiales o numeros");
+                JOptionPane.showMessageDialog(this, "No se permiten caracteres especiales o números.","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             
-if (ValidarData.caracteresEspecialesMail(correo)) {
-
-                JOptionPane.showMessageDialog(this, "El correo electronico es incorrecto");
+            //Se valida que el domicilio sea correcto
+            if (ValidarData.caracteresEspecialesDomicilio(domicilio)) {
+                
+                JOptionPane.showMessageDialog(this, "El domicilio contiene caracteres especiales.","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            int celular = Integer.parseInt(jTFCelular.getText());//Con esto validamos que en la casilla celular solo haya numeros
+
+            //Se valida que el mail no contenga caracteres especiales
+            if (ValidarData.caracteresEspecialesMail(correo)) {
+
+                JOptionPane.showMessageDialog(this, "El correo electronico es incorrecto","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            //Se valida que el nobre, apellido, domicilio y correo contengan un largo adecuado
+            if (ValidarData.largoCadena(nombre)||ValidarData.largoCadena(apellido)||ValidarData.largoCadena(domicilio)|| ValidarData.largoCadena(correo)) {
+                
+                JOptionPane.showMessageDialog(this, "El dato ingresado es incorrecto.","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            //Se valida que en la casilla celular solo haya numeros
+            String celular = jTFCelular.getText();
+            if (ValidarData.validarCelular(celular)) {
+
+                JOptionPane.showMessageDialog(this, "El teléfono contiene caracteres incorrectos.","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            //Se valida que el numero de telefono tenga un largo adecuado
+            if (ValidarData.validarLargoCelular(celular)) {
+                JOptionPane.showMessageDialog(this, "El teléfono es incorrecto.","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
 
             //Llegado el punto en que todos los valores son correctos, se crea un huesped
             //En este huesped guardamos el resultado de la busqueda por medio del dni que figura en la tabla
             Huesped h = Vista.getHD().buscarHuespedPorDni(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
-            Huesped huesped=Vista.getHD().buscarHuespedPorCel(jTFCelular.getText());
-            if (huesped.getDni()!=h.getDni()) {
-               JOptionPane.showMessageDialog(this, "No se puede editar este huesped debido a que tiene el mismo celular que otro"); 
-            return;
+            Huesped huesped = Vista.getHD().buscarHuespedPorCel(celular);
+            if (huesped != null) {
+                if (huesped.getDni() != h.getDni()) {
+                    JOptionPane.showMessageDialog(this, "No se puede editar este huesped debido a que tiene el mismo celular que otro");
+                    return;
+                }
             }
             //Seteamos al huesped con la informacion nueva
             h.setDni(dni);
@@ -490,7 +515,6 @@ if (ValidarData.caracteresEspecialesMail(correo)) {
             h.setCorreo(correo);
             h.setCelular(jTFCelular.getText());
             h.setDomicilio(domicilio);
-            
 
             //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo editarAlumno
             int registro = Vista.getHD().editarHuesped(h);
@@ -510,6 +534,9 @@ if (ValidarData.caracteresEspecialesMail(correo)) {
         } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(this, "En la casilla de Dni solo deben ir numeros", "", JOptionPane.WARNING_MESSAGE);
+        } catch (NullPointerException e) {
+
+            JOptionPane.showMessageDialog(this, "nullpointer", "", JOptionPane.ERROR_MESSAGE);
         }
         //Se limpian los textfields
         limpiarInfo();
@@ -681,7 +708,7 @@ if (ValidarData.caracteresEspecialesMail(correo)) {
         jTFDomicilio.setText("");
         jTFCorreo.setText("");
         jTFCelular.setText("");
-       
+
     }
 
     //Este metodo elimina todas las filas de la tabla
@@ -689,21 +716,21 @@ if (ValidarData.caracteresEspecialesMail(correo)) {
 
         int filas = modelo.getRowCount() - 1;
         for (int i = filas; i >= 0; i--) {
-            
+
             modelo.removeRow(i);
         }
     }
-    
-    private void mostrarInfo(int filaSelec){
+
+    private void mostrarInfo(int filaSelec) {
         //Se obtienen los datos del alumno almacenado en la fila seleccionada
         int dni = Integer.parseInt(modelo.getValueAt(filaSelec, 1).toString());
         Huesped huesped = Vista.getHD().buscarHuespedPorDni(dni);
-        jTFDni.setText(dni+"");
+        jTFDni.setText(dni + "");
         jTFApellido.setText(huesped.getApellido());
         jTFNombre.setText(huesped.getNombre());
         jTFDomicilio.setText(huesped.getDomicilio());
         jTFCorreo.setText(huesped.getCorreo());
         jTFCelular.setText(huesped.getCelular());
-       
+
     }
 }
