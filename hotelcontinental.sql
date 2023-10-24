@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-10-2023 a las 01:09:56
+-- Tiempo de generación: 24-10-2023 a las 22:51:34
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 7.4.22
 
@@ -112,7 +112,8 @@ ALTER TABLE `habitacion`
 --
 ALTER TABLE `huesped`
   ADD PRIMARY KEY (`idHuesped`),
-  ADD UNIQUE KEY `dni` (`dni`);
+  ADD UNIQUE KEY `dni` (`dni`),
+  ADD UNIQUE KEY `celular` (`celular`);
 
 --
 -- Indices de la tabla `reserva`
