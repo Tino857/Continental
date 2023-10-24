@@ -222,7 +222,7 @@
                   <Color blue="be" green="be" red="be" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="Ingrese el nombre de la categoria para filtrar la tabla..."/>
+                <Property name="text" type="java.lang.String" value="Ingrese el nombre de la categor&#xed;a para filtrar la tabla..."/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>

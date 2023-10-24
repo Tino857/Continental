@@ -8,7 +8,6 @@ package continental.vistas;
 import continental.accesoADatos.ValidarData;
 import continental.entidades.Categoria;
 import continental.entidades.Habitacion;
-import continental.entidades.Huesped;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -85,24 +84,26 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
 
         jPBackground.setBackground(new java.awt.Color(51, 51, 51));
 
-        JBEditar.setBackground(new java.awt.Color(51, 51, 51));
+        JBEditar.setBackground(new java.awt.Color(45, 54, 60));
+        JBEditar.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         JBEditar.setForeground(new java.awt.Color(235, 235, 235));
         JBEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/editar-w.png"))); // NOI18N
         JBEditar.setText("Editar");
         JBEditar.setIconTextGap(10);
-        JBEditar.setPreferredSize(new java.awt.Dimension(100, 32));
+        JBEditar.setPreferredSize(new java.awt.Dimension(110, 32));
         JBEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBEditarActionPerformed(evt);
             }
         });
 
-        jBSalir.setBackground(new java.awt.Color(51, 51, 51));
+        jBSalir.setBackground(new java.awt.Color(45, 54, 60));
+        jBSalir.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBSalir.setForeground(new java.awt.Color(235, 235, 235));
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/salir-w.png"))); // NOI18N
         jBSalir.setText("Salir");
         jBSalir.setIconTextGap(10);
-        jBSalir.setPreferredSize(new java.awt.Dimension(100, 32));
+        jBSalir.setPreferredSize(new java.awt.Dimension(110, 32));
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSalirActionPerformed(evt);
@@ -128,14 +129,14 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(85, 94, 100));
         jPanel1.setPreferredSize(new java.awt.Dimension(100, 24));
 
-        JTFBuscador.setBackground(new java.awt.Color(102, 102, 102));
-        JTFBuscador.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
-        JTFBuscador.setForeground(new java.awt.Color(153, 153, 153));
+        JTFBuscador.setBackground(new java.awt.Color(85, 94, 100));
+        JTFBuscador.setFont(new java.awt.Font("Dialog", 2, 13)); // NOI18N
+        JTFBuscador.setForeground(new java.awt.Color(190, 190, 190));
         JTFBuscador.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        JTFBuscador.setText("Ingrese el Numero de Habitacion para filtrar la tabla...");
+        JTFBuscador.setText("Ingrese el Número de Habitación para filtrar la tabla...");
         JTFBuscador.setBorder(null);
         JTFBuscador.setMargin(new java.awt.Insets(0, 10, 0, 10));
         JTFBuscador.setMinimumSize(new java.awt.Dimension(0, 24));
@@ -167,12 +168,14 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
             .addComponent(JTFBuscador, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
         );
 
-        jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLTitulo.setForeground(new java.awt.Color(235, 235, 235));
-        jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLTitulo.setText("REMODELACION DE HABIACIONES");
+        jLMargen.setPreferredSize(new java.awt.Dimension(63, 64));
 
-        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoULP3-w.png"))); // NOI18N
+        jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLTitulo.setText("REMODELACIÓN DE HABIACIONES");
+
+        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoSmall-w.png"))); // NOI18N
 
         jLPCabecera.setLayer(jLMargen, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLPCabecera.setLayer(jLTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -183,9 +186,9 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
         jLPCabeceraLayout.setHorizontalGroup(
             jLPCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLPCabeceraLayout.createSequentialGroup()
-                .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLLogo))
         );
@@ -195,33 +198,41 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jLPCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLMargen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         jTFCodigo.setEditable(false);
-        jTFCodigo.setBackground(new java.awt.Color(102, 102, 102));
-        jTFCodigo.setForeground(new java.awt.Color(255, 255, 255));
+        jTFCodigo.setBackground(new java.awt.Color(85, 94, 100));
+        jTFCodigo.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
+        jTFCodigo.setForeground(new java.awt.Color(190, 190, 190));
 
-        jTFNumero.setBackground(new java.awt.Color(102, 102, 102));
+        jTFNumero.setBackground(new java.awt.Color(85, 94, 100));
+        jTFNumero.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTFNumero.setForeground(new java.awt.Color(255, 255, 255));
 
-        jTFPiso.setBackground(new java.awt.Color(102, 102, 102));
+        jTFPiso.setBackground(new java.awt.Color(85, 94, 100));
+        jTFPiso.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTFPiso.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLID.setForeground(new java.awt.Color(235, 235, 235));
-        jLID.setText("Codigo");
+        jLID.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        jLID.setForeground(new java.awt.Color(255, 255, 255));
+        jLID.setText("Código:");
 
-        jLNumero.setForeground(new java.awt.Color(235, 235, 235));
-        jLNumero.setText("Numero");
+        jLNumero.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        jLNumero.setForeground(new java.awt.Color(255, 255, 255));
+        jLNumero.setText("Número:");
 
-        jLPsio.setForeground(new java.awt.Color(235, 235, 235));
-        jLPsio.setText("Piso");
+        jLPsio.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        jLPsio.setForeground(new java.awt.Color(255, 255, 255));
+        jLPsio.setText("Piso:");
 
-        jLabel6.setForeground(new java.awt.Color(235, 235, 235));
-        jLabel6.setText("Categoria");
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Categoría:");
 
+        jCBCategorias.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jCBCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBCategoriasActionPerformed(evt);
@@ -242,19 +253,19 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLID)
                     .addComponent(jLNumero)
                     .addComponent(jLPsio)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTFNumero)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jCBCategorias, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTFPiso)
-                    .addComponent(jTFCodigo)
-                    .addComponent(jCBCategorias, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(23, 23, 23))
+                    .addComponent(jTFNumero)
+                    .addComponent(jTFCodigo))
+                .addContainerGap())
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,11 +282,11 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLPsio)
                     .addComponent(jTFPiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCBCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPBackgroundLayout = new javax.swing.GroupLayout(jPBackground);
@@ -302,7 +313,7 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -415,7 +426,7 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
 
     private void JTFBuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusGained
 
-        if (JTFBuscador.getText().equals("Ingrese el Numero de Habitacion para filtrar la tabla...")) {
+        if (JTFBuscador.getText().equals("Ingrese el Número de Habitación para filtrar la tabla...")) {
 
             JTFBuscador.setText("");
         }
@@ -426,7 +437,7 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
 
         if (JTFBuscador.getText().equals("")) {
 
-            JTFBuscador.setText("Ingrese el Numero de Habitacion para filtrar la tabla...");
+            JTFBuscador.setText("Ingrese el Número de Habitación para filtrar la tabla...");
         }
         JTFBuscador.setForeground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_JTFBuscadorFocusLost

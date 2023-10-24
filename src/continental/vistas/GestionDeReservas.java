@@ -86,29 +86,32 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
 
-        jDCInicio.setBackground(new java.awt.Color(51, 51, 51));
+        jDCInicio.setBackground(new java.awt.Color(85, 94, 100));
         jDCInicio.setForeground(new java.awt.Color(255, 255, 255));
 
-        jDCFinal.setBackground(new java.awt.Color(51, 51, 51));
+        jDCFinal.setBackground(new java.awt.Color(85, 94, 100));
 
-        jBFiltrar.setBackground(new java.awt.Color(51, 51, 51));
+        jBFiltrar.setBackground(new java.awt.Color(45, 54, 60));
+        jBFiltrar.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBFiltrar.setForeground(new java.awt.Color(255, 255, 255));
         jBFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/buscar-w.png"))); // NOI18N
         jBFiltrar.setText("Filtrar");
         jBFiltrar.setIconTextGap(10);
-        jBFiltrar.setPreferredSize(new java.awt.Dimension(105, 32));
+        jBFiltrar.setPreferredSize(new java.awt.Dimension(110, 32));
         jBFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBFiltrarActionPerformed(evt);
             }
         });
 
-        jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLTitulo.setForeground(new java.awt.Color(235, 235, 235));
-        jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLTitulo.setText("GESTION DE RESERVAS");
+        jLMargen.setPreferredSize(new java.awt.Dimension(63, 64));
 
-        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoULP3-w.png"))); // NOI18N
+        jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLTitulo.setText("GESTIÓN DE RESERVAS");
+
+        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoSmall-w.png"))); // NOI18N
 
         jLPCabecera.setLayer(jLMargen, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLPCabecera.setLayer(jLTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -119,9 +122,9 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
         jLPCabeceraLayout.setHorizontalGroup(
             jLPCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLPCabeceraLayout.createSequentialGroup()
-                .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLLogo))
         );
@@ -131,21 +134,25 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jLPCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLMargen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Fecha Inicio:");
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Fecha Fin:");
 
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Cantidad Personas:");
 
-        jTFCantidad.setBackground(new java.awt.Color(102, 102, 102));
+        jTFCantidad.setBackground(new java.awt.Color(85, 94, 100));
+        jTFCantidad.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTFCantidad.setForeground(new java.awt.Color(255, 255, 255));
         jTFCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -153,8 +160,9 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Categoria:");
+        jLabel4.setText("Categoría:");
 
         jCBCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,12 +170,14 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Precio:");
 
         jTFPrecio.setEditable(false);
-        jTFPrecio.setBackground(new java.awt.Color(102, 102, 102));
-        jTFPrecio.setForeground(new java.awt.Color(255, 255, 255));
+        jTFPrecio.setBackground(new java.awt.Color(85, 94, 100));
+        jTFPrecio.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
+        jTFPrecio.setForeground(new java.awt.Color(190, 190, 190));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -182,36 +192,39 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jBSiguiente.setBackground(new java.awt.Color(51, 51, 51));
+        jBSiguiente.setBackground(new java.awt.Color(45, 54, 60));
+        jBSiguiente.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBSiguiente.setForeground(new java.awt.Color(255, 255, 255));
         jBSiguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/aceptar-c.png"))); // NOI18N
         jBSiguiente.setText("Siguiente");
         jBSiguiente.setIconTextGap(10);
-        jBSiguiente.setPreferredSize(new java.awt.Dimension(105, 32));
+        jBSiguiente.setPreferredSize(new java.awt.Dimension(110, 32));
         jBSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSiguienteActionPerformed(evt);
             }
         });
 
-        jBLimpiar.setBackground(new java.awt.Color(51, 51, 51));
+        jBLimpiar.setBackground(new java.awt.Color(45, 54, 60));
+        jBLimpiar.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         jBLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/limpiar-w.png"))); // NOI18N
         jBLimpiar.setText("Limpiar");
         jBLimpiar.setIconTextGap(10);
-        jBLimpiar.setPreferredSize(new java.awt.Dimension(105, 32));
+        jBLimpiar.setPreferredSize(new java.awt.Dimension(110, 32));
         jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBLimpiarActionPerformed(evt);
             }
         });
 
-        jBSalir.setBackground(new java.awt.Color(51, 51, 51));
+        jBSalir.setBackground(new java.awt.Color(45, 54, 60));
+        jBSalir.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBSalir.setForeground(new java.awt.Color(255, 255, 255));
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/salir-w.png"))); // NOI18N
         jBSalir.setText("Salir");
         jBSalir.setIconTextGap(10);
-        jBSalir.setPreferredSize(new java.awt.Dimension(105, 32));
+        jBSalir.setPreferredSize(new java.awt.Dimension(110, 32));
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSalirActionPerformed(evt);
@@ -235,7 +248,7 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(jDCInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(jDCFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -254,8 +267,8 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(91, 91, 91)
+                        .addComponent(jBSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(89, 89, 89)
                         .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
@@ -283,7 +296,7 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jBFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -67,10 +67,10 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         jRBHabilitada = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jBDeshabilitar1 = new javax.swing.JButton();
-        jLPCabecera = new javax.swing.JLayeredPane();
-        jLMargen = new javax.swing.JLabel();
-        jLTitulo = new javax.swing.JLabel();
-        jLLogo = new javax.swing.JLabel();
+        jLPCabecera1 = new javax.swing.JLayeredPane();
+        jLMargen1 = new javax.swing.JLabel();
+        jLTitulo1 = new javax.swing.JLabel();
+        jLLogo1 = new javax.swing.JLabel();
 
         setClosable(true);
         setMaximizable(true);
@@ -86,15 +86,15 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         jPBackground.setBackground(new java.awt.Color(51, 51, 51));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(235, 235, 235));
-        jLabel2.setText("Codigo:");
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Código:");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(235, 235, 235));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Piso:");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(235, 235, 235));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Num de Habitacion:");
 
         jBBuscar.setBackground(new java.awt.Color(45, 54, 60));
@@ -176,8 +176,8 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(235, 235, 235));
-        jLabel6.setText("Categoria:");
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Categoría:");
 
         jCBCategorias.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
 
@@ -189,7 +189,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(235, 235, 235));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Habilitada:");
 
         jBDeshabilitar1.setBackground(new java.awt.Color(45, 54, 60));
@@ -205,38 +205,38 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
-        jLMargen.setPreferredSize(new java.awt.Dimension(63, 64));
+        jLMargen1.setPreferredSize(new java.awt.Dimension(63, 64));
 
-        jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLTitulo.setText("GESTION DE HABITACION");
+        jLTitulo1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLTitulo1.setForeground(new java.awt.Color(255, 255, 255));
+        jLTitulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLTitulo1.setText("GESTIÓN DE HABITACIÓN");
 
-        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoSmall-w.png"))); // NOI18N
+        jLLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoSmall-w.png"))); // NOI18N
 
-        jLPCabecera.setLayer(jLMargen, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLPCabecera.setLayer(jLTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLPCabecera.setLayer(jLLogo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLPCabecera1.setLayer(jLMargen1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLPCabecera1.setLayer(jLTitulo1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLPCabecera1.setLayer(jLLogo1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout jLPCabeceraLayout = new javax.swing.GroupLayout(jLPCabecera);
-        jLPCabecera.setLayout(jLPCabeceraLayout);
-        jLPCabeceraLayout.setHorizontalGroup(
-            jLPCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLPCabeceraLayout.createSequentialGroup()
-                .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout jLPCabecera1Layout = new javax.swing.GroupLayout(jLPCabecera1);
+        jLPCabecera1.setLayout(jLPCabecera1Layout);
+        jLPCabecera1Layout.setHorizontalGroup(
+            jLPCabecera1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLPCabecera1Layout.createSequentialGroup()
+                .addComponent(jLMargen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                .addComponent(jLTitulo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLLogo))
+                .addComponent(jLLogo1))
         );
-        jLPCabeceraLayout.setVerticalGroup(
-            jLPCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLPCabeceraLayout.createSequentialGroup()
+        jLPCabecera1Layout.setVerticalGroup(
+            jLPCabecera1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLPCabecera1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jLPCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLMargen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jLPCabecera1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLTitulo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLLogo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLMargen1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -244,10 +244,11 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         jPBackground.setLayout(jPBackgroundLayout);
         jPBackgroundLayout.setHorizontalGroup(
             jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPBackgroundLayout.createSequentialGroup()
-                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLPCabecera1)
+                    .addGroup(jPBackgroundLayout.createSequentialGroup()
                         .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel2)
@@ -269,24 +270,20 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jBBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jBLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                    .addGroup(jPBackgroundLayout.createSequentialGroup()
                         .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jBHabilitar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jBDeshabilitar1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPBackgroundLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLPCabecera)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
         jPBackgroundLayout.setVerticalGroup(
             jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPBackgroundLayout.createSequentialGroup()
-                .addComponent(jLPCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLPCabecera1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -570,10 +567,10 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBSalir;
     private javax.swing.JComboBox<Categoria> jCBCategorias;
     private javax.swing.JDesktopPane jDPEscritorio;
-    private javax.swing.JLabel jLLogo;
-    private javax.swing.JLabel jLMargen;
-    private javax.swing.JLayeredPane jLPCabecera;
-    private javax.swing.JLabel jLTitulo;
+    private javax.swing.JLabel jLLogo1;
+    private javax.swing.JLabel jLMargen1;
+    private javax.swing.JLayeredPane jLPCabecera1;
+    private javax.swing.JLabel jLTitulo1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

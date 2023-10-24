@@ -141,7 +141,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         JTFBuscador.setFont(new java.awt.Font("Dialog", 2, 13)); // NOI18N
         JTFBuscador.setForeground(new java.awt.Color(190, 190, 190));
         JTFBuscador.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        JTFBuscador.setText("Ingrese el nombre de la categoria para filtrar la tabla...");
+        JTFBuscador.setText("Ingrese el nombre de la categoría para filtrar la tabla...");
         JTFBuscador.setBorder(null);
         JTFBuscador.setMargin(new java.awt.Insets(0, 10, 0, 10));
         JTFBuscador.setMinimumSize(new java.awt.Dimension(0, 24));
@@ -474,7 +474,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
 
     private void JTFBuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusGained
 
-        if (JTFBuscador.getText().equals("Ingrese el nombre de la categoria para filtrar la tabla...")) {
+        if (JTFBuscador.getText().equals("Ingrese el nombre de la categoría para filtrar la tabla...")) {
 
             JTFBuscador.setText("");
         }
@@ -485,7 +485,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
 
         if (JTFBuscador.getText().equals("")) {
 
-            JTFBuscador.setText("Ingrese el nombre de la categoria para filtrar la tabla...");
+            JTFBuscador.setText("Ingrese el nombre de la categoría para filtrar la tabla...");
         }
         JTFBuscador.setForeground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_JTFBuscadorFocusLost

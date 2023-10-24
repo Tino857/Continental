@@ -68,7 +68,7 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
         jLMargen.setPreferredSize(new java.awt.Dimension(63, 64));
 
         jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLTitulo.setForeground(new java.awt.Color(235, 235, 235));
+        jLTitulo.setForeground(new java.awt.Color(255, 255, 255));
         jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLTitulo.setText("RESERVA POR HUESPED");
 
@@ -99,18 +99,21 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
                     .addComponent(jLMargen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Ingrese el DNI:");
 
-        jTFDni.setBackground(new java.awt.Color(102, 102, 102));
+        jTFDni.setBackground(new java.awt.Color(85, 94, 100));
+        jTFDni.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTFDni.setForeground(new java.awt.Color(255, 255, 255));
 
-        jBBuscar.setBackground(new java.awt.Color(51, 51, 51));
+        jBBuscar.setBackground(new java.awt.Color(45, 54, 60));
+        jBBuscar.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBBuscar.setForeground(new java.awt.Color(255, 255, 255));
         jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/buscar-w.png"))); // NOI18N
         jBBuscar.setText("Buscar");
         jBBuscar.setIconTextGap(10);
-        jBBuscar.setPreferredSize(new java.awt.Dimension(105, 32));
+        jBBuscar.setPreferredSize(new java.awt.Dimension(110, 32));
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBBuscarActionPerformed(evt);
@@ -130,36 +133,39 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jBLimpiar.setBackground(new java.awt.Color(51, 51, 51));
+        jBLimpiar.setBackground(new java.awt.Color(45, 54, 60));
+        jBLimpiar.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         jBLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/limpiar-w.png"))); // NOI18N
         jBLimpiar.setText("Limpiar");
         jBLimpiar.setIconTextGap(10);
-        jBLimpiar.setPreferredSize(new java.awt.Dimension(105, 32));
+        jBLimpiar.setPreferredSize(new java.awt.Dimension(110, 32));
         jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBLimpiarActionPerformed(evt);
             }
         });
 
-        jBSalir.setBackground(new java.awt.Color(51, 51, 51));
+        jBSalir.setBackground(new java.awt.Color(45, 54, 60));
+        jBSalir.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBSalir.setForeground(new java.awt.Color(255, 255, 255));
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/salir-w.png"))); // NOI18N
         jBSalir.setText("Salir");
         jBSalir.setIconTextGap(10);
-        jBSalir.setPreferredSize(new java.awt.Dimension(105, 32));
+        jBSalir.setPreferredSize(new java.awt.Dimension(110, 32));
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSalirActionPerformed(evt);
             }
         });
 
-        jBEliminar.setBackground(new java.awt.Color(51, 51, 51));
+        jBEliminar.setBackground(new java.awt.Color(45, 54, 60));
+        jBEliminar.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBEliminar.setForeground(new java.awt.Color(255, 255, 255));
         jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/eliminar-w.png"))); // NOI18N
         jBEliminar.setText("Eliminar");
         jBEliminar.setIconTextGap(10);
-        jBEliminar.setPreferredSize(new java.awt.Dimension(105, 32));
+        jBEliminar.setPreferredSize(new java.awt.Dimension(110, 32));
         jBEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBEliminarActionPerformed(evt);
@@ -183,7 +189,7 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
                     .addGroup(jPBackgroundLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jTFDni, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTFDni, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE))
@@ -378,10 +384,13 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
     }
 
     private void cargarTabla(Reserva res) {
+        
         String estado = "Inactiva";
         if (res.isEstado()) {
+            
             estado = "Activa";
         }
+        
         modelo.addRow(new Object[]{
             Integer.toString(res.getIdReserva()),
             Integer.toString(res.getHabitacion().getNro()),
@@ -395,6 +404,7 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
     }
 
     private void mostrarReservas(Huesped h) {
+        
         limpiarTabla();
         ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
         for (Reserva reserva : reservas) {

@@ -22,7 +22,8 @@ import javax.swing.table.TableColumnModel;
  * @author valen
  */
 public class ReservaPorFecha extends javax.swing.JInternalFrame {
-private final DefaultTableModel modelo = new DefaultTableModel() {
+
+    private final DefaultTableModel modelo = new DefaultTableModel() {
 
         @Override
         public boolean isCellEditable(int f, int c) {
@@ -30,6 +31,7 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
             return false;
         }
     };
+
     public ReservaPorFecha() {
         initComponents();
         armarTabla();
@@ -52,18 +54,18 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
                 g.drawImage(image,0,0,getWidth(),getHeight(),this);
             }
         };
-        jBSalir = new javax.swing.JButton();
-        jBLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jBBuscar = new javax.swing.JButton();
         jLPCabecera = new javax.swing.JLayeredPane();
         jLMargen = new javax.swing.JLabel();
         jLTitulo = new javax.swing.JLabel();
         jLLogo = new javax.swing.JLabel();
+        jBSalir = new javax.swing.JButton();
+        jBLimpiar = new javax.swing.JButton();
+        jBBuscar = new javax.swing.JButton();
         jDCInicio = new com.toedter.calendar.JDateChooser();
         jDCFin = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jBEliminar = new javax.swing.JButton();
 
@@ -71,30 +73,6 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         setMaximizable(true);
         setResizable(true);
         setPreferredSize(new java.awt.Dimension(550, 500));
-
-        jBSalir.setBackground(new java.awt.Color(51, 51, 51));
-        jBSalir.setForeground(new java.awt.Color(255, 255, 255));
-        jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/salir-w.png"))); // NOI18N
-        jBSalir.setText("Salir");
-        jBSalir.setIconTextGap(10);
-        jBSalir.setPreferredSize(new java.awt.Dimension(105, 32));
-        jBSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBSalirActionPerformed(evt);
-            }
-        });
-
-        jBLimpiar.setBackground(new java.awt.Color(51, 51, 51));
-        jBLimpiar.setForeground(new java.awt.Color(255, 255, 255));
-        jBLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/limpiar-w.png"))); // NOI18N
-        jBLimpiar.setText("Limpiar");
-        jBLimpiar.setIconTextGap(10);
-        jBLimpiar.setPreferredSize(new java.awt.Dimension(105, 32));
-        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBLimpiarActionPerformed(evt);
-            }
-        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,30 +87,14 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Ingrese la fecha de inicio");
-
-        jBBuscar.setBackground(new java.awt.Color(51, 51, 51));
-        jBBuscar.setForeground(new java.awt.Color(255, 255, 255));
-        jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/buscar-w.png"))); // NOI18N
-        jBBuscar.setText("Buscar");
-        jBBuscar.setIconTextGap(10);
-        jBBuscar.setPreferredSize(new java.awt.Dimension(105, 32));
-        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBBuscarActionPerformed(evt);
-            }
-        });
-
-        jLMargen.setPreferredSize(new java.awt.Dimension(38, 58));
+        jLMargen.setPreferredSize(new java.awt.Dimension(63, 64));
 
         jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLTitulo.setForeground(new java.awt.Color(235, 235, 235));
+        jLTitulo.setForeground(new java.awt.Color(255, 255, 255));
         jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLTitulo.setText("RESERVA POR FECHA");
 
-        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoULP3-w.png"))); // NOI18N
+        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/LogoSmall-w.png"))); // NOI18N
 
         jLPCabecera.setLayer(jLMargen, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLPCabecera.setLayer(jLTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -144,7 +106,7 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
             jLPCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLPCabeceraLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLMargen, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -158,24 +120,70 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
                 .addGroup(jLPCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLMargen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLMargen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jDCInicio.setBackground(new java.awt.Color(51, 51, 51));
+        jBSalir.setBackground(new java.awt.Color(45, 54, 60));
+        jBSalir.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        jBSalir.setForeground(new java.awt.Color(255, 255, 255));
+        jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/salir-w.png"))); // NOI18N
+        jBSalir.setText("Salir");
+        jBSalir.setIconTextGap(10);
+        jBSalir.setPreferredSize(new java.awt.Dimension(110, 32));
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
 
-        jDCFin.setBackground(new java.awt.Color(51, 51, 51));
+        jBLimpiar.setBackground(new java.awt.Color(45, 54, 60));
+        jBLimpiar.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        jBLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        jBLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/limpiar-w.png"))); // NOI18N
+        jBLimpiar.setText("Limpiar");
+        jBLimpiar.setIconTextGap(10);
+        jBLimpiar.setPreferredSize(new java.awt.Dimension(110, 32));
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
 
+        jBBuscar.setBackground(new java.awt.Color(45, 54, 60));
+        jBBuscar.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        jBBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/buscar-w.png"))); // NOI18N
+        jBBuscar.setText("Buscar");
+        jBBuscar.setIconTextGap(10);
+        jBBuscar.setPreferredSize(new java.awt.Dimension(110, 32));
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarActionPerformed(evt);
+            }
+        });
+
+        jDCInicio.setBackground(new java.awt.Color(85, 94, 100));
+
+        jDCFin.setBackground(new java.awt.Color(85, 94, 100));
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Ingrese la fecha de inicio");
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Ingrese la fecha de fin");
 
-        jBEliminar.setBackground(new java.awt.Color(51, 51, 51));
+        jBEliminar.setBackground(new java.awt.Color(45, 54, 60));
+        jBEliminar.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jBEliminar.setForeground(new java.awt.Color(255, 255, 255));
         jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/continental/imagenes/eliminar-w.png"))); // NOI18N
         jBEliminar.setText("Eliminar");
         jBEliminar.setIconTextGap(10);
-        jBEliminar.setPreferredSize(new java.awt.Dimension(105, 32));
+        jBEliminar.setPreferredSize(new java.awt.Dimension(110, 32));
         jBEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBEliminarActionPerformed(evt);
@@ -188,50 +196,52 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
             jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPBackgroundLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLPCabecera)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPBackgroundLayout.createSequentialGroup()
-                        .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
-                    .addGroup(jPBackgroundLayout.createSequentialGroup()
-                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
+                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPBackgroundLayout.createSequentialGroup()
-                                .addGap(207, 207, 207)
-                                .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                .addComponent(jDCInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jDCFin, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(20, 20, 20))
+                                .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPBackgroundLayout.createSequentialGroup()
+                                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jDCInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jDCFin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
+                        .addGap(20, 20, 20))))
+            .addGroup(jPBackgroundLayout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPBackgroundLayout.setVerticalGroup(
             jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPBackgroundLayout.createSequentialGroup()
                 .addComponent(jLPCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jDCInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jDCFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
@@ -249,18 +259,41 @@ private final DefaultTableModel modelo = new DefaultTableModel() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-        dispose();
-    }//GEN-LAST:event_jBSalirActionPerformed
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        try {
+            int filaSelec = jTable1.getSelectedRow();
+            if (filaSelec == -1) {
+                JOptionPane.showMessageDialog(this, "Seleccione una reserva");
+                return;
+            }
+            if (jTable1.getRowCount() == 1) {
 
-    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
-limpiarTabla();
-jDCInicio.setDate(null);
-jDCFin.setDate(null);
-    }//GEN-LAST:event_jBLimpiarActionPerformed
+                filaSelec = 0;
+            }
+
+            LocalDate fi = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate ff = jDCFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            Reserva res = Vista.getRD().buscarReservaPorId(Integer.parseInt((String) modelo.getValueAt(filaSelec, 0)));
+            Vista.getRD().eliminarReserva(res.getIdReserva());
+            limpiarTabla();
+            ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
+            for (Reserva reserva : reservas) {
+                if ((reserva.getFi().equals(fi) || reserva.getFi().isAfter(fi)) && (reserva.getFf().equals(ff) || reserva.getFf().isBefore(ff))) {
+                    cargarTabla(reserva);
+                }
+
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese datos validos");
+        } catch (NullPointerException e) {
+
+            JOptionPane.showMessageDialog(this, "Ingrese datos validos");
+        }
+    }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        if (jDCInicio.equals(null)||jDCFin.equals(null)) {
+        if (jDCInicio.equals(null) || jDCFin.equals(null)) {
 
             JOptionPane.showMessageDialog(this, "La casilla de las fechas debe recibir un dato valido.");
             return;
@@ -269,17 +302,15 @@ jDCFin.setDate(null);
         try {
             LocalDate fi = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate ff = jDCFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-          
 
             if (fi.isAfter(ff)) {
                 JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser anterior a la fecha de final");
                 return;
             }
 
-           
-            ArrayList<Reserva> reservas=Vista.getRD().listarReservas();
+            ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
             for (Reserva reserva : reservas) {
-                if ((reserva.getFi().equals(fi)||reserva.getFi().isAfter(fi))&&(reserva.getFf().equals(ff)||reserva.getFf().isBefore(ff))) {
+                if ((reserva.getFi().equals(fi) || reserva.getFi().isAfter(fi)) && (reserva.getFf().equals(ff) || reserva.getFf().isBefore(ff))) {
                     cargarTabla(reserva);
                 }
             }
@@ -292,41 +323,15 @@ jDCFin.setDate(null);
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
-    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        try{
-            int filaSelec = jTable1.getSelectedRow();
-            if (filaSelec==-1) {
-                JOptionPane.showMessageDialog(this, "Seleccione una reserva");
-                return;
-            }
-            if (jTable1.getRowCount() == 1) {
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        limpiarTabla();
+        jDCInicio.setDate(null);
+        jDCFin.setDate(null);
+    }//GEN-LAST:event_jBLimpiarActionPerformed
 
-                filaSelec = 0;
-            }
-           
-             LocalDate fi = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            LocalDate ff = jDCFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-            
-            
-            Reserva res = Vista.getRD().buscarReservaPorId(Integer.parseInt((String) modelo.getValueAt(filaSelec, 0)));
-            Vista.getRD().eliminarReserva(res.getIdReserva());
-            limpiarTabla();
-           ArrayList<Reserva> reservas=Vista.getRD().listarReservas();
-            for (Reserva reserva : reservas) {
-                if ((reserva.getFi().equals(fi)||reserva.getFi().isAfter(fi))&&(reserva.getFf().equals(ff)||reserva.getFf().isBefore(ff))) {
-                    cargarTabla(reserva);
-                }
-            
-            }
-        }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(this, "Ingrese datos validos");
-        }catch (NullPointerException e) {
-
-            JOptionPane.showMessageDialog(this, "Ingrese datos validos");
-        }
-
-    }//GEN-LAST:event_jBEliminarActionPerformed
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jBSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -348,15 +353,15 @@ jDCFin.setDate(null);
     // End of variables declaration//GEN-END:variables
 private void armarTabla() {
 
-    //Se agregan las columnas con su nombre correspondiente al modelo de tabla creado anteriormente
-    modelo.addColumn("ID");
-    modelo.addColumn("Numero de Hab");
-    modelo.addColumn("Apellido");
-    modelo.addColumn("Fecha de Inicio");
-    modelo.addColumn("Fecha de Fin");
-    modelo.addColumn("Dias");
-    modelo.addColumn("Precio Final");
-       modelo.addColumn("Estado");
+        //Se agregan las columnas con su nombre correspondiente al modelo de tabla creado anteriormente
+        modelo.addColumn("ID");
+        modelo.addColumn("Nº de Hab");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Inicio");
+        modelo.addColumn("Fin");
+        modelo.addColumn("Dias");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Estado");
 
         //Se setea el modelo de tabla a la tabla de alumnos
         jTable1.setModel(modelo);
@@ -366,7 +371,9 @@ private void armarTabla() {
 
         //Se llama al metodo que se encarga de setear el ancho de las columnas
         anchoColumna(columnas, 0, 40);
-        anchoColumna(columnas, 1, 80);
+        anchoColumna(columnas, 1, 70);
+        anchoColumna(columnas, 5, 50);
+        anchoColumna(columnas, 7, 70);
     }
 
     private void anchoColumna(TableColumnModel modeloTabla, int indice, int ancho) {
@@ -376,22 +383,28 @@ private void armarTabla() {
         modeloTabla.getColumn(indice).setMinWidth(ancho - 10);
         modeloTabla.getColumn(indice).setPreferredWidth(ancho);
     }
- private void cargarTabla(Reserva res) {
-String estado="Inactiva";
+
+    private void cargarTabla(Reserva res) {
+
+        String estado = "Inactiva";
         if (res.isEstado()) {
-            estado="Activa";
+
+            estado = "Activa";
         }
+
         modelo.addRow(new Object[]{
-           Integer.toString(res.getIdReserva()),
+            Integer.toString(res.getIdReserva()),
             Integer.toString(res.getHabitacion().getNro()),
             res.getHuesped().getApellido(),
             res.getFi().toString(),
             res.getFf().toString(),
             Integer.toString(res.getDias()),
-            Double.toString(res.getMonto())
+            Double.toString(res.getMonto()),
+            estado
         });
-    } 
- private void limpiarTabla() {
+    }
+
+    private void limpiarTabla() {
 
         int filas = modelo.getRowCount() - 1;
         for (int i = filas; i >= 0; i--) {
@@ -400,4 +413,3 @@ String estado="Inactiva";
         }
     }
 }
-
