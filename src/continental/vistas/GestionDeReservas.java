@@ -433,15 +433,19 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
 
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Es un husped nuevo?", "", JOptionPane.YES_NO_OPTION);
             if (respuesta == 0) {
+                
                 //Dijo que si
                 GestionDeHuesped GDH = new GestionDeHuesped(fi, ff, hab, cantidadPersonas);
                 abrirVentana(GDH);
-            } else {
+            } else if (respuesta == 1) {
+                
                 //Dijo que no
                 MostrarHuespedes mh = new MostrarHuespedes(fi, ff, hab, cantidadPersonas);
-                abrirVentana(mh);        
+                abrirVentana(mh);  
             }
+
         } catch (NullPointerException e) {
+            
             JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
         }
 

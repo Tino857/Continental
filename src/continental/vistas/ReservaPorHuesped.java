@@ -233,7 +233,7 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
 
         if (jTFDni.getText().isEmpty()) {
 
-            JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea buscar las reservas.");
+            JOptionPane.showMessageDialog(this, "Ingrese un dni para buscar reservas.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -297,15 +297,25 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
             //Se obtiene el huesped correspondiente a dicha reserva
             Huesped h = res.getHuesped();
             //Se pregunta si se desea eliminar la reserva
-            int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar esta reserva?", "ELIMINAR", JOptionPane.YES_NO_OPTION);
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar la siguiente reserva?"
+             + " \nTitular: " + res.getHuesped().getApellido() + ", " + res.getHuesped().getNombre()
+                + " \nDNI: " + res.getHuesped().getDni()
+                + " \nFecha de ingreso: " + res.getFi()
+                + " \nFecha de salida: " + res.getFf()
+                + " \nCantidad de personas: " + res.getCantDePersonas()
+                + " \nNº de Habitación: " + res.getHabitacion().getNro() + " - Piso: " + res.getHabitacion().getPiso()
+                + " \nTipo de habitacion: " + res.getHabitacion().getCategoria().getTipoCategoria()
+                + " \nPrecio por noche: " + res.getHabitacion().getCategoria().getPrecio()
+                + " \nCantidad de dias: " + res.getDias()
+                + " \nTOTAL A PAGAR: " + res.getMonto(), "CONFIRMAR", JOptionPane.YES_NO_OPTION);
             //Si la respuesta es si, el resultado obtenido es 0
             if (respuesta == 0) {
 
                 //Se crea una variable que almacenara el numero de indices afectados en la DB al eliminar la reserva
-                respuesta = Vista.getRD().eliminarReserva(res.getIdReserva());
+                int registro = Vista.getRD().eliminarReserva(res.getIdReserva());
                 //Dependiendo del resultado se mostrara un mensaje al usuario
                 //Si se elimino exitosamente el numero de indice sera mayor a 0. Caso contrario sera 0
-                if (respuesta > 0) {
+                if (registro > 0) {
 
                     JOptionPane.showMessageDialog(this, "Se elimino la reserva.");
                 } else {

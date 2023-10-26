@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package continental.vistas;
 
-import continental.entidades.Habitacion;
 import continental.entidades.Reserva;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -19,7 +13,7 @@ import javax.swing.table.TableColumnModel;
 
 /**
  *
- * @author valen
+ * @author Grupo 61
  */
 public class ReservaPorFecha extends javax.swing.JInternalFrame {
 
@@ -261,30 +255,51 @@ public class ReservaPorFecha extends javax.swing.JInternalFrame {
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         try {
+            
             int filaSelec = jTable1.getSelectedRow();
-            if (filaSelec == -1) {
-                JOptionPane.showMessageDialog(this, "Seleccione una reserva");
-                return;
-            }
+            
             if (jTable1.getRowCount() == 1) {
 
                 filaSelec = 0;
             }
+            
+            if (filaSelec == -1) {
+                JOptionPane.showMessageDialog(this, "Seleccione una reserva");
+                return;
+            }
+            
 
             LocalDate fi = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate ff = jDCFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
             Reserva res = Vista.getRD().buscarReservaPorId(Integer.parseInt((String) modelo.getValueAt(filaSelec, 0)));
-            Vista.getRD().eliminarReserva(res.getIdReserva());
-            limpiarTabla();
-            ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
-            for (Reserva reserva : reservas) {
-                if ((reserva.getFi().equals(fi) || reserva.getFi().isAfter(fi)) && (reserva.getFf().equals(ff) || reserva.getFf().isBefore(ff))) {
-                    cargarTabla(reserva);
-                }
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar la siguiente reserva?"
+                    + " \nTitular: " + res.getHuesped().getApellido() + ", " + res.getHuesped().getNombre()
+                    + " \nDNI: " + res.getHuesped().getDni()
+                    + " \nFecha de ingreso: " + res.getFi()
+                    + " \nFecha de salida: " + res.getFf()
+                    + " \nCantidad de personas: " + res.getCantDePersonas()
+                    + " \nNº de Habitación: " + res.getHabitacion().getNro() + " - Piso: " + res.getHabitacion().getPiso()
+                    + " \nTipo de habitacion: " + res.getHabitacion().getCategoria().getTipoCategoria()
+                    + " \nPrecio por noche: " + res.getHabitacion().getCategoria().getPrecio()
+                    + " \nCantidad de dias: " + res.getDias()
+                    + " \nTOTAL A PAGAR: " + res.getMonto(), "CONFIRMAR", JOptionPane.YES_NO_OPTION);
+            if (respuesta == 0) {
 
+                int registro = Vista.getRD().eliminarReserva(res.getIdReserva());
+                if (registro > 0) {
+
+                    JOptionPane.showMessageDialog(this, "Se eliminó la reserva.");
+                } else {
+                    
+                    JOptionPane.showMessageDialog(this, "No se pudo eliminar la reserva.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
             }
+
+            //Se muestran las reservas
+            cargarReservas(fi, ff);
         } catch (NumberFormatException e) {
+
             JOptionPane.showMessageDialog(this, "Ingrese datos validos");
         } catch (NullPointerException e) {
 
@@ -293,6 +308,7 @@ public class ReservaPorFecha extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+
         if (jDCInicio.equals(null) || jDCFin.equals(null)) {
 
             JOptionPane.showMessageDialog(this, "La casilla de las fechas debe recibir un dato valido.");
@@ -308,28 +324,25 @@ public class ReservaPorFecha extends javax.swing.JInternalFrame {
                 return;
             }
 
-            ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
-            for (Reserva reserva : reservas) {
-                if ((reserva.getFi().equals(fi) || reserva.getFi().isAfter(fi)) && (reserva.getFf().equals(ff) || reserva.getFf().isBefore(ff))) {
-                    cargarTabla(reserva);
-                }
-            }
+            cargarReservas(fi, ff);
         } catch (NumberFormatException e) {
 
-            JOptionPane.showMessageDialog(this, "");
+            JOptionPane.showMessageDialog(this, "wep");
         } catch (NullPointerException e) {
 
-            JOptionPane.showMessageDialog(this, "Debe ingresar datos validos");
+            JOptionPane.showMessageDialog(this, "Debe ingresar datos validos null pointer");
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+
         limpiarTabla();
         jDCInicio.setDate(null);
         jDCFin.setDate(null);
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
@@ -410,6 +423,19 @@ private void armarTabla() {
         for (int i = filas; i >= 0; i--) {
 
             modelo.removeRow(i);
+        }
+    }
+
+    private void cargarReservas(LocalDate fi, LocalDate ff) {
+        
+        limpiarTabla();
+        ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
+        for (Reserva reserva : reservas) {
+            
+            if ((reserva.getFi().equals(fi) || reserva.getFi().isAfter(fi)) && (reserva.getFf().equals(ff) || reserva.getFf().isBefore(ff))) {
+                
+                cargarTabla(reserva);
+            }
         }
     }
 }

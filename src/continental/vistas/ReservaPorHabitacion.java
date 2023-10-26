@@ -296,6 +296,12 @@ public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
             //Se recupera de la tambla el numero de fila seleccionada
             int filaSelec = jTable1.getSelectedRow();
 
+            //Si en la tabla hay solo una fila, se setea la fila seleccionada a 0
+            if (jTable1.getRowCount() == 1) {
+
+                filaSelec = 0;
+            }
+            
             //Si el valor de la fila seleccionada es -1, significa que no se seleccionó ninguna fila de la tabla
             if (filaSelec == -1) {
 
@@ -303,31 +309,34 @@ public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
                 return;
             }
 
-            //Si en la tabla no hay filas, se setea la fila seleccionada a 0
-            if (jTable1.getRowCount() == 1) {
-
-                filaSelec = 0;
-            }
-
             //Se recupera la habitacion y la reserva de la DB
-            Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
+            
             Reserva res = Vista.getRD().buscarReservaPorId(Integer.parseInt((String) modelo.getValueAt(filaSelec, 0)));
             
-            int respuesta = JOptionPane.showConfirmDialog(this, "Desea eliminar esta reserva?", "CONFRIMAR", JOptionPane.YES_NO_OPTION);
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar la siguiente reserva?"
+             + " \nTitular: " + res.getHuesped().getApellido() + ", " + res.getHuesped().getNombre()
+                + " \nDNI: " + res.getHuesped().getDni()
+                + " \nFecha de ingreso: " + res.getFi()
+                + " \nFecha de salida: " + res.getFf()
+                + " \nCantidad de personas: " + res.getCantDePersonas()
+                + " \nNº de Habitación: " + res.getHabitacion().getNro() + " - Piso: " + res.getHabitacion().getPiso()
+                + " \nTipo de habitacion: " + res.getHabitacion().getCategoria().getTipoCategoria()
+                + " \nPrecio por noche: " + res.getHabitacion().getCategoria().getPrecio()
+                + " \nCantidad de dias: " + res.getDias()
+                + " \nTOTAL A PAGAR: " + res.getMonto(), "CONFIRMAR", JOptionPane.YES_NO_OPTION);
             if (respuesta == 0) {
                 
-                int reg = Vista.getRD().eliminarReserva(res.getIdReserva());
-                if (reg > 0) {
+                int registro = Vista.getRD().eliminarReserva(res.getIdReserva());
+                if (registro > 0) {
                     
                     JOptionPane.showMessageDialog(this, "Se eliminó la reserva.");
                 } else {
                     JOptionPane.showMessageDialog(this, "No se pudo eliminar la reserva.", "ERROR", JOptionPane.ERROR_MESSAGE);
-                    return;
                 }
             }
-            
+                        
             //Se llama al metodo encargado de cargar la tabla
-            cargarDatos(hab);
+            cargarDatos(res.getHabitacion());
         } catch (NumberFormatException e) {
             
             JOptionPane.showMessageDialog(this, "Ingrese datos validos.", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);

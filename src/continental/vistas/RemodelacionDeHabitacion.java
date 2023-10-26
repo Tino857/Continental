@@ -24,7 +24,9 @@ import javax.swing.table.TableColumnModel;
  * @author valen
  */
 public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
- private  Map<Integer,Categoria> listaDeHab=new HashMap();
+    
+    private  Map<Integer,Categoria> listaDeHab=new HashMap();
+    
     private final DefaultTableModel modelo = new DefaultTableModel() {
 
         @Override
@@ -33,11 +35,13 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
             return false;
         }
     };
+    
     public RemodelacionDeHabitacion() {
        initComponents();
         armarTabla();
         cargarDatos();
         cargarCB();
+        mostrar(false);
     }
 
     /**
@@ -67,7 +71,7 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
         jLMargen = new javax.swing.JLabel();
         jLTitulo = new javax.swing.JLabel();
         jLLogo = new javax.swing.JLabel();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jLPDatos = new javax.swing.JLayeredPane();
         jTFCodigo = new javax.swing.JTextField();
         jTFNumero = new javax.swing.JTextField();
         jTFPiso = new javax.swing.JTextField();
@@ -239,51 +243,51 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
-        jLayeredPane1.setLayer(jTFCodigo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jTFNumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jTFPiso, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLID, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLNumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLPsio, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jCBCategorias, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLPDatos.setLayer(jTFCodigo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLPDatos.setLayer(jTFNumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLPDatos.setLayer(jTFPiso, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLPDatos.setLayer(jLID, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLPDatos.setLayer(jLNumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLPDatos.setLayer(jLPsio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLPDatos.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLPDatos.setLayer(jCBCategorias, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jLPDatosLayout = new javax.swing.GroupLayout(jLPDatos);
+        jLPDatos.setLayout(jLPDatosLayout);
+        jLPDatosLayout.setHorizontalGroup(
+            jLPDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLPDatosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jLPDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLID)
                     .addComponent(jLNumero)
                     .addComponent(jLPsio)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jLPDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jCBCategorias, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTFPiso)
                     .addComponent(jTFNumero)
                     .addComponent(jTFCodigo))
                 .addContainerGap())
         );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+        jLPDatosLayout.setVerticalGroup(
+            jLPDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLPDatosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jLPDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLID))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jLPDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLNumero))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLPDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLPsio)
                     .addComponent(jTFPiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLPDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCBCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -302,7 +306,7 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
                         .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
                     .addComponent(jLPCabecera, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLayeredPane1)
+                    .addComponent(jLPDatos)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
@@ -315,7 +319,7 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLPDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -420,7 +424,7 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
 
         //Se captura el evento de click en una fila de la tabla y se recupera el indice de la misma
         int filaSelec = jTable1.getSelectedRow();
-
+        mostrar(true);
         mostrarInfo(filaSelec);
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -481,10 +485,10 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLMargen;
     private javax.swing.JLabel jLNumero;
     private javax.swing.JLayeredPane jLPCabecera;
+    private javax.swing.JLayeredPane jLPDatos;
     private javax.swing.JLabel jLPsio;
     private javax.swing.JLabel jLTitulo;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPBackground;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -593,10 +597,16 @@ String estado="Ocupado";
             modelo.removeRow(i);
         }
     }
- private void limpiarInfo() {
+ 
+    private void limpiarInfo() {
         jTFCodigo.setText("");
         jTFNumero.setText("");
         jTFPiso.setText("");
         jCBCategorias.setSelectedIndex(0);
+    }
+    
+    private void mostrar(boolean valor){
+        jLPDatos.setVisible(valor);
+        JBEditar.setVisible(valor);
     }
 }
