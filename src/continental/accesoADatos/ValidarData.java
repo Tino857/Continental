@@ -170,9 +170,9 @@ public class ValidarData {
         for (int i = 0; i < celular.length(); i++) {
             
             String letra = celular.substring(i,i+1);
-            System.out.println("1");
+            
             if (!especial.contains(letra)) {
-                System.out.println("2");
+                
                 return true;
             } 
         }

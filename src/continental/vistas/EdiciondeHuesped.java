@@ -516,7 +516,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
             h.setCelular(jTFCelular.getText());
             h.setDomicilio(domicilio);
 
-            //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo editarAlumno
+            //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo editarHuesped
             int registro = Vista.getHD().editarHuesped(h);
 
             //Dependiendo del valor que tome la variable registro se muestra un mensaje al usuario
@@ -528,7 +528,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos. \nEl dni está en uso", "", JOptionPane.ERROR_MESSAGE);
             }
 
-            //Se limpia la tabla y se vuelven a cargar los datos de los alumnos
+            //Se limpia la tabla y se vuelven a cargar los datos de los huesped
             limpiarTabla();
             cargarDatos();
         } catch (NumberFormatException e) {
@@ -562,7 +562,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         JTFBuscador.setForeground(Color.WHITE);
     }//GEN-LAST:event_JTFBuscadorFocusGained
 
-    //Este metodo permite filtrar los alumnos de la tabla al escribir un dni en el textField de busqueda
+    //Este metodo permite filtrar los huespedes de la tabla al escribir un dni en el textField de busqueda
     private void JTFBuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFBuscadorKeyReleased
 
         limpiarTabla();
@@ -582,7 +582,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
 
         if (jTable1.getRowCount() == 1) {
 
-            //Si solo quedo un alumno al filtrar, se setean los valores recuperados del alumno en los campos correspondientes
+            //Si solo quedo un huesped al filtrar, se setean los valores recuperados del huesped en los campos correspondientes
             mostrarInfo(0);
         } else {
 
@@ -642,7 +642,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
 
-        //Se setea el modelo de tabla a la tabla de alumnos
+        //Se setea el modelo de tabla a la tabla de huesped
         jTable1.setModel(modelo);
 
         //Se recupera el modelo de columnas
@@ -666,17 +666,17 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
     //Se cargan las filas en la tabla
     private void cargarDatos() {
         if (jRBA.isSelected()) {
-            //Se recupera una lista de alumnos
+            //Se recupera una lista de huespedes
             ArrayList<Huesped> ListaDeHuespedes = Vista.getHD().listarHuespedAct();
 
-            //Se recorre la lista y por cada alumno, se llama al metodo correspondiente para agregar la fila, enviando por parametro dicho alumno
+            //Se recorre la lista y por cada huesped, se llama al metodo correspondiente para agregar la fila, enviando por parametro dicho huesped
             for (Huesped next : ListaDeHuespedes) {
                 cargarTabla(next);
             }
         } else {
             ArrayList<Huesped> ListaDeHuespedes = Vista.getHD().listarHuespedIn();
 
-            //Se recorre la lista y por cada alumno, se llama al metodo correspondiente para agregar la fila, enviando por parametro dicho alumno
+            //Se recorre la lista y por cada huesped, se llama al metodo correspondiente para agregar la fila, enviando por parametro dicho huesped
             for (Huesped next : ListaDeHuespedes) {
                 cargarTabla(next);
             }
@@ -684,7 +684,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
 
     }
 
-    //Este metodo se encarga de recibir un alumno y desglosar su informacion en una fila para agregarla a la tabla de alumnos
+    //Este metodo se encarga de recibir un huesped y desglosar su informacion en una fila para agregarla a la tabla de huespedes
     private void cargarTabla(Huesped h) {
 
         modelo.addRow(new Object[]{
@@ -722,7 +722,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
     }
 
     private void mostrarInfo(int filaSelec) {
-        //Se obtienen los datos del alumno almacenado en la fila seleccionada
+        //Se obtienen los datos del huesped almacenado en la fila seleccionada
         int dni = Integer.parseInt(modelo.getValueAt(filaSelec, 1).toString());
         Huesped huesped = Vista.getHD().buscarHuespedPorDni(dni);
         jTFDni.setText(dni + "");

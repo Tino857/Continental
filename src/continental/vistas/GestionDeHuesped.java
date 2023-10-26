@@ -221,11 +221,6 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
         jTFCorreo.setBackground(new java.awt.Color(85, 94, 100));
         jTFCorreo.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
         jTFCorreo.setForeground(new java.awt.Color(255, 255, 255));
-        jTFCorreo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFCorreoActionPerformed(evt);
-            }
-        });
 
         jTFCelular.setBackground(new java.awt.Color(85, 94, 100));
         jTFCelular.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
@@ -494,7 +489,7 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
         //Se controla que el campo que contiene el dni no esté vacío
         if (JTFDni.getText().isEmpty()) {
 
-            JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea eliminar al alumno.");
+            JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea eliminar al huesped.");
             return;
         }
 
@@ -548,7 +543,7 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "El DNI es incorrecto.", "ADVERTENCIA",JOptionPane.WARNING_MESSAGE);
         } catch (NullPointerException e) {
 
-            JOptionPane.showMessageDialog(this, "No existe el alumno.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No existe el huesped.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBEliminarActionPerformed
 
@@ -574,10 +569,10 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
             //Se intenta parsear el dni
             int dni = Integer.parseInt(JTFDni.getText());
 
-            //Se recupera el alumno que posee el dni en la DB
+            //Se recupera el huesped que posee el dni en la DB
             Huesped h = Vista.getHD().buscarHuespedPorDni(dni);
 
-            //Si el alumno recibido tiene valor nulo significa que no se encuentra en la DB
+            //Si el huesped recibido tiene valor nulo significa que no se encuentra en la DB
             //Se muestra el mensaje al usuario y se finaliza la ejecucion
             if (h == null) {
 
@@ -585,7 +580,7 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
                 return;
             }
 
-            //Si el alumno se encontraba en la DB, se setean los campos correspondientes con los valores obtenidos del alumno
+            //Si el huesped se encuentra en la DB, se setean los campos correspondientes con los valores obtenidos del huesped
             jTFNombre.setText(h.getNombre());
             jTFApellido.setText(h.getApellido());
             JTFDni.setText(Integer.toString(dni));
@@ -598,19 +593,15 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
         } catch (NullPointerException e) {
 
-            JOptionPane.showMessageDialog(this, "No existe el alumno");
+            JOptionPane.showMessageDialog(this, "No existe el huesped");
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
-
-    private void jTFCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCorreoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFCorreoActionPerformed
 
     private void jBHabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHabilitarActionPerformed
         //Se controla que el campo que contiene el dni no esté vacío
         if (JTFDni.getText().isEmpty()) {
 
-            JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea eliminar al alumno.");
+            JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea eliminar al huesped.");
             return;
         }
 
@@ -619,8 +610,8 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
             //Se intenta parsear el valor del campo dni
             int dni = Integer.parseInt(JTFDni.getText());
 
-            //Se crea un alumno y se busca en la base de datos para confirmar que el alumno existe
-            //En caso que el alumno no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
+            //Se crea un huesped y se busca en la base de datos para confirmar que el huesped existe
+            //En caso que el huesped no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
             Huesped h = Vista.getHD().buscarHuespedPorDni(dni);
 
             if (h == null) {
@@ -629,14 +620,14 @@ public class GestionDeHuesped extends javax.swing.JInternalFrame {
                 return;
             }
 
-            //Si el alumno se encontraba en la base de datos, se recupera su estado para confirmar que no haya sido eliminado anteriormente
+            //Si el huesped se encontraba en la base de datos, se recupera su estado para confirmar que no haya sido eliminado anteriormente
             if (h.isEstado()) {
 
                 JOptionPane.showMessageDialog(this, "El huesped ya se encunetra habilitado");
                 return;
             }
 
-            //Habiendo confirmado que el dni del alumno es correcto, que el huesped existe en la DB y que su estado es inactivo
+            //Habiendo confirmado que el dni del huesped es correcto, que el huesped existe en la DB y que su estado es inactivo
             int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea habilitar este huesped?", "", JOptionPane.YES_OPTION);
             int registro;
             if (resp == 0) {

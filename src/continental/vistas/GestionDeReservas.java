@@ -490,7 +490,7 @@ dispose();        // TODO add your handling code here:
 
     private void cargarCB() {
 
-        //Agregamos en el primer lugar un alumno vacio
+        //Agregamos en el primer lugar una categoria vacio
         Categoria vacio = new Categoria() {
             @Override
             public String toString() {

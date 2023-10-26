@@ -42,7 +42,6 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDPEscritorio = new javax.swing.JDesktopPane();
         ImageIcon icon = new ImageIcon(getClass().getResource("/continental/imagenes/WindowBackground.png"));
         Image image = icon.getImage();
         jPBackground = new javax.swing.JPanel(){
@@ -76,12 +75,6 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setPreferredSize(new java.awt.Dimension(550, 400));
-
-        jDPEscritorio.addContainerListener(new java.awt.event.ContainerAdapter() {
-            public void componentRemoved(java.awt.event.ContainerEvent evt) {
-                jDPEscritorioComponentRemoved(evt);
-            }
-        });
 
         jPBackground.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -182,11 +175,6 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         jCBCategorias.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
 
         jRBHabilitada.setEnabled(false);
-        jRBHabilitada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRBHabilitadaActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -276,7 +264,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                         .addComponent(jBHabilitar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jBDeshabilitar1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
@@ -315,28 +303,15 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20))
         );
 
-        jDPEscritorio.setLayer(jPBackground, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jDPEscritorioLayout = new javax.swing.GroupLayout(jDPEscritorio);
-        jDPEscritorio.setLayout(jDPEscritorioLayout);
-        jDPEscritorioLayout.setHorizontalGroup(
-            jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jDPEscritorioLayout.setVerticalGroup(
-            jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDPEscritorio)
+            .addComponent(jPBackground, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDPEscritorio)
+            .addComponent(jPBackground, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -492,21 +467,6 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
-    private void jDPEscritorioComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jDPEscritorioComponentRemoved
-
-        /**
-         * Se captura el evento de cierre de ventana de confirmacion al eliminar
-         * una materia. Luego se busca la materia que se intento eliminar y se
-         * recupera su estado. Por ultimo se setea el componente radioButton
-         * estado con el valor de estado de la materia.
-         */
-
-    }//GEN-LAST:event_jDPEscritorioComponentRemoved
-
-    private void jRBHabilitadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBHabilitadaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRBHabilitadaActionPerformed
-
     private void jBDeshabilitar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeshabilitar1ActionPerformed
         //Se controla que el campo de numero no se encuentre vacio
         if (jTFNumero.getText().isEmpty()) {
@@ -524,6 +484,10 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
             if (hab == null) {
 
                 JOptionPane.showMessageDialog(this, "No existe la habitacion");
+                return;
+            }
+            if (!hab.isHabilitada()) {
+                JOptionPane.showMessageDialog(this, "La habitacion ya se encunetra deshabilitada");
                 return;
             }
 
@@ -566,7 +530,6 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jBSalir;
     private javax.swing.JComboBox<Categoria> jCBCategorias;
-    private javax.swing.JDesktopPane jDPEscritorio;
     private javax.swing.JLabel jLLogo1;
     private javax.swing.JLabel jLMargen1;
     private javax.swing.JLayeredPane jLPCabecera1;

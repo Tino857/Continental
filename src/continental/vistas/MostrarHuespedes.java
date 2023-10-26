@@ -74,6 +74,7 @@ public class MostrarHuespedes extends javax.swing.JInternalFrame {
         jLTitulo = new javax.swing.JLabel();
         jLLogo = new javax.swing.JLabel();
 
+        setClosable(true);
         setMaximizable(true);
         setResizable(true);
         setPreferredSize(new java.awt.Dimension(500, 450));

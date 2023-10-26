@@ -210,7 +210,7 @@ public class HabitacionData {
             ps.close();//cierra  el PS
         } catch (SQLException e) {
             
-            System.out.println("Error al encontrar al huesped" + e.getMessage());
+            System.out.println("Error al encontrar la habitacion" + e.getMessage());
         }
         return listaHabitaciones;//retorna una lista de habitaciones
     }
