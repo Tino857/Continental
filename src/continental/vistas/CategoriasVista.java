@@ -425,7 +425,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
             TipoCama tipoCamas = (TipoCama) jCBCamas.getSelectedItem();
             String nombre = jTFNombre.getText();
             
-            //VALIDAR DATOSç
+            //VALIDAR DATOS
             if (!validarDatos()){
                 return;
             }
@@ -766,16 +766,16 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
             
             //Se valida si la cantidad de personas es correcta
 
-            if (cantidadPersonas<1) {
+            if (cantidadPersonas<1||cantidadPersonas>4) {
                 
-                JOptionPane.showMessageDialog(this, "La cantidad de personas debe ser mayor o igual a 1", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "La cantidad de personas debe ser entre 1 y 4", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
                 return false;
             }
             
             //Se valida si la cantidad de camas es correcta
-            if (cantidadCamas<1) {
+            if (cantidadCamas<1||cantidadCamas>4) {
                 
-                JOptionPane.showMessageDialog(this, "La cantidad de camas debe ser mayor o igual a 1", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "La cantidad de camas debe ser entre 1 y 4", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
                 return false;
             }
             

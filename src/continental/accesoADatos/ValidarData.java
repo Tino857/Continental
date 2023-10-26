@@ -64,13 +64,13 @@ public class ValidarData {
     //Valida si el valor ingresado de piso es correcto
     public static boolean validarPiso(int piso) {
 
-        return (piso < 0 || piso > 20);
+        return (piso < 1 || piso > 20);
     }
 
     //Valida si el valor ingresado de habitacion es correcto
     public static boolean validarNumero(int num) {
 
-        return (num < 0 || num > 200);
+        return (num < 1 || num > 200);
     }
 
     //Recibe un entero y devuelve un tipo de cama

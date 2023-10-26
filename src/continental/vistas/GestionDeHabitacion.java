@@ -327,7 +327,10 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         try {
 
             int nDH = Integer.parseInt(jTFNumero.getText());
-
+            if (ValidarData.validarNumero(nDH)) {
+                JOptionPane.showMessageDialog(this, "El numero de habitacion debe estar entre 1 y 200");
+                return;
+            }
             //Se busca la materia en la base de datos y se guarda
             Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(nDH);
 
@@ -376,7 +379,10 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         try {
 
             int numero = Integer.parseInt(jTFNumero.getText());
-
+ if (ValidarData.validarNumero(numero)) {
+                JOptionPane.showMessageDialog(this, "El numero de habitacion debe estar entre 1 y 200");
+                return;
+            }
             //Se crea una habitacion y se busca en la base de datos para confirmar que la habitacion existe
             //En caso que la habitacion no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
             Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(numero);

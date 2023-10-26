@@ -8,6 +8,7 @@ package continental.vistas;
 import continental.accesoADatos.ValidarData;
 import continental.entidades.Categoria;
 import continental.entidades.Habitacion;
+import continental.entidades.Reserva;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -381,10 +382,14 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
             }
 
                Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
-                if (!hab.isEstado()) {
-                JOptionPane.showMessageDialog(this, "No puede editar una habitacion que esta siendo ocupada");
-                return;
+               ArrayList<Reserva> reservas=Vista.getRD().listarReservas();
+               for (Reserva reserva : reservas) {
+                   if (reserva.getHabitacion().getNro()==hab.getNro()) {
+                      JOptionPane.showMessageDialog(this, "No puede editar una habitacion que esta siendo ocupada o tenga una reserva en el futuro"); 
+                  return;
+                   }
             }
+               
                 //Seteamos a la habitacioncon la informacion nueva
                 hab.setNro(numero);
                 hab.setPiso(piso);

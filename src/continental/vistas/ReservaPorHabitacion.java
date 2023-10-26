@@ -330,6 +330,9 @@ public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
                 if (registro > 0) {
                     
                     JOptionPane.showMessageDialog(this, "Se eliminó la reserva.");
+                    Habitacion hab=res.getHabitacion();
+                    hab.setEstado(true);
+                    Vista.getHabD().editarHabitacion(hab);
                 } else {
                     JOptionPane.showMessageDialog(this, "No se pudo eliminar la reserva.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }

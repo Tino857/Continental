@@ -35,7 +35,7 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
             return false;
         }
     };
-
+ private boolean okay=false;
     public GestionDeReservas() {
         initComponents();
         armarTabla();
@@ -335,58 +335,13 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
     private void jBFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFiltrarActionPerformed
         limpiarTabla();
 
-        try {
-            LocalDate fi = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            LocalDate ff = jDCFinal.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            if (ff.isBefore(LocalDate.now(ZoneId.systemDefault())) || fi.isBefore(LocalDate.now(ZoneId.systemDefault()))) {
-                JOptionPane.showMessageDialog(this, "La fecha debe ser posterior al dia de hoy");
-                return;
-            }
-
-            if (fi.isAfter(ff)) {
-                JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser anterior a la fecha de final");
-                return;
-            }
-            int cant = Integer.parseInt(jTFCantidad.getText());
-
-            ArrayList<Reserva> ListaDeReserva = Vista.getRD().listarReservas();
-            ArrayList<Habitacion> listaDeHabitacion = Vista.getHabD().listarHabitaciones();
-            Map<Integer, Habitacion> listaDeHab = new HashMap();
-            Categoria cat = (Categoria) jCBCategorias.getSelectedItem();
-
-           //Paso la lista de habitaciones a un hash map
-            for (Habitacion hab : listaDeHabitacion) {
-                if (hab.getCategoria().getTipoCategoria().equals(cat.getTipoCategoria())) {
-                    listaDeHab.put(hab.getNro(), hab);
-                }
-
-            }
-            for (Reserva reserva : ListaDeReserva) {
-                if (!((fi.isBefore(reserva.getFi()) && ff.isBefore(reserva.getFi())) || (fi.isAfter(reserva.getFf()) && ff.isAfter(reserva.getFf())))) {
-                    
-                 listaDeHab.remove(reserva.getHabitacion().getNro());
-
-                }
-            }
-
-            for (Map.Entry<Integer, Habitacion> entry : listaDeHab.entrySet()) {
-                Integer key = entry.getKey();
-                Habitacion value = entry.getValue();
-
-                cargarTabla(value);
-            }
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "En cantidad debe ser un numero entero");
-        } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(this, "Error en la Fecha");
-
-        }
+       comprobarDatos();
 
 
     }//GEN-LAST:event_jBFiltrarActionPerformed
 
     private void jTFCantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCantidadKeyReleased
+       limpiarTabla();
         jCBCategorias.removeAllItems();
         ArrayList<Categoria> ListaDeCategorias = Vista.getCD().listarCategorias();
 
@@ -418,7 +373,11 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jCBCategoriasActionPerformed
 
     private void jBSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSiguienteActionPerformed
+ ;
+        if (comprobarDatos()) {
 
+            return;
+        }
         try {
             if (jTable1.getSelectedRow() == -1) {
                 JOptionPane.showMessageDialog(this, "Seleccione una habitacion para continuar");
@@ -444,7 +403,10 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
                 abrirVentana(mh);  
             }
 
-        } catch (NullPointerException e) {
+        }catch (NumberFormatException e){
+             JOptionPane.showMessageDialog(this, "La cantidad de personas debe ser un dato valido");
+        }
+        catch (NullPointerException e) {
             
             JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
         }
@@ -569,5 +531,66 @@ dispose();        // TODO add your handling code here:
 
         jDesktopPane1.moveToFront(cpm);
     }
+private boolean comprobarDatos(){
+    try {
+            LocalDate fi = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate ff = jDCFinal.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if (ff.isBefore(LocalDate.now(ZoneId.systemDefault())) || fi.isBefore(LocalDate.now(ZoneId.systemDefault()))) {
+                JOptionPane.showMessageDialog(this, "La fecha debe ser posterior al dia de hoy");
+             
+                return true;
+            }
 
+            if (fi.isAfter(ff)) {
+                JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser anterior a la fecha de final");
+           
+                return true;
+            }
+            int cant = Integer.parseInt(jTFCantidad.getText());
+            
+            if (cant<=0 ||cant>4) {
+            JOptionPane.showMessageDialog(this, "Ingrese una cantidad de personas de 1 a 4");
+               
+            return true;
+        }
+            
+            ArrayList<Reserva> ListaDeReserva = Vista.getRD().listarReservas();
+            ArrayList<Habitacion> listaDeHabitacion = Vista.getHabD().listarHabitaciones();
+            Map<Integer, Habitacion> listaDeHab = new HashMap();
+            Categoria cat = (Categoria) jCBCategorias.getSelectedItem();
+
+           //Paso la lista de habitaciones a un hash map
+            for (Habitacion hab : listaDeHabitacion) {
+                if (hab.getCategoria().getTipoCategoria().equals(cat.getTipoCategoria())) {
+                    listaDeHab.put(hab.getNro(), hab);
+                }
+
+            }
+            for (Reserva reserva : ListaDeReserva) {
+                if (!((fi.isBefore(reserva.getFi()) && ff.isBefore(reserva.getFi())) || (fi.isAfter(reserva.getFf()) && ff.isAfter(reserva.getFf())))) {
+                    
+                 listaDeHab.remove(reserva.getHabitacion().getNro());
+
+                }
+            }
+
+            for (Map.Entry<Integer, Habitacion> entry : listaDeHab.entrySet()) {
+                Integer key = entry.getKey();
+                Habitacion value = entry.getValue();
+
+                cargarTabla(value);
+                
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "En cantidad debe ser un numero entero");
+             return true;
+
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Error en la Fecha");
+            return true;
+
+        }
+    return false;
+}
 }

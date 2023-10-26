@@ -1,5 +1,6 @@
 package continental.vistas;
 
+import continental.entidades.Habitacion;
 import continental.entidades.Huesped;
 import continental.entidades.Reserva;
 import java.awt.Graphics;
@@ -318,6 +319,9 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
                 if (registro > 0) {
 
                     JOptionPane.showMessageDialog(this, "Se elimino la reserva.");
+                     Habitacion hab=res.getHabitacion();
+                    hab.setEstado(true);
+                    Vista.getHabD().editarHabitacion(hab);
                 } else {
 
                     JOptionPane.showMessageDialog(this, "No se pudo eliminar la reserva.", "ERROR", JOptionPane.ERROR_MESSAGE);
