@@ -542,7 +542,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         limpiarInfo();
     }//GEN-LAST:event_JBEditarActionPerformed
 
-    //Este metodo setea el texto y propiedades del textField de busqueda al entrar al mismo
+    //Este metodo setea el texto y propiedades del textField de busqueda al salir del mismo
     private void JTFBuscadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusLost
 
         if (JTFBuscador.getText().equals("")) {
@@ -552,7 +552,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         JTFBuscador.setForeground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_JTFBuscadorFocusLost
 
-    //Este metodo setea el texto y propiedades del textField de busqueda al salir del mismo
+    //Este metodo setea el texto y propiedades del textField de busqueda al entrar al mismo
     private void JTFBuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusGained
 
         if (JTFBuscador.getText().equals("Ingrese un DNI para filtrar la tabla...")) {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package continental.vistas;
 
 import continental.accesoADatos.ValidarData;
@@ -22,12 +17,12 @@ import javax.swing.table.TableColumnModel;
 
 /**
  *
- * @author valen
+ * @author Grupo 61
  */
 public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
-    
-    private  Map<Integer,Categoria> listaDeHab=new HashMap();
-    
+
+    private Map<Integer, Categoria> listaDeHab = new HashMap();
+
     private final DefaultTableModel modelo = new DefaultTableModel() {
 
         @Override
@@ -36,13 +31,13 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
             return false;
         }
     };
-    
+
     public RemodelacionDeHabitacion() {
-       initComponents();
+
+        initComponents();
         armarTabla();
         cargarDatos();
         cargarCB();
-        mostrar(false);
     }
 
     /**
@@ -238,11 +233,6 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
         jLabel6.setText("Categoría:");
 
         jCBCategorias.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        jCBCategorias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBCategoriasActionPerformed(evt);
-            }
-        });
 
         jLPDatos.setLayer(jTFCodigo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLPDatos.setLayer(jTFNumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -342,19 +332,20 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //BOTON EDITAR
     private void JBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditarActionPerformed
-       
-        //Se controla que no hayan campos vacios
-        if (jTFPiso.getText().isEmpty() || jTFNumero.getText().isEmpty() || jTFCodigo.getText().isEmpty()||jCBCategorias.getSelectedIndex()==0 ) {
 
-            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio.");
+        //Se controla que una habitacion de la tabla esté seleccionado
+        if (jTable1.getSelectedRow() == -1 && jTable1.getRowCount() > 1) {
+
+            JOptionPane.showMessageDialog(this, "Seleccione una habitacion de la lista.", "", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        //Se controla que un huesped de la tabla esté seleccionado
-        if (jTable1.getSelectedRow() == -1 && jTable1.getRowCount() > 1) {
+        //Se controla que no hayan campos vacios
+        if (jTFPiso.getText().isEmpty() || jTFNumero.getText().isEmpty() || jTFCodigo.getText().isEmpty() || jCBCategorias.getSelectedIndex() == 0) {
 
-            JOptionPane.showMessageDialog(this, "Seleccione un huesped de la lista.", "", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio.");
             return;
         }
 
@@ -367,8 +358,8 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
                 filaSelec = 0;
             }
 
-            //Se intenta parsear el nuevo dni a guardar en el huesped y se realiza su validacion
-            int numero=Integer.parseInt(jTFNumero.getText());
+            //Se intenta parsear el numero y piso de la habitacion ingresados y se realiza su validacion
+            int numero = Integer.parseInt(jTFNumero.getText());
             int piso = Integer.parseInt(jTFPiso.getText());
             if (ValidarData.validarNumero(numero)) {
 
@@ -381,58 +372,61 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
                 return;
             }
 
-               Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
-               ArrayList<Reserva> reservas=Vista.getRD().listarReservas();
-               for (Reserva reserva : reservas) {
-                   if (reserva.getHabitacion().getNro()==hab.getNro()) {
-                      JOptionPane.showMessageDialog(this, "No puede editar una habitacion que esta siendo ocupada o tenga una reserva en el futuro"); 
-                  return;
-                   }
-            }
-               
-                //Seteamos a la habitacioncon la informacion nueva
-                hab.setNro(numero);
-                hab.setPiso(piso);
-                hab.setCategoria((Categoria)jCBCategorias.getSelectedItem());
-               
-
-                //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo editarAlumno
-                int registro = Vista.getHabD().editarHabitacion(hab);
-
-                //Dependiendo del valor que tome la variable registro se muestra un mensaje al usuario
-                if (registro > 0) {
-
-                    JOptionPane.showMessageDialog(this, "Datos actualizados");
-                } else {
-
-                    JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos. \nEl numero está en uso", "", JOptionPane.ERROR_MESSAGE);
+            //Se crea una habitacion y se controla que no haya reservas activas o este siendo ocupada
+            Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
+            ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
+            for (Reserva reserva : reservas) {
+                if (reserva.getHabitacion().getNro() == hab.getNro()) {
+                    JOptionPane.showMessageDialog(this, "No puede editar una habitacion que esta siendo ocupada o tenga una reserva en el futuro");
+                    return;
                 }
-
-                //Se limpia la tabla y se vuelven a cargar los datos de los alumnos
-                limpiarTabla();
-                cargarDatos();
-            } catch (NumberFormatException e) {
-
-                JOptionPane.showMessageDialog(this, "En la casilla de numero o piso solo deben ir numeros", "", JOptionPane.WARNING_MESSAGE);
             }
-            //Se limpian los textfields
-            limpiarInfo();
+
+            //Seteamos a la habitacioncon la informacion nueva
+            hab.setNro(numero);
+            hab.setPiso(piso);
+            hab.setCategoria((Categoria) jCBCategorias.getSelectedItem());
+
+            //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo editarHabitacion
+            int registro = Vista.getHabD().editarHabitacion(hab);
+
+            //Dependiendo del valor que tome la variable registro se muestra un mensaje al usuario
+            if (registro > 0) {
+
+                JOptionPane.showMessageDialog(this, "Datos actualizados");
+            } else {
+
+                JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos. \nEl numero está en uso", "", JOptionPane.ERROR_MESSAGE);
+            }
+
+            //Se limpia la tabla y se vuelven a cargar los datos de las habitaciones
+            limpiarTabla();
+            cargarDatos();
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "En la casilla de numero o piso solo deben ir numeros", "", JOptionPane.WARNING_MESSAGE);
+        }
+        //Se limpian los textfields
+        limpiarInfo();
     }//GEN-LAST:event_JBEditarActionPerformed
 
+    //BOTON SALIR
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
 
         //Cierra la ventana
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    //Click en tabla
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
         //Se captura el evento de click en una fila de la tabla y se recupera el indice de la misma
         int filaSelec = jTable1.getSelectedRow();
-        mostrar(true);
+        //Se llama al metodo encargado de mostrar la informacion de la fila
         mostrarInfo(filaSelec);
     }//GEN-LAST:event_jTable1MouseClicked
 
+    //Este metodo setea el texto y propiedades del textField de busqueda al entrar al mismo
     private void JTFBuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusGained
 
         if (JTFBuscador.getText().equals("Ingrese el Número de Habitación para filtrar la tabla...")) {
@@ -442,6 +436,7 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
         JTFBuscador.setForeground(Color.WHITE);
     }//GEN-LAST:event_JTFBuscadorFocusGained
 
+    //Este metodo setea el texto y propiedades del textField de busqueda al salir del mismo
     private void JTFBuscadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusLost
 
         if (JTFBuscador.getText().equals("")) {
@@ -451,14 +446,15 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
         JTFBuscador.setForeground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_JTFBuscadorFocusLost
 
+    //Este metodo permite filtrar las habitaciones de la tabla al escribir un numero de habitacion en el textField de busqueda
     private void JTFBuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFBuscadorKeyReleased
 
         limpiarTabla();
-        ArrayList<Habitacion> ListaDeHabitaciones=Vista.getHabD().listarHabitaciones();
-        
+        ArrayList<Habitacion> ListaDeHabitaciones = Vista.getHabD().listarHabitaciones();
+
         for (Habitacion h : ListaDeHabitaciones) {
 
-            if ((h.getNro()+ "").startsWith(JTFBuscador.getText())) {
+            if ((h.getNro() + "").startsWith(JTFBuscador.getText())) {
 
                 cargarTabla(h);
             }
@@ -466,7 +462,7 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
 
         if (jTable1.getRowCount() == 1) {
 
-            //Si solo quedo un alumno al filtrar, se setean los valores recuperados del alumno en los campos correspondientes
+            //Si solo quedo una habitacion al filtrar, se setean los valores recuperados de la habitacion en los campos correspondientes
             mostrarInfo(0);
         } else {
 
@@ -474,10 +470,6 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
             limpiarInfo();
         }
     }//GEN-LAST:event_JTFBuscadorKeyReleased
-
-    private void jCBCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCategoriasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCBCategoriasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -502,7 +494,8 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTFPiso;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
- //Este metodo permite setear un modelo de tabla personalizado
+
+    //Este metodo permite setear un modelo de tabla personalizado
     private void armarTabla() {
 
         //Se agregan las columnas con su nombre correspondiente al modelo de tabla creado anteriormente
@@ -512,7 +505,7 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
         modelo.addColumn("Categoria");
         modelo.addColumn("Estado");
 
-        //Se setea el modelo de tabla a la tabla de alumnos
+        //Se setea el modelo de tabla a la tabla de habitaciones
         jTable1.setModel(modelo);
 
         //Se recupera el modelo de columnas
@@ -522,57 +515,65 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
         anchoColumna(columnas, 0, 40);
         anchoColumna(columnas, 1, 80);
     }
- private void anchoColumna(TableColumnModel modeloTabla, int indice, int ancho) {
+
+    private void anchoColumna(TableColumnModel modeloTabla, int indice, int ancho) {
 
         modeloTabla.getColumn(indice).setWidth(ancho);
         modeloTabla.getColumn(indice).setMaxWidth(ancho + 30);
         modeloTabla.getColumn(indice).setMinWidth(ancho - 10);
         modeloTabla.getColumn(indice).setPreferredWidth(ancho);
     }
- private void cargarDatos() {
- 
-            //Se recupera una lista de alumnos
-            ArrayList<Habitacion> ListaDeHabitaciones = Vista.getHabD().listarHabitaciones();
-            for (Habitacion next : ListaDeHabitaciones) {
-                cargarTabla(next);
-            }
-        
 
-}
- 
- private void cargarTabla(Habitacion hab) {
-String estado="Ocupado";
-     if (hab.isEstado()) {
-         estado="Libre";
-     }
+    private void cargarDatos() {
+
+        //Se recupera una lista de habitaciones
+        ArrayList<Habitacion> ListaDeHabitaciones = Vista.getHabD().listarHabitaciones();
+        for (Habitacion next : ListaDeHabitaciones) {
+
+            cargarTabla(next);
+        }
+    }
+
+    //Este metodo recibe una habitacion y desglosa sus atributos en una fila nueva de la tabla
+    private void cargarTabla(Habitacion hab) {
+
+        String estado = "Ocupado";
+        if (hab.isEstado()) {
+
+            estado = "Libre";
+        }
         modelo.addRow(new Object[]{
-             Integer.toString(hab.getIdHabitacion()),
+            Integer.toString(hab.getIdHabitacion()),
             Integer.toString(hab.getNro()),
             Integer.toString(hab.getPiso()),
-           hab.getCategoria().getTipoCategoria(),
-           estado
-           
+            hab.getCategoria().getTipoCategoria(),
+            estado
         });
     }
-   private void mostrarInfo(int filaSelec){
-        //Se obtienen los datos del alumno almacenado en la fila seleccionada
+
+    //Este metodo recibe el numero de fila seleccionada, recupera una habitacion y setea los textfields con la informacion de la habitacion obtenida
+    private void mostrarInfo(int filaSelec) {
+
         int numero = Integer.parseInt(modelo.getValueAt(filaSelec, 1).toString());
         Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(numero);
-       jTFCodigo.setText(hab.getIdHabitacion()+"");
-        jTFNumero.setText(numero+"");
-        jTFPiso.setText(hab.getPiso()+"");
-       for (Map.Entry<Integer, Categoria> entry : listaDeHab.entrySet()) {
-                Integer key = entry.getKey();
-                Categoria value = entry.getValue();
-                       if (hab.getCategoria().getIdCategoria()==value.getIdCategoria()) {
-                           jCBCategorias.setSelectedIndex(key);
-                       }
-            } 
-        
-    }
-  private void cargarCB() {
+        jTFCodigo.setText(hab.getIdHabitacion() + "");
+        jTFNumero.setText(numero + "");
+        jTFPiso.setText(hab.getPiso() + "");
+        for (Map.Entry<Integer, Categoria> entry : listaDeHab.entrySet()) {
 
-        //Agregamos en el primer lugar un alumno vacio
+            Integer key = entry.getKey();
+            Categoria value = entry.getValue();
+            if (hab.getCategoria().getIdCategoria() == value.getIdCategoria()) {
+
+                jCBCategorias.setSelectedIndex(key);
+            }
+        }
+    }
+
+    //Este metodo carga las categorias de habitacion al combo box
+    private void cargarCB() {
+
+        //Agregamos en el primer lugar una categoria vacia
         Categoria vacio = new Categoria() {
             @Override
             public String toString() {
@@ -581,37 +582,34 @@ String estado="Ocupado";
         };
         jCBCategorias.addItem(vacio);
 
-        //Se recupera una lista de alumnos
+        //Se recupera una lista de categorias
         ArrayList<Categoria> Lista = Vista.getCD().listarCategorias();
-       int i=0;
+        int i = 0;
         for (Categoria categoria : Lista) {
-            listaDeHab.put(i+1, categoria);
+            listaDeHab.put(i + 1, categoria);
             i++;
         }
-        //Se recorre la lista y cada alumno se agrega al CB
+        //Se recorre la lista y cada categoria se agrega al CB
         for (Categoria cat : Lista) {
             jCBCategorias.addItem(cat);
         }
     }
-     //Este metodo elimina todas las filas de la tabla
+
+    //Este metodo elimina todas las filas de la tabla
     private void limpiarTabla() {
 
         int filas = modelo.getRowCount() - 1;
         for (int i = filas; i >= 0; i--) {
-            
+
             modelo.removeRow(i);
         }
     }
- 
+
+    //Este metodo limpia los campos de texto y setea el item seleccionado del combobox al indice 0
     private void limpiarInfo() {
         jTFCodigo.setText("");
         jTFNumero.setText("");
         jTFPiso.setText("");
         jCBCategorias.setSelectedIndex(0);
-    }
-    
-    private void mostrar(boolean valor){
-        jLPDatos.setVisible(valor);
-        JBEditar.setVisible(valor);
     }
 }

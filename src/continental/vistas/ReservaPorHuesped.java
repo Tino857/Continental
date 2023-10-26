@@ -30,6 +30,7 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
 
         initComponents();
         armarTabla();
+        jRBActivas.setSelected(true);
     }
 
     /**
@@ -41,6 +42,7 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         ImageIcon icon = new ImageIcon(getClass().getResource("/continental/imagenes/WindowBackground.png"));
         Image image = icon.getImage();
         jPBackground = new javax.swing.JPanel(){
@@ -61,6 +63,8 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
         jBLimpiar = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
         jBEliminar = new javax.swing.JButton();
+        jRBActivas = new javax.swing.JRadioButton();
+        jRBInactivas = new javax.swing.JRadioButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -173,6 +177,22 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonGroup1.add(jRBActivas);
+        jRBActivas.setText("Activas");
+        jRBActivas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBActivasActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRBInactivas);
+        jRBInactivas.setText("Inactivas");
+        jRBInactivas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBInactivasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPBackgroundLayout = new javax.swing.GroupLayout(jPBackground);
         jPBackground.setLayout(jPBackgroundLayout);
         jPBackgroundLayout.setHorizontalGroup(
@@ -187,13 +207,17 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLPCabecera)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
                     .addGroup(jPBackgroundLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jRBActivas)
+                            .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addComponent(jTFDni, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE))
+                        .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jRBInactivas))))
                 .addGap(20, 20, 20))
         );
         jPBackgroundLayout.setVerticalGroup(
@@ -203,11 +227,15 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
                 .addComponent(jLPCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRBActivas)
+                    .addComponent(jRBInactivas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTFDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -280,13 +308,13 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
         try {
             //Se obtiene la fila seleccionada de la tabla de reservas
             int filaSelec = jTable1.getSelectedRow();
-            
+
             //Si hay solo una reserva, se toma la primer fila como seleccionada
             if (jTable1.getRowCount() == 1) {
 
                 filaSelec = 0;
             }
-            
+
             if (filaSelec == -1) {
                 //Si hay mas de una reserva y no se selecciono ninguna fila de la tabla se finaliza la ejecucion
                 JOptionPane.showMessageDialog(this, "Seleccione una reserva.", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
@@ -299,16 +327,16 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
             Huesped h = res.getHuesped();
             //Se pregunta si se desea eliminar la reserva
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar la siguiente reserva?"
-             + " \nTitular: " + res.getHuesped().getApellido() + ", " + res.getHuesped().getNombre()
-                + " \nDNI: " + res.getHuesped().getDni()
-                + " \nFecha de ingreso: " + res.getFi()
-                + " \nFecha de salida: " + res.getFf()
-                + " \nCantidad de personas: " + res.getCantDePersonas()
-                + " \nNº de Habitación: " + res.getHabitacion().getNro() + " - Piso: " + res.getHabitacion().getPiso()
-                + " \nTipo de habitacion: " + res.getHabitacion().getCategoria().getTipoCategoria()
-                + " \nPrecio por noche: " + res.getHabitacion().getCategoria().getPrecio()
-                + " \nCantidad de dias: " + res.getDias()
-                + " \nTOTAL A PAGAR: " + res.getMonto(), "CONFIRMAR", JOptionPane.YES_NO_OPTION);
+                    + " \nTitular: " + res.getHuesped().getApellido() + ", " + res.getHuesped().getNombre()
+                    + " \nDNI: " + res.getHuesped().getDni()
+                    + " \nFecha de ingreso: " + res.getFi()
+                    + " \nFecha de salida: " + res.getFf()
+                    + " \nCantidad de personas: " + res.getCantDePersonas()
+                    + " \nNº de Habitación: " + res.getHabitacion().getNro() + " - Piso: " + res.getHabitacion().getPiso()
+                    + " \nTipo de habitacion: " + res.getHabitacion().getCategoria().getTipoCategoria()
+                    + " \nPrecio por noche: " + res.getHabitacion().getCategoria().getPrecio()
+                    + " \nCantidad de dias: " + res.getDias()
+                    + " \nTOTAL A PAGAR: " + res.getMonto(), "CONFIRMAR", JOptionPane.YES_NO_OPTION);
             //Si la respuesta es si, el resultado obtenido es 0
             if (respuesta == 0) {
 
@@ -319,7 +347,7 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
                 if (registro > 0) {
 
                     JOptionPane.showMessageDialog(this, "Se elimino la reserva.");
-                     Habitacion hab=res.getHabitacion();
+                    Habitacion hab = res.getHabitacion();
                     hab.setEstado(true);
                     Vista.getHabD().editarHabitacion(hab);
                 } else {
@@ -338,8 +366,21 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBEliminarActionPerformed
 
+    private void jRBInactivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBInactivasActionPerformed
+        mostrarBoton(false);
+        limpiarTabla();
+        buscar();
+    }//GEN-LAST:event_jRBInactivasActionPerformed
+
+    private void jRBActivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBActivasActionPerformed
+        mostrarBoton(true);
+        limpiarTabla();
+        buscar();
+    }//GEN-LAST:event_jRBActivasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBLimpiar;
@@ -350,6 +391,8 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLTitulo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPBackground;
+    private javax.swing.JRadioButton jRBActivas;
+    private javax.swing.JRadioButton jRBInactivas;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFDni;
     private javax.swing.JTable jTable1;
@@ -367,7 +410,7 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
         modelo.addColumn("Precio");
         modelo.addColumn("Estado");
 
-        //Se setea el modelo de tabla a la tabla de alumnos
+        //Se setea el modelo de tabla a la tabla de huesped
         jTable1.setModel(modelo);
 
         //Se recupera el modelo de columnas
@@ -398,13 +441,13 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
     }
 
     private void cargarTabla(Reserva res) {
-        
+
         String estado = "Inactiva";
         if (res.isEstado()) {
-            
+
             estado = "Activa";
         }
-        
+
         modelo.addRow(new Object[]{
             Integer.toString(res.getIdReserva()),
             Integer.toString(res.getHabitacion().getNro()),
@@ -418,15 +461,61 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
     }
 
     private void mostrarReservas(Huesped h) {
-        
+
         limpiarTabla();
-        ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
-        for (Reserva reserva : reservas) {
+        if (jRBActivas.isSelected()) {
+            ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
+            for (Reserva reserva : reservas) {
 
-            if (reserva.getHuesped().getDni() == h.getDni()) {
+                if (reserva.getHuesped().getDni() == h.getDni()) {
 
-                cargarTabla(reserva);
+                    cargarTabla(reserva);
+                }
             }
+        } else if (jRBInactivas.isSelected()) {
+            ArrayList<Reserva> reservas = Vista.getRD().listarReservasInactivas();
+            for (Reserva reserva : reservas) {
+
+                if (reserva.getHuesped().getDni() == h.getDni()) {
+
+                    cargarTabla(reserva);
+                }
+            }
+        }
+
+    }
+
+    private void mostrarBoton(boolean valor) {
+
+        jBEliminar.setEnabled(valor);
+        jBEliminar.setVisible(valor);
+    }
+
+    private void buscar() {
+
+        if (jTFDni.getText().isEmpty()) {
+
+            return;
+        }
+
+        try {
+
+            //Se intenta parsear el dni
+            int dni = Integer.parseInt(jTFDni.getText());
+
+            //Se recupera el huesped que posee el dni en la DB
+            Huesped h = Vista.getHD().buscarHuespedPorDni(dni);
+
+            //Si el huesped recibido tiene valor nulo significa que no se encuentra en la DB
+            //Se muestra el mensaje al usuario y se finaliza la ejecucion
+            if (h == null) {
+
+                return;
+            }
+            //Si se encontro un huesped, se limpia la tabla y se cargan las reservas activas de ese huesped
+            mostrarReservas(h);
+        } catch (NumberFormatException | NullPointerException e) {
+
         }
     }
 }

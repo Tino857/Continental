@@ -198,4 +198,35 @@ public class ReservaData {
         }
         return listaReservas;//retorna una lista de reservas
     }
+    
+    //Este metodo devuelve una lista de reservas inactivas
+    public ArrayList<Reserva> listarReservasInactivas() {
+      
+        ArrayList<Reserva> listaReservas = new ArrayList();//se  creo una lista paraa almacenar Reservas
+        String query = "SELECT * FROM reserva WHERE estado = 0";//se define consulta
+        try {
+            
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = ps.executeQuery();//se ejecuta la consulta, para un conjunto de resultados(resulset)
+            Reserva reserva = null;// se inicializa una reserva en null
+            while (rs.next()) {//se inicializa un bucle para modificar la reserva
+                reserva = new Reserva();
+                reserva.setIdReserva(rs.getInt("idReserva"));
+                reserva.setHuesped(Vista.getHD().buscarHuespedPorId(rs.getInt("idHuesped")));
+                reserva.setHabitacion(Vista.getHabD().buscarHabitacionPorId(rs.getInt("idHabitacion")));
+                reserva.setFi(rs.getDate("fechaInicio").toLocalDate());
+                reserva.setFf(rs.getDate("fechaFin").toLocalDate());
+                reserva.setMonto(rs.getDouble("monto"));
+                reserva.setDias(rs.getInt("dias"));
+                reserva.setEstado(rs.getBoolean("estado"));
+                reserva.setCantDePersonas(rs.getInt("cantidadPersonas"));
+                listaReservas.add(reserva);//se agrega la reserva a la lista
+            }
+            ps.close();//cierra  el PS
+        } catch (SQLException e) {
+            
+            System.out.println("Error al encontrar la reserva" + e.getMessage());
+        }
+        return listaReservas;//retorna una lista de reservas
+    }
 }
