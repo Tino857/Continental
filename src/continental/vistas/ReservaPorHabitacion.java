@@ -278,13 +278,6 @@ public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
             return;
         }
 
-        //Se controla que el campo numero no contenga caracteres especiales
-        if (ValidarData.caracteresEspecialesNum(jTFNro.getText())) {
-
-            JOptionPane.showMessageDialog(this, "La casilla numero no puede contener caracteres especiales.", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
         try {
 
             //Se intenta parsear el numero de habitacion
@@ -305,7 +298,7 @@ public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
             cargarDatos(hab);
         } catch (NumberFormatException e) {
 
-            JOptionPane.showMessageDialog(this, "La casilla DNI solo puede contener números.", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "La casilla numero solo puede contener números.", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
         } catch (NullPointerException e) {
 
             JOptionPane.showMessageDialog(this, "No existe la habitacion", "", JOptionPane.ERROR_MESSAGE);
@@ -324,7 +317,7 @@ public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
 
         try {
 
-            //Se recupera de la tambla el numero de fila seleccionada
+            //Se recupera de la tabla el numero de fila seleccionada
             int filaSelec = jTable1.getSelectedRow();
 
             //Si en la tabla hay solo una fila, se setea la fila seleccionada a 0
@@ -360,6 +353,7 @@ public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
                 if (registro > 0) {
 
                     JOptionPane.showMessageDialog(this, "Se eliminó la reserva.");
+                     //Luego de eliminar la reserva la habitacion pasa a estar libre 
                     Habitacion hab = res.getHabitacion();
                     hab.setEstado(true);
                     Vista.getHabD().editarHabitacion(hab);

@@ -284,9 +284,9 @@ public class ReservaPorFecha extends javax.swing.JInternalFrame {
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         try {
-            
+            //Se recupera de la tabla el numero de fila seleccionada
             int filaSelec = jTable1.getSelectedRow();
-            
+            //Si en la tabla hay solo una fila, se setea la fila seleccionada a 0
             if (jTable1.getRowCount() == 1) {
 
                 filaSelec = 0;
@@ -296,8 +296,8 @@ public class ReservaPorFecha extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Seleccione una reserva");
                 return;
             }
-            
 
+            //Se recupera la habitacion y la reserva de la DB
             LocalDate fi = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate ff = jDCFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
@@ -319,16 +319,17 @@ public class ReservaPorFecha extends javax.swing.JInternalFrame {
                 if (registro > 0) {
 
                     JOptionPane.showMessageDialog(this, "Se eliminó la reserva.");
-                     Habitacion hab=res.getHabitacion();
+                    //Luego de eliminar la reserva la habitacion pasa a estar libre 
+                    Habitacion hab = res.getHabitacion();
                     hab.setEstado(true);
                     Vista.getHabD().editarHabitacion(hab);
                 } else {
-                    
+
                     JOptionPane.showMessageDialog(this, "No se pudo eliminar la reserva.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
-            //Se muestran las reservas
+           //Se llama al metodo encargado de cargar la tabla
             cargarReservas(fi, ff);
         } catch (NumberFormatException e) {
 
@@ -340,7 +341,7 @@ public class ReservaPorFecha extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-
+        //Se garantiza que ninguna de las fechas sea nula
         if (jDCInicio.equals(null) || jDCFin.equals(null)) {
 
             JOptionPane.showMessageDialog(this, "La casilla de las fechas debe recibir un dato valido.");
@@ -349,12 +350,12 @@ public class ReservaPorFecha extends javax.swing.JInternalFrame {
         try {
             LocalDate fi = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate ff = jDCFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
+        //Se garantiza que la fecha de fin sea posterior a la fecha de inicio
             if (fi.isAfter(ff)) {
                 JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser anterior a la fecha de final");
                 return;
             }
-
+        //Se cargan las reservas
             cargarReservas(fi, ff);
         } catch (NumberFormatException e) {
 
@@ -507,7 +508,7 @@ private void armarTabla() {
     }
 
     private void buscar() {
-        
+       
         if (jDCInicio.equals(null) || jDCFin.equals(null)) {
 
             JOptionPane.showMessageDialog(this, "La casilla de las fechas debe recibir un dato valido.");

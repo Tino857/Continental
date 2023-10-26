@@ -347,6 +347,7 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
                 if (registro > 0) {
 
                     JOptionPane.showMessageDialog(this, "Se elimino la reserva.");
+                    //Luego de eliminar la reserva la habitacion pasa a estar libre 
                     Habitacion hab = res.getHabitacion();
                     hab.setEstado(true);
                     Vista.getHabD().editarHabitacion(hab);
@@ -492,7 +493,7 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
     }
 
     private void buscar() {
-
+          
         if (jTFDni.getText().isEmpty()) {
 
             return;
