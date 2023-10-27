@@ -1,7 +1,6 @@
 package continental.entidades;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 /**
  *
@@ -49,7 +48,7 @@ public class Reserva {
     public void setIdReserva(int idReserva) {
         this.idReserva = idReserva;
     }
-    
+
     public int getCantDePersonas() {
         return cantDePersonas;
     }
@@ -113,5 +112,4 @@ public class Reserva {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-   
 }

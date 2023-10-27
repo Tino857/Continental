@@ -17,6 +17,7 @@ import javax.swing.table.TableColumnModel;
  */
 public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
 
+    //Se crea el modelo que usaremos en la tabla, y se impide que se puedan modificar los valores de las celdas
     private final DefaultTableModel modelo = new DefaultTableModel() {
 
         @Override
@@ -265,6 +266,7 @@ public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
     //BOTON SALIR
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
 
+        //Cierra la ventana
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
@@ -308,6 +310,7 @@ public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
     //BOTON LIMPIAR
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
 
+        //Llama al metodo encargado de limpiar la tabla, luego limpia el campo de numero
         limpiarTabla();
         jTFNro.setText("");
     }//GEN-LAST:event_jBLimpiarActionPerformed
@@ -336,6 +339,7 @@ public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
             //Se recupera la habitacion y la reserva de la DB
             Reserva res = Vista.getRD().buscarReservaPorId(Integer.parseInt((String) modelo.getValueAt(filaSelec, 0)));
 
+            //Se crea una variable para almacenar la respuesta y se pide confirmacion al usuario
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar la siguiente reserva?"
                     + " \nTitular: " + res.getHuesped().getApellido() + ", " + res.getHuesped().getNombre()
                     + " \nDNI: " + res.getHuesped().getDni()
@@ -353,33 +357,37 @@ public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
                 if (registro > 0) {
 
                     JOptionPane.showMessageDialog(this, "Se eliminó la reserva.");
-                     //Luego de eliminar la reserva la habitacion pasa a estar libre 
+                    //Luego de eliminar la reserva la habitacion pasa a estar libre 
                     Habitacion hab = res.getHabitacion();
                     hab.setEstado(true);
                     Vista.getHabD().editarHabitacion(hab);
                 } else {
+
                     JOptionPane.showMessageDialog(this, "No se pudo eliminar la reserva.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
             //Se llama al metodo encargado de cargar la tabla
             cargarDatos(res.getHabitacion());
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | NullPointerException e) {
 
             JOptionPane.showMessageDialog(this, "Ingrese datos validos.", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
-        } catch (NullPointerException e) {
-
-            JOptionPane.showMessageDialog(this, "Ingrese datos validos.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBEliminarActionPerformed
 
+    //RADIO BUTTON INACTIVAS
     private void jRBInactivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBInactivasActionPerformed
+
+        //Llama al metodo que habilita el boton de eliminar, en este caso para ocultarlo, limpia la tabla y busca reservas
         mostrarBoton(true);
         limpiarTabla();
         buscar();
     }//GEN-LAST:event_jRBInactivasActionPerformed
 
+    //RADIO BUTTON ACTIVAS
     private void jRBActivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBActivasActionPerformed
+
+        //Llama al metodo que habilita el boton de eliminar, limpia la tabla y busca reservas
         mostrarBoton(false);
         limpiarTabla();
         buscar();
@@ -405,6 +413,7 @@ public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
+    //Este metodo permite setear un modelo de tabla personalizado
     private void armarTabla() {
 
         //Se agregan las columnas con su nombre correspondiente al modelo de tabla creado anteriormente
@@ -475,6 +484,7 @@ public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
 
         limpiarTabla();
         if (jRBActivas.isSelected()) {
+
             ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
             for (Reserva reserva : reservas) {
 
@@ -484,6 +494,7 @@ public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
                 }
             }
         } else if (jRBInactivas.isSelected()) {
+
             ArrayList<Reserva> reservas = Vista.getRD().listarReservasInactivas();
             for (Reserva reserva : reservas) {
 
@@ -493,9 +504,9 @@ public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
                 }
             }
         }
-
     }
 
+    //Este metodo recibe un booleano y habilita o deshabilita el boton de eliminar, dependiendo del valor que reciba
     private void mostrarBoton(boolean valor) {
 
         jBEliminar.setEnabled(valor);
@@ -528,7 +539,6 @@ public class ReservaPorHabitacion extends javax.swing.JInternalFrame {
             //Se llama al metodo encargado de cargar los datos en la tabla
             cargarDatos(hab);
         } catch (NumberFormatException | NullPointerException e) {
-
         }
     }
 }

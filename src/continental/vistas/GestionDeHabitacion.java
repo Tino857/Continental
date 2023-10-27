@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package continental.vistas;
 
 import continental.accesoADatos.ValidarData;
@@ -19,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author valen
+ * @author Grupo 61
  */
 public class GestionDeHabitacion extends javax.swing.JInternalFrame {
 
@@ -317,31 +312,22 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //BOTON BUSCAR
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
 
-        if (jTFNumero.getText().isEmpty()) {
-
-            JOptionPane.showMessageDialog(this, "Ingrese el numero de la habitacion.");
-            return;
-        }
         try {
 
-            int nDH = Integer.parseInt(jTFNumero.getText());
-            if (ValidarData.validarNumero(nDH)) {
-                JOptionPane.showMessageDialog(this, "El numero de habitacion debe estar entre 1 y 200");
-                return;
-            }
-            //Se busca la habitacion en la base de datos y se guarda
-            Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(nDH);
+            //Se llama al metodo encargado de validar los datos
+            //Si el metodo retorna falso significa que algun dato no paso las validaciones, en ese caso se termina la ejecucion
+            if (!validarDatos()) {
 
-            //Si la habitacion recibida tiene valor nulo significa que no se encuentra en la DB
-            //Se muestra el mensaje al usuario y se finaliza la ejecucion
-            if (hab == null) {
-                JOptionPane.showMessageDialog(this, "No existe la habitacion");
                 return;
             }
 
-            //Si la habitacion se encontraba en la DB, se setean los campos correspondientes con los valores obtenidos de la habitacion
+            //Habiendo controlado que los datos son correctos, se busca la habitacion en la base de datos
+            Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(Integer.parseInt(jTFNumero.getText()));
+
+            //Se setean los campos correspondientes con los valores obtenidos de la habitacion
             jTFCodigo.setText(hab.getIdHabitacion() + "");
             jTFNumero.setText(hab.getNro() + "");
             jTFPiso.setText(hab.getPiso() + "");
@@ -353,44 +339,38 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                 }
             }
             jRBHabilitada.setSelected(hab.isHabilitada());
-
         } catch (NumberFormatException e) {
 
-            JOptionPane.showMessageDialog(this, "El numero de la habitacion es incorrecto.");
+            JOptionPane.showMessageDialog(this, "El numero de la habitacion es incorrecto.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
         } catch (NullPointerException e) {
 
-            JOptionPane.showMessageDialog(this, "No existe la habitacion");
+            JOptionPane.showMessageDialog(this, "No existe la habitacion.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
+    //BOTON LIMPIAR
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
 
         //Resetea todos los textfield
         limpiar();
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
+    //BOTON HABILITAR
     private void jBHabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHabilitarActionPerformed
-//Se controla que el campo de numero no se encuentre vacio
-        if (jTFNumero.getText().isEmpty()) {
 
-            JOptionPane.showMessageDialog(this, "La casilla numero no debe estar vacia.");
-            return;
-        }
         try {
 
-            int numero = Integer.parseInt(jTFNumero.getText());
- if (ValidarData.validarNumero(numero)) {
-                JOptionPane.showMessageDialog(this, "El numero de habitacion debe estar entre 1 y 200");
-                return;
-            }
-            //Se crea una habitacion y se busca en la base de datos para confirmar que la habitacion existe
-            //En caso que la habitacion no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
-            Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(numero);
-            if (hab == null) {
+            //Se llama al metodo encargado de validar los datos
+            //Si el metodo retorna falso significa que algun dato no paso las validaciones, en ese caso se termina la ejecucion
+            if (!validarDatos()) {
 
-                JOptionPane.showMessageDialog(this, "No existe la habitacion");
                 return;
             }
+
+            //Habiendo controlado que los datos son correctos, se busca la habitacion en la base de datos
+            Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(Integer.parseInt(jTFNumero.getText()));
+
+            //Se controla que la habitacion se encuentre dehabilitada
             if (hab.isHabilitada()) {
                 JOptionPane.showMessageDialog(this, "La habitacion ya se encunetra habilitada");
                 return;
@@ -398,9 +378,8 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
 
             //Habiendo confirmado que el numero de la habitacion es correcto, que la habitacion existe en la DB y que no este habilitada
             int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea habilitar esta habitacion?", "", JOptionPane.YES_OPTION);
-            int registro;
             if (resp == 0) {
-                registro = Vista.getHabD().habilitarHabitacion(hab.getNro());
+                int registro = Vista.getHabD().habilitarHabitacion(hab.getNro());
 
                 if (registro == 1) {
 
@@ -408,20 +387,22 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                     jRBHabilitada.setSelected(true);
                 } else {
 
-                    JOptionPane.showMessageDialog(this, "No se pudo habilitar la habitacion");
+                    JOptionPane.showMessageDialog(this, "No se pudo habilitar la habitacion", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             }
         } catch (NumberFormatException e) {
 
-            JOptionPane.showMessageDialog(this, "El numero de la habitacion es incorrecto.");
+            JOptionPane.showMessageDialog(this, "El numero de la habitacion es incorrecto.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jBHabilitarActionPerformed
-    }
+
+    //BOTON GUARDAR
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
         //Controla que no hayan campos vacios
         if (jTFNumero.getText().isEmpty() || jTFPiso.getText().isEmpty() || jCBCategorias.getSelectedIndex() == 0) {
 
-            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
+            JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -430,14 +411,18 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
             //Se intenta parsear el numero y el piso de la habitacion
             int numero = Integer.parseInt(jTFNumero.getText());
             int piso = Integer.parseInt(jTFPiso.getText());
+            
+            //Se valida si el numero de habitacion es correcto
             if (ValidarData.validarNumero(numero)) {
 
-                JOptionPane.showMessageDialog(this, "En la casilla numero debe ir un dato valido");
+                JOptionPane.showMessageDialog(this, "El numero de habitacion debe estar entre 1 y 200", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
+            
+            //Se valida si el numero de piso es correcto
             if (ValidarData.validarPiso(piso)) {
 
-                JOptionPane.showMessageDialog(this, "En la casilla piso debe ir un dato valido");
+                JOptionPane.showMessageDialog(this, "El piso de debe estar entre 1 y 20", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
@@ -453,80 +438,79 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "La habitacion ha sido guardada");
             } else {
 
-                JOptionPane.showMessageDialog(this, "No se pudo agregar la habitacion, el numero ya existe");
+                JOptionPane.showMessageDialog(this, "No se pudo agregar la habitacion.\nYa existe una habitacion con ese numero.", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
 
             //Se limpian los campos
             limpiar();
         } catch (NumberFormatException e) {
 
-            JOptionPane.showMessageDialog(this, "En la casilla numero y piso deben ir solo numeros.");
+            JOptionPane.showMessageDialog(this, "En la casilla numero y piso deben ir solo numeros.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
         } catch (NullPointerException e) {
 
-            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
+            JOptionPane.showMessageDialog(this, "No puede haber campos vacios.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
 
+    //BOTON SALIR
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
 
         //Cierra la ventana
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    //BOTON DESHABILITAR
     private void jBDeshabilitar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeshabilitar1ActionPerformed
-        //Se controla que el campo de numero no se encuentre vacio
-        if (jTFNumero.getText().isEmpty()) {
-
-            JOptionPane.showMessageDialog(this, "La casilla numero no debe estar vacia.");
-            return;
-        }
+        
         try {
 
-            int numero = Integer.parseInt(jTFNumero.getText());
+            //Se llama al metodo encargado de validar los datos
+            //Si el metodo retorna falso significa que algun dato no paso las validaciones, en ese caso se termina la ejecucion
+            if (!validarDatos()) {
 
-            //Se crea una habitacion y se busca en la base de datos para confirmar que la habitacion existe
-            //En caso que la habitacion no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
-            Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(numero);
-            if (hab == null) {
-
-                JOptionPane.showMessageDialog(this, "No existe la habitacion");
                 return;
             }
+
+            //Habiendo controlado que los datos son correctos, se busca la habitacion en la base de datos
+            Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(Integer.parseInt(jTFNumero.getText()));
+
+            //Se controla que la habitacion se encuentre habilitada
             if (!hab.isHabilitada()) {
-                JOptionPane.showMessageDialog(this, "La habitacion ya se encunetra deshabilitada");
+                JOptionPane.showMessageDialog(this, "La habitacion ya se encuentra deshabilitada", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
+            //Se verifica que la habitacion no tenga reservas asociadas
             ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
             for (Reserva reserva : reservas) {
+
                 if (hab.getIdHabitacion() == reserva.getHabitacion().getIdHabitacion()) {
+
                     JOptionPane.showMessageDialog(this, "La habitacion que desea eliminar tiene reservas asociadas."
-                            + "\n Primero elimine todas las reservas asociadas a esta habiatacion");
+                            + "\n Primero elimine todas las reservas asociadas a esta habiatacion", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
             }
 
             //Habiendo confirmado que el numero de la habitacion es correcto, que la habitacion existe en la DB y que su no tiene reservas asociadas
             int resp = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea deshabilitar esta habitacion?", "", JOptionPane.YES_OPTION);
-            int registro;
             if (resp == 0) {
-                registro = Vista.getHabD().eliminarHabitacion(hab.getNro());
 
+                int registro = Vista.getHabD().eliminarHabitacion(hab.getNro());
                 if (registro == 1) {
 
                     JOptionPane.showMessageDialog(this, "La habitacion ha sido deshabilitada");
                     jRBHabilitada.setSelected(false);
                 } else {
 
-                    JOptionPane.showMessageDialog(this, "No se pudo deshabilitar la habitacion");
+                    JOptionPane.showMessageDialog(this, "No se pudo deshabilitar la habitacion", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             }
         } catch (NumberFormatException e) {
 
-            JOptionPane.showMessageDialog(this, "El numero de la habitacion es incorrecto.");
+            JOptionPane.showMessageDialog(this, "El numero de la habitacion es incorrecto.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jBDeshabilitar1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;
@@ -552,15 +536,17 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTFPiso;
     // End of variables declaration//GEN-END:variables
 
+    //Este metodo limpia los textfields, setea el item seleccionado del combobox al indice 0 y el desselecciona el radioButon habilitada
     private void limpiar() {
+
         jTFCodigo.setText("");
         jTFNumero.setText("");
         jTFPiso.setText("");
         jCBCategorias.setSelectedIndex(0);
         jRBHabilitada.setSelected(false);
-
     }
 
+    //Este metodo carga el combobox
     private void cargarCB() {
 
         //Agregamos en el primer lugar una categoria vacia
@@ -576,12 +562,57 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         ArrayList<Categoria> Lista = Vista.getCD().listarCategorias();
         int i = 0;
         for (Categoria categoria : Lista) {
+
             listaDeHab.put(i + 1, categoria);
             i++;
         }
         //Se recorre la lista y cada  categoria se agrega al CB
         for (Categoria cat : Lista) {
+
             jCBCategorias.addItem(cat);
         }
+    }
+
+    //Este metodo se encarga de validar datos
+    private boolean validarDatos() {
+
+        try {
+
+            //Se controla que el campo de numero de habitacion no este vacio
+            if (jTFNumero.getText().isEmpty()) {
+
+                JOptionPane.showMessageDialog(this, "Ingrese el numero de la habitacion.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+            //Se intenta parsear el numero de habitacion
+            int nDH = Integer.parseInt(jTFNumero.getText());
+
+            //Se valida si el numero de habitacion es correcto
+            if (ValidarData.validarNumero(nDH)) {
+
+                JOptionPane.showMessageDialog(this, "El numero de habitacion debe estar entre 1 y 200", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+
+            //Se busca la habitacion en la base de datos y se guarda
+            Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(nDH);
+
+            //Si la habitacion recibida tiene valor nulo significa que no se encuentra en la DB
+            //Se muestra el mensaje al usuario y se finaliza la ejecucion
+            if (hab == null) {
+
+                JOptionPane.showMessageDialog(this, "No existe la habitacion.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "El numero de la habitacion es incorrecto.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+            return false;
+        } catch (NullPointerException e) {
+
+            JOptionPane.showMessageDialog(this, "No existe la habitacion.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
     }
 }

@@ -20,19 +20,22 @@ import javax.swing.table.TableColumnModel;
  */
 public class MostrarHuespedes extends javax.swing.JInternalFrame {
 
-    private LocalDate fI, fF;
-    private Habitacion hab;
-    private int cantidadPersonas, dias;
-    private double monto;
-    
+    private final LocalDate fI;
+    private final LocalDate fF;
+    private final Habitacion hab;
+    private final int cantidadPersonas;
+    private final int dias;
+    private final double monto;
+
+    //Se crea el modelo que usaremos en la tabla, y se impide que se puedan modificar los valores de las celdas
     private final DefaultTableModel modelo = new DefaultTableModel() {
 
         @Override
         public boolean isCellEditable(int c, int f) {
+
             return false;
         }
     };
-      
 
     public MostrarHuespedes(LocalDate fI, LocalDate fF, Habitacion hab, int cantidadPersonas) {
         initComponents();
@@ -42,7 +45,7 @@ public class MostrarHuespedes extends javax.swing.JInternalFrame {
         this.fF = fF;
         this.hab = hab;
         this.cantidadPersonas = cantidadPersonas;
-        this.dias = (int)ChronoUnit.DAYS.between(fI, fF);
+        this.dias = (int) ChronoUnit.DAYS.between(fI, fF);
         this.monto = hab.getCategoria().getPrecio() * dias;
     }
 
@@ -240,53 +243,67 @@ public class MostrarHuespedes extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //BOTON CONTINUAR
     private void JBContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBContinuarActionPerformed
-try{
-  int fila = jTable1.getSelectedRow();
-        if (fila <0) {
-            JOptionPane.showMessageDialog(this, "Seleccione un huesped");
-            return;
-        }
-        
-        int dni = Integer.parseInt((String) modelo.getValueAt(fila,0));
-        
-        Huesped huesped = Vista.getHD().buscarHuespedPorDni(dni);
-        System.out.println("dni " + huesped.getDni() + " nombre " + huesped.getNombre());
-        int respuesta = JOptionPane.showConfirmDialog(this,"¿Desea confirmar la reserva?"
-                + " \nTitular: " + huesped.getApellido() + ", " + huesped.getNombre()
-                + " \nDNI: " + huesped.getDni()
-                + " \nFecha de ingreso: " + fI
-                + " \nFecha de salida: " + fF
-                + " \nCantidad de personas: " + cantidadPersonas
-                + " \nNumero de Habitacion: " + hab.getNro() + " - Piso: " + hab.getPiso()
-                + " \nTipo de habitacion: " + hab.getCategoria().getTipoCategoria()
-                + " \nPrecio por noche: " + hab.getCategoria().getPrecio()
-                + " \nCantidad de dias: " + dias
-                + " \nTOTAL A PAGAR: " + monto,
-                "CONFIRMAR!", JOptionPane.YES_NO_OPTION
-        );
-        if (respuesta == 0) {
-            Reserva reserva = new Reserva(huesped, hab, fI, fF, dias, cantidadPersonas, monto, true);
-            int registro = Vista.getRD().guardarReserva(reserva);
-            if (registro >0) {
-                JOptionPane.showMessageDialog(this, "La reserva se realizo correctamente");
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "No se pudo realizar la reserva");
+        try {
+            
+            //Se recupera la fila seleccionada de la tabla
+            int fila = jTable1.getSelectedRow();
+            
+            //Si no se selecciono ninguna fila, se finaliza la ejecucion
+            if (fila < 0) {
+                
+                JOptionPane.showMessageDialog(this, "Seleccione un huesped", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                return;
             }
-        }  
-}catch(NumberFormatException e){
-  JOptionPane.showMessageDialog(this, "Ingrese datos correctos");  
-}
-        
+
+            //Se obtiene el dni de la fila seleccionada y se intenta parsear su valor.
+            int dni = Integer.parseInt((String) modelo.getValueAt(fila, 0));
+
+            //Se recupera un huesped con el dni obtenido
+            Huesped huesped = Vista.getHD().buscarHuespedPorDni(dni);
+            
+            //Se crea una variable para almacenar el valor de la respuesta y se pide una confirmacion al usuario
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea confirmar la reserva?"
+                    + " \nTitular: " + huesped.getApellido() + ", " + huesped.getNombre()
+                    + " \nDNI: " + huesped.getDni()
+                    + " \nFecha de ingreso: " + fI
+                    + " \nFecha de salida: " + fF
+                    + " \nCantidad de personas: " + cantidadPersonas
+                    + " \nNumero de Habitacion: " + hab.getNro() + " - Piso: " + hab.getPiso()
+                    + " \nTipo de habitacion: " + hab.getCategoria().getTipoCategoria()
+                    + " \nPrecio por noche: " + hab.getCategoria().getPrecio()
+                    + " \nCantidad de dias: " + dias
+                    + " \nTOTAL A PAGAR: " + monto,
+                    "CONFIRMAR!", JOptionPane.YES_NO_OPTION
+            );
+            if (respuesta == 0) {
+                
+                Reserva reserva = new Reserva(huesped, hab, fI, fF, dias, cantidadPersonas, monto, true);
+                int registro = Vista.getRD().guardarReserva(reserva);
+                if (registro > 0) {
+                    
+                    JOptionPane.showMessageDialog(this, "La reserva se realizo correctamente.");
+                    dispose();
+                } else {
+                    
+                    JOptionPane.showMessageDialog(this, "No se pudo realizar la reserva.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (NumberFormatException e) {
+            
+            JOptionPane.showMessageDialog(this, "Ingrese datos correctos.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_JBContinuarActionPerformed
 
+    //BOTON SALIR
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
 
         //Cierra la ventana
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    //Este metodo setea el texto y propiedades del textField de busqueda al entrar al mismo
     private void JTFBuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusGained
 
         if (JTFBuscador.getText().equals("Ingrese el Número de DNI para filtrar la tabla...")) {
@@ -296,6 +313,7 @@ try{
         JTFBuscador.setForeground(Color.WHITE);
     }//GEN-LAST:event_JTFBuscadorFocusGained
 
+    //Este metodo setea el texto y propiedades del textField de busqueda al salir del mismo
     private void JTFBuscadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusLost
 
         if (JTFBuscador.getText().equals("")) {
@@ -305,11 +323,11 @@ try{
         JTFBuscador.setForeground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_JTFBuscadorFocusLost
 
+    //Este metodo permite filtrar los huespedes de la tabla al escribir un dni en el textField de busqueda
     private void JTFBuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFBuscadorKeyReleased
 
         limpiarTabla();
         ArrayList<Huesped> listaDeHuespedes = Vista.getHD().listarHuespedAct();
-
         for (Huesped huesped : listaDeHuespedes) {
 
             if ((huesped.getDni() + "").startsWith(JTFBuscador.getText())) {
@@ -352,6 +370,8 @@ try{
         anchoColumna(columnas, 0, 80);
     }
 
+    //Este metodo se usa para setear el ancho de una columna
+    //Recibe por parametro el modelo de columna de la tabla, el indice de la columna a modificar y el ancho deseado
     private void anchoColumna(TableColumnModel modeloTabla, int indice, int ancho) {
 
         modeloTabla.getColumn(indice).setWidth(ancho);
@@ -360,23 +380,24 @@ try{
         modeloTabla.getColumn(indice).setPreferredWidth(ancho);
     }
 
+    //Se cargan las filas en la tabla
     private void cargarDatos() {
 
         //Se recupera una lista de huespedes
         ArrayList<Huesped> listaDeHuespedes = Vista.getHD().listarHuespedAct();
         for (Huesped huesped : listaDeHuespedes) {
+            
             cargarTabla(huesped);
         }
-
     }
 
+    //Este metodo se encarga de recibir un huesped y desglosar su informacion en una fila para agregarla a la tabla de huespedes
     private void cargarTabla(Huesped huesped) {
 
         modelo.addRow(new Object[]{
             Integer.toString(huesped.getDni()),
             huesped.getApellido(),
             huesped.getNombre()
-        
         });
     }
 
@@ -389,5 +410,4 @@ try{
             modelo.removeRow(i);
         }
     }
-
 }

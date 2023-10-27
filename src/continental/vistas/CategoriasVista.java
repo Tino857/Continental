@@ -18,11 +18,12 @@ import javax.swing.table.TableColumnModel;
  */
 public class CategoriasVista extends javax.swing.JInternalFrame {
 
+    //Se crea el modelo que usaremos en la tabla, y se impide que se puedan modificar los valores de las celdas
     private final DefaultTableModel modelo = new DefaultTableModel() {
 
         @Override
         public boolean isCellEditable(int f, int c) {
-            
+
             return false;
         }
     };
@@ -407,6 +408,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //BOTON AGREGAR
     private void JBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAgregarActionPerformed
 
         //Controla que no hayan campos vacios
@@ -424,15 +426,15 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
             double precio = Double.parseDouble(jTFPrecio.getText());
             TipoCama tipoCamas = (TipoCama) jCBCamas.getSelectedItem();
             String nombre = jTFNombre.getText();
-            
+
             //VALIDAR DATOS
-            if (!validarDatos()){
+            if (!validarDatos()) {
                 return;
             }
 
             //Llegado el punto en que todos los valores son correctos, se crea una categoria y se le seten los valores recibidos
             Categoria cat = new Categoria(cantidadPersonas, cantidadCamas, tipoCamas, precio, nombre);
-            
+
             //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo guardarCategoria
             int registro = Vista.getCD().guardarCategoria(cat);
 
@@ -442,10 +444,10 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "La categoria ha sido agregada.");
             } else {
 
-                JOptionPane.showMessageDialog(this, "No se pudo agregar la categoria.\nYa existe una categoria con ese nombre","ERROR",JOptionPane.ERROR_MESSAGE);                
+                JOptionPane.showMessageDialog(this, "No se pudo agregar la categoria.\nYa existe una categoria con ese nombre", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
 
-            //Se limpian los campos
+            //Se limpian los campos, la tabla y se carga nuevamente
             limpiarInfo();
             limpiarTabla();
             cargarDatos();
@@ -454,16 +456,18 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Algun campo numerico tiene un valor incorrecto", "Advertencia!", JOptionPane.WARNING_MESSAGE);
         } catch (NullPointerException e) {
 
-            JOptionPane.showMessageDialog(this, "No puede haber campos vacíos.","ERROR",JOptionPane.ERROR_MESSAGE);                
+            JOptionPane.showMessageDialog(this, "No puede haber campos vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_JBAgregarActionPerformed
 
+    //BOTON SALIR
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
 
         //Cierra la ventana
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    //CLICK EN TABLA
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
         //Se captura el evento de click en una fila de la tabla y se recupera el indice de la misma
@@ -472,6 +476,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         mostrarInfo(filaSelec);
     }//GEN-LAST:event_jTable1MouseClicked
 
+    //Este metodo setea el texto y propiedades del textField de busqueda al entrar al mismo
     private void JTFBuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusGained
 
         if (JTFBuscador.getText().equals("Ingrese el nombre de la categoría para filtrar la tabla...")) {
@@ -481,6 +486,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         JTFBuscador.setForeground(Color.WHITE);
     }//GEN-LAST:event_JTFBuscadorFocusGained
 
+    //Este metodo setea el texto y propiedades del textField de busqueda al salir del mismo
     private void JTFBuscadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusLost
 
         if (JTFBuscador.getText().equals("")) {
@@ -490,6 +496,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         JTFBuscador.setForeground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_JTFBuscadorFocusLost
 
+    //Este metodo permite filtrar las categorias de la tabla al escribir un nombre en el textField de busqueda
     private void JTFBuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFBuscadorKeyReleased
 
         limpiarTabla();
@@ -514,8 +521,9 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_JTFBuscadorKeyReleased
 
+    //BOTON EDITAR
     private void JBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditarActionPerformed
-        
+
         //Se controla que no hayan campos vacios
         if (jTFCantCamas.getText().isEmpty() || jTFPersonas.getText().isEmpty() || jTFNombre.getText().isEmpty() || jTFPrecio.getText().isEmpty()) {
 
@@ -552,12 +560,12 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
             double precio = Double.parseDouble(jTFPrecio.getText());
             TipoCama tipoCamas = (TipoCama) jCBCamas.getSelectedItem();
             String nombre = jTFNombre.getText();
-            
+
             //Validar datos
             if (!validarDatos()) {
                 return;
             }
-            
+
             //Llegado el punto en que todos los valores son correctos, se crea una categoria
             //En este categoria guardamos el resultado de la busqueda por medio del id que figura en la tabla
             Categoria cat = obtenerCategoria(filaSelec);
@@ -589,14 +597,15 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Algun campo numerico tiene un valor incorrecto", "", JOptionPane.WARNING_MESSAGE);
         } catch (NullPointerException e) {
 
-            JOptionPane.showMessageDialog(this, "No puede haber campos vacíos.","ERROR",JOptionPane.ERROR_MESSAGE);                
+            JOptionPane.showMessageDialog(this, "No puede haber campos vacíos.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         //Se limpian los textfields
         limpiarInfo();
     }//GEN-LAST:event_JBEditarActionPerformed
 
+    //BOTON LIMPIAR
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
-        
+
         limpiarInfo();
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
@@ -648,7 +657,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
 
         //Se llama al metodo que se encarga de setear el ancho de las columnas
         anchoColumna(columnas, 0, 40);
-        anchoColumna(columnas, 5, 80);
+        anchoColumna(columnas, 5, 70);
     }
 
     //Este metodo se usa para setear el ancho de una columna
@@ -663,12 +672,12 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
 
     //Se cargan las filas en la tabla
     private void cargarDatos() {
-        
+
         //Se recupera una lista de categorias
         ArrayList<Categoria> ListaDeCategorias = Vista.getCD().listarCategorias();
         //Se recorre la lista y por cada categoria, se llama al metodo correspondiente para agregar la fila, enviando por parametro dicha categoria
         for (Categoria next : ListaDeCategorias) {
-            
+
             cargarTabla(next);
         }
     }
@@ -677,7 +686,6 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
     private void cargarTabla(Categoria cat) {
 
         modelo.addRow(new Object[]{
-            
             cat.getIdCategoria(),
             cat.getTipoCategoria(),
             cat.getCantDePersonas(),
@@ -710,7 +718,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
 
     //Este metodo muestra la informacion de una categoria
     private void mostrarInfo(int filaSelec) {
-        
+
         //Recibe por parametro el numero de fila en la tabla, de este se obtiene el numero de id
         Categoria cat = obtenerCategoria(filaSelec);
         jTFID.setText(cat.getIdCategoria() + "");
@@ -723,33 +731,32 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
 
     //Este metodo carga el CB con los tipos de camas
     private void cargarCB() {
-        
+
         int largo = TipoCama.values().length;
         for (int i = 1; i <= largo; i++) {
             jCBCamas.addItem(ValidarData.nombreCama(i));
         }
     }
-    
+
     //Este metodo recibe un numero de fila y recupera una categoria de la base de datos
-    private Categoria obtenerCategoria(int filaSelec){
-        
-        int idC = (Integer)modelo.getValueAt(filaSelec, 0);
+    private Categoria obtenerCategoria(int filaSelec) {
+
+        int idC = (Integer) modelo.getValueAt(filaSelec, 0);
         Categoria cat = Vista.getCD().buscarCategoriaPorId(idC);
         return cat;
     }
-    
+
     //Este metodo controla que los datos ingresados sean correctos
-    private boolean validarDatos(){
+    private boolean validarDatos() {
         try {
-            
+
             int cantidadPersonas = Integer.parseInt(jTFPersonas.getText());
             int cantidadCamas = Integer.parseInt(jTFCantCamas.getText());
             double precio = Double.parseDouble(jTFPrecio.getText());
-            
+
             String nombre = jTFNombre.getText();
-            
+
             //VALIDACION DE DATOS!
-            
             //Se valida si el de nombre de la categoria no contiene caracteres especiales
             if (ValidarData.caracteresEspeciales(nombre)) {
 
@@ -763,25 +770,24 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "El nombre es incorrecto", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
                 return false;
             }
-            
-            //Se valida si la cantidad de personas es correcta
 
-            if (cantidadPersonas<1||cantidadPersonas>4) {
-                
+            //Se valida si la cantidad de personas es correcta
+            if (cantidadPersonas < 1 || cantidadPersonas > 4) {
+
                 JOptionPane.showMessageDialog(this, "La cantidad de personas debe ser entre 1 y 4", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
                 return false;
             }
-            
+
             //Se valida si la cantidad de camas es correcta
-            if (cantidadCamas<1||cantidadCamas>4) {
-                
+            if (cantidadCamas < 1 || cantidadCamas > 4) {
+
                 JOptionPane.showMessageDialog(this, "La cantidad de camas debe ser entre 1 y 4", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
                 return false;
             }
-            
+
             //Se valida que el precio sea correcto
-            if (precio<=0) {
-                
+            if (precio <= 0) {
+
                 JOptionPane.showMessageDialog(this, "El precio es incorrecto", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
                 return false;
             }

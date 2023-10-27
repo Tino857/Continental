@@ -17,6 +17,7 @@ import javax.swing.table.TableColumnModel;
  */
 public class ReservaPorHuesped extends javax.swing.JInternalFrame {
 
+    //Se crea el modelo que usaremos en la tabla, y se impide que se puedan modificar los valores de las celdas
     private final DefaultTableModel modelo = new DefaultTableModel() {
 
         @Override
@@ -258,8 +259,10 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //BOTON BUSCAR
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
 
+        //Se controla que el campo dni no se encuentre vacío
         if (jTFDni.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "Ingrese un dni para buscar reservas.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
@@ -278,7 +281,7 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
             //Se muestra el mensaje al usuario y se finaliza la ejecucion
             if (h == null) {
 
-                JOptionPane.showMessageDialog(this, "No existe el huesped");
+                JOptionPane.showMessageDialog(this, "No existe el huesped.", "", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             //Si se encontro un huesped, se limpia la tabla y se cargan las reservas activas de ese huesped
@@ -292,17 +295,22 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
+    //BOTON SALIR
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
 
+        //Cierra la ventana
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    //BOTON LIMPIAR
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
 
+        //Llama al metodo encargado de limpiar la tabla, luego limpia el campo de dni
         limpiarTabla();
         jTFDni.setText("");
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
+    //BOTON ELIMINAR
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
 
         try {
@@ -360,20 +368,26 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
             mostrarReservas(h);
         } catch (NumberFormatException e) {
 
-            JOptionPane.showMessageDialog(this, "Ingrese datos validos");
+            JOptionPane.showMessageDialog(this, "La casilla DNI solo puede contener números.", "ADVERTENCIA!", JOptionPane.WARNING_MESSAGE);
         } catch (NullPointerException e) {
 
-            JOptionPane.showMessageDialog(this, "Ingrese datos validos");
+            JOptionPane.showMessageDialog(this, "No existe el huesped.", "", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBEliminarActionPerformed
 
+    //RADIO BUTTON INACTIVAS
     private void jRBInactivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBInactivasActionPerformed
+
+        //Llama al metodo que habilita el boton de eliminar, en este caso para ocultarlo, limpia la tabla y busca reservas
         mostrarBoton(false);
         limpiarTabla();
         buscar();
     }//GEN-LAST:event_jRBInactivasActionPerformed
 
+    //RADIO BUTTON ACTIVAS
     private void jRBActivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBActivasActionPerformed
+
+        //Llama al metodo que habilita el boton de eliminar, limpia la tabla y busca reservas
         mostrarBoton(true);
         limpiarTabla();
         buscar();
@@ -399,6 +413,7 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
+    //Este metodo permite setear un modelo de tabla personalizado
     private void armarTabla() {
 
         //Se agregan las columnas con su nombre correspondiente al modelo de tabla creado anteriormente
@@ -424,6 +439,7 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
         anchoColumna(columnas, 7, 70);
     }
 
+    //Este metodo setea el ancho de las columnas deseadas
     private void anchoColumna(TableColumnModel modeloTabla, int indice, int ancho) {
 
         modeloTabla.getColumn(indice).setWidth(ancho);
@@ -432,6 +448,7 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
         modeloTabla.getColumn(indice).setPreferredWidth(ancho);
     }
 
+    //Este metodo se encarga de limpiar los datos de la tabla
     private void limpiarTabla() {
 
         int filas = modelo.getRowCount() - 1;
@@ -441,6 +458,7 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
         }
     }
 
+    //Este metodo recibe una reserva y desglosa su informacion para agregarla a una fila de la tabla
     private void cargarTabla(Reserva res) {
 
         String estado = "Inactiva";
@@ -461,10 +479,12 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
         });
     }
 
+    //Este metodo recibe una habitacion y se encarga de cargar los datos de la tabla
     private void mostrarReservas(Huesped h) {
 
         limpiarTabla();
         if (jRBActivas.isSelected()) {
+
             ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
             for (Reserva reserva : reservas) {
 
@@ -474,6 +494,7 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
                 }
             }
         } else if (jRBInactivas.isSelected()) {
+
             ArrayList<Reserva> reservas = Vista.getRD().listarReservasInactivas();
             for (Reserva reserva : reservas) {
 
@@ -483,9 +504,9 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
                 }
             }
         }
-
     }
 
+    //Este metodo recibe un booleano y habilita o deshabilita el boton de eliminar, dependiendo del valor que reciba
     private void mostrarBoton(boolean valor) {
 
         jBEliminar.setEnabled(valor);
@@ -493,7 +514,7 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
     }
 
     private void buscar() {
-          
+
         if (jTFDni.getText().isEmpty()) {
 
             return;
@@ -516,7 +537,6 @@ public class ReservaPorHuesped extends javax.swing.JInternalFrame {
             //Si se encontro un huesped, se limpia la tabla y se cargan las reservas activas de ese huesped
             mostrarReservas(h);
         } catch (NumberFormatException | NullPointerException e) {
-
         }
     }
 }

@@ -25,7 +25,8 @@ public class ValidarData {
         }
         return false;
     }
-    
+
+    //Valida si un domicilio es correcto
     public static boolean caracteresEspecialesDomicilio(String cadena) {
 
         String sup = "ºª!|@·#$~%€&¬/()=?¿¡'`^[*+]´¨{çÇ},;:.-_<>";
@@ -159,24 +160,25 @@ public class ValidarData {
         return false;
     }
 
-    public static boolean validarLargoCelular (String celular){
-                   
-        return (celular.length()<8 || celular.length()>12);
+    //Valida si un celular contiene un largo de digitos
+    public static boolean validarLargoCelular(String celular) {
+
+        return (celular.length() < 8 || celular.length() > 12);
     }
-    
-    public static boolean validarCelular (String celular){
-        
+
+    //Valida si un numero de telefono solo contiene numeros
+    public static boolean validarCelular(String celular) {
+
         String especial = "1234567890";
         for (int i = 0; i < celular.length(); i++) {
-            
-            String letra = celular.substring(i,i+1);
-            
+
+            String letra = celular.substring(i, i + 1);
+
             if (!especial.contains(letra)) {
-                
+
                 return true;
-            } 
+            }
         }
         return false;
     }
-    
 }

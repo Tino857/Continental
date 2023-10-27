@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,13 +31,11 @@ public class HuespedData {
         //Esta variable se utilizará para almacenar el ID generado del nuevo registro en la base de datos.
         int registro = 0;
         try {
+            
             Huesped h = buscarHuespedPorDni(huesped.getDni());// Esto se hace para verificar si el huesped ya existe en la base de datos
             if (h != null) {//Se verifica si se encontró un huesped en la base de datos
 
-                if (h.getIdHuesped() != huesped.getIdHuesped()) {//compara el ID por parametro con el de la base para no duplicar un DNI
-                    
-                    return registro;
-                }
+                return registro;
             }
 
             //Se crea un prepared statement, se prepara la declaracion con la consulta sql definida previamente y se setean los valores
@@ -112,7 +109,16 @@ public class HuespedData {
 
         int registro = 0;
         try {
+            
+            Huesped h = buscarHuespedPorDni(huesped.getDni());// Esto se hace para verificar si el huesped ya existe en la base de datos
+            if (h != null) {//Se verifica si se encontró un huesped en la base de datos
 
+                if (h.getIdHuesped() != huesped.getIdHuesped()) {//compara el ID por parametro con el de la base para no duplicar un DNI
+
+                    return registro;
+                }
+            }
+                
             //Preparación y ejecución de la consulta SQL
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, huesped.getDni());
@@ -263,7 +269,8 @@ public class HuespedData {
         }
         return listaHuespedes;//retorna una lista de huespedes
     }
-     public int habilitarHuesped(int dni) {
+
+    public int habilitarHuesped(int dni) {
 
         String query = "UPDATE huesped SET estado=1 WHERE dni=?";
         //Esta variable almacenara si hubo cambios en el registro de la DB
@@ -287,8 +294,10 @@ public class HuespedData {
         //Retorna variable registro al metodo que lo invoca
         return registro;
     }
-     public Huesped buscarHuespedPorCel(String cel){
-         Huesped huesped = null;// se crea instancia de huesped para utilizarlo dentro del try
+
+    public Huesped buscarHuespedPorCel(String cel) {
+        
+        Huesped huesped = null;// se crea instancia de huesped para utilizarlo dentro del try
         String query = "SELECT * FROM huesped WHERE celular = ?";
         try {
 
@@ -318,7 +327,6 @@ public class HuespedData {
             //Se captura una posible excepcion SQL
             System.out.println("Error al buscar el huesped" + e.getMessage());
         }
-              return huesped;
-  
-     }
+        return huesped;
+    }
 }

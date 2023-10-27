@@ -31,9 +31,8 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
 
         initComponents();
         armarTabla();
-        jRBA.setSelected(true);
+        jRBActivos.setSelected(true);
         cargarDatos();
-
     }
 
     /**
@@ -60,8 +59,8 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         JTFBuscador = new javax.swing.JTextField();
-        jRBIn = new javax.swing.JRadioButton();
-        jRBA = new javax.swing.JRadioButton();
+        jRBInactivos = new javax.swing.JRadioButton();
+        jRBActivos = new javax.swing.JRadioButton();
         jLPCabecera = new javax.swing.JLayeredPane();
         jLMargen = new javax.swing.JLabel();
         jLTitulo = new javax.swing.JLabel();
@@ -172,23 +171,23 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
             .addComponent(JTFBuscador, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
         );
 
-        buttonGroup1.add(jRBIn);
-        jRBIn.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        jRBIn.setForeground(new java.awt.Color(255, 255, 255));
-        jRBIn.setText("Inactivos");
-        jRBIn.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(jRBInactivos);
+        jRBInactivos.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        jRBInactivos.setForeground(new java.awt.Color(255, 255, 255));
+        jRBInactivos.setText("Inactivos");
+        jRBInactivos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRBInActionPerformed(evt);
+                jRBInactivosActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRBA);
-        jRBA.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        jRBA.setForeground(new java.awt.Color(255, 255, 255));
-        jRBA.setText("Activos");
-        jRBA.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(jRBActivos);
+        jRBActivos.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        jRBActivos.setForeground(new java.awt.Color(255, 255, 255));
+        jRBActivos.setText("Activos");
+        jRBActivos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRBAActionPerformed(evt);
+                jRBActivosActionPerformed(evt);
             }
         });
 
@@ -348,9 +347,9 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
             jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRBA)
+                .addComponent(jRBActivos)
                 .addGap(84, 84, 84)
-                .addComponent(jRBIn)
+                .addComponent(jRBInactivos)
                 .addGap(141, 141, 141))
             .addGroup(jPBackgroundLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
@@ -371,8 +370,8 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
                 .addComponent(jLPCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRBIn)
-                    .addComponent(jRBA, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jRBInactivos)
+                    .addComponent(jRBActivos, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -412,7 +411,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
 
         //Se captura el evento de click en una fila de la tabla y se recupera el indice de la misma
         int filaSelec = jTable1.getSelectedRow();
-
+        //Se llama al metodo encargado de mostrar la informacion
         mostrarInfo(filaSelec);
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -459,28 +458,28 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
             //Se valida si los campos de nombre, apellido y domicilio no contengan caracteres especiales
             if (ValidarData.caracteresEspeciales(nombre) || ValidarData.caracteresEspeciales(apellido)) {
 
-                JOptionPane.showMessageDialog(this, "No se permiten caracteres especiales o números.","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "No se permiten caracteres especiales o números.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
+
             //Se valida que el domicilio sea correcto
             if (ValidarData.caracteresEspecialesDomicilio(domicilio)) {
-                
-                JOptionPane.showMessageDialog(this, "El domicilio contiene caracteres especiales.","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+
+                JOptionPane.showMessageDialog(this, "El domicilio contiene caracteres especiales.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
             //Se valida que el mail no contenga caracteres especiales
             if (ValidarData.caracteresEspecialesMail(correo)) {
 
-                JOptionPane.showMessageDialog(this, "El correo electronico es incorrecto","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El correo electronico es incorrecto", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
+
             //Se valida que el nobre, apellido, domicilio y correo contengan un largo adecuado
-            if (ValidarData.largoCadena(nombre)||ValidarData.largoCadena(apellido)||ValidarData.largoCadena(domicilio)|| ValidarData.largoCadena(correo)) {
-                
-                JOptionPane.showMessageDialog(this, "El dato ingresado es incorrecto.","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+            if (ValidarData.largoCadena(nombre) || ValidarData.largoCadena(apellido) || ValidarData.largoCadena(domicilio) || ValidarData.largoCadena(correo)) {
+
+                JOptionPane.showMessageDialog(this, "El dato ingresado es incorrecto.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
@@ -488,13 +487,13 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
             String celular = jTFCelular.getText();
             if (ValidarData.validarCelular(celular)) {
 
-                JOptionPane.showMessageDialog(this, "El teléfono contiene caracteres incorrectos.","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El teléfono contiene caracteres incorrectos.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
+
             //Se valida que el numero de telefono tenga un largo adecuado
             if (ValidarData.validarLargoCelular(celular)) {
-                JOptionPane.showMessageDialog(this, "El teléfono es incorrecto.","ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El teléfono es incorrecto.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
@@ -503,11 +502,14 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
             Huesped h = Vista.getHD().buscarHuespedPorDni(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
             Huesped huesped = Vista.getHD().buscarHuespedPorCel(celular);
             if (huesped != null) {
+
                 if (huesped.getDni() != h.getDni()) {
-                    JOptionPane.showMessageDialog(this, "No se puede editar este huesped debido a que tiene el mismo celular que otro");
+
+                    JOptionPane.showMessageDialog(this, "No se pudo editar el huesped.\nEl numero telefonico esta asociado a otro huesped", "ERROR", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
             }
+
             //Seteamos al huesped con la informacion nueva
             h.setDni(dni);
             h.setApellido(apellido);
@@ -567,7 +569,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
 
         limpiarTabla();
         ArrayList<Huesped> ListaDeHuespedes;
-        if (jRBA.isSelected()) {
+        if (jRBActivos.isSelected()) {
             ListaDeHuespedes = Vista.getHD().listarHuespedAct();
         } else {
             ListaDeHuespedes = Vista.getHD().listarHuespedIn();
@@ -591,17 +593,23 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_JTFBuscadorKeyReleased
 
-    private void jRBInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBInActionPerformed
-        limpiarInfo();
-        limpiarTabla();
-        cargarDatos();
-    }//GEN-LAST:event_jRBInActionPerformed
+    //RADIO BUTTON ACTIVOS
+    private void jRBInactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBInactivosActionPerformed
 
-    private void jRBAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBAActionPerformed
+        //Se limpian los textfields, la tabla y se cargan los valores nuevamente
         limpiarInfo();
         limpiarTabla();
         cargarDatos();
-    }//GEN-LAST:event_jRBAActionPerformed
+    }//GEN-LAST:event_jRBInactivosActionPerformed
+
+    //RADIO BUTTON INACTIVOS
+    private void jRBActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBActivosActionPerformed
+
+        //Se limpian los textfields, la tabla y se cargan los valores nuevamente
+        limpiarInfo();
+        limpiarTabla();
+        cargarDatos();
+    }//GEN-LAST:event_jRBActivosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBEditar;
@@ -621,8 +629,8 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPBackground;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRBA;
-    private javax.swing.JRadioButton jRBIn;
+    private javax.swing.JRadioButton jRBActivos;
+    private javax.swing.JRadioButton jRBInactivos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFApellido;
     private javax.swing.JTextField jTFCelular;
@@ -665,7 +673,9 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
 
     //Se cargan las filas en la tabla
     private void cargarDatos() {
-        if (jRBA.isSelected()) {
+
+        if (jRBActivos.isSelected()) {
+
             //Se recupera una lista de huespedes
             ArrayList<Huesped> ListaDeHuespedes = Vista.getHD().listarHuespedAct();
 
@@ -674,6 +684,7 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
                 cargarTabla(next);
             }
         } else {
+
             ArrayList<Huesped> ListaDeHuespedes = Vista.getHD().listarHuespedIn();
 
             //Se recorre la lista y por cada huesped, se llama al metodo correspondiente para agregar la fila, enviando por parametro dicho huesped
@@ -681,7 +692,6 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
                 cargarTabla(next);
             }
         }
-
     }
 
     //Este metodo se encarga de recibir un huesped y desglosar su informacion en una fila para agregarla a la tabla de huespedes
@@ -708,7 +718,6 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         jTFDomicilio.setText("");
         jTFCorreo.setText("");
         jTFCelular.setText("");
-
     }
 
     //Este metodo elimina todas las filas de la tabla
@@ -721,8 +730,9 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         }
     }
 
+    //Este metodo recibe una fila, y con el ID almacenado en esa fila recupera un huesped, y desglosa su informacion en los textfields
     private void mostrarInfo(int filaSelec) {
-        //Se obtienen los datos del huesped almacenado en la fila seleccionada
+
         int dni = Integer.parseInt(modelo.getValueAt(filaSelec, 1).toString());
         Huesped huesped = Vista.getHD().buscarHuespedPorDni(dni);
         jTFDni.setText(dni + "");
@@ -731,6 +741,5 @@ public class EdiciondeHuesped extends javax.swing.JInternalFrame {
         jTFDomicilio.setText(huesped.getDomicilio());
         jTFCorreo.setText(huesped.getCorreo());
         jTFCelular.setText(huesped.getCelular());
-
     }
 }

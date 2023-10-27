@@ -5,7 +5,8 @@ package continental.entidades;
  * @author Grupo 61
  */
 public class Categoria {
-    private int idCategoria,cantDePersonas,cantDeCamas;
+
+    private int idCategoria, cantDePersonas, cantDeCamas;
     private double precio;
     private String tipoCategoria;
     private TipoCama tipoDeCamas;
@@ -38,7 +39,6 @@ public class Categoria {
         this.idCategoria = idCategoria;
     }
 
- 
     public int getCantDePersonas() {
         return cantDePersonas;
     }

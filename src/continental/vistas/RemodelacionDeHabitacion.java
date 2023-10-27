@@ -23,6 +23,7 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
 
     private Map<Integer, Categoria> listaDeHab = new HashMap();
 
+    //Se crea el modelo que usaremos en la tabla, y se impide que se puedan modificar los valores de las celdas
     private final DefaultTableModel modelo = new DefaultTableModel() {
 
         @Override
@@ -361,14 +362,18 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
             //Se intenta parsear el numero y piso de la habitacion ingresados y se realiza su validacion
             int numero = Integer.parseInt(jTFNumero.getText());
             int piso = Integer.parseInt(jTFPiso.getText());
+
+            //Se valida si el numero de habitacion es correcto
             if (ValidarData.validarNumero(numero)) {
 
-                JOptionPane.showMessageDialog(this, "En la casilla numero debe ir un dato valido");
+                JOptionPane.showMessageDialog(this, "El numero de habitacion debe estar entre 1 y 200", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
+
+            //Se valida si el numero de piso es correcto
             if (ValidarData.validarPiso(piso)) {
 
-                JOptionPane.showMessageDialog(this, "En la casilla piso debe ir un dato valido");
+                JOptionPane.showMessageDialog(this, "El piso de debe estar entre 1 y 20", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
@@ -382,7 +387,7 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
                 }
             }
 
-            //Seteamos a la habitacioncon la informacion nueva
+            //Seteamos la habitacioncon la informacion nueva
             hab.setNro(numero);
             hab.setPiso(piso);
             hab.setCategoria((Categoria) jCBCategorias.getSelectedItem());
@@ -393,7 +398,7 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
             //Dependiendo del valor que tome la variable registro se muestra un mensaje al usuario
             if (registro > 0) {
 
-                JOptionPane.showMessageDialog(this, "Datos actualizados");
+                JOptionPane.showMessageDialog(this, "Datos actualizados.");
             } else {
 
                 JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos. \nEl numero está en uso", "", JOptionPane.ERROR_MESSAGE);
@@ -446,12 +451,11 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
         JTFBuscador.setForeground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_JTFBuscadorFocusLost
 
-    
-    private void JTFBuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFBuscadorKeyReleased
     //Este metodo permite filtrar las habitaciones de la tabla al escribir un numero de habitacion en el textField de busqueda
+    private void JTFBuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFBuscadorKeyReleased
+
         limpiarTabla();
         ArrayList<Habitacion> ListaDeHabitaciones = Vista.getHabD().listarHabitaciones();
-
         for (Habitacion h : ListaDeHabitaciones) {
 
             if ((h.getNro() + "").startsWith(JTFBuscador.getText())) {
@@ -513,9 +517,13 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
 
         //Se llama al metodo que se encarga de setear el ancho de las columnas
         anchoColumna(columnas, 0, 40);
-        anchoColumna(columnas, 1, 80);
+        anchoColumna(columnas, 1, 70);
+        anchoColumna(columnas, 2, 60);
+        anchoColumna(columnas, 4, 90);
     }
 
+    //Este metodo se usa para setear el ancho de una columna
+    //Recibe por parametro el modelo de columna de la tabla, el indice de la columna a modificar y el ancho deseado
     private void anchoColumna(TableColumnModel modeloTabla, int indice, int ancho) {
 
         modeloTabla.getColumn(indice).setWidth(ancho);

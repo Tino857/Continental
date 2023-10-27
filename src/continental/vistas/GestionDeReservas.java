@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package continental.vistas;
 
 import continental.entidades.Categoria;
@@ -23,10 +18,11 @@ import javax.swing.table.TableColumnModel;
 
 /**
  *
- * @author valen
+ * @author Grupo 61
  */
 public class GestionDeReservas extends javax.swing.JInternalFrame {
 
+    //Se crea el modelo que usaremos en la tabla, y se impide que se puedan modificar los valores de las celdas
     private final DefaultTableModel modelo = new DefaultTableModel() {
 
         @Override
@@ -35,11 +31,11 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
             return false;
         }
     };
- private boolean okay=false;
+
     public GestionDeReservas() {
+
         initComponents();
         armarTabla();
-
     }
 
     /**
@@ -85,6 +81,15 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
         setClosable(true);
         setMaximizable(true);
         setResizable(true);
+
+        jDesktopPane1.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jDesktopPane1ComponentAdded(evt);
+            }
+            public void componentRemoved(java.awt.event.ContainerEvent evt) {
+                jDesktopPane1ComponentRemoved(evt);
+            }
+        });
 
         jDCInicio.setBackground(new java.awt.Color(85, 94, 100));
         jDCInicio.setForeground(new java.awt.Color(255, 255, 255));
@@ -332,101 +337,163 @@ public class GestionDeReservas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //BOTON FILTRAR
     private void jBFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFiltrarActionPerformed
+
+        //Llama al metodo encargado de limpiar la tabla de reservas, y al de comprobar datos
         limpiarTabla();
-
-       comprobarDatos();
-
-
+        if (comprobarDatos()) {
+            //Si hay datos erroneos se finaliza la ejecucion
+            return;
+        }
+        //Se llama al metodo encargado de cargar las reservas en la tabla
+        cargarDatos();
     }//GEN-LAST:event_jBFiltrarActionPerformed
 
+    //CANTIDAD
     private void jTFCantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCantidadKeyReleased
-       limpiarTabla();
-        jCBCategorias.removeAllItems();
-        ArrayList<Categoria> ListaDeCategorias = Vista.getCD().listarCategorias();
 
-        for (Categoria cat : ListaDeCategorias) {
-            if (jTFCantidad.getText().equals("")) {
-                 jCBCategorias.removeAllItems();
-                 return;
-            }
-            if ((cat.getCantDePersonas() >= Integer.parseInt(jTFCantidad.getText()))) {
+        try {
+            //Se limpia la tabla y el CB
+            limpiarTabla();
+            jCBCategorias.removeAllItems();
+            //Se intenta parsear el numero
+            int cantidad = Integer.parseInt(jTFCantidad.getText());
+            //Si el valor esta fuera de los indices se finaliza la ejecucion
+            if (cantidad < 1 || cantidad > 4) {
 
-                jCBCategorias.addItem(cat);
+                return;
             }
+            //Se crea una lista de categorias
+            ArrayList<Categoria> ListaDeCategorias = Vista.getCD().listarCategorias();
+            //Se recorre la lista y si el maximo de personas de la categoria es mayor o igual a la cantidad de personas de la reserva, se agrega la categoria al CB
+            for (Categoria cat : ListaDeCategorias) {
+                if ((cat.getCantDePersonas() >= Integer.parseInt(jTFCantidad.getText()))) {
+
+                    jCBCategorias.addItem(cat);
+                }
+            }
+        } catch (NumberFormatException | NullPointerException e) {
+            jCBCategorias.removeAllItems();
         }
-
-
     }//GEN-LAST:event_jTFCantidadKeyReleased
 
+    //COMBO BOX
     private void jCBCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCategoriasActionPerformed
+
+        //Se recupera la cartegoria seleccionada del CB
         Categoria cat = (Categoria) jCBCategorias.getSelectedItem();
-        if (cat==null) {
-         jTFPrecio.setText("");   
-         return;
-        }else{
-             jTFPrecio.setText(cat.getPrecio() + "");
+        //Se setea el texfield de precio con el precio correspondiente a la categoria seleccionada
+        if (cat == null) {
+
+            jTFPrecio.setText("");
+        } else {
+
+            jTFPrecio.setText(cat.getPrecio() + "");
         }
-       
-
-
     }//GEN-LAST:event_jCBCategoriasActionPerformed
 
+    //BOTON SIGUIENTE
     private void jBSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSiguienteActionPerformed
- ;
-        if (comprobarDatos()) {
 
-            return;
-        }
         try {
-            if (jTable1.getSelectedRow() == -1) {
-                JOptionPane.showMessageDialog(this, "Seleccione una habitacion para continuar");
-            return;
-            }
-            int filaSelec = jTable1.getSelectedRow();
+            //Se convierten las fechas de los date chooser a LocalDate
             LocalDate fi = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate ff = jDCFinal.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            //Se parsea la cantidad de personas
             int cantidadPersonas = Integer.parseInt(jTFCantidad.getText());
-            
+
+            //Se llama al metodo encargado de comprobar los datos
+            if (comprobarDatos()) {
+                //Si hay datos erroneos se finaliza la ejecucion
+                return;
+            }
+
+            //Se verifica que esté seleccionada una fila de la tabla
+            if (jTable1.getSelectedRow() == -1) {
+
+                JOptionPane.showMessageDialog(this, "Seleccione una habitacion para continuar", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            //Se recupera la fila seleccionada de la tabla
+            int filaSelec = jTable1.getSelectedRow();
+
+            //Se recupera el numero de habitacion de la tala, y con el se recupera una habitacion
             Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
 
+            //Se controla que la habitacion este disponible en la fecha seleccionada
+            ArrayList<Reserva> ListaDeReserva = Vista.getRD().listarReservas();
+            for (Reserva reserva : ListaDeReserva) {
+
+                if (reserva.getHabitacion().getNro() == hab.getNro()) {
+                    if (!((fi.isBefore(reserva.getFi()) && ff.isBefore(reserva.getFi())) || (fi.isAfter(reserva.getFf()) && ff.isAfter(reserva.getFf())))) {
+
+                        JOptionPane.showMessageDialog(this, "La habitacion seleccionada no está disponible en esa fecha", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                        limpiarTabla();
+                        return;
+                    }
+                }
+            }
+
+            //Teniendo todos los valores correctos, pasamos a seleccionar el huesped que sera el titular de la reserva
+            //Creamos una variable para almacenar la respuesta y preguntamos al usuario si es un huesped nuevo
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Es un husped nuevo?", "", JOptionPane.YES_NO_OPTION);
             if (respuesta == 0) {
-                
-                //Dijo que si
+
+                //De responder que si, se mustra la ventana de gestion de huespedes, que permitira ingresar un nuevo huesped
                 GestionDeHuesped GDH = new GestionDeHuesped(fi, ff, hab, cantidadPersonas);
                 abrirVentana(GDH);
             } else if (respuesta == 1) {
-                
-                //Dijo que no
+
+                //De responder que si, se mustra una ventana con la lista de huespedes registrados activos
                 MostrarHuespedes mh = new MostrarHuespedes(fi, ff, hab, cantidadPersonas);
-                abrirVentana(mh);  
+                abrirVentana(mh);
             }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "La cantidad de personas debe ser un numero entero", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+        } catch (NullPointerException e) {
 
-        }catch (NumberFormatException e){
-             JOptionPane.showMessageDialog(this, "La cantidad de personas debe ser un dato valido");
+            JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
         }
-        catch (NullPointerException e) {
-            
-            JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
-        }
-
     }//GEN-LAST:event_jBSiguienteActionPerformed
 
+    //BOTON LIMPIAR
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+
+        //Limpia la tabla, vacia los TextFields, DateChooser y ComboBox
         limpiarTabla();
-         
-          jTFCantidad.setText("");
-          jTFPrecio.setText("");
-          jDCInicio.setDate(null);
-           jDCFinal.setDate(null);
-           //falta que se limpie el comobo box jCBCategorias.removeAllItems();
+        jTFCantidad.setText("");
+        jTFPrecio.setText("");
+        jDCInicio.setDate(null);
+        jDCFinal.setDate(null);
+        jCBCategorias.removeAllItems();
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
+    //BOTON SALIR
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-dispose();        // TODO add your handling code here:
+
+        //Cierra la ventana
+        dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    //Se captura el evento de creacion de una ventana para deshabilitar los botones y campos de texto de la ventana actual mientras esta en segundo plano
+    private void jDesktopPane1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jDesktopPane1ComponentAdded
+
+        if (!jTFPrecio.getText().isEmpty()) {
+            habilitar(false);
+        }
+    }//GEN-LAST:event_jDesktopPane1ComponentAdded
+
+    //Se captura el evento de remocion de una ventana para volver a habilitar los botones y campos de texto de la ventana
+    private void jDesktopPane1ComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jDesktopPane1ComponentRemoved
+
+        habilitar(true);
+        //Se limpia la tabla y se cargan las reservas nuevamente
+        limpiarTabla();
+        cargarDatos();
+    }//GEN-LAST:event_jDesktopPane1ComponentRemoved
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -454,18 +521,7 @@ dispose();        // TODO add your handling code here:
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarCB() {
-
-        //Agregamos en el primer lugar una categoria vacio
-        Categoria vacio = new Categoria() {
-            @Override
-            public String toString() {
-                return "Introduzca la cantidad de personas";
-            }
-        };
-        jCBCategorias.addItem(vacio);
-    }
-
+    //Este metodo permite setear un modelo de tabla personalizado
     private void armarTabla() {
 
         //Se agregan las columnas con su nombre correspondiente al modelo de tabla creado anteriormente
@@ -483,9 +539,13 @@ dispose();        // TODO add your handling code here:
 
         //Se llama al metodo que se encarga de setear el ancho de las columnas
         anchoColumna(columnas, 0, 40);
-        anchoColumna(columnas, 1, 80);
+        anchoColumna(columnas, 1, 70);
+        anchoColumna(columnas, 2, 60);
+        anchoColumna(columnas, 4, 120);
     }
 
+    //Este metodo se usa para setear el ancho de una columna
+    //Recibe por parametro el modelo de columna de la tabla, el indice de la columna a modificar y el ancho deseado
     private void anchoColumna(TableColumnModel modeloTabla, int indice, int ancho) {
 
         modeloTabla.getColumn(indice).setWidth(ancho);
@@ -494,16 +554,53 @@ dispose();        // TODO add your handling code here:
         modeloTabla.getColumn(indice).setPreferredWidth(ancho);
     }
 
+    //Este metodo se encarga de filtrar las reservas disponibles en cierto periodo de tiempo y cargarlas en la tabla de reservas
     private void cargarDatos() {
 
-        //Se recupera una lista de habitaciones
-        ArrayList<Habitacion> ListaDeHabitaciones = Vista.getHabD().listarHabitaciones();
-        for (Habitacion next : ListaDeHabitaciones) {
-            cargarTabla(next);
-        }
+        try {
 
+            //Se convierten las fechas de los date chooser a LocalDate
+            LocalDate fi = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate ff = jDCFinal.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            //Se crea una lista re reservas, una de habitacion y un mapa de habitacion
+            ArrayList<Reserva> ListaDeReserva = Vista.getRD().listarReservas();
+            ArrayList<Habitacion> listaDeHabitacion = Vista.getHabD().listarHabitaciones();
+            Map<Integer, Habitacion> listaDeHab = new HashMap();
+
+            //Se recupera la categoria seleccionada del CB
+            Categoria cat = (Categoria) jCBCategorias.getSelectedItem();
+
+            //Paso la lista de habitaciones a un hash map
+            for (Habitacion hab : listaDeHabitacion) {
+
+                if (hab.getCategoria().getTipoCategoria().equals(cat.getTipoCategoria())) {
+
+                    listaDeHab.put(hab.getNro(), hab);
+                }
+            }
+            //Se recorre la lista de reservas, y si alguna coincide con las fechas ingresadas por el usuario, esa reserva
+            //Sera borrada del hash map de habitaciones
+            for (Reserva reserva : ListaDeReserva) {
+
+                if (!((fi.isBefore(reserva.getFi()) && ff.isBefore(reserva.getFi())) || (fi.isAfter(reserva.getFf()) && ff.isAfter(reserva.getFf())))) {
+
+                    listaDeHab.remove(reserva.getHabitacion().getNro());
+                }
+            }
+
+            //Se recorre el mapa y se agregan las reservas a la tabla
+            for (Map.Entry<Integer, Habitacion> entry : listaDeHab.entrySet()) {
+
+                Integer key = entry.getKey();
+                Habitacion value = entry.getValue();
+                cargarTabla(value);
+            }
+        } catch (Exception e) {
+        }
     }
 
+    //Este metodo se encarga de limpiar la tabla
     private void limpiarTabla() {
 
         int filas = modelo.getRowCount() - 1;
@@ -513,6 +610,7 @@ dispose();        // TODO add your handling code here:
         }
     }
 
+    //Este metodo recibe una habitacion, y desglosa su informacion 
     private void cargarTabla(Habitacion hab) {
 
         modelo.addRow(new Object[]{
@@ -524,73 +622,67 @@ dispose();        // TODO add your handling code here:
         });
     }
 
+    //Recibe un componente y lo agrega a la pantalla
     private void abrirVentana(Component cpm) {
 
         cpm.setVisible(true);
         jDesktopPane1.add(cpm);
-
         jDesktopPane1.moveToFront(cpm);
     }
-private boolean comprobarDatos(){
-    try {
+
+    //Este metodo se encarga de hacer las comprobaciones
+    private boolean comprobarDatos() {
+
+        try {
+
+            //Se convierten las fechas de los date chooser a LocalDate
             LocalDate fi = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate ff = jDCFinal.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            
+            //Se comprueba que la fecha ingresada sea posterior a la fecha actual
             if (ff.isBefore(LocalDate.now(ZoneId.systemDefault())) || fi.isBefore(LocalDate.now(ZoneId.systemDefault()))) {
-                JOptionPane.showMessageDialog(this, "La fecha debe ser posterior al dia de hoy");
-             
+
+                JOptionPane.showMessageDialog(this, "La fecha debe ser posterior al dia de hoy", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return true;
             }
 
+            //Se verifica que la fecha de inicio sea previa a la fecha de fin de la reserva
             if (fi.isAfter(ff)) {
-                JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser anterior a la fecha de final");
-           
+
+                JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser anterior a la fecha de final", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return true;
             }
+
+            //Se parsea la cantidad de personas y se valida que este en un rango correcto
             int cant = Integer.parseInt(jTFCantidad.getText());
-            
-            if (cant<=0 ||cant>4) {
-            JOptionPane.showMessageDialog(this, "Ingrese una cantidad de personas de 1 a 4");
-               
-            return true;
-        }
-            
-            ArrayList<Reserva> ListaDeReserva = Vista.getRD().listarReservas();
-            ArrayList<Habitacion> listaDeHabitacion = Vista.getHabD().listarHabitaciones();
-            Map<Integer, Habitacion> listaDeHab = new HashMap();
-            Categoria cat = (Categoria) jCBCategorias.getSelectedItem();
+            if (cant <= 0 || cant > 4) {
 
-           //Paso la lista de habitaciones a un hash map
-            for (Habitacion hab : listaDeHabitacion) {
-                if (hab.getCategoria().getTipoCategoria().equals(cat.getTipoCategoria())) {
-                    listaDeHab.put(hab.getNro(), hab);
-                }
-
+                JOptionPane.showMessageDialog(this, "Ingrese una cantidad de personas de 1 a 4", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                return true;
             }
-            for (Reserva reserva : ListaDeReserva) {
-                if (!((fi.isBefore(reserva.getFi()) && ff.isBefore(reserva.getFi())) || (fi.isAfter(reserva.getFf()) && ff.isAfter(reserva.getFf())))) {
-                    
-                 listaDeHab.remove(reserva.getHabitacion().getNro());
-
-                }
-            }
-
-            for (Map.Entry<Integer, Habitacion> entry : listaDeHab.entrySet()) {
-                Integer key = entry.getKey();
-                Habitacion value = entry.getValue();
-
-                cargarTabla(value);
-                
-            }
-
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "En cantidad debe ser un numero entero");
-             return true;
 
-        } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(this, "Error en la Fecha");
+            JOptionPane.showMessageDialog(this, "La cantidad de personas debe ser un numero entero", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
             return true;
+        } catch (NullPointerException e) {
 
+            JOptionPane.showMessageDialog(this, "Fecha incorrecta", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+            return true;
         }
-    return false;
-}
+        return false;
+    }
+
+    //Este metodo recibe un valor booleano, y dependiendo del mismo, habilita o deshabilita componentes de la vista
+    private void habilitar(boolean valor) {
+
+        jDCInicio.setEnabled(valor);
+        jDCFinal.setEnabled(valor);
+        jTFCantidad.setEnabled(valor);
+        jBFiltrar.setEnabled(valor);
+        jBLimpiar.setEnabled(valor);
+        jBSiguiente.setEnabled(valor);
+        jBSalir.setEnabled(valor);
+        jCBCategorias.setEnabled(valor);
+        jTable1.setEnabled(valor);
+    }
 }

@@ -18,6 +18,7 @@ import javax.swing.table.TableColumnModel;
  */
 public class ReservaPorFecha extends javax.swing.JInternalFrame {
 
+    //Se crea el modelo que usaremos en la tabla, y se impide que se puedan modificar los valores de las celdas
     private final DefaultTableModel modelo = new DefaultTableModel() {
 
         @Override
@@ -28,7 +29,7 @@ public class ReservaPorFecha extends javax.swing.JInternalFrame {
     };
 
     public ReservaPorFecha() {
-        
+
         initComponents();
         armarTabla();
         jRBActivas.setSelected(true);
@@ -282,7 +283,9 @@ public class ReservaPorFecha extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //BOTON ELIMINAR
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+
         try {
             //Se recupera de la tabla el numero de fila seleccionada
             int filaSelec = jTable1.getSelectedRow();
@@ -291,17 +294,20 @@ public class ReservaPorFecha extends javax.swing.JInternalFrame {
 
                 filaSelec = 0;
             }
-            
+            //Si no hay ninguna fila seleccionada se termina con la ejecucion
             if (filaSelec == -1) {
-                JOptionPane.showMessageDialog(this, "Seleccione una reserva");
+
+                JOptionPane.showMessageDialog(this, "Seleccione una reserva", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            //Se recupera la habitacion y la reserva de la DB
+            //Se convierten las fechas a LocalDate y se recupera la reserva de la DB
             LocalDate fi = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate ff = jDCFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
             Reserva res = Vista.getRD().buscarReservaPorId(Integer.parseInt((String) modelo.getValueAt(filaSelec, 0)));
+
+            //Se crea una variable para almacenar la respuesta y se pide confirmacion al usuario
             int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea eliminar la siguiente reserva?"
                     + " \nTitular: " + res.getHuesped().getApellido() + ", " + res.getHuesped().getNombre()
                     + " \nDNI: " + res.getHuesped().getDni()
@@ -329,69 +335,73 @@ public class ReservaPorFecha extends javax.swing.JInternalFrame {
                 }
             }
 
-           //Se llama al metodo encargado de cargar la tabla
+            //Se llama al metodo encargado de cargar la tabla
             cargarReservas(fi, ff);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | NullPointerException e) {
 
-            JOptionPane.showMessageDialog(this, "Ingrese datos validos");
-        } catch (NullPointerException e) {
-
-            JOptionPane.showMessageDialog(this, "Ingrese datos validos");
+            JOptionPane.showMessageDialog(this, "Ingrese datos validos.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jBEliminarActionPerformed
 
+    //BOTON BUSCAR
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        //Se garantiza que ninguna de las fechas sea nula
-        if (jDCInicio.equals(null) || jDCFin.equals(null)) {
 
-            JOptionPane.showMessageDialog(this, "La casilla de las fechas debe recibir un dato valido.");
+        //Se garantiza que ninguna de las fechas sea nula
+        if (jDCInicio == null || jDCFin == null) {
+
+            JOptionPane.showMessageDialog(this, "La casilla de las fechas debe recibir un dato valido.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
             return;
         }
         try {
             LocalDate fi = jDCInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate ff = jDCFin.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        //Se garantiza que la fecha de fin sea posterior a la fecha de inicio
+            //Se controla que la fecha de fin sea posterior a la fecha de inicio
             if (fi.isAfter(ff)) {
-                JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser anterior a la fecha de final");
+
+                JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser anterior a la fecha de final", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-        //Se cargan las reservas
+            //Se cargan las reservas
             cargarReservas(fi, ff);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | NullPointerException e) {
 
-            JOptionPane.showMessageDialog(this, "wep");
-        } catch (NullPointerException e) {
-
-            JOptionPane.showMessageDialog(this, "Debe ingresar datos validos null pointer");
+            JOptionPane.showMessageDialog(this, "Error de fecha", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
+    //BOTON LIMPIAR
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
 
+        //Llama al metodo encargado de limpiar la tabla, luego resetea los date chooser 
         limpiarTabla();
         jDCInicio.setDate(null);
         jDCFin.setDate(null);
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
+    //BOTON SALIR
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
 
+        //Cierra la ventana
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    //RADIO BUTTON ACTIVAS
     private void jRBActivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBActivasActionPerformed
-        
+
+        //Llama al metodo que habilita el boton de eliminar, limpia la tabla y busca reservas
         mostrarBoton(true);
         limpiarTabla();
         buscar();
     }//GEN-LAST:event_jRBActivasActionPerformed
 
+    //RADIO BUTTON INACTIVAS
     private void jRBInactivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBInactivasActionPerformed
-        
+
+        //Llama al metodo que habilita el boton de eliminar, en este caso para ocultarlo, limpia la tabla y busca reservas
         mostrarBoton(false);
         limpiarTabla();
         buscar();
     }//GEN-LAST:event_jRBInactivasActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -413,7 +423,9 @@ public class ReservaPorFecha extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
-private void armarTabla() {
+
+    //Este metodo permite setear un modelo de tabla personalizado
+    private void armarTabla() {
 
         //Se agregan las columnas con su nombre correspondiente al modelo de tabla creado anteriormente
         modelo.addColumn("ID");
@@ -438,6 +450,8 @@ private void armarTabla() {
         anchoColumna(columnas, 7, 70);
     }
 
+    //Este metodo se usa para setear el ancho de una columna
+    //Recibe por parametro el modelo de columna de la tabla, el indice de la columna a modificar y el ancho deseado
     private void anchoColumna(TableColumnModel modeloTabla, int indice, int ancho) {
 
         modeloTabla.getColumn(indice).setWidth(ancho);
@@ -446,6 +460,7 @@ private void armarTabla() {
         modeloTabla.getColumn(indice).setPreferredWidth(ancho);
     }
 
+    //Este metodo se encarga de recibir una reserva y desglosar su informacion en una fila para agregarla a la tabla de reservas
     private void cargarTabla(Reserva res) {
 
         String estado = "Inactiva";
@@ -466,6 +481,7 @@ private void armarTabla() {
         });
     }
 
+    //Este metodo se encarga de limpiar los datos de la tabla
     private void limpiarTabla() {
 
         int filas = modelo.getRowCount() - 1;
@@ -475,32 +491,34 @@ private void armarTabla() {
         }
     }
 
+    //Este metodo recibe una fecha de inicio y de fin, y se encarga de cargar en la tabla las reservas que coincidan con ese periodo de tiempo
     private void cargarReservas(LocalDate fi, LocalDate ff) {
-        
+
         limpiarTabla();
         if (jRBActivas.isSelected()) {
-            
+
             ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
             for (Reserva reserva : reservas) {
-            
+
                 if ((reserva.getFi().equals(fi) || reserva.getFi().isAfter(fi)) && (reserva.getFf().equals(ff) || reserva.getFf().isBefore(ff))) {
-                
+
                     cargarTabla(reserva);
                 }
             }
-        } else if (jRBInactivas.isSelected()){
-            
+        } else if (jRBInactivas.isSelected()) {
+
             ArrayList<Reserva> reservas = Vista.getRD().listarReservasInactivas();
             for (Reserva reserva : reservas) {
-            
+
                 if ((reserva.getFi().equals(fi) || reserva.getFi().isAfter(fi)) && (reserva.getFf().equals(ff) || reserva.getFf().isBefore(ff))) {
-                
+
                     cargarTabla(reserva);
                 }
             }
         }
     }
-    
+
+    //Este metodo recibe un booleano y habilita o deshabilita el boton de eliminar, dependiendo del valor que reciba
     private void mostrarBoton(boolean valor) {
 
         jBEliminar.setEnabled(valor);
@@ -508,10 +526,10 @@ private void armarTabla() {
     }
 
     private void buscar() {
-       
-        if (jDCInicio.equals(null) || jDCFin.equals(null)) {
 
-            JOptionPane.showMessageDialog(this, "La casilla de las fechas debe recibir un dato valido.");
+        if (jDCInicio == null || jDCFin == null) {
+
+            JOptionPane.showMessageDialog(this, "La casilla de las fechas debe recibir un dato valido.", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
             return;
         }
         try {
@@ -522,10 +540,8 @@ private void armarTabla() {
 
                 return;
             }
-
             cargarReservas(fi, ff);
         } catch (NumberFormatException | NullPointerException e) {
-
         }
     }
 }

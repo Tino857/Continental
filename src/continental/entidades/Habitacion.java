@@ -1,18 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package continental.entidades;
 
 /**
  *
- * @author valen
+ * @author Grupo 61
  */
 public class Habitacion {
+
     private int piso, nro, idHabitacion;
     private Categoria categoria;
-    private boolean estado,habilitada;
+    private boolean estado, habilitada;
 
     public Habitacion() {
     }
@@ -22,7 +18,7 @@ public class Habitacion {
         this.nro = nro;
         this.categoria = categoria;
         this.estado = estado;
-        this.habilitada=true;
+        this.habilitada = true;
     }
 
     public Habitacion(int piso, int nro, int idHabitacion, Categoria categoria, boolean estado) {
@@ -31,7 +27,7 @@ public class Habitacion {
         this.idHabitacion = idHabitacion;
         this.categoria = categoria;
         this.estado = estado;
-          this.habilitada=true;
+        this.habilitada = true;
     }
 
     public boolean isHabilitada() {
@@ -66,7 +62,6 @@ public class Habitacion {
         this.categoria = categoria;
     }
 
-    
     public boolean isEstado() {
         return estado;
     }
@@ -82,5 +77,4 @@ public class Habitacion {
     public void setIdHabitacion(int idHabitacion) {
         this.idHabitacion = idHabitacion;
     }
-
 }

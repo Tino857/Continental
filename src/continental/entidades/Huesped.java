@@ -5,9 +5,9 @@ package continental.entidades;
  * @author Grupo 61
  */
 public class Huesped {
-    
-    private String nombre,apellido,domicilio,correo,celular;
-    private int dni,idHuesped;
+
+    private String nombre, apellido, domicilio, correo, celular;
+    private int dni, idHuesped;
     private boolean estado;
 
     public Huesped() {
@@ -22,7 +22,7 @@ public class Huesped {
         this.dni = dni;
         this.estado = estado;
     }
-    
+
     public Huesped(String nombre, String apellido, String domicilio, String correo, String celular, int dni, int idHuesped, boolean estado) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -97,13 +97,13 @@ public class Huesped {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-        
+
     @Override
     public String toString() {
         return "Apellido: " + apellido + "\n"
                 + "Nombre: " + nombre + "\n"
                 + "Correo: " + correo + "\n"
-                +"Celular: "+celular+"\n"
-                + "Domicilio: "+domicilio;
+                + "Celular: " + celular + "\n"
+                + "Domicilio: " + domicilio;
     }
 }
