@@ -33,7 +33,7 @@ public class HuespedData {
         int registro = 0;
         try {
             Huesped h = buscarHuespedPorDni(huesped.getDni());// Esto se hace para verificar si el huesped ya existe en la base de datos
-            if (h != null) {//Se verifica si se encontró un alumno en la base de datos
+            if (h != null) {//Se verifica si se encontró un huesped en la base de datos
 
                 if (h.getIdHuesped() != huesped.getIdHuesped()) {//compara el ID por parametro con el de la base para no duplicar un DNI
                     
@@ -72,7 +72,7 @@ public class HuespedData {
         } catch (SQLException e) {
 
             //Se captura una posible excepcion SQL
-            System.out.println("Error al guardar al alumno: " + huesped.getNombre() + " " + huesped.getApellido() + " " + e.getMessage());
+            System.out.println("Error al guardar al huesped: " + huesped.getNombre() + " " + huesped.getApellido() + " " + e.getMessage());
         }
 
         //Retorna un registro que tendra valor 0 en caso de fallar o el id del husped en caso de tener exito

@@ -331,17 +331,17 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "El numero de habitacion debe estar entre 1 y 200");
                 return;
             }
-            //Se busca la materia en la base de datos y se guarda
+            //Se busca la habitacion en la base de datos y se guarda
             Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(nDH);
 
-            //Si la materia recibida tiene valor nulo significa que no se encuentra en la DB
+            //Si la habitacion recibida tiene valor nulo significa que no se encuentra en la DB
             //Se muestra el mensaje al usuario y se finaliza la ejecucion
             if (hab == null) {
                 JOptionPane.showMessageDialog(this, "No existe la habitacion");
                 return;
             }
 
-            //Si la materia se encontraba en la DB, se setean los campos correspondientes con los valores obtenidos de la materia
+            //Si la habitacion se encontraba en la DB, se setean los campos correspondientes con los valores obtenidos de la habitacion
             jTFCodigo.setText(hab.getIdHabitacion() + "");
             jTFNumero.setText(hab.getNro() + "");
             jTFPiso.setText(hab.getPiso() + "");
@@ -441,10 +441,10 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
                 return;
             }
 
-            //Llegado el punto en que todos los valores son correctos, se crea una materia
+            //Llegado el punto en que todos los valores son correctos, se crea una habitacion
             Habitacion hab = new Habitacion(piso, numero, (Categoria) jCBCategorias.getSelectedItem(), true);
 
-            //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo guardarMateria
+            //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo guardarHabitacion
             int registro = Vista.getHabD().guardarHabitacion(hab);
 
             //Dependiendo del valor que tome la variable registro se muestra un mensaje al usuario
@@ -563,7 +563,7 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
 
     private void cargarCB() {
 
-        //Agregamos en el primer lugar un alumno vacio
+        //Agregamos en el primer lugar una categoria vacia
         Categoria vacio = new Categoria() {
             @Override
             public String toString() {
@@ -572,14 +572,14 @@ public class GestionDeHabitacion extends javax.swing.JInternalFrame {
         };
         jCBCategorias.addItem(vacio);
 
-        //Se recupera una lista de alumnos
+        //Se recupera una lista de  categorias
         ArrayList<Categoria> Lista = Vista.getCD().listarCategorias();
         int i = 0;
         for (Categoria categoria : Lista) {
             listaDeHab.put(i + 1, categoria);
             i++;
         }
-        //Se recorre la lista y cada alumno se agrega al CB
+        //Se recorre la lista y cada  categoria se agrega al CB
         for (Categoria cat : Lista) {
             jCBCategorias.addItem(cat);
         }

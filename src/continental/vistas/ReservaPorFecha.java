@@ -425,7 +425,7 @@ private void armarTabla() {
         modelo.addColumn("Precio");
         modelo.addColumn("Estado");
 
-        //Se setea el modelo de tabla a la tabla de alumnos
+        //Se setea el modelo de tabla a la tabla de reservas
         jTable1.setModel(modelo);
 
         //Se recupera el modelo de columnas

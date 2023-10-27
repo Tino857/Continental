@@ -475,7 +475,7 @@ dispose();        // TODO add your handling code here:
         modelo.addColumn("Categoria");
         modelo.addColumn("Precio por noche");
 
-        //Se setea el modelo de tabla a la tabla de alumnos
+        //Se setea el modelo de tabla a la tabla de habitacion
         jTable1.setModel(modelo);
 
         //Se recupera el modelo de columnas
@@ -496,7 +496,7 @@ dispose();        // TODO add your handling code here:
 
     private void cargarDatos() {
 
-        //Se recupera una lista de alumnos
+        //Se recupera una lista de habitaciones
         ArrayList<Habitacion> ListaDeHabitaciones = Vista.getHabD().listarHabitaciones();
         for (Habitacion next : ListaDeHabitaciones) {
             cargarTabla(next);

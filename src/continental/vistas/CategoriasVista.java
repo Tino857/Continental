@@ -581,7 +581,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos.\nYa existe una categoria con ese nombre", "", JOptionPane.ERROR_MESSAGE);
             }
 
-            //Se limpia la tabla y se vuelven a cargar los datos de los alumnos
+            //Se limpia la tabla y se vuelven a cargar los datos de las categorias
             limpiarTabla();
             cargarDatos();
         } catch (NumberFormatException e) {
@@ -640,7 +640,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         modelo.addColumn("Tipo de Camas");
         modelo.addColumn("Precio");
 
-        //Se setea el modelo de tabla a la tabla de alumnos
+        //Se setea el modelo de tabla a la tabla de categoria
         jTable1.setModel(modelo);
 
         //Se recupera el modelo de columnas
@@ -673,7 +673,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
         }
     }
 
-    //Este metodo se encarga de recibir un categoria y desglosar su informacion en una fila para agregarla a la tabla de alumnos
+    //Este metodo se encarga de recibir un categoria y desglosar su informacion en una fila para agregarla a la tabla de categorias
     private void cargarTabla(Categoria cat) {
 
         modelo.addRow(new Object[]{

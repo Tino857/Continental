@@ -404,7 +404,7 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
             cargarDatos();
         } catch (NumberFormatException e) {
 
-            JOptionPane.showMessageDialog(this, "En la casilla de numero o piso solo deben ir numeros", "", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "En la casilla de numero y piso solo deben ir numeros", "", JOptionPane.WARNING_MESSAGE);
         }
         //Se limpian los textfields
         limpiarInfo();
@@ -446,9 +446,9 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
         JTFBuscador.setForeground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_JTFBuscadorFocusLost
 
-    //Este metodo permite filtrar las habitaciones de la tabla al escribir un numero de habitacion en el textField de busqueda
+    
     private void JTFBuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFBuscadorKeyReleased
-
+    //Este metodo permite filtrar las habitaciones de la tabla al escribir un numero de habitacion en el textField de busqueda
         limpiarTabla();
         ArrayList<Habitacion> ListaDeHabitaciones = Vista.getHabD().listarHabitaciones();
 

@@ -342,7 +342,7 @@ try{
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
 
-        //Se setea el modelo de tabla a la tabla de alumnos
+        //Se setea el modelo de tabla a la tabla de Huesped
         jTable1.setModel(modelo);
 
         //Se recupera el modelo de columnas
@@ -362,7 +362,7 @@ try{
 
     private void cargarDatos() {
 
-        //Se recupera una lista de alumnos
+        //Se recupera una lista de huespedes
         ArrayList<Huesped> listaDeHuespedes = Vista.getHD().listarHuespedAct();
         for (Huesped huesped : listaDeHuespedes) {
             cargarTabla(huesped);
