@@ -643,10 +643,9 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
 
         //Se agregan las columnas con su nombre correspondiente al modelo de tabla creado anteriormente
         modelo.addColumn("ID");
-        modelo.addColumn("Tipo de Hab");
-        modelo.addColumn("Cant Personas");
-        modelo.addColumn("Cant Camas");
-        modelo.addColumn("Tipo de Camas");
+        modelo.addColumn("Tipo de Habitacion");
+        modelo.addColumn("Personas");
+        modelo.addColumn("Camas");
         modelo.addColumn("Precio");
 
         //Se setea el modelo de tabla a la tabla de categoria
@@ -657,7 +656,8 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
 
         //Se llama al metodo que se encarga de setear el ancho de las columnas
         anchoColumna(columnas, 0, 40);
-        anchoColumna(columnas, 5, 70);
+        anchoColumna(columnas, 2, 90);
+        anchoColumna(columnas, 4, 70);
     }
 
     //Este metodo se usa para setear el ancho de una columna
@@ -689,7 +689,7 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
             cat.getIdCategoria(),
             cat.getTipoCategoria(),
             cat.getCantDePersonas(),
-            cat.getCantDeCamas(),
+            cat.getCantDeCamas()+" - "+
             cat.getTipoDeCamas(),
             cat.getPrecio()
         });
