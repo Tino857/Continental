@@ -227,6 +227,37 @@ public class HabitacionData {
         }
         return listaHabitaciones;//retorna una lista de habitaciones
     }
+    
+    //Este metodo devuelve una lista de habitaciones
+    public ArrayList<Habitacion> listarHabitacionesPorCategoria(int idCat) {
+
+        ArrayList<Habitacion> listaHabitaciones = new ArrayList();//se  creo una lista paraa almacenar Habitaciones
+        String query = "SELECT * FROM habitacion where habilitada = 1 AND idCategoria = ?";//se define consulta
+        try {
+
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, idCat);
+            ResultSet rs = ps.executeQuery();//se ejecuta la consulta, para un conjunto de resultados(resulset)
+            Habitacion hab = null;// se inicializa una Habitacion en null
+
+            while (rs.next()) {//se inicializa un bucle para modificar la Habitacion
+                hab = new Habitacion();
+                hab.setIdHabitacion(rs.getInt("idHabitacion"));
+                hab.setNro(rs.getInt("numero"));
+                hab.setPiso(rs.getInt("piso"));
+                hab.setEstado(rs.getBoolean("estado"));
+                hab.setCategoria(Vista.getCD().buscarCategoriaPorId(rs.getInt("idCategoria")));
+                hab.setHabilitada(rs.getBoolean("habilitada"));
+                listaHabitaciones.add(hab);//se agrega ela habitacion a la lista
+            }
+
+            ps.close();//cierra  el PS
+        } catch (SQLException e) {
+
+            System.out.println("Error al encontrar la habitacion" + e.getMessage());
+        }
+        return listaHabitaciones;//retorna una lista de habitaciones
+    }
 
     public int habilitarHabitacion(int nro) {
 

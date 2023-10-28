@@ -574,22 +574,18 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
 
             //Se controla que la categoria a editar no pertenezca a una habitacion con reservas activas
             //Se crea una lista de habitaciones que pertenezcan a esa categoria
-            ArrayList<Habitacion> listaDeHabitaciones = Vista.getHabD().listarHabitaciones();
+            ArrayList<Habitacion> listaDeHabitaciones = Vista.getHabD().listarHabitacionesPorCategoria(cat.getIdCategoria());
             for (Habitacion habitacion : listaDeHabitaciones) {
 
-                if (habitacion.getCategoria().getTipoCategoria().equalsIgnoreCase(cat.getTipoCategoria())) {
+                //Por cada habitacion que coincida con la categoria, se filtran las reservas activas que pertenezcan a esa habitacion
+                ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
+                for (Reserva reserva : reservas) {
 
+                    //En caso de que hayan reservas activas, se finaliza la ejecucion.
+                    if (reserva.getHabitacion().getNro() == habitacion.getNro()) {
 
-                    //Por cada habitacion que coincida con la categoria, se filtran las reservas activas que pertenezcan a esa habitacion
-                    ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
-                    for (Reserva reserva : reservas) {
-
-                        //En caso de que hayan reservas activas, se finaliza la ejecucion.
-                        if (reserva.getHabitacion().getNro() == habitacion.getNro()) {
-
-                            JOptionPane.showMessageDialog(this, "No puede editar una categoria perteneciente a una habitacion que esta siendo ocupada o tenga una reserva en el futuro", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
-                            return;
-                        }
+                        JOptionPane.showMessageDialog(this, "No puede editar una categoria perteneciente a una habitacion que esta siendo ocupada o tenga una reserva en el futuro", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                        return;
                     }
                 }
             }
