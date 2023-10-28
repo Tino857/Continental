@@ -2,6 +2,8 @@ package continental.vistas;
 
 import continental.accesoADatos.ValidarData;
 import continental.entidades.Categoria;
+import continental.entidades.Habitacion;
+import continental.entidades.Reserva;
 import continental.entidades.TipoCama;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -570,6 +572,28 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
             //En este categoria guardamos el resultado de la busqueda por medio del id que figura en la tabla
             Categoria cat = obtenerCategoria(filaSelec);
 
+            //Se controla que la categoria a editar no pertenezca a una habitacion con reservas activas
+            //Se crea una lista de habitaciones que pertenezcan a esa categoria
+            ArrayList<Habitacion> listaDeHabitaciones = Vista.getHabD().listarHabitaciones();
+            for (Habitacion habitacion : listaDeHabitaciones) {
+
+                if (habitacion.getCategoria().getTipoCategoria().equalsIgnoreCase(cat.getTipoCategoria())) {
+
+
+                    //Por cada habitacion que coincida con la categoria, se filtran las reservas activas que pertenezcan a esa habitacion
+                    ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
+                    for (Reserva reserva : reservas) {
+
+                        //En caso de que hayan reservas activas, se finaliza la ejecucion.
+                        if (reserva.getHabitacion().getNro() == habitacion.getNro()) {
+
+                            JOptionPane.showMessageDialog(this, "No puede editar una categoria perteneciente a una habitacion que esta siendo ocupada o tenga una reserva en el futuro", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+                    }
+                }
+            }
+
             //Seteamos el objeto categoria con la informacion nueva
             cat.setTipoCategoria(nombre);
             cat.setCantDePersonas(cantidadPersonas);
@@ -689,8 +713,8 @@ public class CategoriasVista extends javax.swing.JInternalFrame {
             cat.getIdCategoria(),
             cat.getTipoCategoria(),
             cat.getCantDePersonas(),
-            cat.getCantDeCamas()+" - "+
-            cat.getTipoDeCamas(),
+            cat.getCantDeCamas() + " - "
+            + cat.getTipoDeCamas(),
             cat.getPrecio()
         });
     }

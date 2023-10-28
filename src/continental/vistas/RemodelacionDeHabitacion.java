@@ -381,8 +381,10 @@ public class RemodelacionDeHabitacion extends javax.swing.JInternalFrame {
             Habitacion hab = Vista.getHabD().buscarHabitacionPorNumero(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
             ArrayList<Reserva> reservas = Vista.getRD().listarReservas();
             for (Reserva reserva : reservas) {
+                
                 if (reserva.getHabitacion().getNro() == hab.getNro()) {
-                    JOptionPane.showMessageDialog(this, "No puede editar una habitacion que esta siendo ocupada o tenga una reserva en el futuro");
+                    
+                    JOptionPane.showMessageDialog(this, "No puede editar una habitacion que esta siendo ocupada o tenga una reserva en el futuro", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
             }
