@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2023 a las 01:27:07
+-- Tiempo de generación: 30-10-2023 a las 01:48:43
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 7.4.22
 
@@ -139,7 +139,7 @@ CREATE TABLE `huesped` (
 INSERT INTO `huesped` (`idHuesped`, `dni`, `apellido`, `nombre`, `domicilio`, `correo`, `celular`, `estado`) VALUES
 (1, 35623588, 'Lopez', 'Juan Pablo', 'Colon 1015', 'juan.pablo.lopez@gmail.com', '2625406156', 1),
 (2, 33835999, 'Lopez', 'Abel Omar', 'Belgrano 7583', 'abel.omar.lopez@gmail.com', '1164740288', 1),
-(3, 42473263, 'Peralta', 'Valentino', 'Calle 35 numero 4943', 'valen85.p@gmail.com', '1167370961', 0),
+(3, 42473263, 'Peralta', 'Valentino', 'Calle 35 numero 4943', 'valen85.p@gmail.com', '1167370961', 1),
 (4, 37854612, 'Rodriguez', 'Laura', 'Rivadavia 123', 'laura.rodriguez@example.org', '1234567890', 1),
 (5, 56984123, 'Perez', 'Jose', 'Belgrano 456', 'jose.perez@test.org', '987654321', 1),
 (6, 47856321, 'Lopez', 'Ana', 'Sarmiento 789', 'ana.lopez@example.com', '9871234567', 1),
@@ -158,7 +158,9 @@ INSERT INTO `huesped` (`idHuesped`, `dni`, `apellido`, `nombre`, `domicilio`, `c
 (19, 32548796, 'Martinez', 'Pedro', 'San Martin 789', 'pedro.martinez@example.com', '1234567893', 1),
 (20, 69874152, 'Rodriguez', 'Luis', 'Rivadavia 234', 'luis.rodriguez@test.com', '9871234345', 1),
 (21, 48596321, 'Gonzalez', 'Maria', 'Libertad 456', 'maria.gonzalez@example.com', '4567891234', 1),
-(22, 56478213, 'Martinez', 'Carlos', 'San Martin 789', 'carlos.martinez@test.com', '9876543210', 1);
+(22, 56478213, 'Martinez', 'Carlos', 'San Martin 789', 'carlos.martinez@test.com', '9876543210', 1),
+(23, 38082942, 'Cocco', 'Antonella', 'Colon 1000', 'antonella.cocco@gmail.com', '2995090675', 1),
+(24, 39423588, 'Lopez', 'Valentin', 'Ejercito de los Andes 591', 'valentin.lopez@gmail.com', '2625513731', 1);
 
 -- --------------------------------------------------------
 
@@ -177,6 +179,32 @@ CREATE TABLE `reserva` (
   `estado` tinyint(1) NOT NULL,
   `cantidadPersonas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `reserva`
+--
+
+INSERT INTO `reserva` (`idReserva`, `idHabitacion`, `idHuesped`, `fechaInicio`, `fechaFin`, `dias`, `monto`, `estado`, `cantidadPersonas`) VALUES
+(1, 25, 1, '2023-11-17', '2023-11-20', 3, 124500, 1, 2),
+(2, 32, 17, '2023-12-23', '2023-12-30', 7, 315000, 1, 4),
+(3, 27, 4, '2024-02-09', '2024-02-14', 5, 207500, 1, 2),
+(4, 9, 9, '2023-11-07', '2023-11-11', 4, 116000, 1, 2),
+(5, 28, 24, '2023-12-07', '2023-12-11', 4, 166000, 1, 2),
+(6, 10, 11, '2023-12-28', '2024-01-02', 5, 145000, 1, 1),
+(7, 37, 22, '2023-11-13', '2023-11-19', 6, 315420, 1, 2),
+(8, 18, 21, '2023-11-13', '2023-11-19', 6, 189420, 1, 2),
+(9, 35, 5, '2023-11-25', '2023-11-28', 3, 145050, 1, 3),
+(10, 12, 1, '2023-11-08', '2023-11-18', 10, 290000, 1, 1),
+(11, 3, 1, '2023-11-18', '2023-11-21', 3, 70500, 1, 1),
+(12, 28, 2, '2023-11-10', '2023-11-12', 2, 83000, 1, 2),
+(13, 21, 2, '2023-11-12', '2023-11-16', 4, 150540, 1, 2),
+(14, 19, 2, '2023-11-17', '2023-11-21', 4, 126280, 1, 2),
+(15, 3, 3, '2023-12-18', '2023-12-24', 6, 141000, 1, 1),
+(16, 27, 3, '2023-12-24', '2023-12-26', 2, 83000, 1, 1),
+(17, 5, 3, '2023-12-26', '2023-12-30', 4, 109400, 1, 1),
+(18, 28, 3, '2023-12-30', '2023-12-31', 1, 41500, 1, 1),
+(19, 25, 1, '2023-12-01', '2023-12-05', 4, 166000, 1, 1),
+(20, 25, 1, '2023-12-09', '2023-12-12', 3, 124500, 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -233,13 +261,13 @@ ALTER TABLE `habitacion`
 -- AUTO_INCREMENT de la tabla `huesped`
 --
 ALTER TABLE `huesped`
-  MODIFY `idHuesped` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `idHuesped` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Restricciones para tablas volcadas
